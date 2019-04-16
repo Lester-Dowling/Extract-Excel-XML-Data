@@ -1,0 +1,81 @@
+body, table, div, p, dl {
+    font: 400 18px/26px Roboto,sans-serif;
+}
+
+
+    p.reference, p.definition {
+        font: 400 18px/26px Roboto,sans-serif;
+    }
+
+
+.title {
+    font: 400 18px/26px Roboto,sans-serif;
+}
+
+
+pre.fragment {
+    font-size: 14px;
+}
+
+
+div.line {
+    font-size: 16px;
+}
+
+
+input.search {
+    font-size: 90%;
+}
+
+
+span.mlabel {
+    font-size: 10px;
+}
+
+
+.directory .levels {
+    font-size: 10px;
+}
+
+
+table.directory {
+    font: 400 16px Roboto,sans-serif;
+}
+
+
+.tabsearch {
+    font-size: 16px;
+}
+
+
+.navpath ul {
+    font-size: 14px;
+}
+
+.navpath li.footer {
+    font-size: 12px;
+}
+
+
+div.summary {
+    font-size: 12px;
+}
+
+
+div.ingroups {
+    font-size: 12px;
+}
+
+
+div.toc li {
+    font: 14px/1.2 Verdana,DejaVu Sans,Geneva,sans-serif;
+}
+
+div.toc h3 {
+    font: bold 16px/1.2 Arial,FreeSans,sans-serif;
+}
+
+
+#projectname {
+    font: 200% Tahoma, Arial,sans-serif;
+}

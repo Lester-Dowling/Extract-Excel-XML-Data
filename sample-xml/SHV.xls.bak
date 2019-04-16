@@ -1,0 +1,2940 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+    <Style ss:ID="percentStyle" ss:Name="Normal">
+	  <NumberFormat ss:Format="Percent"/>
+    </Style>
+    <Style ss:ID="shortDate01">
+	  <NumberFormat ss:Format="Short Date"/>
+	  <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+    </Style>
+    <Style ss:ID="header01">
+	  <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+	  <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000" ss:Bold="1"/>
+	  <Interior ss:Color="#CCCCCC" ss:Pattern="Solid"/>
+    </Style>
+    <Style ss:ID="header02">
+	  <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+	  <Font x:Family="Swiss" ss:Bold="1"/>
+    </Style>
+    <Style ss:ID="aRight01">
+	  <Alignment ss:Horizontal="Right" ss:Vertical="Bottom"/>
+    </Style>
+    <Style ss:ID="centerBottom">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+    </Style>
+    <Style ss:ID="numberStyle">
+      <NumberFormat ss:Format="#,##0.00"/>
+    </Style>
+    <Style ss:ID="percentCommaStyle">
+      <NumberFormat ss:Format="#,##0.00%"/>
+    </Style>
+  </Styles>
+  <Worksheet xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" ss:Name="Profit Loss">
+    <Table ss:DefaultRowHeight="15">
+      <Column ss:AutoFitWidth="0" ss:Width="80"/> <!-- asxcode -->
+      <Column ss:AutoFitWidth="0" ss:Width="150"/> <!-- company name -->
+      <Column ss:AutoFitWidth="0" ss:Width="200"/> <!-- items name -->
+      <Column  ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Column  ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Row ss:AutoFitHeight="0">
+        <Cell ss:StyleID="header01"><Data ss:Type="String">ASX Code</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Company Name</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Item</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">06/16</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">06/17</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Revenue</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">285917000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">239981000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Other Revenue</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-34138000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-12077000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Revenue Excluding Interest</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">251779000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">227904000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Expenses</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-188971000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-196028000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EBITDA</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">62808000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">31876000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-12599000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-14866000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Amortisation</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation and Amortisation</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-12599000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-14866000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EBIT</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">50209000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">17010000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Interest Revenue</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Interest Expense</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-5538000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-5032000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Interest Expense</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-5538000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-5032000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">PreTax Profit</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">44671000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">11978000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Tax Expense</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-10494000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-2729000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Profit after Tax Before Abnormals</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">34177000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">9249000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Abnormals</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-381000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Abnormals Tax</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Abnormals</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-381000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Reported NPAT After Abnormals</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">33796000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">9249000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Outside Equity Interests</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Shares Outstanding at Period End</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">72918757</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">73606835</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Weighted Average Number of Shares</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">72426703</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">73366492</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EPS Adjusted (cents/share)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">46.52</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12.40</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EPS After Abnormals (cents/share)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">46.00</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12.40</Data></Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+  <Worksheet xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" ss:Name="Balance Sheet">
+    <Table ss:DefaultRowHeight="15">
+      <Column ss:AutoFitWidth="0" ss:Width="80"/>
+      <Column ss:AutoFitWidth="0" ss:Width="150"/>
+      <Column ss:AutoFitWidth="0" ss:Width="200"/>
+      <Column  ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Column  ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Row ss:AutoFitHeight="0">
+        <Cell ss:StyleID="header01"><Data ss:Type="String">ASX Code</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Company Name</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Item</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">06/16</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">06/17</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">CA - Cash</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1435000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1060000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">CA - Receivables</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">44888000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">41131000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">CA - Prepaid Expenses</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3589000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">5675000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">CA - Inventories</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">104316000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">87474000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">CA - Investments</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1293000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1270000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">CA - NCA Held Sale</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">CA - Other</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Current Assets</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">155521000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">136610000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NCA - Receivables</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NCA - Inventories</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NCA - Investments</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NCA - PP&E</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">238187000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">282477000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NCA - Intangibles(ExGW)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">30069000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">34609000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NCA - Goodwill</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">25995000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">25995000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NCA - Future Tax Benefit</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NCA - Other</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total NCA</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">294251000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">343081000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Assets</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">449772000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">479691000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">CL - Account Payable</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">23180000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">14294000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">CL - Short-Term Debt</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">30619000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">110385000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">CL - Provisions</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">27809000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">5517000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">CL - NCL Held Sale</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">CL - Other</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">175000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">175000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Curr. Liabilities</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">81783000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">130371000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NCL - Account Payable</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NCL - Long-Term Debt</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">38082000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">36492000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NCL - Provisions</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">35809000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">32188000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NCL - Other</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3197000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3021000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total NCL</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">77088000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">71701000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Liabilities</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">158871000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">202072000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Share Capital</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">178553000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">181164000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Reserves</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">11168000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">11602000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Retained Earnings</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">101180000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">84853000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Other Equity</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Convertible Equity</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">SE Held Sale</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Outside Equity</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Equity</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">290901000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">277619000</Data></Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+  <Worksheet xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" ss:Name="Cash Flow">
+    <Table ss:DefaultRowHeight="15">
+      <Column ss:AutoFitWidth="0" ss:Width="80"/>
+      <Column ss:AutoFitWidth="0" ss:Width="150"/>
+      <Column ss:AutoFitWidth="0" ss:Width="200"/>
+      <Column  ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Column  ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Row ss:AutoFitHeight="0">
+        <Cell ss:StyleID="header01"><Data ss:Type="String">ASX Code</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Company Name</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Item</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">06/16</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">06/17</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Receipts from Customers</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">304306000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">249969000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Payments to Suppliers and Employees</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-205688000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-211212000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Dividends Received</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Interest Received</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">294000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">31000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Interest Paid</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-5156000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-5028000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Tax Paid</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-890000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-29022000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Other Operating Cashflows</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Operating Cashflows</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">92866000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">4738000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Payment for Purchase of PPE</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-46716000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-28121000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Proceeds From Sale of PPE</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">9800000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Investments Purchased</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Proceeds From Sale of Investments</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Payments for Purchase of Subsidiaries</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-5285000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Proceeds from Sale of Subsidiaries</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Loans Granted</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Loans Repaid</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Other Investing Cashflows</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">39040000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-28679000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Investing Cashflows</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-3161000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-56788000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Proceeds from Issues</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Proceeds from Borrowings</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">197000000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">209250000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Repayment of Borrowings</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-279608000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-128750000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Dividends Paid</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-31903000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-22964000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Other Financing Cashflows</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">26451000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-3962000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Financing Cashflows</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-88060000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">53574000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Increase in Cash</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1645000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1524000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Cash at Beginning of Period</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-5100000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-3455000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Exchange Rate Adj</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Other Cash Adjustments</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Cash at End of Period</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-3455000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-1931000</Data></Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+  <Worksheet xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" ss:Name="Per Share Statisticts">
+    <Table ss:DefaultRowHeight="15">
+      <Column ss:AutoFitWidth="0" ss:Width="80"/>
+      <Column ss:AutoFitWidth="0" ss:Width="150"/>
+      <Column ss:AutoFitWidth="0" ss:Width="200"/>
+      <Column  ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Column  ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Row ss:AutoFitHeight="0">
+        <Cell ss:StyleID="header01"><Data ss:Type="String">ASX Code</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Company Name</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Item</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">06/16</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">06/17</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Shares Outstand. (EOP)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">72918757</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">73606835</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Weighted Avg. Shares</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">72426703</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">73366492</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EPS Bef. Abs</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">46.6623</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12.6066</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EPS Aft. Abs.</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">46.0000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12.4000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Dilution Factor</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Cumulative</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.0000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.0000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Reportd EPS Bef. Abs.Adj</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">46.5200</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12.4000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">DPS - Adj Ex. Special</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">46.0000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">10.0000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">DPS - Adj.</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">46.0000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">10.0000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Interim Div - Ordinary</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">21.0000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">10.0000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Interim Franking - Ord (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.00</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">100.00</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Gross Interim Div - Ord</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">21.0000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">14.2857</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Final Dividend - Ordinary</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">25.0000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.0000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Final Franking - Ordinary (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">100.00</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Gross Final Div - Ord</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">35.7143</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.0000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Special Dividend - Ord</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.0000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.0000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Special Franking - Ord (%)</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Gross Special Div - Ord</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.0000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.0000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Div - Ex. Special</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">46.0000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">10.0000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Div - Inc. Special</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">46.0000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">10.0000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Franking - Ex. Spec</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">54.35</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">100.00</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Franking - Inc. Spec (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">54.35</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">100.00</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Gross Div- Ex.Spec</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">56.7147</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">14.2857</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Gross Div- Inc.Spec</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">56.7147</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">14.2857</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Tax Rate (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">23.49</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">22.78</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Corporate Tax Rate (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">30.00</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">30.00</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Payout Ratio Ex. Special (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">98.88</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">80.65</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Payout Ratio (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">98.88</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">80.65</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Dividend Yield (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">6.82</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">2.04</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Dividend Yield Ex. Spec (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">6.82</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">2.04</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Dividend Cover (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">101.13</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">124.00</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Gross Div. Yield (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">8.41</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">2.92</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Gross Div. Yield Ex. Spec (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">8.41</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">2.92</Data></Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+  <Worksheet xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" ss:Name="Revenue Expense">
+    <Table ss:DefaultRowHeight="15">
+      <Column ss:AutoFitWidth="0" ss:Width="80"/>
+      <Column ss:AutoFitWidth="0" ss:Width="150"/>
+      <Column ss:AutoFitWidth="0" ss:Width="100"/>
+      <Column ss:AutoFitWidth="0" ss:Width="120"/>
+      <Column ss:AutoFitWidth="0" ss:Width="180"/>
+      <Column ss:AutoFitWidth="0" ss:Width="180"/>
+      <Column ss:AutoFitWidth="0" ss:Width="100"/>
+      <Column ss:AutoFitWidth="0" ss:Width="100"/>
+      <Column ss:AutoFitWidth="0" ss:Width="100"/>
+      <Row ss:AutoFitHeight="0">
+        <Cell ss:StyleID="header01"><Data ss:Type="String">ASX Code</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Company Name</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Year</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Data Set</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Items</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Item BreakDown</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Values</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Tax</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Notes</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Revenue</Data></Cell>
+        <Cell><Data ss:Type="String">Gain/(Loss) on sales of non current assets</Data></Cell>
+        <Cell><Data ss:Type="String">Gain on sale of assets</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Revenue</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Revenue (sales)</Data></Cell>
+        <Cell><Data ss:Type="String">Sale of goods</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">232120000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Revenue</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Revenue (sales)</Data></Cell>
+        <Cell><Data ss:Type="String">Management services</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">7861000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Revenue</Data></Cell>
+        <Cell><Data ss:Type="String">Increase in Value of inventories (SGARA/Agriculture)</Data></Cell>
+        <Cell><Data ss:Type="String">Inventory fair value adjustment</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-14250000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Revenue</Data></Cell>
+        <Cell><Data ss:Type="String">Other Non-Operating Revenue (ordinary activities)</Data></Cell>
+        <Cell><Data ss:Type="String">Government grant and other revenue</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">2161000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Loss/(Gain) on sales of PPE</Data></Cell>
+        <Cell><Data ss:Type="String">Net (gain)/ loss on disposal of property, plant and equipment</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Cost of Goods Sold</Data></Cell>
+        <Cell><Data ss:Type="String">Cost of goods & services sold</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-194240000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Distribution expenses</Data></Cell>
+        <Cell><Data ss:Type="String">Distribution expenses</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-3972000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Sales and marketing expenses</Data></Cell>
+        <Cell><Data ss:Type="String">Marketing expenses</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-1445000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Staff and Employee Expenses</Data></Cell>
+        <Cell><Data ss:Type="String">Employee benefits</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-26220000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Occupancy Expenses</Data></Cell>
+        <Cell><Data ss:Type="String">Occupancy expenses</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-1232000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Administration Expenses</Data></Cell>
+        <Cell><Data ss:Type="String">Administrative expenses</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-7014000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Operating lease expense</Data></Cell>
+        <Cell><Data ss:Type="String">Operating lease rental minimum lease payments</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-3225000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Directors' Remuneration</Data></Cell>
+        <Cell><Data ss:Type="String">Directors' remuneration</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-1410029</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Audit Fee Paid by Consolidated Entity to Main Auditor including related firms</Data></Cell>
+        <Cell><Data ss:Type="String">Audit and review of financial statements - PricewaterhouseCoopers</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-255000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Other Operating Expenses</Data></Cell>
+        <Cell><Data ss:Type="String">Other expenses</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-2991000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation - Plant and equipment</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-7115000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation - Bearer plants</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-5887000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation - Buildings</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-220000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2017</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation - Plantation land and irrigation systems</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-1644000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Revenue</Data></Cell>
+        <Cell><Data ss:Type="String">Gain/(Loss) on sales of non current assets</Data></Cell>
+        <Cell><Data ss:Type="String">Gain on sale of assets</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">8644000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Revenue</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Revenue (sales)</Data></Cell>
+        <Cell><Data ss:Type="String">Management services</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">4400000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Revenue</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Revenue (sales)</Data></Cell>
+        <Cell><Data ss:Type="String">Sale of goods</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">281517000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Revenue</Data></Cell>
+        <Cell><Data ss:Type="String">Increase in Value of inventories (SGARA/Agriculture)</Data></Cell>
+        <Cell><Data ss:Type="String">Inventory fair value adjustment</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-43033000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Revenue</Data></Cell>
+        <Cell><Data ss:Type="String">Other Non-Operating Revenue (ordinary activities)</Data></Cell>
+        <Cell><Data ss:Type="String">Other revenue</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">251000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Loss/(Gain) on sales of PPE</Data></Cell>
+        <Cell><Data ss:Type="String">Net (gain)/ loss on disposal of property, plant and equipment</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">8644000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Cost of Goods Sold</Data></Cell>
+        <Cell><Data ss:Type="String">Cost of goods & services sold</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-186286000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Distribution expenses</Data></Cell>
+        <Cell><Data ss:Type="String">Distribution expenses</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-4463000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Sales and marketing expenses</Data></Cell>
+        <Cell><Data ss:Type="String">Marketing expenses</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-1304000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Staff and Employee Expenses</Data></Cell>
+        <Cell><Data ss:Type="String">Employee benefits</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-23854000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Occupancy Expenses</Data></Cell>
+        <Cell><Data ss:Type="String">Occupancy expenses</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-1314000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Administration Expenses</Data></Cell>
+        <Cell><Data ss:Type="String">Administrative expenses</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-6642000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Operating lease expense</Data></Cell>
+        <Cell><Data ss:Type="String">Operating lease rental minimum lease payments</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-5169000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Directors' Remuneration</Data></Cell>
+        <Cell><Data ss:Type="String">Directors' remuneration</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-1462210</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Audit Fee Paid by Consolidated Entity to Main Auditor including related firms</Data></Cell>
+        <Cell><Data ss:Type="String">Audit and review of financial s</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-264200</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Other Operating Expenses</Data></Cell>
+        <Cell><Data ss:Type="String">Other expenses</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-1942000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation - Buildings</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-205000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation - Plantation land and irrigation systems</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-1364000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation - Bearer plants</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-5789000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation - Plant and equipment</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-5241000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Expense</Data></Cell>
+        <Cell><Data ss:Type="String">Other Expenses (outside ordinary activities)</Data></Cell>
+        <Cell><Data ss:Type="String">Acquisition transaction costs</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-381000</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">06/2016</Data></Cell>
+        <Cell><Data ss:Type="String">Non Recurring</Data></Cell>
+        <Cell><Data ss:Type="String">Acquisition transaction costs </Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-381000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+  <Worksheet xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" ss:Name="Sundry Analysis">
+    <Table ss:DefaultRowHeight="15">
+      <Column ss:AutoFitWidth="0" ss:Width="80"/>
+      <Column ss:AutoFitWidth="0" ss:Width="150"/>
+      <Column ss:AutoFitWidth="0" ss:Width="200"/>
+      <Column  ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Column  ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Row ss:AutoFitHeight="0">
+        <Cell ss:StyleID="header01"><Data ss:Type="String">ASX Code</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Company Name</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Item</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">06/16</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">06/17</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Current Assets</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">154086000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">135550000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Non Int Bearing CL</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-51164000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-19986000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Wkg Capital</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">102922000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">115564000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net PP&E</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">238187000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">282477000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Intangibles Ex.Goodwill</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">30069000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">34609000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Oth Operating Assets</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-39006000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-35209000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Invested Capital Ex-Goodwill</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">332172000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">397441000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Goodwill</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">25995000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">25995000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Invested Capital Incl. Goodwill</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">358167000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">423436000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Cash</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1435000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1060000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Non Current Investments</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Investor Funds</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">359602000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">424496000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Equity</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">290901000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">277619000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Gross Borrowings</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">68701000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">146877000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Investor Funds</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">359602000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">424496000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EBIT</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">50209000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">17010000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Corp Tax Rate (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">30.00</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">30.00</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Tax on EBIT</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-12155400</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-4238600</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Amortisation</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NOPLAT</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">38053600</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12771400</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Tax Expense</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-10494000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-2729000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Tax Shield</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1661400</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1509600</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Tax on EBIT</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-12155400</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-4238600</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NOPLAT</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">38053600</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12771400</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12599000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">14866000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Gross Cash Flow</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">47745300</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">26773000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Gross Investment</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12032000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-40763000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Free Cash Flow</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">59777300</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-13990000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Current Debtors</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">44888000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">41131000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Prepayments</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3589000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">5675000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Current Inventory</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">104316000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">87474000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Current Investments</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1293000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1270000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Oth Current Assets</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Creditors CL</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">23180000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">14294000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Provisions CL</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">27809000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">5517000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Other Curr Liab</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">175000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">175000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Working Capital</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">102922000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">115564000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Debtors</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-13420000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-3757000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Prepay</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1815000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">2086000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Inventory CA</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-38038000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-16842000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Curr Invest</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1217000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-23000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Oth CA</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Creditors CL</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-8093000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-8886000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Provisions CL</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">18240000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-22292000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Other CL</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">175000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Wkg Capital</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-58748000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12642000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Capex</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-46716000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-28121000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Capex</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-1665000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">18595000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Wkg Capital</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-58748000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12642000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Capex</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-46716000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-28121000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Gross Investment</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12032000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-40763000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Funds from Operations</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">98618000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">38757000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Dividends Received</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Interest Received</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">294000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">31000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Interest Paid</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-5156000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-5028000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Other Operating Cash</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Purchase of PPE</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-46716000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-28121000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Surplus Funds - Post Capex</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">46150000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-23383000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Proceeds from PPE</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">9800000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Surplus Funds - Post PPE</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">55950000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-23371000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Dividends Paid</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-31903000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-22964000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Surplus Funds - Post Div.</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">24047000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-46335000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Purchase of Investments</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Surplus Funds - Post Acquis.</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">24047000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-46335000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">S/T Debt</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">30619000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">110385000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">L/T Debt</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">38082000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">36492000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Gross Debt</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">68701000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">146877000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase S/T Debt</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">9568000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">79766000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase L/T Debt</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-50845000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-1590000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Change Gross Debt</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-41277000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">78176000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Cash</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1435000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1060000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Cash</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1165000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-375000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Debt</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">67266000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">145817000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Net Debt</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-42442000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">78551000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Capital</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">178553000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">181164000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Reserves Ex-SPR</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">11168000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">11602000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Share Prem Reserve</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Retained Profits</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">101180000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">84853000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Other Equity</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Convertible Equity</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Outside Equity</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Equity</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">290901000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">277619000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase in Capital</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">8355000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">2611000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Incr Reserves Ex-SPR</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-1650000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">434000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Incr. Share Prem Res</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Retain Profits</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-3191000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-16327000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Other Equity</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Convert Equity</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Outside Equity</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Increase Total Equity</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3514000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-13282000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Gross Debt</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">68701000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">146877000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Equity</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">290901000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">277619000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Capital Invested</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">359602000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">424496000</Data></Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+  <Worksheet xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" ss:Name="Growth Rates">
+    <Table ss:DefaultRowHeight="15">
+      <Column ss:AutoFitWidth="0" ss:Width="80"/>
+      <Column ss:AutoFitWidth="0" ss:Width="150"/>
+      <Column ss:AutoFitWidth="0" ss:Width="200"/>
+      <Column ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Column ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Row ss:AutoFitHeight="0">
+        <Cell ss:StyleID="header01">
+          <Data ss:Type="String">ASX Code</Data>
+        </Cell>
+        <Cell ss:StyleID="header01">
+          <Data ss:Type="String">Company Name</Data>
+        </Cell>
+        <Cell ss:StyleID="header01">
+          <Data ss:Type="String">Item</Data>
+        </Cell>
+        <Cell ss:StyleID="header01">
+          <Data ss:Type="String">06/16</Data>
+        </Cell>
+        <Cell ss:StyleID="header01">
+          <Data ss:Type="String">06/17</Data>
+        </Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Rev. 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">27.94</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-16.07</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Rev. 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">14.41</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">8.46</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Rev. 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">2.76</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-0.56</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Exp. 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">10.56</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3.73</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Exp. 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.70</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">9.05</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Operating Exp. 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-3.36</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-4.75</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EBITDA 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-37.31</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-49.25</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EBITDA 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">15.56</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-11.26</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EBITDA 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">17.68</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">54.53</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EBIT 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-43.99</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-66.12</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EBIT 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">11.69</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-25.90</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EBIT 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">17.30</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EBT After Abs. 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-44.99</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-72.96</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EBT After Abs. 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">507.03</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-31.55</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EBT After Abs. 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">18.17</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EAT 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-40.46</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-72.63</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EAT 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">127.45</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-31.68</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EAT 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">13.84</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EPS Adj 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-46.16</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-73.34</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EPS Adj 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">4.36</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-36.66</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EPS Adj 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">6.67</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Div. Ex Spec 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-8.00</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-78.26</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Div. Ex Spec 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">56.50</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-20.63</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Div. Ex Spec 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">28.75</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">4.56</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">DPS Adj Ex Spec 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-8.00</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-78.26</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">DPS Adj Ex Spec 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">56.50</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-20.63</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">DPS Adj Ex Spec 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">28.75</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">4.56</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Assets 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-7.82</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">6.65</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Assets 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">13.97</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12.02</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Assets 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">8.27</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">11.42</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net PP&E 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">2.91</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">18.59</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net PP&E 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">46.97</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">48.87</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net PP&E 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">15.37</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">25.43</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Equity 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.22</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-4.57</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Equity 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">22.18</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">14.95</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Total Equity 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">11.50</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">11.61</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Retained Profits 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-3.06</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-16.14</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Retained Profits 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">23.78</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">6.21</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Retained Profits 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">10.10</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">9.50</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Debt 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-38.69</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">116.78</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Debt 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-5.29</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">15.45</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Debt 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-1.64</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">16.85</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Invested Capital 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-10.49</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">19.65</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Invested Capital 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">16.02</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">16.47</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Invested Capital 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">9.00</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">14.58</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NOPLAT 1 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-40.81</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-66.44</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NOPLAT 3 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">12.25</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-26.47</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NOPLAT 5 Year (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">13.68</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Free Cashflow 1 Year (%)</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Free Cashflow 3 Year (%)</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">37.01</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Free Cashflow 5 Year (%)</Data></Cell>
+        <Cell><Data ss:Type="String">--</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">-4.79</Data></Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+  <Worksheet xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" ss:Name="Ratio Analysis">
+    <Table ss:DefaultRowHeight="15">
+      <Column ss:AutoFitWidth="0" ss:Width="80"/>
+      <Column ss:AutoFitWidth="0" ss:Width="150"/>
+      <Column ss:AutoFitWidth="0" ss:Width="200"/>
+      <Column  ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Column  ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Row ss:AutoFitHeight="0">
+        <Cell ss:StyleID="header01"><Data ss:Type="String">ASX Code</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Company Name</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Item</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">06/16</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">06/17</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Profit Margin (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">11.95</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3.85</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EBIT Margin (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">17.56</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">7.09</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EBITA Margin (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">17.56</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">7.09</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EBITDA Margin (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">21.97</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">13.28</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">ROE (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">11.75</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3.33</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">ROA (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">8.46</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">2.66</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">ROIC (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">11.46</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3.21</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NOPLAT Margin (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">13.31</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">5.32</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Invested Capital Turnover</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.8607</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.6038</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Inventory Turnover</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">2.7409</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">2.7435</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Asset Turnover</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.6357</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.5003</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">LT Asset Turnover</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.9717</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.6995</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">PPE Turnover</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.2004</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.8496</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation/PP&E (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3.77</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3.78</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation/Revenue (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">4.41</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">6.19</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Wkg Capital/Revenue (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">36.00</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">48.16</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Working Cap Turnover</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">2.7780</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">2.0766</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Financial Leverage</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.5461</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.7279</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Gross Gearing (D/E) (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">23.62</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">52.91</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Gearing (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">23.12</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">52.52</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Interest Cover</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">9.0663</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3.3804</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Current Ratio</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.9016</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.0479</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Quick Ratio</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.6261</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.3769</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Gross Debt/CF</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.4389</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">5.4860</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Debt/CF</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.4089</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">5.4464</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">NTA per Share ($)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3.2205</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">2.9483</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">BV per Share ($)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3.9894</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3.7716</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Cash per Share ($)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.0197</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.0144</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Receivables/Op. Rev. (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">15.70</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">17.14</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Inventory/Trading Rev. (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">36.48</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">36.45</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Creditors/Op. Rev. (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">8.11</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">5.96</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Funds from Ops./EBITDA (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">157.02</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">121.59</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Depreciation/Capex (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">26.97</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">52.86</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Capex/Operating Rev. (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">16.34</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">11.72</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Days Inventory</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">133.1692</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">133.0439</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Days Receivables</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">57.3038</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">62.5583</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Days Payables</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">29.5915</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">21.7405</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Gross CF per Share ($)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.6499</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.3589</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Sales per Share ($)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3.8916</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">3.2174</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Year End Share Price</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">6.7400</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">4.9000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Market Cap.</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">491472422</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">360673491</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Net Debt</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">67266000</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">145817000</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Enterprise Value</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">558738422</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">506490491</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EV/EBITDA</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">8.8960</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">15.8894</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">EV/EBIT</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">11.1283</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">29.7760</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Market Cap./Rep NPAT</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">14.5423</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">38.9959</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Market Cap./Trading Rev.</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.7189</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.5029</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Price/Book Value</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.6895</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.2992</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Price/Gross Cash Flow</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">10.2936</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">13.4715</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">PER</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">14.4884</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">39.5161</Data></Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+  <Worksheet xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" ss:Name="Asset Base Analysis">
+    <Table ss:DefaultRowHeight="15">
+      <Column ss:AutoFitWidth="0" ss:Width="80"/>
+      <Column ss:AutoFitWidth="0" ss:Width="150"/>
+      <Column ss:AutoFitWidth="0" ss:Width="200"/>
+      <Column  ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Column  ss:StyleID="aRight01" ss:Width="100.0"/>
+      <Row ss:AutoFitHeight="0">
+        <Cell ss:StyleID="header01"><Data ss:Type="String">ASX Code</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Company Name</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">Item</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">06/16</Data></Cell>
+        <Cell ss:StyleID="header01"><Data ss:Type="String">06/17</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Cash (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.32</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.22</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Trade Debtors (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">9.98</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">8.57</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Inventory (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">23.19</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">18.24</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Plant & Equipment (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">52.96</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">58.89</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Intangibles (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">6.69</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">7.21</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Goodwill (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">5.78</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">5.42</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Non Current Investments (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.00</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">0.00</Data></Cell>
+      </Row>
+      <Row ss:AutoFitHeight="0">
+        <Cell><Data ss:Type="String">SHV</Data></Cell>
+        <Cell><Data ss:Type="String">Select Harvests Limited</Data></Cell>
+        <Cell><Data ss:Type="String">Other (%)</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.09</Data></Cell>
+        <Cell ss:StyleID="numberStyle"><Data ss:Type="Number">1.45</Data></Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+</Workbook>

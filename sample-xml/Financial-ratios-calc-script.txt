@@ -1,0 +1,2 @@
+QuickRatio = ( [Balance Sheet][Total Current Assets][06/17] - [Balance Sheet][CA - Inventories][06/17] ) / [Balance Sheet][Total Curr. Liabilities][06/17]
+CurrentRatio = [Balance Sheet][Total Current Assets][06/17] / [Balance Sheet][Total Curr. Liabilities][06/17]
