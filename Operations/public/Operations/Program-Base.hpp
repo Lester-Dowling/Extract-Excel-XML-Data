@@ -15,17 +15,22 @@ namespace operations {
 	 * Operational parameters for this program such as can be configured from the
 	 * command line.
 	 */
-	class Program_Base {
-	public:
+	class Program_Base
+	{
+	  public:
 		int argc;
 		char** argv;
 		int gExitCode = EXIT_SUCCESS;
 		bool gVerbose = false;
 		std::ostream* gOut;
 		std::ostream* gErr;
-		const char* gVersion = "Version 1.0";
+		struct Version
+		{
+			int major, minor, small;
+		};
+		Version gVersion{ 1, 0, 0 };
 
-	protected:
+	  protected:
 		/*
 		 * Options for only the command line.
 		 */
@@ -53,7 +58,7 @@ namespace operations {
 		virtual void set_err(std::ostream& err);
 		virtual void save() = 0;
 
-	public:
+	  public:
 		/**
 		 * Run the program and let all exceptions through.
 		 */

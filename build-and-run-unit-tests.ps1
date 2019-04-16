@@ -131,7 +131,7 @@ if (-Not($VCVARSALL_SETUP_ONLY_ONCE)) {
 #
 # Build Directory
 #
-$WORKSPACEHASH = "cbefd5ec-437e-6535-8692-ef753bfc67e5"
+$WORKSPACEHASH = "076195ff-0e9d-8133-b6b4-9a14fc0d2b9e"
 $BUILD="C:/Users/ljdowling/CMakeBuilds/${WORKSPACEHASH}/build/x64-Release"
 $BUILD = Resolve-Path $BUILD -ea:stop  |  Select -ExpandProperty Path
 if (-Not(Test-Path $BUILD)) { fatal_error_exit "No BUILD path" }

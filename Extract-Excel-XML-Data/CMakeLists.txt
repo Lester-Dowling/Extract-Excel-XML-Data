@@ -24,11 +24,12 @@ endif()
 #
 # Config
 #
-# The version number.
+# The version number:
 set (Extract_Excel_XML_Data_VERSION_MAJOR 1)
 set (Extract_Excel_XML_Data_VERSION_MINOR 0)
+set (Extract_Excel_XML_Data_VERSION_SMALL 0)
 configure_file (
-  "${PROJECT_SOURCE_DIR}/config.h.in"
+  "config.h.in"
   "${PROJECT_BINARY_DIR}/config.h"
   )
 include_directories("${PROJECT_BINARY_DIR}")
