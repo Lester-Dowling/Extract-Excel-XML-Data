@@ -30,11 +30,12 @@ namespace operations {
 		  // -----------------------------------------------------------------
 		  ("help,h", "Print this help message.")
 		  // -----------------------------------------------------------------
-		  ("verbose,V",
+		  ("verbose",
 		   po::bool_switch(&gVerbose),
 		   "Print informational messages during processing.")
 		  // -----------------------------------------------------------------
-		  ("politely_finish", "Wait for user to press <Enter> to finish program.")
+		  ("politely_finish",
+		   "Wait for user to press <Enter> before finishing the program.")
 		  // -----------------------------------------------------------------
 		  ;
 	}

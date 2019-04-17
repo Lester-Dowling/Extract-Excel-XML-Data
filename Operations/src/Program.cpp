@@ -14,10 +14,10 @@
 
 namespace operations {
 	using std::endl;
+	using std::runtime_error;
 	using std::setw;
 	using std::string;
 	using std::vector;
-	using std::runtime_error;
 	namespace ascii = boost::spirit::ascii;
 	namespace qi = boost::spirit::qi;
 	using file_in_memory_t = Program::file_in_memory_t;
@@ -29,12 +29,7 @@ namespace operations {
 	using XPath_Grammar = pseudo_xpath_parser::mini_grammar<String_Iterator>;
 	using XML_Grammar = excel_xml_parser::mini_grammar<Memory_Iterator>;
 
-	const char* const all_data_xpath_text = //
-	  " Row "
-	  " , "
-	  " Cell "
-	  " , "
-	  " Data ";
+	const char* const all_data_xpath_text = "Row,Cell,Data";
 
 	std::string Program::xpath_prefix(std::string worksheet_name)
 	{
@@ -374,9 +369,9 @@ namespace operations {
 
 	void Program::compute_xpath_and_write_results(Node::SP xml_root)
 	{
-		using std::string;
 		using boost::regex;
 		using boost::regex_match;
+		using std::string;
 		assert(!gXPathText.empty());
 		string full_xpath_text;
 		if (gXPathText == "Data")
@@ -550,61 +545,63 @@ namespace operations {
 		  // --------------------------------------------------------------
 		  ("calc,c",
 		   po::value<string>(&gCalcText),
-		   "Arithmetic expression to be worked out by the calculator.  Give either a "
-		   "file "
-		   "name for a calc script file; or, give a calc expression.")
+		   "Arithmetic expression to be worked out by the calculator.")
+		  // --------------------------------------------------------------
+		  ("calc_file,f",
+		   po::value<string>(&gCalcFile),
+		   "File name of a text file containing arithmetic expressions for the calculator "
+		   "to work through.")
 		  // --------------------------------------------------------------
 		  ("each,e",
 		   po::value<string>(&gEachArithmeticExpression),
-		   "Arithmetic expression to be worked out by the calculator.  The symbol DATA "
-		   "in "
-		   "the expression will be replaced by its value from the worksheet.  For "
-		   "example, "
-		   "to triple every extracted data value: --each='DATA * 3'")
+		   "Arithmetic expression to be worked out by the calculator for each extract "
+		   "value given by a pseudo XPath expression (--xpath).  The symbol DATA in the "
+		   "arithmetic will be replaced by its value from the worksheet.  For example, to "
+		   "extract and triple every data value from column 2: --xpath "
+		   "'Worksheet[1],Row,Cell[2],Data'  --each='DATA * 3'")
 		  // --------------------------------------------------------------
 		  ("precision,p",
 		   po::value<int>(&gPrecision)->default_value(-1),
-		   "Number of decimal places for output from the calculator.  Default is "
-		   "maximum "
+		   "Number of decimal places for output from the calculator.  Default is maximum "
 		   "precision.")
 		  // --------------------------------------------------------------
 		  ("default_worksheet,d",
 		   po::value<string>(&gDefaultWorksheet)->default_value("1"),
-		   "The worksheet to operate on when no worksheet ref is otherwise specified.")
+		   "Worksheet to operate on when no worksheet ref is otherwise specified.  "
+		   "Default is the first worksheet.")
 		  // -----------------------------------------------------------------
 		  ("titles_of_worksheets,k",
 		   po::bool_switch(&gWriteWorksheetTitles),
-		   "Write out only the titles of each worksheet, nothing else.")
+		   "Write out the titles of each worksheet.  Nothing else.")
 		  // -----------------------------------------------------------------
 		  ("titles_of_columns,t",
 		   po::bool_switch(&gWriteColumnTitles),
-		   "Write out only the titles of each column, nothing else.")
+		   "Write out the titles of each column.  Nothing else.")
 		  // -----------------------------------------------------------------
 		  ("titles_of_rows,y",
 		   po::bool_switch(&gWriteRowTitles),
-		   "Write out only the titles of each row, nothing else.")
+		   "Write out the titles of each row.  Nothing else.")
 		  // -----------------------------------------------------------------
 		  ("cell_refs,r",
 		   po::bool_switch(&gWriteCellRefs),
-		   "Write out all the valid cell refs that are possible in calc expressions.")
+		   "Write out all the valid cell refs that are possible in calc expressions.  "
+		   "Nothing else.")
 		  // -----------------------------------------------------------------
 		  ("enumerate_rows,n",
-		   po::bool_switch(&gEnumerateRows),
-		   "Prefix the row number to each line of output.")
+		   po::bool_switch(&gEnumerateRows)->default_value(false),
+		   "Prefix the row number to each line of output.  Default is off.")
 		  // -----------------------------------------------------------------
 		  ("row_titles_column,m",
-		   po::value<string>(&gRowTitlesColumn),
-		   "The column which contains the titles for each row.  Default is the first "
-		   "column.")
+		   po::value<string>(&gRowTitlesColumn)->default_value("1"),
+		   "Column which contains the titles for each row.  Default is the first column.")
 		  // -----------------------------------------------------------------
 		  ("column_titles_row,w",
 		   po::value<int>(&gColumnTitlesRow)->default_value(1),
-		   "The row which contains the titles for each column.  Default is the first "
-		   "row.")
+		   "Row which contains the titles for each column.  Default is the first row.")
 		  // -----------------------------------------------------------------
 		  ("column_titles_span,s",
-		   po::value<size_t>(&gColumnTitleSpan),
-		   "The number of rows that the column titles span over.  Defaults to one row.")
+		   po::value<size_t>(&gColumnTitleSpan)->default_value(1),
+		   "Number of rows that the column titles span over.  Defaults to one row.")
 		  // -----------------------------------------------------------------
 		  ;
 

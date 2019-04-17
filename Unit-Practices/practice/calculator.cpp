@@ -1,21 +1,23 @@
 // Unit-Tests/test/calculator.cpp
 // Started 7 Apr 2019
-#include "pch-unit-tests.hpp"
+#include "pch-practice.hpp"
 #include <boost/test/unit_test.hpp>
 #include "Operations/Program.hpp"
 #include "Operations/Calculator.hpp"
 namespace utf = boost::unit_test;
 namespace tt = boost::test_tools;
 namespace a = boost::algorithm;
-using operations::Program;
 using std::setw;
+using std::shared_ptr;
+using std::make_shared;
+using operations::Program;
 using Grade = pseudo_xpath_parser::Grade;
 
 /*
  * Unit tests to verify the correct operation of Calculator.
  */
 
-BOOST_AUTO_TEST_SUITE(test_calculator_suite, *utf::enabled())
+BOOST_AUTO_TEST_SUITE(test_calculator_suite, *utf::disabled())
 namespace {
 	char* const small_xml_file =
 	  "C:/Users/ljdowling/Projects/Extract-Excel-XML-Data-2017/sample-xml/small.xml";
@@ -51,14 +53,77 @@ BOOST_AUTO_TEST_CASE(function_1)
 	BOOST_TEST(c.evaluate("( abs(DATA) * 2 + 1 ) / 2") == (std::abs(v) * 2 + 1) / 2);
 }
 
+BOOST_AUTO_TEST_CASE(regex_into_calc_1)
+{
+	const boost::regex e{ "(\\[[^\\]]+\\]){3}.*" };
+	const std::string calc{ "[1][2][3] * 6" };
+	BOOST_TEST(boost::regex_match(calc, e));
+}
+
+BOOST_AUTO_TEST_CASE(regex_iterator_into_calc_1)
+{
+	const boost::regex e{ "(\\[[^\\]]+\\]){2,3}" };
+	const std::string calc{ "1 + [1][2][3] * 6" };
+	std::string prematched, matched;
+	std::string::const_iterator postmatched_begin;
+	std::string::const_iterator postmatched_end;
+	std::for_each(
+	  boost::sregex_iterator{ calc.begin(), calc.end(), e },
+	  boost::sregex_iterator{},
+	  [&](boost::smatch const& what) //
+	  {
+		  matched = what[0]; // what[0] contains the whole matched string.
+		  prematched = std::string{ what.prefix().first, what.prefix().second };
+		  postmatched_begin = what.suffix().first;
+		  postmatched_end = what.suffix().second;
+	  });
+	BOOST_TEST(matched == "[1][2][3]");
+	BOOST_TEST(prematched == "1 + ");
+	const std::string postmatched{ postmatched_begin, postmatched_end };
+	BOOST_TEST(postmatched == " * 6");
+}
+
+BOOST_AUTO_TEST_CASE(regex_iterator_replace_into_calc_1)
+{
+	const boost::regex e{ "(\\[[^\\]]+\\]){2,3}" };
+	const std::string calc{ "1 + [1][2][3] * 6" };
+	std::map<std::string, std::string> values;
+	values["[1][2][3]"] = "123";
+	std::string replaced;
+	std::string::const_iterator postmatched_begin;
+	std::for_each(
+	  boost::sregex_iterator{ calc.begin(), calc.end(), e },
+	  boost::sregex_iterator{},
+	  [&](boost::smatch const& what) //
+	  {
+		  std::string matched = what[0]; // what[0] contains the whole matched string.
+		  replaced.append(what.prefix().first, what.prefix().second);
+		  replaced.append(values[matched]);
+		  postmatched_begin = what.suffix().first;
+	  });
+	replaced.append(postmatched_begin, calc.cend());
+	BOOST_TEST(replaced == "1 + 123 * 6");
+}
+
+BOOST_AUTO_TEST_CASE(split_worksheet_cell_ref)
+{
+	const std::string cell_ref{ "[1][2][3]" };
+	std::vector<std::string> cell_ref_ords;
+	a::split(cell_ref_ords, cell_ref, a::is_any_of("[]"), a::token_compress_on);
+	BOOST_TEST(cell_ref_ords.size() >= 3);
+	BOOST_TEST(cell_ref_ords[1] == "1");
+	BOOST_TEST(cell_ref_ords[2] == "2");
+	BOOST_TEST(cell_ref_ords[3] == "3");
+}
+
 BOOST_AUTO_TEST_CASE(regex_iterator_replace_into_calc_2)
 {
 	char* argv[] = { program_name };
 	constexpr int argc = static_cast<int>(std::size(argv));
 	std::ostringstream oss;
 	std::ostringstream ess;
-	Program program{ argc, argv, oss, ess };
-	excel_xml_parser::Node::SP xml_root = program.load_xml_file(small_xml_file);
+	auto program = make_shared<Program>(argc, argv, oss, ess);
+	excel_xml_parser::Node::SP xml_root = program->load_xml_file(small_xml_file);
 
 	const boost::regex cell_ref_regex{ "(\\[[^\\]]+\\]){2,3}" };
 	const std::string calc{ "1 + ['Total Revenue Excluding Interest']['06/17'] * 6" };
@@ -93,12 +158,12 @@ BOOST_AUTO_TEST_CASE(regex_iterator_replace_into_calc_2)
 		  cell_ref_ords.pop_front();
 		  cell_ref_xpath_text += ',';
 		  cell_ref_xpath_text += "Data";
-		  Grade::SP xpath_root = program.parse_xpath_text(cell_ref_xpath_text);
+		  Grade::SP xpath_root = program->parse_xpath_text(cell_ref_xpath_text);
 		  const char* const expected_xpath = //
 			"Workbook --> Worksheet[Worksheet=1] --> Table --> Row[Row=Total Revenue "
 			"Excluding Interest] --> Cell[Cell=06/17] --> Data";
 		  BOOST_TEST(Grade::path_to_string(xpath_root) == expected_xpath);
-		  const std::string cell_text = program.extract_single_text(xml_root, xpath_root);
+		  const std::string cell_text = program->extract_single_text(xml_root, xpath_root);
 
 		  calc_interpolated += ' ';
 		  calc_interpolated.append(cell_text);
@@ -106,7 +171,7 @@ BOOST_AUTO_TEST_CASE(regex_iterator_replace_into_calc_2)
 	  });
 	calc_interpolated.append(postmatched_begin, calc.cend());
 	BOOST_TEST(calc_interpolated == "1 +  227904000  * 6");
-	BOOST_TEST(program.gCalculator.evaluate(calc_interpolated) == 1 + 227904000 * 6);
+	BOOST_TEST(program->gCalculator.evaluate(calc_interpolated) == 1 + 227904000 * 6);
 }
 
 namespace {
@@ -128,8 +193,8 @@ namespace {
 		const int argc = static_cast<int>(args.size());
 		std::ostringstream oss;
 		std::ostringstream ess;
-		Program program{ argc, argv, oss, ess };
-		program.run();
+		auto program = make_shared<Program>(argc, argv, oss, ess);
+		program->run();
 		if (!ess.str().empty())
 			throw std::runtime_error{ ess.str() };
 		else
@@ -153,8 +218,8 @@ namespace {
 		const int argc = static_cast<int>(args.size());
 		std::ostringstream oss;
 		std::ostringstream ess;
-		Program program{ argc, argv, oss, ess };
-		program.run();
+		auto program = make_shared<Program>(argc, argv, oss, ess);
+		program->run();
 		if (!ess.str().empty())
 			throw std::runtime_error{ ess.str() };
 		else

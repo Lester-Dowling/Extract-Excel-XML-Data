@@ -1,8 +1,21 @@
 ﻿cmake_minimum_required (VERSION 3.12)
-set(TARGET "Extract-Excel-XML-Data")
-add_executable ( ${TARGET} )
+set(TARGET "Unit-Practices")
+add_executable (
+  ${TARGET}
+  "main-practice.cpp"
+  "GlobalFixture.hpp"
+  "GlobalFixture.cpp"
+  )
 set_property(TARGET ${TARGET} PROPERTY CXX_STANDARD 17)
-target_sources(${TARGET} PRIVATE main.cpp)
+file(GLOB_RECURSE SRC_PRACTICE_FILES LIST_DIRECTORIES false CONFIGURE_DEPENDS "practice/*")
+target_sources(${TARGET} PRIVATE ${SRC_PRACTICE_FILES})
+file(GLOB IO_SRC_FILES LIST_DIRECTORIES false CONFIGURE_DEPENDS "io/*")
+target_sources(${TARGET} PRIVATE ${IO_SRC_FILES})
+target_include_directories(${TARGET} PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(${TARGET} PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/practice)
+
 
 if(WIN32)
   target_compile_definitions(
@@ -22,28 +35,20 @@ if(WIN32)
 endif()
 
 #
-# Config
+# Pre-compiled Header
+# Downloaded external project https://github.com/larsch/cmake-precompiled-header
 #
-configure_file (
-  "config.h.in"
-  "${PROJECT_BINARY_DIR}/config.h"
-  )
-include_directories("${PROJECT_BINARY_DIR}")
-
-#
-# Import Program Operations
-#
-target_link_libraries(${TARGET} PRIVATE "Operations")
-
-#
-# Import XML Parser Library
-#
-target_link_libraries(${TARGET} PRIVATE "Simple-XML-Parser")
-
-#
-# Import Pseudo XPath Parser Library
-#
-target_link_libraries(${TARGET} PRIVATE "Pseudo-XPath-Parser")
+get_filename_component(
+  LOCAL_PRECOMPILED_CMAKE
+  "${LOCALLY_CACHED_REPOS_DIR}/cmake-precompiled-header/PrecompiledHeader.cmake" ABSOLUTE)
+if(EXISTS ${LOCAL_PRECOMPILED_CMAKE})
+  message(STATUS "PrecompiledHeader.cmake: " ${LOCAL_PRECOMPILED_CMAKE})
+  include(${LOCAL_PRECOMPILED_CMAKE})
+  target_sources(${TARGET} PRIVATE "pch-practice.cpp")
+  add_precompiled_header(${TARGET} "pch-practice.hpp" SOURCE_CXX "pch-practice.cpp")
+else()
+  message(WARNING "No such repo available: cmake-precompiled-header")
+endif()
 
 #
 # Threads
@@ -58,9 +63,10 @@ target_link_libraries(
   PRIVATE
   Boost::boost
   Boost::filesystem
-  Boost::program_options
   Boost::date_time
+  Boost::program_options
   Boost::regex
+  Boost::unit_test_framework
   )
 add_custom_command(
   TARGET ${TARGET} PRE_BUILD
@@ -70,25 +76,33 @@ add_custom_command(
   "${CMAKE_CURRENT_BINARY_DIR}"
   "boost*dll")
 
+#
+# Discover all the unit practices
+#
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/")
+include(Discover.Boost.Test)
+boost_discover_tests(${TARGET})
+
 
 message(STATUS "------------------ CMake Variable Logging ------------------")
 message(STATUS "PROJECT_NAME:                " ${PROJECT_NAME})
 message(STATUS "TARGET:                      " ${TARGET})
-message(STATUS "SRC_FILES:                   " ${SRC_FILES})
 message(STATUS "CMAKE_SYSTEM_VERSION:        " ${CMAKE_SYSTEM_VERSION})
 message(STATUS "CMAKE_SYSTEM_NAME:           " ${CMAKE_SYSTEM_NAME})
 message(STATUS "CMAKE_HOST_SYSTEM_VERSION:   " ${CMAKE_HOST_SYSTEM_VERSION})
 message(STATUS "CMAKE_BINARY_DIR:            " ${CMAKE_BINARY_DIR})
 message(STATUS "CMAKE_CURRENT_BINARY_DIR:    " ${CMAKE_CURRENT_BINARY_DIR})
-message(STATUS "PROJECT_BINARY_DIR:          " ${PROJECT_BINARY_DIR})
 
-# This is the directory, from which cmake was started, i.e. the top level source
+# This is the directory from which cmake was started, i.e. the top level source
 # directory:
 message(STATUS "CMAKE_SOURCE_DIR:            " ${CMAKE_SOURCE_DIR})
 
 # This is the directory where the currently processed CMakeLists.txt is located
 # in:
 message(STATUS "CMAKE_CURRENT_SOURCE_DIR:    " ${CMAKE_CURRENT_SOURCE_DIR})
+
+# Contains the full path to the top level directory of your build tree:
+message(STATUS "PROJECT_BINARY_DIR:          " ${PROJECT_BINARY_DIR})
 
 # Contains the full path to the root of your project source directory, i.e. to
 # the nearest directory where CMakeLists.txt contains the PROJECT() command:

@@ -1,9 +1,10 @@
 // Unit-Tests/test/xpath-mini-grammar.cpp
 // Started 15 Aug 2018
-#include "pch-unit-tests.hpp"
+#include "pch-practice.hpp"
 #include <boost/test/unit_test.hpp>
 #include "Pseudo-XPath-Parser/mini-grammar.hpp"
 #include "Pseudo-XPath-Parser/Grade.hpp"
+#include <boost/spirit/repository/include/qi_confix.hpp>
 namespace utf = boost::unit_test;
 namespace fsn = boost::fusion;
 namespace spirit = boost::spirit;
@@ -20,6 +21,7 @@ using XPath_Grammar = pseudo_xpath_parser::mini_grammar<Stream_Iterator>;
  */
 
 BOOST_AUTO_TEST_SUITE(test_xpath_mini_grammar_suite, *utf::enabled())
+
 
 BOOST_AUTO_TEST_CASE(single_attribute_filter)
 {
@@ -165,6 +167,104 @@ BOOST_AUTO_TEST_CASE(grammar_xml_attribute_filter)
 	BOOST_TEST(
 	  Grade::path_to_string(g.result) ==
 	  "Worksheet --> Table --> Row[Row=12] --> Cell[Column=1 ss::ValueType='Number']");
+}
+
+BOOST_AUTO_TEST_CASE(column_name_or_number)
+{
+	const std::string filter_by_name{ "Name of a column" };
+	const std::string filter_by_number{ "6" };
+	int filter_col_idx = -1;
+	try {
+		filter_col_idx = std::stoi(filter_by_name);
+		BOOST_FAIL("Successfully parsed text");
+	}
+	catch (std::invalid_argument const&) {
+		BOOST_TEST(filter_col_idx == -1);
+	}
+}
+
+namespace learning {
+	// A metafunction to compute the type
+	// of the confix() construct
+	template<typename Prefix, typename Suffix = Prefix>
+	struct confix_spec {
+		using type =
+		  typename spirit::result_of::terminal<repo::tag::confix(Prefix, Suffix)>::type;
+	};
+} // namespace learning
+
+BOOST_AUTO_TEST_CASE(confix_double_quote)
+{
+	const char kDQ = '"';
+	const std::string dq{ kDQ };
+	learning::confix_spec<std::string>::type const dq_confix = repo::confix(dq, dq);
+	const char* const sample_data = "Sample quoted string";
+	const std::string sample_dq_string{ dq + sample_data + dq };
+	std::string attr_dq;
+	bool dqr = qi::parse(
+	  sample_dq_string.begin(),
+	  sample_dq_string.end(),
+	  dq_confix[*(qi::char_ - kDQ)],
+	  attr_dq);
+	BOOST_TEST(dqr);
+	BOOST_TEST(attr_dq == sample_data);
+}
+
+BOOST_AUTO_TEST_CASE(confix_single_quote)
+{
+	const char kSQ = '\'';
+	const std::string sq{ kSQ };
+	learning::confix_spec<std::string>::type const sq_confix = repo::confix(sq, sq);
+	const char* const sample_data = "Sample quoted string";
+	const std::string sample_sq_string{ sq + sample_data + sq };
+	std::string attr_sq;
+	bool sqr = qi::parse(
+	  sample_sq_string.begin(),
+	  sample_sq_string.end(),
+	  sq_confix[*(qi::char_ - kSQ)],
+	  attr_sq);
+	BOOST_TEST(sqr);
+	BOOST_TEST(attr_sq == sample_data);
+}
+
+template<typename P, typename T>
+bool test_parser_attr(char const* input, P const& p, T& attr, bool full_match = true)
+{
+	char const* f{ input };
+	char const* l(f + strlen(f));
+	if (qi::parse(f, l, p, attr) && (!full_match || (f == l)))
+		return true;
+	else
+		return false;
+}
+
+BOOST_AUTO_TEST_CASE(attr)
+{
+	std::string str;
+	test_parser_attr("", qi::attr("boost"), str);
+	BOOST_TEST(str == "boost");
+
+	double d;
+	test_parser_attr("", qi::attr(1.0), d);
+	BOOST_TEST(d == 1.0);
+
+	d = 0.0;
+	double d1 = 1.2;
+	test_parser_attr("", qi::attr(phx::ref(d1)), d);
+	BOOST_TEST(d == 1.2);
+}
+
+BOOST_AUTO_TEST_CASE(const_char_seq)
+{
+	constexpr char kDQ = '"';
+	constexpr char kSQ = '\'';
+	typedef std::vector<char> char_seq_t;
+	typedef const char_seq_t const_char_seq_t;
+	const_char_seq_t dq{ kDQ }, sq{ kSQ };
+	BOOST_TEST(dq.size() == 1);
+	BOOST_TEST(sq.size() == 1);
+	BOOST_TEST(dq.front() == kDQ);
+	BOOST_TEST(sq.front() == kSQ);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

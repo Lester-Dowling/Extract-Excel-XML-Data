@@ -9,9 +9,7 @@ int main(int argc, char* argv[])
 		using namespace std;
 		cin.exceptions(ios_base::badbit);
 		Program program{ argc, argv, std::cout, std::cerr };
-		program.gVersion.major = PROJECT_VERSION_MAJOR;
-		program.gVersion.minor = PROJECT_VERSION_MINOR;
-		program.gVersion.small = PROJECT_VERSION_PATCH;
+		program.gVersion = PROJECT_VERSION;
 		program.run_and_report_exceptions();
 		program.politely_finish_if_asked();
 		return program.gExitCode;

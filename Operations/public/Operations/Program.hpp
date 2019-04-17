@@ -91,6 +91,12 @@ namespace operations {
 		std::string gCalcText;
 
 		/**
+		 * Filename of a text file which contains calc script to be worked out by the
+		 * calculator.
+		 */
+		std::string gCalcFile;
+
+		/**
 		 * Calculator for computing arithmetic expressions.
 		 */
 		Calculator gCalculator;
