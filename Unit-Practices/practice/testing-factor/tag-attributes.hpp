@@ -8,7 +8,7 @@
 #include <boost/fusion/include/vector.hpp>
 #include <boost/spirit/include/qi.hpp>
 
-namespace learning {
+namespace practice {
 	namespace fusion = boost::fusion;
 	namespace phoenix = boost::phoenix;
 	namespace qi = boost::spirit::qi;
@@ -56,4 +56,4 @@ namespace learning {
 						<< std::endl);
 		}
 	};
-} // namespace learning
+} // namespace practice

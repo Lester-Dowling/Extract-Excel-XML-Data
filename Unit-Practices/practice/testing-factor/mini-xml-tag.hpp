@@ -5,14 +5,14 @@
 #include <map>
 #include <boost/fusion/include/adapt_struct.hpp>
 
-namespace learning {
+namespace practice {
 	struct mini_xml_tag
 	{
 		std::string name;
 		std::string attributes;
 		std::map<std::string, std::string> attribute_dict;
 	};
-} // namespace learning
+} // namespace practice
 BOOST_FUSION_ADAPT_STRUCT(
-  learning::mini_xml_tag,
+  practice::mini_xml_tag,
   (std::string, name)(std::string, attributes));

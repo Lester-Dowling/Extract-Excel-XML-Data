@@ -4,7 +4,7 @@
 #include <string>
 #include <boost/spirit/include/qi.hpp>
 
-namespace learning {
+namespace practice {
 	// namespace fusion = boost::fusion;
 	// namespace phoenix = boost::phoenix;
 	namespace qi = boost::spirit::qi;

@@ -93,10 +93,11 @@ BOOST_AUTO_TEST_CASE(regex_iterator_replace_into_calc_2)
 		  cell_ref_ords.pop_front();
 		  cell_ref_xpath_text += ',';
 		  cell_ref_xpath_text += "Data";
-		  Grade::SP xpath_root = program.parse_xpath_text(cell_ref_xpath_text);
+		  Grade::SP xpath_root =
+			program.parse_xpath_text(program.xpath_prefix(1) + cell_ref_xpath_text);
 		  const char* const expected_xpath = //
-			"Workbook --> Worksheet[Worksheet=1] --> Table --> Row[Row=Total Revenue "
-			"Excluding Interest] --> Cell[Cell=06/17] --> Data";
+			"Workbook --> Worksheet[Worksheet=1] --> Table --> "
+			"Row[Row='Total Revenue Excluding Interest'] --> Cell[Cell='06/17'] --> Data";
 		  BOOST_TEST(Grade::path_to_string(xpath_root) == expected_xpath);
 		  const std::string cell_text = program.extract_single_text(xml_root, xpath_root);
 

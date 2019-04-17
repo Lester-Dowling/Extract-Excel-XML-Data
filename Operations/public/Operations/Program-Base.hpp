@@ -68,7 +68,7 @@ namespace operations {
 		 * Run the program and catch all exceptions.  Write an error report to the user for
 		 * any thrown exception.
 		 */
-		virtual bool run_and_report_exceptions() noexcept;
+		virtual void run_and_report_exceptions() noexcept;
 
 		/**
 		 * Ask the user to press <Enter> to finish the program run.

@@ -62,10 +62,9 @@ BOOST_AUTO_TEST_CASE(std_tuple_as_attribute_of_compound_component)
 	BOOST_TEST(std::get<1>(p) == 2.0);
 }
 
-namespace learning {
+namespace practice {
 	template<typename Iterator>
-	struct CSV_Doubles
-	  : qi::grammar<Iterator, std::list<double>(), ascii::space_type> //
+	struct CSV_Doubles : qi::grammar<Iterator, std::list<double>(), ascii::space_type> //
 	{
 		using start_type = typename CSV_Doubles::base_type::start_type;
 		using attr_type = typename start_type::attr_type;
@@ -78,12 +77,12 @@ namespace learning {
 			// BOOST_TEST_MESSAGE("attr_type : " << typeid(attr_type).name());
 		}
 	};
-} // namespace learning
+} // namespace practice
 
 BOOST_AUTO_TEST_CASE(grammar_csv_number_list_to_std_vector)
 {
 	const char* const sample_text = "  1.12   ,   2.23   ,   3.34   ";
-	typedef learning::CSV_Doubles<Stream_Iterator> Grammar;
+	typedef practice::CSV_Doubles<Stream_Iterator> Grammar;
 	Grammar::attr_type v; // std::vector<double> std::list<double> std::deque<double>
 	// v.reserve(10);
 
@@ -119,10 +118,9 @@ BOOST_AUTO_TEST_CASE(grammar_csv_number_list_to_std_vector)
 //	BOOST_TEST(v.at(2) == 3);
 //}
 
-namespace learning {
+namespace practice {
 	template<typename Iterator>
-	struct XML_Attribute_Filter
-	  : qi::grammar<Iterator, void(), ascii::space_type> //
+	struct XML_Attribute_Filter : qi::grammar<Iterator, void(), ascii::space_type> //
 	{
 		using base_type = typename XML_Attribute_Filter::base_type;
 		using start_type = typename base_type::start_type;
@@ -168,17 +166,16 @@ namespace learning {
 		  , start{ (xml_identifier[boost::bind(&Node_Creator::new_element, creator, _1)] >>
 					-(qi::lit('[') > attributes > qi::lit(']'))) %
 				   ',' }
-		{
-		}
+		{}
 	};
-} // namespace learning
+} // namespace practice
 
 BOOST_AUTO_TEST_CASE(grammar_xml_attribute_filter)
 {
 	using Node_Visitor = excel_xml_parser::Node_Visitor;
 	const char* const sample_text = "  Worksheet   ,   Table   ,   Row[ Row=12 ] , "
 									"Cell[Column=1 ss::ValueType=Number]   ";
-	typedef learning::XML_Attribute_Filter<Stream_Iterator> Grammar;
+	typedef practice::XML_Attribute_Filter<Stream_Iterator> Grammar;
 	Grammar g;
 
 	std::istringstream sample_stream{ sample_text };
@@ -188,27 +185,27 @@ BOOST_AUTO_TEST_CASE(grammar_xml_attribute_filter)
 	int path_depth = 1;
 	Node_Visitor::all_depth_first(g.result, [&](Node_Visitor& v) -> bool {
 		switch (path_depth++) {
-		case 1:
-			BOOST_TEST(v.name() == "Worksheet");
-			return true;
-		case 2:
-			BOOST_TEST(v.name() == "Table");
-			return true;
-		case 3:
-			BOOST_TEST(v.name() == "Row");
-			BOOST_REQUIRE(v.attribute("Row").has_value());
-			BOOST_TEST(v.attribute("Row").value() == "12");
-			return true;
-		case 4:
-			BOOST_TEST(v.name() == "Cell");
-			BOOST_REQUIRE(v.attribute("Column").has_value());
-			BOOST_TEST(v.attribute("Column").value() == "1");
-			BOOST_REQUIRE(v.attribute("ss::ValueType").has_value());
-			BOOST_TEST(v.attribute("ss::ValueType").value() == "Number");
-			return true;
-		default:
-			BOOST_FAIL("XML node visitor path too deep");
-			return false;
+			case 1:
+				BOOST_TEST(v.name() == "Worksheet");
+				return true;
+			case 2:
+				BOOST_TEST(v.name() == "Table");
+				return true;
+			case 3:
+				BOOST_TEST(v.name() == "Row");
+				BOOST_REQUIRE(v.attribute("Row").has_value());
+				BOOST_TEST(v.attribute("Row").value() == "12");
+				return true;
+			case 4:
+				BOOST_TEST(v.name() == "Cell");
+				BOOST_REQUIRE(v.attribute("Column").has_value());
+				BOOST_TEST(v.attribute("Column").value() == "1");
+				BOOST_REQUIRE(v.attribute("ss::ValueType").has_value());
+				BOOST_TEST(v.attribute("ss::ValueType").value() == "Number");
+				return true;
+			default:
+				BOOST_FAIL("XML node visitor path too deep");
+				return false;
 		}
 	});
 }

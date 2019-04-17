@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-namespace learning {
+namespace practice {
 	///////////////////////////////////////////////////////////////////////////
 	//  Print out the mini xml tree
 	///////////////////////////////////////////////////////////////////////////
@@ -59,4 +59,4 @@ namespace learning {
 		tab(indent);
 		std::cout << '}' << std::endl;
 	}
-} // namespace learning
+} // namespace practice

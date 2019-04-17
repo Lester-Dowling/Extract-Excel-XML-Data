@@ -10,7 +10,7 @@ namespace utf = boost::unit_test;
 
 BOOST_AUTO_TEST_SUITE(test_grammars_suite, *utf::enabled())
 
-namespace learning {
+namespace practice {
 	namespace qi = boost::spirit::qi;
 	namespace ascii = boost::spirit::ascii;
 
@@ -56,7 +56,7 @@ namespace learning {
 			start %= qi::lit('<') >> head >> tail >> qi::lit('>');
 		}
 	};
-} // namespace learning
+} // namespace practice
 
 BOOST_AUTO_TEST_CASE(verify_list_of_words)
 {
@@ -64,7 +64,7 @@ BOOST_AUTO_TEST_CASE(verify_list_of_words)
 	namespace ascii = boost::spirit::ascii;
 	std::string str = " 22   333   4444  55555  a bb ccc dddd e .";
 
-	typedef learning::word_list_verifier<std::string::const_iterator>
+	typedef practice::word_list_verifier<std::string::const_iterator>
 	  word_list_verifier_grammar;
 	word_list_verifier_grammar g; // Our grammar
 
@@ -79,7 +79,7 @@ BOOST_AUTO_TEST_CASE(list_of_words)
 	namespace ascii = boost::spirit::ascii;
 	std::string str = " 22   333   4444  55555  a bb ccc dddd e .";
 	typedef std::string::const_iterator Iterator;
-	typedef learning::word_list<Iterator> word_list_grammar;
+	typedef practice::word_list<Iterator> word_list_grammar;
 	word_list_grammar g; // Our grammar
 
 	Iterator iter = str.begin();
@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_CASE(head_word)
 	namespace ascii = boost::spirit::ascii;
 	std::string str = "<22   333   4444  55555  a bb ccc dddd e >";
 	typedef std::string::const_iterator Iterator;
-	typedef learning::head_word<Iterator> word_list_grammar;
+	typedef practice::head_word<Iterator> word_list_grammar;
 	word_list_grammar g; // Our grammar
 
 	Iterator iter = str.begin();

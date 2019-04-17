@@ -12,13 +12,13 @@ namespace utf = boost::unit_test;
 
 BOOST_AUTO_TEST_SUITE(test_fusion_suite, *utf::enabled())
 namespace {
-	learning::mini_xml_tag trial_mini_xml_tag(const std::string sample_input)
+	practice::mini_xml_tag trial_mini_xml_tag(const std::string sample_input)
 	{
 		namespace qi = boost::spirit::qi;
 		namespace ascii = boost::spirit::ascii;
 		typedef std::string::const_iterator Iterator;
-		learning::opening_tag<Iterator> g; // Our grammar
-		learning::mini_xml_tag result;
+		practice::opening_tag<Iterator> g; // Our grammar
+		practice::mini_xml_tag result;
 		BOOST_REQUIRE(qi::phrase_parse(
 		  sample_input.begin(), sample_input.end(), g, ascii::space, result));
 		//std::ostringstream oss;

@@ -12,7 +12,7 @@ namespace utf = boost::unit_test;
  */
 
 BOOST_AUTO_TEST_SUITE(test_semantic_actions_suite, *utf::enabled())
-namespace learning {
+namespace practice {
 	namespace qi = boost::spirit::qi;
 	namespace ascii = boost::spirit::ascii;
 
@@ -81,14 +81,14 @@ namespace learning {
 			start = head; // >> tail;
 		}
 	};
-} // namespace learning
+} // namespace practice
 
 BOOST_AUTO_TEST_CASE(int_parser_semantic_action)
 {
 	namespace qi = boost::spirit::qi;
 	namespace ascii = boost::spirit::ascii;
 	using StringIterator = std::string::const_iterator;
-	using Parser = learning::int_parser<StringIterator>;
+	using Parser = practice::int_parser<StringIterator>;
 	const std::string str = " <22> ";
 	Parser parser;
 	StringIterator itr = str.begin(), end = str.end();
@@ -102,7 +102,7 @@ BOOST_AUTO_TEST_CASE(double_parser_semantic_action)
 	namespace ascii = boost::spirit::ascii;
 	const std::string str = "  (  11  ,  22.3 )   ";
 	typedef std::string::const_iterator StringIterator;
-	learning::coords_parser<StringIterator> parser;
+	practice::coords_parser<StringIterator> parser;
 	StringIterator itr = str.begin(), end = str.end();
 	BOOST_TEST(qi::phrase_parse(itr, end, parser, ascii::space));
 	BOOST_TEST(parser.result == std::make_pair(11.0, 22.3));

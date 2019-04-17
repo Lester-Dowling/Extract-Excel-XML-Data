@@ -17,7 +17,7 @@
 #include <boost/spirit/include/qi_operator.hpp>
 #include <boost/spirit/include/qi_string.hpp>
 #include <boost/spirit/include/qi_symbols.hpp>
-namespace learning {
+namespace practice {
 	namespace fusion = boost::fusion;
 	namespace phoenix = boost::phoenix;
 	namespace qi = boost::spirit::qi;
@@ -41,12 +41,12 @@ namespace learning {
 		mini_xml_tag tag;
 		std::vector<mini_xml_node> children;
 	};
-} // namespace learning
+} // namespace practice
 
 BOOST_FUSION_ADAPT_STRUCT(
-  learning::mini_xml_tag,
+  practice::mini_xml_tag,
   (std::string, name)(std::string, attributes))
 
 BOOST_FUSION_ADAPT_STRUCT(
-  learning::mini_xml,
-  (learning::mini_xml_tag, tag)(std::vector<learning::mini_xml_node>, children))
+  practice::mini_xml,
+  (practice::mini_xml_tag, tag)(std::vector<practice::mini_xml_node>, children))

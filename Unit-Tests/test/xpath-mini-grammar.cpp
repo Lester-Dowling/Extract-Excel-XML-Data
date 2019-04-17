@@ -9,7 +9,6 @@ namespace fsn = boost::fusion;
 namespace spirit = boost::spirit;
 namespace qi = spirit::qi;
 namespace ascii = spirit::ascii;
-namespace repo = spirit::repository;
 namespace phx = boost::phoenix;
 using Stream_Iterator = boost::spirit::basic_istream_iterator<char>;
 using Grade = pseudo_xpath_parser::Grade;

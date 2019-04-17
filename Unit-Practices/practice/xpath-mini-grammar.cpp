@@ -22,7 +22,6 @@ using XPath_Grammar = pseudo_xpath_parser::mini_grammar<Stream_Iterator>;
 
 BOOST_AUTO_TEST_SUITE(test_xpath_mini_grammar_suite, *utf::enabled())
 
-
 BOOST_AUTO_TEST_CASE(single_attribute_filter)
 {
 	const char* const xpath_text = "Cell[ Column=1 ]   ";
@@ -177,27 +176,27 @@ BOOST_AUTO_TEST_CASE(column_name_or_number)
 	try {
 		filter_col_idx = std::stoi(filter_by_name);
 		BOOST_FAIL("Successfully parsed text");
-	}
-	catch (std::invalid_argument const&) {
+	} catch (std::invalid_argument const&) {
 		BOOST_TEST(filter_col_idx == -1);
 	}
 }
 
-namespace learning {
+namespace practice {
 	// A metafunction to compute the type
 	// of the confix() construct
 	template<typename Prefix, typename Suffix = Prefix>
-	struct confix_spec {
+	struct confix_spec
+	{
 		using type =
 		  typename spirit::result_of::terminal<repo::tag::confix(Prefix, Suffix)>::type;
 	};
-} // namespace learning
+} // namespace practice
 
 BOOST_AUTO_TEST_CASE(confix_double_quote)
 {
 	const char kDQ = '"';
 	const std::string dq{ kDQ };
-	learning::confix_spec<std::string>::type const dq_confix = repo::confix(dq, dq);
+	practice::confix_spec<std::string>::type const dq_confix = repo::confix(dq, dq);
 	const char* const sample_data = "Sample quoted string";
 	const std::string sample_dq_string{ dq + sample_data + dq };
 	std::string attr_dq;
@@ -214,7 +213,7 @@ BOOST_AUTO_TEST_CASE(confix_single_quote)
 {
 	const char kSQ = '\'';
 	const std::string sq{ kSQ };
-	learning::confix_spec<std::string>::type const sq_confix = repo::confix(sq, sq);
+	practice::confix_spec<std::string>::type const sq_confix = repo::confix(sq, sq);
 	const char* const sample_data = "Sample quoted string";
 	const std::string sample_sq_string{ sq + sample_data + sq };
 	std::string attr_sq;

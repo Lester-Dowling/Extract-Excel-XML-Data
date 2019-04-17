@@ -11,7 +11,7 @@ namespace utf = boost::unit_test;
  */
 
 BOOST_AUTO_TEST_SUITE(test_parsers_suite, *utf::enabled())
-namespace learning {
+namespace practice {
 	namespace qi = boost::spirit::qi;
 	namespace ascii = boost::spirit::ascii;
 
@@ -28,7 +28,7 @@ namespace learning {
 			return false;
 		return r;
 	}
-} // namespace learning
+} // namespace practice
 
 namespace test {
 	template<typename P>
@@ -61,13 +61,13 @@ namespace test {
 BOOST_AUTO_TEST_CASE(parse_valid_list_of_numbers) //
 {
 	std::string str = "2, 3, 4, 5";
-	BOOST_TEST(learning::parse_numbers(str.begin(), str.end()));
+	BOOST_TEST(practice::parse_numbers(str.begin(), str.end()));
 }
 
 BOOST_AUTO_TEST_CASE(fail_parse_of_invalid_numerical_list) //
 {
 	std::string str = "a, b, c, d";
-	BOOST_TEST(!learning::parse_numbers(str.begin(), str.end()));
+	BOOST_TEST(!practice::parse_numbers(str.begin(), str.end()));
 }
 
 BOOST_AUTO_TEST_CASE(simple_string_parsers)

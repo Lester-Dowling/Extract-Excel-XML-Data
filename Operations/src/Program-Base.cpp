@@ -184,7 +184,7 @@ namespace operations {
 		save();
 	}
 
-	bool Program_Base::run_and_report_exceptions() noexcept
+	void Program_Base::run_and_report_exceptions() noexcept
 	{
 		try {
 			this->run();
