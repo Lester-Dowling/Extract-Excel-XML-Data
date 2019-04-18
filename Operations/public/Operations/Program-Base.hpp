@@ -15,22 +15,20 @@ namespace operations {
 	 * Operational parameters for this program such as can be configured from the
 	 * command line.
 	 */
-	class Program_Base
-	{
-	  public:
+	class Program_Base {
+	public:
 		int argc;
 		char** argv;
 		int gExitCode = EXIT_SUCCESS;
 		bool gVerbose = false;
 		std::ostream* gOut;
 		std::ostream* gErr;
-		struct Version
-		{
+		struct Version {
 			int major, minor, small;
 		};
 		Version gVersion{ 1, 0, 0 };
 
-	  protected:
+	protected:
 		/*
 		 * Options for only the command line.
 		 */
@@ -54,11 +52,11 @@ namespace operations {
 		virtual void parse_command_line_options();
 		virtual void print_custom_help();
 		virtual void perform_requested_operation() = 0;
-		virtual void set_out(std::ostream& out);
-		virtual void set_err(std::ostream& err);
-		virtual void save() = 0;
+		virtual void set_out(std::ostream& out) noexcept;
+		virtual void set_err(std::ostream& err) noexcept;
+		// virtual void save() = 0;
 
-	  public:
+	public:
 		/**
 		 * Run the program and let all exceptions through.
 		 */
@@ -73,20 +71,20 @@ namespace operations {
 		/**
 		 * Ask the user to press <Enter> to finish the program run.
 		 */
-		virtual void politely_finish_if_asked();
+		virtual void politely_finish_if_asked() noexcept;
 
 		/**
 		 * Present to the user a report of an exception within the program.
 		 */
 		virtual void report_exception(
 		  const char* const title,
-		  const std::string& what = std::string{}) noexcept;
+		  const std::string& what = {}) noexcept;
 
 		/**
 		 * Report an emergency exit of program because it failed to start.
 		 */
-		static void report_startup_error(
+		[[noreturn]] static void report_startup_error(
 		  const char* const title,
-		  std::string const& what = std::string{}) noexcept;
+		  std::string const& what = {}) noexcept;
 	};
 } // namespace operations

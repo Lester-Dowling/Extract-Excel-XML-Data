@@ -25,9 +25,9 @@ message(STATUS "date binary dir is " ${date_prj_BINARY_DIR})
 add_library(date::interface INTERFACE IMPORTED GLOBAL)
 
 # set_target_properties(
-	# date_interface
-	# PROPERTIES IMPORTED_GLOBAL TRUE
-	# )
+# date_interface
+# PROPERTIES IMPORTED_GLOBAL TRUE
+# )
 
 target_include_directories(date::interface INTERFACE "${date_prj_SOURCE_DIR}/include")
 target_compile_features(date::interface INTERFACE cxx_std_17)

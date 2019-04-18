@@ -1,5 +1,5 @@
 /**
- * @file   Simple-XML/Model.cpp
+ * @file   Simple-XML/Document.cpp
  * @date   Started 2019-04-18
  * @author Lester J. Dowling
  */

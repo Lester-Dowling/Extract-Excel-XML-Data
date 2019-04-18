@@ -1,7 +1,10 @@
-// Simple-XML-Parser/src/Node-Filter.cpp
-// Started 14 Aug 2018
-#include "pch-xml-parser.hpp"
-#include "Simple-XML-Parser/Node-Filter.hpp"
+/**
+ * @file   Simple-XML/src/Element-Filter.cpp
+ * @date   Started 2018-08-14
+ * @author Lester J. Dowling
+ */
+#include "pch-simple-xml.hpp"
+#include "Simple-XML/Element-Filter.hpp"
 #define TRACE_FILTER
 //#undef TRACE_FILTER
 
@@ -9,19 +12,19 @@
 #undef TRACE_FILTER
 #endif
 
-namespace excel_xml_parser {
+namespace simple_xml {
 
-	Node_Filter::Node_Filter(excel_xml_parser::Node::SP root)
+	Element_Filter::Element_Filter(excel_xml_parser::Node::SP root)
 	  : Node_Visitor{ root }
 	{
 	}
 
-	void Node_Filter::set_filter_path(pseudo_xpath_parser::Grade::SP filter_path)
+	void Element_Filter::set_filter_path(pseudo_xpath_parser::Grade::SP filter_path)
 	{
 		m_filter_path = filter_path;
 	}
 
-	bool Node_Filter::xml_node_matches_filter_node(
+	bool Element_Filter::xml_node_matches_filter_node(
 	  const excel_xml_parser::Node::SP node,
 	  const Filter_Node fn) const
 	{
@@ -152,7 +155,7 @@ namespace excel_xml_parser {
 #define __TRACER(args)
 #endif
 
-	bool Node_Filter::current_path_matches_filter_path() const
+	bool Element_Filter::current_path_matches_filter_path() const
 	{
 		using std::cout;
 		using std::endl;
@@ -197,13 +200,13 @@ namespace excel_xml_parser {
 		return true;
 	}
 
-	void Node_Filter::all_siblings(
+	void Element_Filter::all_siblings(
 	  excel_xml_parser::Node::SP root,
 	  pseudo_xpath_parser::Grade::SP filter_path,
 	  Worksheet_Row_Column_Titles::SP titles,
 	  std::function<bool(Node_Visitor&)> filter_predicate)
 	{
-		Node_Filter visitor{ root };
+		Element_Filter visitor{ root };
 		visitor.set_filter_path(filter_path);
 		visitor.set_titles(titles);
 		while (true) {
@@ -238,4 +241,4 @@ namespace excel_xml_parser {
 			std::cout << std::endl;
 	}
 #endif
-} // namespace excel_xml_parser
+} // namespace simple_xml

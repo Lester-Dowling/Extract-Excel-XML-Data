@@ -4,8 +4,6 @@
  * @author Lester J. Dowling
  */
 #pragma once
-#include <map>
-#include <memory>
 #include <string>
 #include <vector>
 #include <boost/filesystem/path.hpp>
@@ -19,11 +17,15 @@ namespace simple_xml {
 	 * represented by @c Element.
 	 */
 	class Document {
-	public:
 		/**
-		 * Load and parse the given XML file into this document.
+		 * The connected set of nodes.
 		 */
-		void load_xml_file(const boost::filesystem::path xml_path);
+		std::vector<Element> m_elements;
+
+		/**
+		 * Titles of all worksheets, rows and columns within the workbook.
+		 */
+		Worksheet_Row_Column_Titles m_titles;
 
 		/**
 		 * The column which contains the titles for each row.
@@ -41,9 +43,24 @@ namespace simple_xml {
 		 */
 		size_t m_column_title_span; // gColumnTitleSpan
 
+		friend class Element_Visitor;
+		friend class Element_Filter;
+		friend class Element_Creator;
+
+	public:
+		Document(
+		  std::string row_titles_column,
+		  int column_titles_row,
+		  size_t column_title_span)
+		  : m_row_titles_column{ row_titles_column }
+		  , m_column_titles_row{ column_titles_row }
+		  , m_column_title_span{ column_title_span }
+		{
+		}
+
+	public:
 		/**
-		 * The connected set of nodes.
+		 * Load and parse the given XML file into this document.
 		 */
-		std::vector<Element> m_elements;
-	};
-} // namespace simple_xml
+		void load_xml_file(const boost::filesystem::path xml_path);
+	} // namespace simple_xml

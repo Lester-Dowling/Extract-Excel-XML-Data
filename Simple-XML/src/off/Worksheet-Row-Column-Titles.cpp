@@ -1,11 +1,11 @@
 /**
- * @file   Simple-XML-Parser/Worksheet-Row-Column-Titles.hpp
- * @date   Started Thu 11 Apr 2019 5:03:00 AM EST
+ * @file   Simple-XML/src/Worksheet-Row-Column-Titles.cpp
+ * @date   Started 2019-04-11
  * @author Lester J. Dowling
  */
-#include "pch-xml-parser.hpp"
-#include "Simple-XML-Parser/Worksheet-Row-Column-Titles.hpp"
-namespace excel_xml_parser {
+#include "pch-simple-xml.hpp"
+#include "Simple-XML/Worksheet-Row-Column-Titles.hpp"
+namespace simple_xml {
 	using W = Worksheet_Row_Column_Titles;
 
 	void W::verify_existing_idx(const int wkt_idx) const
@@ -137,4 +137,4 @@ namespace excel_xml_parser {
 		else
 			return {};
 	}
-} // namespace excel_xml_parser
+} // namespace simple_xml

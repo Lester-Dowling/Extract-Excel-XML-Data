@@ -11,7 +11,7 @@ namespace std {
 	{
 		return os << v.major << '.' << v.minor << '.' << v.small;
 	}
-}
+} // namespace std
 namespace operations {
 
 	Program_Base::Program_Base(int argc, char** argv, std::ostream& o, std::ostream& e)
@@ -107,25 +107,31 @@ namespace operations {
 		}
 	}
 
-	void Program_Base::politely_finish_if_asked()
+	void Program_Base::politely_finish_if_asked() noexcept
 	{
-		if (gVM.count("politely_finish")) {
-			using std::cout;
-			using std::endl;
-			using std::flush;
-			cout << endl << endl << "Please press <Enter> to finish:" << flush;
-			getchar();
+		try {
+			if (gVM.count("politely_finish")) {
+				using std::cout;
+				using std::endl;
+				using std::flush;
+				cout << endl << endl << "Please press <Enter> to finish:" << flush;
+				getchar();
+			}
+		}
+		catch (...) {
+			/* Ignore.  Cannot do anything but terminate... */
+			std::terminate();
 		}
 	}
 
-	void Program_Base::set_out(std::ostream& out)
+	void Program_Base::set_out(std::ostream& out) noexcept
 	{
 		gOut = &out;
 		gOut->exceptions(
 		  std::ios_base::badbit | std::ios_base::failbit | std::ios_base::eofbit);
 	}
 
-	void Program_Base::set_err(std::ostream& err)
+	void Program_Base::set_err(std::ostream& err) noexcept
 	{
 		gErr = &err;
 		gErr->exceptions(
@@ -144,11 +150,13 @@ namespace operations {
 			*gErr << prefix_tag << title << " error";
 			if (what.empty()) {
 				*gErr << '.' << endl;
-			} else {
+			}
+			else {
 				*gErr << ':' << endl;
 				*gErr << prefix_tag << what << endl;
 			}
-		} catch (...) {
+		}
+		catch (...) {
 			std::terminate();
 		}
 	}
@@ -166,11 +174,13 @@ namespace operations {
 			cerr << error_msg_prefix << "Failed to start.  " << title << " error" << endl;
 			if (what.empty()) {
 				cerr << '.' << endl;
-			} else {
+			}
+			else {
 				cerr << ':' << endl;
 				cerr << error_msg_prefix << what << endl;
 			}
-		} catch (...) {
+		}
+		catch (...) {
 			/* Ignore.  Cannot do anything but terminate... */
 		}
 		std::terminate();
@@ -181,7 +191,7 @@ namespace operations {
 		print_help_if_asked();
 		print_version_if_asked();
 		perform_requested_operation();
-		save();
+		// save();
 	}
 
 	void Program_Base::run_and_report_exceptions() noexcept
@@ -190,36 +200,50 @@ namespace operations {
 			this->run();
 			if (this->gVerbose)
 				*gOut << "Okay." << std::endl;
-		} catch (operations::No_Op const& ex) { // Nothing for program to do.
+		}
+		catch (operations::No_Op const& ex) { // Nothing for program to do.
 			if (0 < std::strlen(ex.what()))
 				this->report_exception("No Operation", ex.what());
 			else
 				this->gExitCode = EXIT_FAILURE;
-		} catch (boost::filesystem::filesystem_error const& ex) {
+		}
+		catch (boost::filesystem::filesystem_error const& ex) {
 			this->report_exception("File system", ex.what());
-		} catch (boost::system::system_error const& ex) {
+		}
+		catch (boost::system::system_error const& ex) {
 			this->report_exception("System", ex.what());
-		} catch (std::ios_base::failure const& ex) {
+		}
+		catch (std::ios_base::failure const& ex) {
 			this->report_exception("I/O", ex.what());
-		} catch (std::bad_alloc const&) {
+		}
+		catch (std::bad_alloc const&) {
 			this->report_exception("Out of memory");
-		} catch (std::domain_error const& ex) {
+		}
+		catch (std::domain_error const& ex) {
 			this->report_exception("Domain", ex.what());
-		} catch (std::length_error const& ex) {
+		}
+		catch (std::length_error const& ex) {
 			this->report_exception("Length", ex.what());
-		} catch (std::invalid_argument const& ex) {
+		}
+		catch (std::invalid_argument const& ex) {
 			this->report_exception("Invalid argument", ex.what());
-		} catch (std::out_of_range const& ex) {
+		}
+		catch (std::out_of_range const& ex) {
 			this->report_exception("Out of range", ex.what());
-		} catch (std::range_error const& ex) {
+		}
+		catch (std::range_error const& ex) {
 			this->report_exception("Range", ex.what());
-		} catch (std::logic_error const& ex) {
+		}
+		catch (std::logic_error const& ex) {
 			this->report_exception("Logic", ex.what());
-		} catch (std::runtime_error const& ex) {
+		}
+		catch (std::runtime_error const& ex) {
 			this->report_exception("Runtime", ex.what());
-		} catch (std::exception const& ex) {
+		}
+		catch (std::exception const& ex) {
 			this->report_exception("Exception", ex.what());
-		} catch (...) {
+		}
+		catch (...) {
 			this->report_exception("Unexpected");
 		}
 	}

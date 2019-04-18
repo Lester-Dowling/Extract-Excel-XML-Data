@@ -1,5 +1,8 @@
-// Simple-XML/src/Element-Visitor.cpp
-// Started 14 Aug 2018
+/**
+ * @file   Simple-XML/src/Element-Visitor.cpp
+ * @date   Started 2018-08-14
+ * @author Lester J. Dowling
+ */
 #include "pch-simple-xml.hpp"
 #include "Simple-XML/Element-Visitor.hpp"
 #define TRACE_VISITOR
@@ -10,8 +13,13 @@
 #endif
 
 namespace simple_xml {
+	using std::string;
+	using std::vector;
+	using std::map;
+	using std::optional;
+	using std::runtime_error;
 
-	Element_Visitor::Element_Visitor(std::vector<Element>& elements)
+	Element_Visitor::Element_Visitor(vector<Element>& elements)
 	  : m_elements{ elements }
 	  , current_index{}
 	{
@@ -20,27 +28,27 @@ namespace simple_xml {
 	void Element_Visitor::throw_if_current_is_null() const
 	{
 		if (!current_index)
-			throw std::runtime_error{ "Current XML element is null." };
+			throw runtime_error{ "Current XML element is null." };
 	}
 
-	std::string Element_Visitor::name() const
+	string Element_Visitor::name() const
 	{
 		throw_if_current_is_null();
 		return current_index->name;
 	}
 
-	std::string Element_Visitor::text() const
+	string Element_Visitor::text() const
 	{
 		throw_if_current_is_null();
 		return current_index->text;
 	}
 
-	std::map<std::string, std::string> const& Element_Visitor::attributes() const
+	map<string, string> const& Element_Visitor::attributes() const
 	{
 		return current_index->attributes;
 	}
 
-	std::optional<std::string> Element_Visitor::attribute(std::string attribute_name) const
+	optional<string> Element_Visitor::attribute(string attribute_name) const
 	{
 		const auto fitr = current_index->attributes.find(attribute_name);
 		if (fitr != current_index->attributes.end())
@@ -99,9 +107,9 @@ namespace simple_xml {
 		return false;
 	}
 
-	std::string Element_Visitor::path_to_string() const
+	string Element_Visitor::path_to_string() const
 	{
-		std::string result;
+		string result;
 		Element_Path_Iterator nitr = current_index_path.begin();
 		Element_Path_Iterator const nend = current_index_path.end();
 		while (++nitr != nend) { // Elide root with "++nitr".

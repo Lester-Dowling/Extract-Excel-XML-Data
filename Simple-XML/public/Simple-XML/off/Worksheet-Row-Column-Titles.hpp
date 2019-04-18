@@ -4,7 +4,6 @@
  * @author Lester J. Dowling
  */
 #pragma once
-#include <memory>
 #include <string>
 #include <map>
 #include <utility>
@@ -12,6 +11,7 @@
 #include <boost/noncopyable.hpp>
 #include "Simple-XML/Row-Column-Titles.hpp"
 namespace simple_xml {
+	using std::map;
 	using std::optional;
 	using std::runtime_error;
 	using std::string;
@@ -20,9 +20,8 @@ namespace simple_xml {
 	/**
 	 * Keep all the titles of worksheets, rows and columns in a workbook.
 	 */
-	class Worksheet_Row_Column_Titles : private boost::noncopyable
-	{
-		std::map<int, Column_Row_Titles> m_wrc_titles;
+	class Worksheet_Row_Column_Titles : private boost::noncopyable {
+		map<int, Column_Row_Titles> m_wrc_titles;
 		int m_previous_wkt_idx = 0;
 
 		/**
@@ -36,12 +35,10 @@ namespace simple_xml {
 		 */
 		void verify_non_existing_idx(const int wkt_idx) const;
 
-	  public: //~ Ctors -------------------------------------------------
-		typedef std::shared_ptr<Worksheet_Row_Column_Titles> SP;
+	public: //~ Ctors -------------------------------------------------
+		Worksheet_Row_Column_Titles() = default;
 
-		static SP create() { return std::make_shared<Worksheet_Row_Column_Titles>(); }
-
-	  public: //~ Mutators ----------------------------------------------
+	public: //~ Mutators ----------------------------------------------
 		/**
 		 * Add a new worksheet title at the given idx to the titles map.
 		 *
@@ -113,16 +110,16 @@ namespace simple_xml {
 			m_previous_wkt_idx = 0;
 		}
 
-	  public: //~ Accessors ---------------------------------------------
+	public: //~ Accessors ---------------------------------------------
 		/**
 		 * @return The number of worksheets in the titles map.
 		 */
-		size_t size() const { return m_wrc_titles.size(); }
+		size_t size() const noexcept { return m_wrc_titles.size(); }
 
 		/**
 		 * @return The number of worksheets in the titles map.
 		 */
-		size_t wkt_count() const { return m_wrc_titles.size(); }
+		size_t wkt_count() const noexcept { return m_wrc_titles.size(); }
 
 		/**
 		 * @return The number of rows within the given worksheet in the titles map.
@@ -166,4 +163,4 @@ namespace simple_xml {
 		 */
 		optional<string> col_title(const int wkt_idx, const int col_idx) const;
 	};
-}
+} // namespace simple_xml

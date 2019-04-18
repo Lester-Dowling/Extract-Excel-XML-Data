@@ -29,6 +29,9 @@ endif()
 # Make globally available all required external libraries:
 add_subdirectory ("external")
 
+# Simple XML library
+add_subdirectory ("Simple-XML")
+
 # XML Parser library
 add_subdirectory ("Simple-XML-Parser")
 

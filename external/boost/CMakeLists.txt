@@ -8,105 +8,105 @@ set(Boost_USE_STATIC_RUNTIME    OFF)
 set(Boost_ADDITIONAL_VERSIONS   "${BOOST_VERSION}")
 
 find_package(
-	Boost ${BOOST_VERSION} EXACT REQUIRED
-	COMPONENTS filesystem program_options date_time regex unit_test_framework
-	 )
+  Boost ${BOOST_VERSION} EXACT REQUIRED
+  COMPONENTS filesystem program_options date_time regex unit_test_framework
+  )
 
 if (Boost_FOUND)
-	set_target_properties(
-		Boost::boost
-		Boost::filesystem
-		Boost::program_options
-		Boost::date_time
-		Boost::regex
-		Boost::unit_test_framework
-		PROPERTIES IMPORTED_GLOBAL TRUE
-		)
+  set_target_properties(
+	Boost::boost
+	Boost::filesystem
+	Boost::program_options
+	Boost::date_time
+	Boost::regex
+	Boost::unit_test_framework
+	PROPERTIES IMPORTED_GLOBAL TRUE
+	)
+  target_compile_definitions(
+	Boost::boost
+	INTERFACE
+	BOOST_ALL_DYN_LINK
+	BOOST_SYSTEM_NO_DEPRECATED
+	BOOST_SYSTEM_NO_LIB
+	BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE
+	_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS)
+
+  if(WIN32)
 	target_compile_definitions(
-		Boost::boost
-		INTERFACE
-		BOOST_ALL_DYN_LINK
-		BOOST_SYSTEM_NO_DEPRECATED
-		BOOST_SYSTEM_NO_LIB
-		BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE
-		_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS)
+	  Boost::boost
+	  INTERFACE
+	  BOOST_ASIO_HAS_WINDOWS_STREAM_HANDLE
+	  BOOST_ASIO_HAS_IOCP
+	  BOOST_ASIO_HEADER_ONLY
+	  WINAPI_FAMILY=WINAPI_FAMILY_DESKTOP_APP
+	  _WIN32_WINNT=_WIN32_WINNT_WIN10
+	  _WINSOCK_DEPRECATED_NO_WARNINGS)
+  endif(WIN32)
 
-	if(WIN32)
-	  target_compile_definitions(
-		Boost::boost
-		INTERFACE
-		BOOST_ASIO_HAS_WINDOWS_STREAM_HANDLE
-		BOOST_ASIO_HAS_IOCP
-		BOOST_ASIO_HEADER_ONLY
-		WINAPI_FAMILY=WINAPI_FAMILY_DESKTOP_APP
-		_WIN32_WINNT=_WIN32_WINNT_WIN10
-		_WINSOCK_DEPRECATED_NO_WARNINGS)
-	endif(WIN32)
+  if(NOT WIN32)
+	# Support for <boost/dll.hpp> on Linux:
+	target_link_libraries(Boost::boost PUBLIC dl)
+  endif()
 
-	if(NOT WIN32)
-		# Support for <boost/dll.hpp> on Linux:
-		target_link_libraries(Boost::boost PUBLIC dl)
-	endif()
 
-	
-	#
-	# Copy Boost DLLs
-	#
-	if(WIN32)
-	  set(BOOST_REDIST_COPY_LIST "")
-	  set(Boost_Do_Next_Copy OFF)
-	  foreach(BOOST_LIB_ABSOLUTE ${Boost_LIBRARIES})
-		if(Boost_Do_Next_Copy)
-		  set(Boost_Do_Next_Copy OFF)
-		  get_filename_component(LIB_BASENAME ${BOOST_LIB_ABSOLUTE} NAME_WE)
-		  get_filename_component(BOOST_REDIST_DIR ${BOOST_LIB_ABSOLUTE} DIRECTORY)
-		  set(DLL_FILENAME "${LIB_BASENAME}.dll")
-		  get_filename_component(DLL_ABSOLUTE "${BOOST_REDIST_DIR}/${DLL_FILENAME}"
-								 ABSOLUTE)
-		  if(NOT EXISTS ${DLL_ABSOLUTE})
-			message(FATAL_ERROR "No such Boost DLL: ${DLL_ABSOLUTE}")
-		  endif()
-		  message(STATUS "Copied: ${DLL_FILENAME}")
-		  set(BOOST_REDIST_COPY_LIST
-			  "${BOOST_REDIST_COPY_LIST} \"${DLL_FILENAME}\"")
+  #
+  # Copy Boost DLLs
+  #
+  if(WIN32)
+	set(BOOST_REDIST_COPY_LIST "")
+	set(Boost_Do_Next_Copy OFF)
+	foreach(BOOST_LIB_ABSOLUTE ${Boost_LIBRARIES})
+	  if(Boost_Do_Next_Copy)
+		set(Boost_Do_Next_Copy OFF)
+		get_filename_component(LIB_BASENAME ${BOOST_LIB_ABSOLUTE} NAME_WE)
+		get_filename_component(BOOST_REDIST_DIR ${BOOST_LIB_ABSOLUTE} DIRECTORY)
+		set(DLL_FILENAME "${LIB_BASENAME}.dll")
+		get_filename_component(DLL_ABSOLUTE "${BOOST_REDIST_DIR}/${DLL_FILENAME}"
+		  ABSOLUTE)
+		if(NOT EXISTS ${DLL_ABSOLUTE})
+		  message(FATAL_ERROR "No such Boost DLL: ${DLL_ABSOLUTE}")
 		endif()
-		if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-		  if(BOOST_LIB_ABSOLUTE STREQUAL "debug")
-			set(Boost_Do_Next_Copy ON)
-		  endif()
+		message(STATUS "Copied: ${DLL_FILENAME}")
+		set(BOOST_REDIST_COPY_LIST
+		  "${BOOST_REDIST_COPY_LIST} \"${DLL_FILENAME}\"")
+	  endif()
+	  if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+		if(BOOST_LIB_ABSOLUTE STREQUAL "debug")
+		  set(Boost_Do_Next_Copy ON)
 		endif()
-		if(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-		  if(BOOST_LIB_ABSOLUTE STREQUAL "optimized")
-			set(Boost_Do_Next_Copy ON)
-		  endif()
+	  endif()
+	  if(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+		if(BOOST_LIB_ABSOLUTE STREQUAL "optimized")
+		  set(Boost_Do_Next_Copy ON)
 		endif()
-	  endforeach(BOOST_LIB_ABSOLUTE)
-	  file(TO_NATIVE_PATH "${CMAKE_BINARY_DIR}/RoboCopy-Log-Boost-redist.txt"
-						  BOOST_REDIST_COPY_LOG)
-	  message(STATUS "Boost redist folder = " ${BOOST_REDIST_DIR})
-	  message(STATUS "Boost redist copy list = " ${BOOST_REDIST_COPY_LIST})
-	  message(STATUS "Boost redist copy log = " ${BOOST_REDIST_COPY_LOG})
-	  add_custom_target(RoboCopy_Boost_Redist ALL
-						 COMMENT "RoboCopy of Boost redist"
-						 COMMAND START /MIN "RoboCopy of Boost redist" ROBOCOPY
-								 /LOG:"${BOOST_REDIST_COPY_LOG}" /COPY:DAT /NP /R:2 /W:2
-								 "${BOOST_REDIST_DIR}" "${CMAKE_BINARY_DIR}"
-								 ${BOOST_REDIST_COPY_LIST})
-	endif(WIN32)
+	  endif()
+	endforeach(BOOST_LIB_ABSOLUTE)
+	file(TO_NATIVE_PATH "${CMAKE_BINARY_DIR}/RoboCopy-Log-Boost-redist.txt"
+	  BOOST_REDIST_COPY_LOG)
+	message(STATUS "Boost redist folder = " ${BOOST_REDIST_DIR})
+	message(STATUS "Boost redist copy list = " ${BOOST_REDIST_COPY_LIST})
+	message(STATUS "Boost redist copy log = " ${BOOST_REDIST_COPY_LOG})
+	add_custom_target(RoboCopy_Boost_Redist ALL
+	  COMMENT "RoboCopy of Boost redist"
+	  COMMAND START /MIN "RoboCopy of Boost redist" ROBOCOPY
+	  /LOG:"${BOOST_REDIST_COPY_LOG}" /COPY:DAT /NP /R:2 /W:2
+	  "${BOOST_REDIST_DIR}" "${CMAKE_BINARY_DIR}"
+	  ${BOOST_REDIST_COPY_LIST})
+  endif(WIN32)
 
-	message(STATUS "------------------ CMake Variable Logging ------------------")
-	message(STATUS "BOOST_ROOT:                  " ${BOOST_ROOT})
-	message(STATUS "Boost_FOUND:                 " ${Boost_FOUND})
-	message(STATUS "Boost_INCLUDE_DIRS:          " ${Boost_INCLUDE_DIRS})
-	message(STATUS "Boost_LIBRARY_DIRS:          " ${Boost_LIBRARY_DIRS})
-	# foreach(Boost_Lib ${Boost_LIBRARIES})
-	  # message(STATUS "Boost_Lib:                   " ${Boost_Lib})
-	# endforeach(Boost_Lib)
-	message(STATUS "Boost_VERSION:               " ${Boost_VERSION})
-	message(STATUS "Boost_LIB_VERSION:           " ${Boost_LIB_VERSION})
-	message(STATUS "Boost_MAJOR_VERSION:         " ${Boost_MAJOR_VERSION})
-	message(STATUS "Boost_MINOR_VERSION:         " ${Boost_MINOR_VERSION})
-	message(STATUS "Boost_SUBMINOR_VERSION:      " ${Boost_SUBMINOR_VERSION})
-	message(STATUS "---------------- End CMake Variable Logging ----------------")
+  message(STATUS "------------------ CMake Variable Logging ------------------")
+  message(STATUS "BOOST_ROOT:                  " ${BOOST_ROOT})
+  message(STATUS "Boost_FOUND:                 " ${Boost_FOUND})
+  message(STATUS "Boost_INCLUDE_DIRS:          " ${Boost_INCLUDE_DIRS})
+  message(STATUS "Boost_LIBRARY_DIRS:          " ${Boost_LIBRARY_DIRS})
+  # foreach(Boost_Lib ${Boost_LIBRARIES})
+  # message(STATUS "Boost_Lib:                   " ${Boost_Lib})
+  # endforeach(Boost_Lib)
+  message(STATUS "Boost_VERSION:               " ${Boost_VERSION})
+  message(STATUS "Boost_LIB_VERSION:           " ${Boost_LIB_VERSION})
+  message(STATUS "Boost_MAJOR_VERSION:         " ${Boost_MAJOR_VERSION})
+  message(STATUS "Boost_MINOR_VERSION:         " ${Boost_MINOR_VERSION})
+  message(STATUS "Boost_SUBMINOR_VERSION:      " ${Boost_SUBMINOR_VERSION})
+  message(STATUS "---------------- End CMake Variable Logging ----------------")
 
 endif(Boost_FOUND)

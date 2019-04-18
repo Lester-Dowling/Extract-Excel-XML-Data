@@ -1,20 +1,21 @@
-// Simple-XML-Parser/Node-Filter.hpp
-// Started 15 Aug 2018
+/**
+ * @file   Simple-XML/Element-Filter.hpp
+ * @date   Started 2018-08-15
+ * @author Lester J. Dowling
+ */
 #pragma once
 #include <string>
-#include <deque>
-#include <initializer_list>
 #include <functional>
-#include "Simple-XML-Parser/Node.hpp"
-#include "Simple-XML-Parser/Node-Visitor.hpp"
-#include "Simple-XML-Parser/Worksheet-Row-Column-Titles.hpp"
+#include "Simple-XML/Element.hpp"
+#include "Simple-XML/Element-Visitor.hpp"
+#include "Simple-XML/Worksheet-Row-Column-Titles.hpp"
 #include "Pseudo-XPath-Parser/Grade.hpp"
 
-namespace excel_xml_parser {
+namespace simple_xml {
 
-	class Node_Filter : public excel_xml_parser::Node_Visitor {
+	class Element_Filter : public Element_Visitor {
 	public:
-		typedef std::shared_ptr<Node_Filter> SP;
+		typedef std::shared_ptr<Element_Filter> SP;
 
 		static void all_siblings(
 		  excel_xml_parser::Node::SP root,
@@ -23,7 +24,7 @@ namespace excel_xml_parser {
 		  std::function<bool(excel_xml_parser::Node_Visitor&)> callback);
 
 	protected:
-		Node_Filter(excel_xml_parser::Node::SP root);
+		Element_Filter(excel_xml_parser::Node::SP root);
 
 		void set_filter_path(pseudo_xpath_parser::Grade::SP filter_path);
 
@@ -35,9 +36,6 @@ namespace excel_xml_parser {
 		  const Filter_Node fn) const;
 
 		Worksheet_Row_Column_Titles::SP m_titles;
-		void set_titles(Worksheet_Row_Column_Titles::SP t)
-		{
-			m_titles = t;
-		}
+		void set_titles(Worksheet_Row_Column_Titles::SP t) { m_titles = t; }
 	};
-} // namespace excel_xml_parser
+} // namespace simple_xml

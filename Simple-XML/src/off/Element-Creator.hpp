@@ -1,5 +1,8 @@
-// Simple-XML/src/Element-Creator.hpp
-// Started 15 Aug 2018
+/**
+ * @file   Simple-XML/src/Element-Creator.hpp
+ * @date   Started 2018-08-15
+ * @author Lester J. Dowling
+ */
 #pragma once
 #include <string>
 #include <vector>

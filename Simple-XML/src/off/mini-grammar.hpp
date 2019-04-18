@@ -1,5 +1,8 @@
-// Simple-XML/mini-grammar.hpp
-// Started 14 Aug 2018
+/**
+ * @file   Simple-XML/src/mini-grammar.hpp
+ * @date   Started 2018-08-14
+ * @author Lester J. Dowling
+ */
 #pragma once
 #include <boost/fusion/adapted/std_pair.hpp>
 #include <boost/fusion/adapted/std_tuple.hpp>

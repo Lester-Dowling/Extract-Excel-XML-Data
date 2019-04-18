@@ -4,15 +4,19 @@ set(TARGET "Simple-XML")
 
 add_library( ${TARGET} OBJECT )
 
-file(GLOB_RECURSE SRC_FILES LIST_DIRECTORIES false CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/*)
-file(GLOB_RECURSE PUB_FILES LIST_DIRECTORIES false CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/public/*)
+file(GLOB SRC_FILES LIST_DIRECTORIES false CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/*)
+file(GLOB PUB_FILES LIST_DIRECTORIES false CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/public/*)
 target_sources(${TARGET}
   PRIVATE ${SRC_FILES}
   PUBLIC  ${PUB_FILES}
   )
 
-message(STATUS "SRC_FILES == ${SRC_FILES}")
-message(STATUS "PUB_FILES == ${PUB_FILES}")
+foreach(src_file ${SRC_FILES})
+  message(STATUS "${TARGET} src file: ${src_file}")
+endforeach(src_file)
+foreach(pub_file ${PUB_FILES})
+  message(STATUS "${TARGET} pub file: ${pub_file}")
+endforeach(pub_file)
 
 # Top-level include directories:
 target_include_directories(${TARGET}

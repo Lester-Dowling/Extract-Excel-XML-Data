@@ -125,7 +125,7 @@ namespace operations {
 	public: //~ Overrides -----------------------------------------------------
 		void setup_option_descriptions() override;
 		void perform_requested_operation() override;
-		void save() override{};
+		// void save() override{};
 
 	public: //~ XML operations ------------------------------------------------
 		typedef std::vector<char> file_in_memory_t;

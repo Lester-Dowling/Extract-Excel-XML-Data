@@ -16,6 +16,10 @@ target_include_directories(${TARGET} PRIVATE
 target_include_directories(${TARGET} PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/test)
 
+foreach(src_file ${SRC_TEST_FILES})
+  message(STATUS "${TARGET} src file: ${src_file}")
+endforeach(src_file)
+
 #
 # Import the subjects for unit testing
 #
