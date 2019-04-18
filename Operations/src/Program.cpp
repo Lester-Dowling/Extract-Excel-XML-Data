@@ -629,6 +629,8 @@ namespace operations {
 			m_titles->clear();
 			m_visited_row = 0;
 			m_visited_col = 0;
+			if (gVerbose)
+				*gErr << "Parsing " << file_path << endl;
 			Node::SP xml_root = load_xml_file(file_path);
 			if (!gCalcText.empty()) {
 				// Try gCalcText first as a filename:
