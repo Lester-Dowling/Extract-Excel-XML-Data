@@ -1,5 +1,5 @@
 /**
- * @file   Simple-XML/src/mini-grammar.hpp
+ * @file   Simple-XML/mini-grammar.hpp
  * @date   Started 2018-08-14
  * @author Lester J. Dowling
  */
@@ -25,7 +25,7 @@
 #include <boost/spirit/include/qi_symbols.hpp>
 #include <boost/bind.hpp>
 #include "Simple-XML/Element.hpp"
-#include "Element-Creator.hpp"
+#include "Simple-XML/Element-Creator.hpp"
 namespace simple_xml {
 	namespace fusion = boost::fusion;
 	namespace phoenix = boost::phoenix;

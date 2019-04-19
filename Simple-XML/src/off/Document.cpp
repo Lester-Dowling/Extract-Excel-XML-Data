@@ -5,8 +5,8 @@
  */
 #include "pch-simple-xml.hpp"
 #include "Simple-XML/Document.hpp"
-#include "Element-Creator.hpp"
-#include "mini-grammar.hpp"
+#include "Simple-XML/Element-Creator.hpp"
+#include "Simple-XML/mini-grammar.hpp"
 
 namespace simple_xml {
 	using std::runtime_error;

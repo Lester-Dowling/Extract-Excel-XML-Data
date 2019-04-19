@@ -15,7 +15,7 @@
 namespace simple_xml {
 
 	Element_Filter::Element_Filter(excel_xml_parser::Node::SP root)
-	  : Node_Visitor{ root }
+	  : Element_Visitor{ root }
 	{
 	}
 
@@ -231,14 +231,4 @@ namespace simple_xml {
 			}
 		}
 	}
-
-#if 0
-			else {
-			std::cout << "Filtered out path: ";
-			for (auto filtered_out_node : visitor.current_node_path) {
-				std::cout << filtered_out_node->name << "   ";
-			}
-			std::cout << std::endl;
-	}
-#endif
 } // namespace simple_xml
