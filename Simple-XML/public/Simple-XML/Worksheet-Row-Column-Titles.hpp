@@ -24,17 +24,6 @@ namespace simple_xml {
 		map<int, Row_Column_Titles> m_wrc_titles;
 		int m_previous_wkt_idx = 0;
 
-		/**
-		 * Throw a @c runtime_error if the given idx does exist in the titles map.
-		 */
-		void verify_existing_idx(const int wkt_idx) const;
-
-		/**
-		 * Throw a @c runtime_error if the given idx has already been inserted into the
-		 * titles map.
-		 */
-		void verify_non_existing_idx(const int wkt_idx) const;
-
 	public: //~ Ctors -------------------------------------------------
 		Worksheet_Row_Column_Titles() = default;
 
@@ -112,6 +101,11 @@ namespace simple_xml {
 
 	public: //~ Accessors ---------------------------------------------
 		/**
+		 * @return Is this data structure empty?
+		 */
+		bool empty() const noexcept { return m_wrc_titles.empty(); }
+
+		/**
 		 * @return The number of worksheets in the titles map.
 		 */
 		size_t size() const noexcept { return m_wrc_titles.size(); }
@@ -162,5 +156,16 @@ namespace simple_xml {
 		 * @return The title of the column within the given worksheet.
 		 */
 		optional<string> col_title(const int wkt_idx, const int col_idx) const;
+
+		/**
+		 * Throw a @c runtime_error if the given idx does exist in the titles map.
+		 */
+		void verify_existing_wkt(const int wkt_idx) const;
+
+		/**
+		 * Throw a @c runtime_error if the given idx has already been inserted into the
+		 * titles map.
+		 */
+		void verify_non_existing_wkt(const int wkt_idx) const;
 	};
 } // namespace simple_xml
