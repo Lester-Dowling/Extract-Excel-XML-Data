@@ -21,11 +21,11 @@ namespace simple_xml {
 	  const Grade::SP fn) const
 	{
 		using Attribute_Filter = pseudo_xpath_parser::Attribute_Filter;
-		// cout << "e.name == " << ele.name() << endl;
+		// cout << "e.name == " << visited_element.name() << endl;
 		// cout << "fn->name   == " << fn->name() << endl;
 		if (ele.name() != fn->name())
 			return false;
-		// cout << "XML node == " << ele.name() << endl;
+		// cout << "XML node == " << visited_element.name() << endl;
 		for (Attribute_Filter const& filter_attribute : fn->filters()) {
 			auto const& filter_name = filter_attribute.attribute_name;
 			auto const& filter_operator = filter_attribute.filter_operator;
@@ -152,21 +152,19 @@ namespace simple_xml {
 		using std::endl;
 		__TRACER("XML path == " << path_to_string());
 		__TRACER("XPath    == " << Grade::path_to_string(m_filter_path));
-		Element_Visitor::Element_Path_Iterator ele_itr = current_index_path.begin();
-		Element_Visitor::Element_Path_Iterator const ele_end = current_index_path.end();
 		Grade::SP filter_node = m_filter_path;
 		if (!filter_node)
 			return true;
-		while (ele_itr != ele_end) { 
-			const Element::Index ele_idx = *ele_itr++;
+		for (const Element::Index visited_index : current_index_path) {
+			Element const& visited_element = m_elements[visited_index];
 			if (!(filter_node = filter_node->next())) {
 				__TRACER("<<< No more filters => accept all nodes below.");
 				return true;
 			}
 			__TRACER("filter_node.name == " << filter_node->name());
-			if (!xml_element_matches_filter_node(m_elements.at(ele_idx), filter_node)) {
+			if (!xml_element_matches_filter_node(visited_element, filter_node)) {
 				__TRACER(
-				  "<<< Node " << m_elements.at(ele_idx).name() << " failed to match filter "
+				  "<<< Node " << visited_element.name() << " failed to match filter "
 							  << filter_node->name());
 				return false;
 			}
