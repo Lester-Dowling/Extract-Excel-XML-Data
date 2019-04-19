@@ -29,10 +29,10 @@ namespace simple_xml {
 		cout << ">>> " << __FUNCTION__ << ": " << '(' << name() << ' ' << children().size()
 			 << " children" << ')' << path_to_string() << endl;
 #endif
-		if (children().empty())
+		if (current().children.empty())
 			return false;
 		current_index_path.push_back(current_index);
-		current_index = children().front();
+		current_index = current().children.front();
 		return true;
 	}
 
@@ -75,16 +75,12 @@ namespace simple_xml {
 		string result;
 		Element_Path_Iterator nitr = current_index_path.begin();
 		Element_Path_Iterator const nend = current_index_path.end();
-		if (nitr != nend) {
-			const Element::Index idx = *nitr++;
-			result += m_elements[idx].name();
-		}
 		while (nitr != nend) {
 			const Element::Index idx = *nitr++;
-			result += " --> ";
 			result += m_elements[idx].name();
+			result += " --> ";
 		}
-		result += name();
+		result += current().name();
 		return result;
 	}
 
@@ -95,6 +91,8 @@ namespace simple_xml {
 		if (elements.empty())
 			return;
 		Element_Visitor visitor{ elements };
+		if (!callback(visitor))
+			return;
 		while (true) {
 			while (visitor.visit_first_child()) {
 				if (!callback(visitor))

@@ -6,6 +6,10 @@
 ## @date        Started 2019-04-10-10-16-08
 Param
 (
+    [parameter(Position = 0)]
+    [String]
+    $WORKSPACE_HASH = "29884886-1304-9437-a529-31f5a8869390",
+
     [parameter(mandatory = $false)]
     [Switch]
     [alias("c")]
@@ -17,15 +21,15 @@ Param
     $QUIET
 )
 
-###
-### VLC location
-###
-New-Variable -Name VLC  -Scope Script  -Force
-[string] $VLC = Resolve-Path "${ENV:ProgramFiles}/VideoLAN/VLC/vlc.exe" -ea:ignore    |    Select -ExpandProperty Path
-[string] $VOLUME = "--directx-volume=0.1"
-###
-### Sounds Directory
-###
+#
+# Audio Player
+#
+New-Variable -Name AUDIO -Scope Script -Force
+$AUDIO = New-Object System.Media.SoundPlayer
+
+#
+# Sounds Directory
+#
 New-Variable -Name SOUNDS_DIR  -Scope Script -Force
 [string] $SOUNDS_DIR = Resolve-Path "${ENV:USERPROFILE}/sounds" -ea:ignore    |    Select -ExpandProperty Path
 
@@ -34,7 +38,8 @@ Function play_start_sound() {   # Commencement sound.
     if ($QUIET) {return}
     $START_SOUND = Resolve-Path "${SOUNDS_DIR}/Computer Data 01.wav" -ea:ignore    |    Select -ExpandProperty Path
     if (Test-Path $START_SOUND) {
-        &${VLC}  $VOLUME  -I dummy  --quiet  --one-instance  --play-and-exit   "$START_SOUND"
+        $AUDIO.SoundLocation = "$START_SOUND"
+	    $AUDIO.Play()
     }
 }
 
@@ -43,7 +48,8 @@ Function play_finished_sound() { # Successful completion.
     if ($QUIET) {return}
     $FINISH_SOUND = Resolve-Path "${SOUNDS_DIR}/Computer Data 02.wav" -ea:ignore    |    Select -ExpandProperty Path
     if (Test-Path $FINISH_SOUND) {
-        &${VLC}  $VOLUME  -I dummy  --quiet  --one-instance  --play-and-exit   "$FINISH_SOUND"
+        $AUDIO.SoundLocation = "$FINISH_SOUND"
+	    $AUDIO.Play()
     }
 }
 
@@ -52,7 +58,8 @@ Function fatal_error_exit($ERROR_MESSAGE) {   # Fatal error; cannot continue.
     if (-Not($QUIET)) {
         $ERROR_SOUND = Resolve-Path "${SOUNDS_DIR}/Computer-Data-Error-Sound.wav" -ea:ignore    |    Select -ExpandProperty Path
         if (Test-Path $ERROR_SOUND) {
-            &${VLC}  $VOLUME  -I dummy  --quiet  --one-instance  --play-and-exit   "$ERROR_SOUND"
+            $AUDIO.SoundLocation = "$ERROR_SOUND"
+	        $AUDIO.Play()
         }
     }
     Write-Output "!!! [ERROR] $ERROR_MESSAGE"
@@ -131,8 +138,7 @@ if (-Not($VCVARSALL_SETUP_ONLY_ONCE)) {
 #
 # Build Directory
 #
-$WORKSPACEHASH = "076195ff-0e9d-8133-b6b4-9a14fc0d2b9e"
-$BUILD="C:/Users/ljdowling/CMakeBuilds/${WORKSPACEHASH}/build/x64-Release"
+$BUILD="C:/Users/ljdowling/CMakeBuilds/${WORKSPACE_HASH}/build/x64-Release"
 $BUILD = Resolve-Path $BUILD -ea:stop  |  Select -ExpandProperty Path
 if (-Not(Test-Path $BUILD)) { fatal_error_exit "No BUILD path" }
 Write-Host "Build directory is: $BUILD"
@@ -158,6 +164,6 @@ if ($LASTEXITCODE -ne 0) { fatal_error_exit "CMake build failed."; }
 $UNIT_TESTS = Resolve-Path "${BUILD}/Unit-Tests/Unit-Tests.exe" -ea:stop    |    Select -ExpandProperty Path
 if (-Not(Test-Path $UNIT_TESTS)) { fatal_error_exit "No UNIT_TESTS path" }
 cls
-&$UNIT_TESTS --build_info  --color_output=false  --report_level=short  --log_level=message;
+&$UNIT_TESTS --color_output=false  --report_level=short  --log_level=message;
 if ($LASTEXITCODE -ne 0) { fatal_error_exit "Unit tests failed."; }
 play_finished_sound

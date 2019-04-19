@@ -8,13 +8,11 @@
 #include <map>
 #include <vector>
 #include <string>
-#include <optional>
 #include <functional>
 #include "Simple-XML/Element.hpp"
 
 namespace simple_xml {
 	using std::map;
-	using std::optional;
 	using std::string;
 	using std::vector;
 
@@ -23,9 +21,6 @@ namespace simple_xml {
 		vector<Element>& m_elements; // Ref to the collection of Elements.
 		Element::Index current_index;
 
-		Element& current() noexcept { return m_elements[current_index]; }
-		Element const& current() const noexcept { return m_elements[current_index]; }
-
 		Element& parent() const noexcept { return m_elements[current_index_path.back()]; }
 
 		typedef vector<Element::Index> Element_Path_Type;
@@ -33,13 +28,7 @@ namespace simple_xml {
 		Element_Path_Type current_index_path;
 		bool is_current_index_root() const { return current_index_path.empty(); }
 
-		virtual bool resume_parent();
-
-		virtual bool visit_first_child();
-
-		virtual bool visit_next_sibling();
-
-	public:
+	public: //~ Ctors et al -------------------------------------------
 		Element_Visitor(vector<Element>& elements)
 		  : m_elements{ elements }
 		  , current_index{}
@@ -49,26 +38,36 @@ namespace simple_xml {
 
 		virtual ~Element_Visitor() = default;
 
-		string const& name() const { return current().name(); }
+	public: //~ Accessors ---------------------------------------------
+		Element& current() noexcept { return m_elements[current_index]; }
+		Element const& current() const noexcept { return m_elements[current_index]; }
 
-		string const& text() const { return current().text(); }
+		// string const& name() const { return current().name(); }
 
-		map<string, string> const& attributes() const { return current().attributes; };
+		// string const& text() const { return current().text(); }
 
-		vector<Element::Index> const& children() const { return current().children; }
+		// map<string, string> const& attributes() const { return current().attributes; };
 
-		int col_idx() const { return current().col_idx; }
+		// vector<Element::Index> const& children() const { return current().children; }
 
-		int row_idx() const { return current().row_idx; }
+		// int col_idx() const { return current().col_idx; }
 
-		int wkt_idx() const { return current().wkt_idx; }
+		// int row_idx() const { return current().row_idx; }
 
-		optional<string> attribute(string attribute_name) const
-		{
-			return current().attribute(attribute_name);
-		}
+		// int wkt_idx() const { return current().wkt_idx; }
 
-		size_t depth() const { return current_index_path.size(); }
+		// optional<string> attribute(string attribute_name) const
+		//{
+		//	return current().attribute(attribute_name);
+		//}
+
+		virtual bool resume_parent();
+
+		virtual bool visit_first_child();
+
+		virtual bool visit_next_sibling();
+
+		size_t depth() const { return current_index_path.size() + 1; }
 
 		string path_to_string() const;
 
