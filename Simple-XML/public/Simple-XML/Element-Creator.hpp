@@ -17,20 +17,17 @@ namespace simple_xml {
 		int m_row_idx = 0; // Current row number.
 		int m_col_idx = 0; // Current column number.
 		int m_wkt_idx = 0; // Current worksheet number.
-		void new_child();
-		Element& current() noexcept { return m_elements[current_index]; }
-		Element const& current() const noexcept { return m_elements[current_index]; }
 
 	public:
 		Element_Creator(vector<Element>& elements);
 
-		void new_element(vector<char> const& x);
+		Element::Index new_element(vector<char> const& new_name);
 
-		void set_attribute(string name, string value);
+		void set_attribute(string attribute_name, string value);
 
 		bool close_singleton();
 
-		bool verify_closing_tag(vector<char> x);
+		bool verify_closing_tag(vector<char> const& element_name);
 
 		void set_text(vector<char> const& y);
 	};

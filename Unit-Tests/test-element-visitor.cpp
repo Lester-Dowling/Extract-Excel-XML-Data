@@ -113,7 +113,6 @@ BOOST_AUTO_TEST_CASE(element_visitor_depth_first_1)
 	  sample,
 	  [&](Element_Visitor& v) -> bool //
 	  {
-		  std::cout << v.current().name() << std::endl;
 		  ++visit_count;
 		  return true;
 	  });

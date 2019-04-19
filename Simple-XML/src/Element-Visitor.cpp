@@ -72,6 +72,8 @@ namespace simple_xml {
 
 	string Element_Visitor::path_to_string() const
 	{
+		if (m_elements.empty())
+			return {};
 		string result;
 		Element_Path_Iterator nitr = current_index_path.begin();
 		Element_Path_Iterator const nend = current_index_path.end();

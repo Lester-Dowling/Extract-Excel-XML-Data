@@ -23,6 +23,7 @@ namespace simple_xml {
 	Element_Creator::Element_Creator(vector<Element>& elements)
 	  : Element_Visitor{ elements }
 	{
+		assert(m_elements.empty());
 	}
 
 	void Element_Creator::set_text(vector<char> const& y)
@@ -48,25 +49,17 @@ namespace simple_xml {
 #endif
 	}
 
-	void Element_Creator::new_child()
+	Element::Index Element_Creator::new_element(vector<char> const& new_name)
 	{
-#ifdef TRACE_CREATOR
-		cout << ">>> " << __FUNCTION__ << endl;
-#endif
+		// New child:
 		const bool new_child_is_root = m_elements.empty();
-		m_elements.push_back(Element{});
-		Element::Index new_element_index = m_elements.size() - 1;
+		m_elements.emplace_back(new_name);
+		const Element::Index new_element_index = m_elements.size() - 1;
 		if (!new_child_is_root) {
 			current().children.push_back(new_element_index);
 			current_index_path.push_back(current_index);
 		}
 		current_index = new_element_index;
-	}
-
-	void Element_Creator::new_element(vector<char> const& x)
-	{
-		new_child();
-		current().set_name(x);
 #ifdef TRACE_CREATOR
 		cout << ">>> " << __FUNCTION__ << ": " << current().name() << endl;
 #endif
@@ -85,26 +78,29 @@ namespace simple_xml {
 		current().row_idx = m_row_idx;
 		current().col_idx = m_col_idx;
 		current().wkt_idx = m_wkt_idx;
+		return new_element_index;
 	}
 
 	bool Element_Creator::close_singleton()
 	{
-		throw_if_current_is_null();
 #ifdef TRACE_CREATOR
 		cout << ">>> " << __FUNCTION__ << ": " << current().name() << endl;
 #endif
+		if (!current().text().empty())
+			throw std::runtime_error{ "Unexpected text in XML singleton" };
 		return resume_parent();
 	}
 
-	bool Element_Creator::verify_closing_tag(vector<char> x)
+	bool Element_Creator::verify_closing_tag(vector<char> const& x)
 	{
-		throw_if_current_is_null();
-		bool verify =
+		const bool verify =
 		  std::equal(x.begin(), x.end(), current().name().begin(), current().name().end());
 #ifdef TRACE_CREATOR
 		cout << ">>> " << __FUNCTION__ << ": " << string{ x.begin(), x.end() } << " --- "
 			 << (verify ? "correct" : "WRONG") << endl;
 #endif
+		if (!verify)
+			throw std::runtime_error{ "Mismatched closing tag: " + current().name() };
 		resume_parent();
 		return verify;
 	}

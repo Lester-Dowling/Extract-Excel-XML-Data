@@ -108,4 +108,17 @@ BOOST_AUTO_TEST_CASE(trimmed_element_text_3)
 	BOOST_TEST(e.name().empty());
 }
 
+BOOST_AUTO_TEST_CASE(attributes_1)
+{
+	simple_xml::Element e;
+	BOOST_TEST(!e.attribute("Not there").has_value());
+	e.attributes["ss::Type"] = "Number";
+	e.attributes["ss::Format"] = "Centered";
+	BOOST_TEST(e.attribute("ss::Type").has_value());
+	BOOST_TEST(e.attribute("ss::Type").value() == "Number");
+	BOOST_TEST(e.attribute("ss::Format").has_value());
+	BOOST_TEST(e.attribute("ss::Format").value() == "Centered");
+}
+
+
 BOOST_AUTO_TEST_SUITE_END()

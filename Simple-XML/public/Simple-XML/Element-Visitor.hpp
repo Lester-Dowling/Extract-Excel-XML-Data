@@ -33,14 +33,14 @@ namespace simple_xml {
 		  : m_elements{ elements }
 		  , current_index{}
 		{
-			assert(!m_elements.empty());
 		}
 
 		virtual ~Element_Visitor() = default;
 
 	public: //~ Accessors ---------------------------------------------
-		Element& current() noexcept { return m_elements[current_index]; }
-		Element const& current() const noexcept { return m_elements[current_index]; }
+		Element& current() noexcept { return m_elements.at(current_index); }
+
+		Element const& current() const noexcept { return m_elements.at(current_index); }
 
 		// string const& name() const { return current().name(); }
 
@@ -67,7 +67,10 @@ namespace simple_xml {
 
 		virtual bool visit_next_sibling();
 
-		size_t depth() const { return current_index_path.size() + 1; }
+		size_t depth() const
+		{
+			return m_elements.empty() ? 0 : current_index_path.size() + 1;
+		}
 
 		string path_to_string() const;
 
