@@ -7,9 +7,9 @@ add_executable (
   "GlobalFixture.cpp"
   )
 set_property(TARGET ${TARGET} PROPERTY CXX_STANDARD 17)
-file(GLOB_RECURSE SRC_TEST_FILES LIST_DIRECTORIES false CONFIGURE_DEPENDS "test/*")
+file(GLOB SRC_TEST_FILES LIST_DIRECTORIES false CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/test-*.cpp")
 target_sources(${TARGET} PRIVATE ${SRC_TEST_FILES})
-file(GLOB IO_SRC_FILES LIST_DIRECTORIES false CONFIGURE_DEPENDS "io/*")
+file(GLOB IO_SRC_FILES LIST_DIRECTORIES false CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/io/*")
 target_sources(${TARGET} PRIVATE ${IO_SRC_FILES})
 target_include_directories(${TARGET} PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR})
@@ -23,6 +23,7 @@ endforeach(src_file)
 #
 # Import the subjects for unit testing
 #
+target_link_libraries(${TARGET} PRIVATE "Simple-XML")
 target_link_libraries(${TARGET} PRIVATE "Simple-XML-Parser")
 target_link_libraries(${TARGET} PRIVATE "Pseudo-XPath-Parser")
 target_link_libraries(${TARGET} PRIVATE "Operations")

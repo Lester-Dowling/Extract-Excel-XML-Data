@@ -19,33 +19,31 @@ namespace simple_xml {
 #endif
 	using std::string;
 	using std::vector;
-	namespace a = boost::algorithm;
 
 	Element_Creator::Element_Creator(vector<Element>& elements)
 	  : Element_Visitor{ elements }
 	{
 	}
 
-	void Element_Creator::set_text(vector<char> y)
+	void Element_Creator::set_text(vector<char> const& y)
 	{
-		m_elements[current_index].text.assign(y.begin(), y.end());
-		a::trim(m_elements[current_index].text);
+		current().set_text(y);
 #ifdef TRACE_CREATOR
-		cout << ">>> " << __FUNCTION__ << ": " << m_elements[current_index].text
-			 << " --- length = " << m_elements[current_index].text.size() << endl;
+		cout << ">>> " << __FUNCTION__ << ": " << current().text
+			 << " --- length = " << current().text.size() << endl;
 #endif
 	}
 
-	void Element_Creator::set_attribute(string name, string value)
+	void Element_Creator::set_attribute(string n, string v)
 	{
-		m_elements[current_index].attributes[name] = value;
+		current().attributes[n] = v;
 #ifdef TRACE_CREATOR
 		cout << ">>> " << __FUNCTION__ << ": ";
 		if (m_elements[current_index].attributes.empty()) {
 			cout << "empty";
 		}
 		else {
-			cout << name << '=' << m_elements[current_index].attributes[name] << endl;
+			cout << n << '=' << current().attributes[n] << endl;
 		}
 #endif
 	}
@@ -59,41 +57,41 @@ namespace simple_xml {
 		m_elements.push_back(Element{});
 		Element::Index new_element_index = m_elements.size() - 1;
 		if (!new_child_is_root) {
-			m_elements[current_index].children.push_back(new_element_index);
+			current().children.push_back(new_element_index);
 			current_index_path.push_back(current_index);
 		}
 		current_index = new_element_index;
 	}
 
-	void Element_Creator::new_element(vector<char> x)
+	void Element_Creator::new_element(vector<char> const& x)
 	{
 		new_child();
-		m_elements[current_index].name.assign(x.begin(), x.end());
+		current().set_name(x);
 #ifdef TRACE_CREATOR
-		cout << ">>> " << __FUNCTION__ << ": " << m_elements[current_index].name << endl;
+		cout << ">>> " << __FUNCTION__ << ": " << current().name() << endl;
 #endif
-		if (m_elements[current_index].name == "Row") {
+		if (current().name() == "Row") {
 			m_col_idx = 0;
 			++m_row_idx;
 		}
-		else if (m_elements[current_index].name == "Cell") {
+		else if (current().name() == "Cell") {
 			++m_col_idx;
 		}
-		else if (m_elements[current_index].name == "Worksheet") {
+		else if (current().name() == "Worksheet") {
 			m_row_idx = 0;
 			m_col_idx = 0;
 			++m_wkt_idx;
 		}
-		m_elements[current_index].row_idx = m_row_idx;
-		m_elements[current_index].col_idx = m_col_idx;
-		m_elements[current_index].wkt_idx = m_wkt_idx;
+		current().row_idx = m_row_idx;
+		current().col_idx = m_col_idx;
+		current().wkt_idx = m_wkt_idx;
 	}
 
 	bool Element_Creator::close_singleton()
 	{
 		throw_if_current_is_null();
 #ifdef TRACE_CREATOR
-		cout << ">>> " << __FUNCTION__ << ": " << m_elements[current_index].name << endl;
+		cout << ">>> " << __FUNCTION__ << ": " << current().name() << endl;
 #endif
 		return resume_parent();
 	}
@@ -101,11 +99,8 @@ namespace simple_xml {
 	bool Element_Creator::verify_closing_tag(vector<char> x)
 	{
 		throw_if_current_is_null();
-		bool verify = std::equal(
-		  x.begin(),
-		  x.end(),
-		  m_elements[current_index].name.begin(),
-		  m_elements[current_index].name.end());
+		bool verify =
+		  std::equal(x.begin(), x.end(), current().name().begin(), current().name().end());
 #ifdef TRACE_CREATOR
 		cout << ">>> " << __FUNCTION__ << ": " << string{ x.begin(), x.end() } << " --- "
 			 << (verify ? "correct" : "WRONG") << endl;

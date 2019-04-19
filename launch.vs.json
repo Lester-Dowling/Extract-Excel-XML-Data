@@ -1,31 +1,31 @@
 {
-    "version": "0.2.1",
-    "defaults": {},
-    "configurations": [
-        {
-            "type": "default",
-            "project": "CMakeLists.txt",
-            "projectTarget": "Unit-Tests.exe (Unit-Tests\\Unit-Tests.exe)",
-            "name": "Unit-Tests.exe (Unit-Tests\\Unit-Tests.exe)",
-            "args": [
-                "--build_info",
-                "--color_output",
-                "--report_level=short",
-                "--log_level=message"
-            ]
-        },
-        {
-            "type": "default",
-            "project": "CMakeLists.txt",
-            "projectTarget": "Extract-Excel-XML-Data.exe (Extract-Excel-XML-Data\\Extract-Excel-XML-Data.exe)",
-            "name": "Extract-Excel-XML-Data.exe (Extract-Excel-XML-Data\\Extract-Excel-XML-Data.exe)",
-            "args": [
-                "--politely_finish",
-                "--row_titles_column=Item",
-                "--enumerate_rows",
-                "--xpath=\"Row['Net Profit after Tax Before Abnormals'] , Cell['06/16'] , Data \"",
-                "C:\\Users\\ljdowling\\Projects\\Extract-Excel-XML-Data-2017\\sample-xml\\SHV.xls"
-            ]
-        }
-    ]
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "Unit-Tests.exe (Unit-Tests\\Unit-Tests.exe)",
+      "name": "Unit-Tests.exe (Unit-Tests\\Unit-Tests.exe)",
+      "args": [
+        "--build_info",
+        "--color_output",
+        "--report_level=short",
+        "--log_level=message"
+      ]
+    },
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "Extract-Excel-XML-Data.exe (Extract-Excel-XML-Data\\Extract-Excel-XML-Data.exe)",
+      "name": "Extract-Excel-XML-Data.exe (Extract-Excel-XML-Data\\Extract-Excel-XML-Data.exe)",
+      "args": [
+        "--politely_finish",
+        "--row_titles_column=Item",
+        "--enumerate_rows",
+        "--xpath=\"Row['Net Profit after Tax Before Abnormals'] , Cell['06/16'] , Data \"",
+        "C:\\Users\\ljdowling\\Projects\\Extract-Excel-XML-Data-2017\\sample-xml\\SHV.xls"
+      ]
+    }
+  ]
 }

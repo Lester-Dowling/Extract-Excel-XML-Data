@@ -10,24 +10,28 @@
 #include "Simple-XML/Element-Visitor.hpp"
 
 namespace simple_xml {
+	using std::string;
+	using std::vector;
 
 	class Element_Creator : public Element_Visitor {
 		int m_row_idx = 0; // Current row number.
 		int m_col_idx = 0; // Current column number.
 		int m_wkt_idx = 0; // Current worksheet number.
 		void new_child();
+		Element& current() noexcept { return m_elements[current_index]; }
+		Element const& current() const noexcept { return m_elements[current_index]; }
 
 	public:
-		Element_Creator(std::vector<Element>& elements);
+		Element_Creator(vector<Element>& elements);
 
-		void new_element(std::vector<char> x);
+		void new_element(vector<char> const& x);
 
-		void set_attribute(std::string name, std::string value);
+		void set_attribute(string name, string value);
 
 		bool close_singleton();
 
-		bool verify_closing_tag(std::vector<char> x);
+		bool verify_closing_tag(vector<char> x);
 
-		void set_text(std::vector<char> y);
+		void set_text(vector<char> const& y);
 	};
 } // namespace simple_xml

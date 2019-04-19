@@ -1,4 +1,4 @@
-// Unit-Tests/test/string-functions.cpp
+// Unit-Tests/test-string-functions.cpp
 // Started 10 Apr 2019
 #include "pch-unit-tests.hpp"
 #include <boost/test/unit_test.hpp>
@@ -48,7 +48,8 @@ BOOST_AUTO_TEST_CASE(append_quoted_1)
 	BOOST_TEST(bdr == "'abc'");
 	operations::append_quoted_if_not_number(bdr, "123", "unexpected");
 	BOOST_TEST(bdr == "'abc'123");
-	BOOST_REQUIRE_THROW(operations::append_quoted_if_not_number(bdr, "", "expected"),std::runtime_error);
+	BOOST_REQUIRE_THROW(
+	  operations::append_quoted_if_not_number(bdr, "", "expected"), std::runtime_error);
 	operations::append_quoted_if_not_number(bdr, "Z", "unexpected");
 	BOOST_TEST(bdr == "'abc'123'Z'");
 }

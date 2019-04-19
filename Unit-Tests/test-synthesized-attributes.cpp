@@ -1,4 +1,4 @@
-// Unit-Tests/test/synthesized-attributes.cpp
+// Unit-Tests/test-synthesized-attributes.cpp
 // Started 15 Aug 2018
 #include "pch-unit-tests.hpp"
 #include <boost/test/unit_test.hpp>
@@ -20,7 +20,8 @@ BOOST_AUTO_TEST_SUITE(test_synthesized_attributes_suite, *utf::enabled())
 
 namespace practice {
 	template<typename Iterator>
-	struct XML_Attribute_Filter : qi::grammar<Iterator, void(), ascii::space_type> //
+	struct XML_Attribute_Filter
+	  : qi::grammar<Iterator, void(), ascii::space_type> //
 	{
 		using base_type = typename XML_Attribute_Filter::base_type;
 		using start_type = typename base_type::start_type;
@@ -66,7 +67,8 @@ namespace practice {
 		  , start{ (xml_identifier[boost::bind(&Node_Creator::new_element, creator, _1)] >>
 					-(qi::lit('[') > attributes > qi::lit(']'))) %
 				   ',' }
-		{}
+		{
+		}
 	};
 } // namespace practice
 
@@ -85,27 +87,27 @@ BOOST_AUTO_TEST_CASE(grammar_xml_attribute_filter)
 	int path_depth = 1;
 	Node_Visitor::all_depth_first(g.result, [&](Node_Visitor& v) -> bool {
 		switch (path_depth++) {
-			case 1:
-				BOOST_TEST(v.name() == "Worksheet");
-				return true;
-			case 2:
-				BOOST_TEST(v.name() == "Table");
-				return true;
-			case 3:
-				BOOST_TEST(v.name() == "Row");
-				BOOST_REQUIRE(v.attribute("Row").has_value());
-				BOOST_TEST(v.attribute("Row").value() == "12");
-				return true;
-			case 4:
-				BOOST_TEST(v.name() == "Cell");
-				BOOST_REQUIRE(v.attribute("Column").has_value());
-				BOOST_TEST(v.attribute("Column").value() == "1");
-				BOOST_REQUIRE(v.attribute("ss::ValueType").has_value());
-				BOOST_TEST(v.attribute("ss::ValueType").value() == "Number");
-				return true;
-			default:
-				BOOST_FAIL("XML node visitor path too deep");
-				return false;
+		case 1:
+			BOOST_TEST(v.name() == "Worksheet");
+			return true;
+		case 2:
+			BOOST_TEST(v.name() == "Table");
+			return true;
+		case 3:
+			BOOST_TEST(v.name() == "Row");
+			BOOST_REQUIRE(v.attribute("Row").has_value());
+			BOOST_TEST(v.attribute("Row").value() == "12");
+			return true;
+		case 4:
+			BOOST_TEST(v.name() == "Cell");
+			BOOST_REQUIRE(v.attribute("Column").has_value());
+			BOOST_TEST(v.attribute("Column").value() == "1");
+			BOOST_REQUIRE(v.attribute("ss::ValueType").has_value());
+			BOOST_TEST(v.attribute("ss::ValueType").value() == "Number");
+			return true;
+		default:
+			BOOST_FAIL("XML node visitor path too deep");
+			return false;
 		}
 	});
 }

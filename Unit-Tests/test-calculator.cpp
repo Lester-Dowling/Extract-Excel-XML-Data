@@ -1,4 +1,4 @@
-// Unit-Tests/test/calculator.cpp
+// Unit-Tests/test-calculator.cpp
 // Started 7 Apr 2019
 #include "pch-unit-tests.hpp"
 #include <boost/test/unit_test.hpp>

@@ -4,8 +4,11 @@
 #include <SDKDDKVer.h>
 // include <windows.h>
 #endif // _WINDOWS
+
 #include <cassert>
 #include <cstdlib>
+#include <cctype>
+
 #include <algorithm>
 #include <functional>
 #include <iostream>
@@ -18,6 +21,7 @@
 #include <memory>
 #include <numeric>
 #include <stdexcept>
+
 #include <boost/filesystem.hpp>
 #include <boost/regex.hpp>
 #include <boost/algorithm/string.hpp>
