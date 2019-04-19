@@ -95,8 +95,6 @@ catch (std::invalid_argument const&) {
 
 
 
-
-
 BOOST_AUTO_TEST_CASE(wrc_add_row_col)
 {
 	operations::Worksheet_Column_Row_Titles t;
@@ -131,3 +129,24 @@ BOOST_AUTO_TEST_CASE(wrc_add_row_col)
 	BOOST_TEST(t.col_title(1, 2).value() == "two col");
 	BOOST_TEST(t.col_title(1, 3).value() == "three col");
 }
+
+
+
+// string const& name() const { return current().name(); }
+
+// string const& text() const { return current().text(); }
+
+// map<string, string> const& attributes() const { return current().attributes; };
+
+// vector<Element::Index> const& children() const { return current().children; }
+
+// int col_idx() const { return current().col_idx; }
+
+// int row_idx() const { return current().row_idx; }
+
+// int wkt_idx() const { return current().wkt_idx; }
+
+// optional<string> attribute(string attribute_name) const
+//{
+//	return current().attribute(attribute_name);
+//}

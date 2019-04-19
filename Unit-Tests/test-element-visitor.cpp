@@ -109,8 +109,7 @@ BOOST_AUTO_TEST_CASE(element_visitor_depth_first_1)
 
 	Element_Visitor v{ sample };
 	int visit_count = 0;
-	Element_Visitor::depth_first(
-	  sample,
+	v.visit_all_depth_first(
 	  [&](Element_Visitor& v) -> bool //
 	  {
 		  ++visit_count;

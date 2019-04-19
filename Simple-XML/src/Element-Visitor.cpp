@@ -22,6 +22,7 @@ namespace simple_xml {
 	using std::map;
 	using std::optional;
 	using std::runtime_error;
+	using std::function;
 
 	bool Element_Visitor::visit_first_child()
 	{
@@ -36,6 +37,7 @@ namespace simple_xml {
 		return true;
 	}
 
+
 	bool Element_Visitor::resume_parent()
 	{
 #ifdef TRACE_VISITOR
@@ -48,6 +50,7 @@ namespace simple_xml {
 		current_index_path.pop_back();
 		return true;
 	}
+
 
 	bool Element_Visitor::visit_next_sibling()
 	{
@@ -70,6 +73,13 @@ namespace simple_xml {
 		return false;
 	}
 
+
+	size_t Element_Visitor::depth() const
+	{
+		return m_elements.empty() ? 0 : current_index_path.size() + 1;
+	}
+
+
 	string Element_Visitor::path_to_string() const
 	{
 		if (m_elements.empty())
@@ -86,28 +96,31 @@ namespace simple_xml {
 		return result;
 	}
 
-	void Element_Visitor::depth_first(
-	  vector<Element>& elements,
-	  std::function<bool(Element_Visitor&)> callback)
+
+	void Element_Visitor::visit_all_depth_first(function<bool(Element_Visitor&)> callback)
 	{
-		if (elements.empty())
+		if (m_elements.empty())
 			return;
-		Element_Visitor visitor{ elements };
-		if (!callback(visitor))
+		current_index = 0;
+		if (!callback(*this))
 			return;
 		while (true) {
-			while (visitor.visit_first_child()) {
-				if (!callback(visitor))
-					return;
+			while (visit_first_child()) {
+				if (visit_all_predicate()) {
+					if (!callback(*this))
+						return;
+				}
 			}
 			while (true) {
-				if (visitor.visit_next_sibling()) {
-					if (!callback(visitor))
-						return;
+				if (visit_next_sibling()) {
+					if (visit_all_predicate()) {
+						if (!callback(*this))
+							return;
+					}
 					break;
 				}
 				else { // No more siblings => retreat to parent:
-					if (!visitor.resume_parent())
+					if (!resume_parent())
 						return;
 				}
 			}

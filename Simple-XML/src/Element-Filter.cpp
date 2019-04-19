@@ -13,29 +13,19 @@
 #endif
 
 namespace simple_xml {
+	using std::cout;
+	using std::endl;
 
-	Element_Filter::Element_Filter(excel_xml_parser::Node::SP root)
-	  : Element_Visitor{ root }
+	bool Element_Filter::xml_element_matches_filter_node(
+	  Element const& ele,
+	  const Grade::SP fn) const
 	{
-	}
-
-	void Element_Filter::set_filter_path(pseudo_xpath_parser::Grade::SP filter_path)
-	{
-		m_filter_path = filter_path;
-	}
-
-	bool Element_Filter::xml_node_matches_filter_node(
-	  const excel_xml_parser::Node::SP node,
-	  const Filter_Node fn) const
-	{
-		using std::cout;
-		using std::endl;
 		using Attribute_Filter = pseudo_xpath_parser::Attribute_Filter;
-		// cout << "node->name == " << node->name << endl;
+		// cout << "e.name == " << ele.name() << endl;
 		// cout << "fn->name   == " << fn->name() << endl;
-		if (node->name != fn->name())
+		if (ele.name() != fn->name())
 			return false;
-		// cout << "XML node == " << node->name << endl;
+		// cout << "XML node == " << ele.name() << endl;
 		for (Attribute_Filter const& filter_attribute : fn->filters()) {
 			auto const& filter_name = filter_attribute.attribute_name;
 			auto const& filter_operator = filter_attribute.filter_operator;
@@ -47,15 +37,15 @@ namespace simple_xml {
 				if (good_filter_number)
 					switch (filter_operator) {
 					case '=':
-						if (!(node->col_idx == filter_number))
+						if (!(ele.col_idx == filter_number))
 							return false;
 						break;
 					case '<':
-						if (!(node->col_idx < filter_number))
+						if (!(ele.col_idx < filter_number))
 							return false;
 						break;
 					case '>':
-						if (!(node->col_idx > filter_number))
+						if (!(ele.col_idx > filter_number))
 							return false;
 						break;
 					default:
@@ -65,7 +55,7 @@ namespace simple_xml {
 					switch (filter_operator) {
 					case '=':
 						if (const auto col_title =
-							  m_titles->col_title(node->wkt_idx, node->col_idx);
+							  m_titles.col_title(ele.wkt_idx, ele.col_idx);
 							col_title.has_value() && *col_title != filter_value) //
 						{
 							return false;
@@ -79,15 +69,15 @@ namespace simple_xml {
 				if (good_filter_number)
 					switch (filter_operator) {
 					case '=':
-						if (!(node->row_idx == filter_number))
+						if (!(ele.row_idx == filter_number))
 							return false;
 						break;
 					case '<':
-						if (!(node->row_idx < filter_number))
+						if (!(ele.row_idx < filter_number))
 							return false;
 						break;
 					case '>':
-						if (!(node->row_idx > filter_number))
+						if (!(ele.row_idx > filter_number))
 							return false;
 						break;
 					default:
@@ -97,7 +87,7 @@ namespace simple_xml {
 					switch (filter_operator) {
 					case '=':
 						if (const auto row_title =
-							  m_titles->row_title(node->wkt_idx, node->row_idx);
+							  m_titles.row_title(ele.wkt_idx, ele.row_idx);
 							row_title.has_value() && *row_title != filter_value) //
 						{
 							return false;
@@ -111,15 +101,15 @@ namespace simple_xml {
 				if (good_filter_number)
 					switch (filter_operator) {
 					case '=':
-						if (!(node->wkt_idx == filter_number))
+						if (!(ele.wkt_idx == filter_number))
 							return false;
 						break;
 					case '<':
-						if (!(node->wkt_idx < filter_number))
+						if (!(ele.wkt_idx < filter_number))
 							return false;
 						break;
 					case '>':
-						if (!(node->wkt_idx > filter_number))
+						if (!(ele.wkt_idx > filter_number))
 							return false;
 						break;
 					default:
@@ -128,7 +118,7 @@ namespace simple_xml {
 				else // no good_filter_number => try filter_value
 					switch (filter_operator) {
 					case '=':
-						if (const auto wkt_title = m_titles->wkt_title(node->wkt_idx);
+						if (const auto wkt_title = m_titles.wkt_title(ele.wkt_idx);
 							wkt_title.has_value() && *wkt_title != filter_value) //
 						{
 							return false;
@@ -138,14 +128,15 @@ namespace simple_xml {
 						throw std::runtime_error{ "Bad filter operator" };
 					}
 			}
-			else if (node->attributes.count(filter_name)) {
-				if (node->attributes[filter_name] != filter_value) {
-					return false;
-				}
+			else if (const auto attribute_value = ele.attribute(filter_name);
+					 attribute_value.has_value() && *attribute_value != filter_value) //
+			{
+				return false;
 			}
 		}
 		return true;
 	}
+
 
 #undef TRACE_CURRENT_PATH_MATCHES_FILTER_PATH
 // define TRACE_CURRENT_PATH_MATCHES_FILTER_PATH
@@ -160,22 +151,22 @@ namespace simple_xml {
 		using std::cout;
 		using std::endl;
 		__TRACER("XML path == " << path_to_string());
-		__TRACER(
-		  "XPath    == " << pseudo_xpath_parser::Grade::path_to_string(m_filter_path));
-		Node_Visitor::Node_Path_Iterator node_itr = current_node_path.begin();
-		Node_Visitor::Node_Path_Iterator const node_end = current_node_path.end();
-		Filter_Node filter_node = m_filter_path;
+		__TRACER("XPath    == " << Grade::path_to_string(m_filter_path));
+		Element_Visitor::Element_Path_Iterator ele_itr = current_index_path.begin();
+		Element_Visitor::Element_Path_Iterator const ele_end = current_index_path.end();
+		Grade::SP filter_node = m_filter_path;
 		if (!filter_node)
 			return true;
-		while (++node_itr != node_end) { // Skip root node with ++node_itr.
+		while (ele_itr != ele_end) { 
+			const Element::Index ele_idx = *ele_itr++;
 			if (!(filter_node = filter_node->next())) {
 				__TRACER("<<< No more filters => accept all nodes below.");
 				return true;
 			}
 			__TRACER("filter_node.name == " << filter_node->name());
-			if (!xml_node_matches_filter_node(*node_itr, filter_node)) {
+			if (!xml_element_matches_filter_node(m_elements.at(ele_idx), filter_node)) {
 				__TRACER(
-				  "<<< Node " << (*node_itr)->name << " failed to match filter "
+				  "<<< Node " << m_elements.at(ele_idx).name() << " failed to match filter "
 							  << filter_node->name());
 				return false;
 			}
@@ -186,9 +177,9 @@ namespace simple_xml {
 			return true;
 		}
 		__TRACER("filter_node.name == " << filter_node->name());
-		if (!xml_node_matches_filter_node(current_node, filter_node)) {
+		if (!xml_element_matches_filter_node(current(), filter_node)) {
 			__TRACER(
-			  "<<< Current Node " << current_node->name << " failed to match filter "
+			  "<<< Current Node " << current().name() << " failed to match filter "
 								  << filter_node->name());
 			return false;
 		}
@@ -200,35 +191,4 @@ namespace simple_xml {
 		return true;
 	}
 
-	void Element_Filter::all_siblings(
-	  excel_xml_parser::Node::SP root,
-	  pseudo_xpath_parser::Grade::SP filter_path,
-	  Worksheet_Row_Column_Titles::SP titles,
-	  std::function<bool(Node_Visitor&)> filter_predicate)
-	{
-		Element_Filter visitor{ root };
-		visitor.set_filter_path(filter_path);
-		visitor.set_titles(titles);
-		while (true) {
-			while (visitor.visit_first_child()) {
-				if (visitor.current_path_matches_filter_path()) {
-					if (!filter_predicate(visitor))
-						return;
-				}
-			}
-			while (true) {
-				if (visitor.visit_next_sibling()) {
-					if (visitor.current_path_matches_filter_path()) {
-						if (!filter_predicate(visitor))
-							return;
-					}
-					break;
-				}
-				else { // No more siblings => retreat to parent:
-					if (!visitor.resume_parent())
-						return;
-				}
-			}
-		}
-	}
 } // namespace simple_xml
