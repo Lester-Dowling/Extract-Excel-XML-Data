@@ -62,8 +62,23 @@ namespace simple_xml {
 		void load_xml_file(const boost::filesystem::path xml_path);
 
 		/**
+		 * Find all the worksheet titles.
+		 */
+		void extract_worksheet_titles();
+
+		/**
+		 * Find the column titles for each worksheet.
+		 */
+		void extract_column_titles();
+
+		/**
 		 * Accessor that returns the Elements in this document.
 		 */
 		std::vector<Element> const& elements() const { return m_elements; }
+
+		/**
+		 * Accessor that returns the titles in this document.
+		 */
+		Worksheet_Row_Column_Titles const& titles() const { return m_titles; }
 	};
 } // namespace simple_xml

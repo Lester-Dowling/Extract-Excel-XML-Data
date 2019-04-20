@@ -7,13 +7,13 @@
 #include "Simple-XML/Worksheet-Row-Column-Titles.hpp"
 namespace simple_xml {
 
-	void Worksheet_Row_Column_Titles::verify_existing_wkt(const int wkt_idx) const
+	void Worksheet_Row_Column_Titles::throw_if_existing_wkt(const int wkt_idx) const
 	{
 		if (m_wrc_titles.count(wkt_idx) != 1)
 			throw runtime_error{ "No such worksheet at idx " + to_string(wkt_idx) };
 	}
 
-	void Worksheet_Row_Column_Titles::verify_non_existing_wkt(const int wkt_idx) const
+	void Worksheet_Row_Column_Titles::throw_if_non_existing_wkt(const int wkt_idx) const
 	{
 		if (m_wrc_titles.count(wkt_idx) != 0)
 			throw runtime_error{ "Worksheet already existing at idx " +
@@ -22,7 +22,7 @@ namespace simple_xml {
 
 	void Worksheet_Row_Column_Titles::add_worksheet(const int wkt_idx, const string title)
 	{
-		verify_non_existing_wkt(wkt_idx);
+		throw_if_non_existing_wkt(wkt_idx);
 		m_wrc_titles.emplace(std::make_pair(wkt_idx, Row_Column_Titles{ title }));
 		m_previous_wkt_idx = wkt_idx;
 	}
@@ -39,13 +39,13 @@ namespace simple_xml {
 	  const int row_idx,
 	  const string title)
 	{
-		verify_existing_wkt(wkt_idx);
+		throw_if_existing_wkt(wkt_idx);
 		m_wrc_titles[wkt_idx].add_row(row_idx, title);
 	}
 
 	int Worksheet_Row_Column_Titles::add_row(const int wkt_idx, const string title)
 	{
-		verify_existing_wkt(wkt_idx);
+		throw_if_existing_wkt(wkt_idx);
 		return m_wrc_titles[wkt_idx].add_row(title);
 	}
 
@@ -54,13 +54,13 @@ namespace simple_xml {
 	  const int col_idx,
 	  const string title)
 	{
-		verify_existing_wkt(wkt_idx);
+		throw_if_existing_wkt(wkt_idx);
 		m_wrc_titles[wkt_idx].add_col(col_idx, title);
 	}
 
 	int Worksheet_Row_Column_Titles::add_col(const int wkt_idx, const string title)
 	{
-		verify_existing_wkt(wkt_idx);
+		throw_if_existing_wkt(wkt_idx);
 		return m_wrc_titles[wkt_idx].add_col(title);
 	}
 
@@ -68,7 +68,7 @@ namespace simple_xml {
 	  const
 	{
 		if (throwing)
-			verify_existing_wkt(wkt_idx);
+			throw_if_existing_wkt(wkt_idx);
 		const auto fitr = m_wrc_titles.find(wkt_idx);
 		if (fitr != m_wrc_titles.end())
 			return fitr->second.row_count();
@@ -80,7 +80,7 @@ namespace simple_xml {
 	  const
 	{
 		if (throwing)
-			verify_existing_wkt(wkt_idx);
+			throw_if_existing_wkt(wkt_idx);
 		const auto fitr = m_wrc_titles.find(wkt_idx);
 		if (fitr != m_wrc_titles.end())
 			return fitr->second.col_count();
@@ -101,7 +101,7 @@ namespace simple_xml {
 	  const bool throwing) const
 	{
 		if (throwing)
-			verify_existing_wkt(wkt_idx);
+			throw_if_existing_wkt(wkt_idx);
 		auto fitr = m_wrc_titles.find(wkt_idx);
 		if (fitr != m_wrc_titles.end())
 			return fitr->second.row_indices();
@@ -114,7 +114,7 @@ namespace simple_xml {
 	  const bool throwing) const
 	{
 		if (throwing)
-			verify_existing_wkt(wkt_idx);
+			throw_if_existing_wkt(wkt_idx);
 		auto fitr = m_wrc_titles.find(wkt_idx);
 		if (fitr != m_wrc_titles.end())
 			return fitr->second.col_indices();

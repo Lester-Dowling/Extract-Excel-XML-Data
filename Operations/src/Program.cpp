@@ -349,7 +349,7 @@ namespace operations {
 		return xml_parser.result;
 	}
 
-	Grade::SP Program::parse_xpath_text(const string xpath_text, const int wkt_idx)
+	Grade::SP Program::parse_xpath_text(const string xpath_text) // , const int wkt_idx)
 	{
 		using std::runtime_error;
 		namespace ascii = boost::spirit::ascii;

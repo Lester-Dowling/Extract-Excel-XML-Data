@@ -41,8 +41,8 @@ add_subdirectory ("Pseudo-XPath-Parser")
 # The program operations
 add_subdirectory("Operations")
 
-# Main :- merely an execution harness around the program operations
-add_subdirectory ("Extract-Excel-XML-Data")
+# main is an execution harness around Operations
+add_subdirectory ("main")
 
 # Unit tests
 include(CTest)
@@ -61,10 +61,9 @@ find_package(Doxygen
 
 doxygen_add_docs(
   ${PROJECT_NAME}
-  "Simple-XML-Parser"
   "Pseudo-XPath-Parser"
+  "Simple-XML"
   "Operations"
-  "Extract-Excel-XML-Data"
   ALL
   COMMENT "Generate HTML Documentation"
   )

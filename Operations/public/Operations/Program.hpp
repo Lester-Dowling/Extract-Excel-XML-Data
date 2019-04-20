@@ -147,7 +147,7 @@ namespace operations {
 		 *
 		 * @return The root node of the parsed pseudo XPath.
 		 */
-		Grade::SP parse_xpath_text(const std::string xpath_text, const int wkt_idx = 1);
+		Grade::SP parse_xpath_text(const std::string xpath_text);
 
 		/**
 		 * Find and return a single node's text as specified by the precise pseudo
