@@ -150,7 +150,7 @@ namespace simple_xml {
 		__TRACER("XPath    == " << Grade::path_to_string(m_filter_path));
 		Grade::SP filter_node = m_filter_path;
 		if (!filter_node)
-			return true;
+			throw std::runtime_error{ "No filter path set for Element Filter." };
 		for (const Element::Index visited_index : current_index_path) {
 			Element const& visited_element = m_elements[visited_index];
 			if (!(filter_node = filter_node->next())) {

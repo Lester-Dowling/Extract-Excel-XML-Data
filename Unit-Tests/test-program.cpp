@@ -53,7 +53,7 @@ BOOST_AUTO_TEST_CASE(single_cell_extraction_1)
 	BOOST_TEST(!oss.str().empty());
 	BOOST_TEST(ess.str().empty());
 	std::list<std::string> expected_output_pieces = {
-		"16",	  // Expected row number.
+		"16",	   // Expected row number.
 		"34177000" // Expected value.
 	};
 	const std::string expected_answer = a::join(expected_output_pieces, " \t ");
@@ -134,7 +134,7 @@ BOOST_AUTO_TEST_CASE(all_data_extraction_1)
 	BOOST_TEST(ess.str().empty());
 	typedef std::list<std::string> pieces_t;
 	pieces_t expected_output_pieces = //
-	  { "1",		 "Item",
+	  { "1",		 "Profit and Loss Item",
 		"06/16",	 "06/17",
 		"2",		 "Operating Revenue",
 		"285917000", "239981000",
@@ -145,15 +145,15 @@ BOOST_AUTO_TEST_CASE(all_data_extraction_1)
 		"1",		 "Item",
 		"06/16",	 "06/17",
 		"2",		 "CA - Cash",
-		"1435000",   "1060000",
+		"1435000",	 "1060000",
 		"3",		 "CA - Receivables",
-		"44888000",  "41131000",
+		"44888000",	 "41131000",
 		"4",		 "CA - Prepaid Expenses",
-		"3589000",   "5675000",
+		"3589000",	 "5675000",
 		"5",		 "CA - Inventories",
 		"104316000", "87474000",
 		"6",		 "CA - Investments",
-		"1293000",   "1270000",
+		"1293000",	 "1270000",
 		"7",		 "CA - NCA Held Sale",
 		"0",		 "0",
 		"8",		 "CA - Other",

@@ -19,7 +19,6 @@
   <WindowWidth>19200</WindowWidth>
   <WindowTopX>32767</WindowTopX>
   <WindowTopY>32767</WindowTopY>
-  <ActiveSheet>1</ActiveSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -48,7 +47,7 @@
    <Column ss:Width="155"/>
    <Column ss:AutoFitWidth="0" ss:Width="80.5" ss:Span="1"/>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s62"><Data ss:Type="String">Item</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Profit and Loss Item</Data></Cell>
     <Cell ss:StyleID="s62"><Data ss:Type="String">06/16</Data></Cell>
     <Cell ss:StyleID="s62"><Data ss:Type="String">06/17</Data></Cell>
    </Row>
@@ -75,10 +74,11 @@
     <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
    </PageSetup>
    <Unsynced/>
+   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>4</ActiveRow>
+     <RangeSelection>R1C1:R1C3</RangeSelection>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -143,7 +143,6 @@
     <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
    </PageSetup>
    <Unsynced/>
-   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>

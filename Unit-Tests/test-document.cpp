@@ -83,19 +83,38 @@ BOOST_AUTO_TEST_CASE(document_load_single_column_of_values_worksheet)
 }
 
 
-BOOST_AUTO_TEST_CASE(document_worksheet_names_1)
+BOOST_AUTO_TEST_CASE(document_worksheet_titles_1)
 {
 	const std::string row_titles_column = "1";
 	const int column_titles_row = 1;
 	const size_t column_title_span = 1;
 	Document d{ row_titles_column, column_titles_row, column_title_span };
 	d.load_xml_file(samples_dir / "small.xml");
-	d.extract_worksheet_titles();
-	BOOST_TEST(d.elements().size() == 154);
+	BOOST_TEST(d.elements().size() == 153);
 	BOOST_TEST(d.elements().front().name() == "Workbook");
-	const vector<string> expected_names = { "Profit and Loss", "Balance Sheet" };
+	d.extract_worksheet_titles();
 	BOOST_TEST(d.titles().wkt_count() == 2);
+	const vector<string> expected_names = { "Profit and Loss", "Balance Sheet" };
 	BOOST_TEST(d.titles().wkt_titles() == expected_names);
+}
+
+
+BOOST_AUTO_TEST_CASE(document_column_titles_1)
+{
+	const std::string row_titles_column = "1";
+	const int column_titles_row = 1;
+	const size_t column_title_span = 1;
+	Document d{ row_titles_column, column_titles_row, column_title_span };
+	d.load_xml_file(samples_dir / "small.xml");
+	BOOST_TEST(d.elements().size() == 153);
+	BOOST_TEST(d.elements().front().name() == "Workbook");
+	d.extract_worksheet_titles();
+	BOOST_TEST(d.titles().wkt_count() == 2);
+	d.extract_column_titles();
+	const vector<string> expected_names_wkt_1 = //
+	  { "Profit and Loss Item", "06/16", "06/17" };
+	BOOST_TEST(d.titles().col_count(1) == 3);
+	BOOST_TEST(d.titles().col_titles(1) == expected_names_wkt_1);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

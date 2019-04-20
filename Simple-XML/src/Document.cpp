@@ -8,7 +8,23 @@
 #include "Simple-XML/Element-Creator.hpp"
 #include "Simple-XML/Element-Filter.hpp"
 #include "Simple-XML/mini-grammar.hpp"
+#include "Pseudo-XPath/Grade.hpp"
 #include "Pseudo-XPath/mini-grammar.hpp"
+
+#define BOOST_ENABLE_ASSERT_HANDLER 1
+#include <boost/assert.hpp>
+
+namespace boost {
+	static void assertion_failed(char const* e, char const* fn, char const* f, long l)
+	{
+		std::ostringstream oss;
+		oss << "[Failed Assertion] " << e << std::endl;
+		oss << "[Function] " << fn << std::endl;
+		oss << "[File] " << f << std::endl;
+		oss << "[Line] " << l << std::endl;
+		throw std::runtime_error{ oss.str() };
+	}
+} // namespace boost
 
 namespace simple_xml {
 	using std::runtime_error;
@@ -23,6 +39,8 @@ namespace simple_xml {
 	using String_Iterator = string::const_iterator;
 	using XML_Grammar = mini_grammar<Memory_Iterator>;
 	using XPath_Grammar = pseudo_xpath::mini_grammar<String_Iterator>;
+	using Grade = pseudo_xpath::Grade;
+
 
 	void Document::load_xml_file(const f::path xml_path)
 	{
@@ -72,16 +90,22 @@ namespace simple_xml {
 		// return xml_parser.result;
 	}
 
-	void Document::extract_worksheet_titles()
+
+	static Grade::SP parse_xpath(const string xpath_text)
 	{
-		const string xpath_text{ "Workbook, Worksheet" };
 		XPath_Grammar xpath_parser;
 		String_Iterator sitr = xpath_text.begin();
 		String_Iterator const send = xpath_text.end();
 		if (!qi::phrase_parse(sitr, send, xpath_parser, ascii::space))
-			throw runtime_error{ "Failed to parse this XPath for worksheet titles: " +
-								 xpath_text };
+			throw runtime_error{ "Failed to parse this XPath: " + xpath_text };
+		return xpath_parser.result;
+	}
+
+
+	void Document::extract_worksheet_titles()
+	{
 		Element_Filter ef{ m_elements, m_titles };
+		ef.set_filter_path(parse_xpath("Workbook, Worksheet"));
 		ef.visit_all_depth_first(
 		  [&](Element_Visitor& visitor) -> bool //
 		  {
@@ -89,7 +113,8 @@ namespace simple_xml {
 			  if (ele.name() == "Worksheet") {
 				  if (ele.attribute("ss:Name").has_value()) {
 					  m_titles.add_worksheet(ele.wkt_idx, *ele.attribute("ss:Name"));
-				  } else {
+				  }
+				  else {
 					  m_titles.add_worksheet(ele.wkt_idx, std::to_string(ele.wkt_idx));
 				  }
 			  }
@@ -97,28 +122,29 @@ namespace simple_xml {
 		  });
 	}
 
+
 	void Document::extract_column_titles()
 	{
-		std::ostringstream titles_xpath_oss;
-		titles_xpath_oss << "Row[" << gColumnTitlesRow << "],Cell,Data[ss:Type=String]";
-		for (const int wkt_idx : m_titles->wkt_indices()) {
-			const string xpath_text{ this->xpath_prefix(wkt_idx) + titles_xpath_oss.str() };
-			XPath_Grammar xpath_parser;
-			String_Iterator sitr = xpath_text.begin();
-			String_Iterator const send = xpath_text.end();
-			if (!qi::phrase_parse(sitr, send, xpath_parser, ascii::space))
-				throw runtime_error{ "Failed to parse this XPath for column titles: " +
-									 xpath_text };
+		for (const int wkt_idx : m_titles.wkt_indices()) {
+			std::ostringstream titles_xpath_oss;
+			titles_xpath_oss << "Workbook, Worksheet[" << wkt_idx << "], Table, "
+							 << "Row[" << m_column_titles_row
+							 << "],Cell,Data[ss:Type=String]";
 			Element_Filter ef{ m_elements, m_titles };
+			ef.set_filter_path(parse_xpath(titles_xpath_oss.str()));
 			ef.visit_all_depth_first(
 			  [&](Element_Visitor& visitor) -> bool //
 			  {
 				  Element& ele = visitor.current();
-				  assert(ele.wkt_idx == wkt_idx);
-				  assert(ele.row_idx == gColumnTitlesRow);
-				  assert(ele.name() == "Data");
+				  BOOST_ASSERT(ele.wkt_idx == wkt_idx);
+				  BOOST_ASSERT(ele.row_idx == m_column_titles_row);
+				  BOOST_ASSERT(ele.name() == "Data");
 				  if (!ele.text().empty()) {
-					  m_titles->add_col(ele.wkt_idx, ele.col_idx, ele.text());
+					  m_titles.add_col(wkt_idx, ele.col_idx, ele.text());
+				  }
+				  else {
+					  m_titles.add_col(
+						ele.wkt_idx, ele.col_idx, std::to_string(ele.col_idx));
 				  }
 				  return true;
 			  });
