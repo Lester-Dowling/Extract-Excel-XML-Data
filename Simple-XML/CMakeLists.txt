@@ -65,6 +65,15 @@ if(EXISTS ${LOCAL_PRECOMPILED_CMAKE})
 endif()
 
 #
+# Config
+#
+configure_file (
+  "config.h.in"
+  "${PROJECT_BINARY_DIR}/config.h"
+  )
+include_directories("${PROJECT_BINARY_DIR}")
+
+#
 # Import Pseudo XPath Parser Library
 #
 target_link_libraries(${TARGET} PUBLIC "Pseudo-XPath")

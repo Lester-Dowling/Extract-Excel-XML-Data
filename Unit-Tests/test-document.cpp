@@ -40,20 +40,14 @@ namespace {
 
 BOOST_AUTO_TEST_CASE(document_ctor)
 {
-	const std::string row_titles_column = "1";
-	const int column_titles_row = 1;
-	const size_t column_title_span = 1;
-	Document d{ row_titles_column, column_titles_row, column_title_span };
+	Document d;
 	BOOST_TEST(d.elements().empty());
 }
 
 
 BOOST_AUTO_TEST_CASE(document_load_single_value_worksheet)
 {
-	const std::string row_titles_column = "1";
-	const int column_titles_row = 1;
-	const size_t column_title_span = 1;
-	Document d{ row_titles_column, column_titles_row, column_title_span };
+	Document d;
 	d.load_xml_file(samples_dir / "single-value-worksheet.xml");
 	BOOST_TEST(d.elements().size() == 40);
 	BOOST_TEST(d.elements().front().name() == "Workbook");
@@ -66,10 +60,7 @@ BOOST_AUTO_TEST_CASE(document_load_single_value_worksheet)
 
 BOOST_AUTO_TEST_CASE(document_load_single_column_of_values_worksheet)
 {
-	const std::string row_titles_column = "1";
-	const int column_titles_row = 1;
-	const size_t column_title_span = 1;
-	Document d{ row_titles_column, column_titles_row, column_title_span };
+	Document d;
 	d.load_xml_file(samples_dir / "single-column-of-values-worksheet.xml");
 	BOOST_TEST(d.elements().size() == 52);
 	BOOST_TEST(d.elements().front().name() == "Workbook");
@@ -85,10 +76,7 @@ BOOST_AUTO_TEST_CASE(document_load_single_column_of_values_worksheet)
 
 BOOST_AUTO_TEST_CASE(document_worksheet_titles_1)
 {
-	const std::string row_titles_column = "1";
-	const int column_titles_row = 1;
-	const size_t column_title_span = 1;
-	Document d{ row_titles_column, column_titles_row, column_title_span };
+	Document d;
 	d.load_xml_file(samples_dir / "small.xml");
 	BOOST_TEST(d.elements().size() == 153);
 	BOOST_TEST(d.elements().front().name() == "Workbook");
@@ -101,10 +89,7 @@ BOOST_AUTO_TEST_CASE(document_worksheet_titles_1)
 
 BOOST_AUTO_TEST_CASE(document_column_titles_1)
 {
-	const std::string row_titles_column = "1";
-	const int column_titles_row = 1;
-	const size_t column_title_span = 1;
-	Document d{ row_titles_column, column_titles_row, column_title_span };
+	Document d;
 	d.load_xml_file(samples_dir / "small.xml");
 	BOOST_TEST(d.elements().size() == 153);
 	BOOST_TEST(d.elements().front().name() == "Workbook");
@@ -115,6 +100,10 @@ BOOST_AUTO_TEST_CASE(document_column_titles_1)
 	  { "Profit and Loss Item", "06/16", "06/17" };
 	BOOST_TEST(d.titles().col_count(1) == 3);
 	BOOST_TEST(d.titles().col_titles(1) == expected_names_wkt_1);
+	const vector<string> expected_names_wkt_2 = //
+	  { "Item", "06/16", "06/17" };
+	BOOST_TEST(d.titles().col_count(2) == 3);
+	BOOST_TEST(d.titles().col_titles(2) == expected_names_wkt_2);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

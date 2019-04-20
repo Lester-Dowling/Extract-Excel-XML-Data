@@ -11,21 +11,6 @@
 #include "Pseudo-XPath/Grade.hpp"
 #include "Pseudo-XPath/mini-grammar.hpp"
 
-#define BOOST_ENABLE_ASSERT_HANDLER 1
-#include <boost/assert.hpp>
-
-namespace boost {
-	static void assertion_failed(char const* e, char const* fn, char const* f, long l)
-	{
-		std::ostringstream oss;
-		oss << "[Failed Assertion] " << e << std::endl;
-		oss << "[Function] " << fn << std::endl;
-		oss << "[File] " << f << std::endl;
-		oss << "[Line] " << l << std::endl;
-		throw std::runtime_error{ oss.str() };
-	}
-} // namespace boost
-
 namespace simple_xml {
 	using std::runtime_error;
 	using std::string;
@@ -123,8 +108,10 @@ namespace simple_xml {
 	}
 
 
-	void Document::extract_column_titles()
+	void Document::extract_column_titles(int column_titles_row, size_t column_title_span)
 	{
+		m_column_titles_row = column_titles_row;
+		m_column_title_span = column_title_span;
 		for (const int wkt_idx : m_titles.wkt_indices()) {
 			std::ostringstream titles_xpath_oss;
 			titles_xpath_oss << "Workbook, Worksheet[" << wkt_idx << "], Table, "
@@ -145,6 +132,63 @@ namespace simple_xml {
 				  else {
 					  m_titles.add_col(
 						ele.wkt_idx, ele.col_idx, std::to_string(ele.col_idx));
+				  }
+				  return true;
+			  });
+		}
+	}
+
+
+	void Document::extract_row_titles(const std::string row_titles_column)
+	{
+		m_row_titles_column = row_titles_column;
+		if (m_row_titles_column.empty())
+			m_row_titles_column = "1";
+		else {
+			// Translate a single capital letter to a column number.  For example, given "-m
+			// C" on the command line, translate that to "-m 3".
+			if (m_row_titles_column.size() == 1) {
+				if (std::isupper(m_row_titles_column.front())) {
+					const int corresponding_column_number =
+					  1 + static_cast<int>(m_row_titles_column.front()) -
+					  static_cast<int>('A');
+					m_row_titles_column = std::to_string(corresponding_column_number);
+				}
+			}
+		}
+		bool good_column_number = true;
+		int column_number;
+		try {
+			column_number = std::stoi(m_row_titles_column);
+		}
+		catch (std::invalid_argument const&) {
+			good_column_number = false;
+		}
+
+		const string col_name_filter{ "[Column=\"" + m_row_titles_column + "\"]" };
+		const string col_number_filter{ "[Column=" + m_row_titles_column + "]" };
+		const string& col_filter = good_column_number ? col_number_filter : col_name_filter;
+		for (const int wkt_idx : m_titles.wkt_indices()) {
+			std::ostringstream titles_xpath_oss;
+			titles_xpath_oss << "Workbook, Worksheet[" << wkt_idx << "], Table, "
+							 << "Row,Cell" << col_filter << ",Data[ss:Type=String]";
+			Element_Filter ef{ m_elements, m_titles };
+			ef.set_filter_path(parse_xpath(titles_xpath_oss.str()));
+			ef.visit_all_depth_first(
+			  [&](Element_Visitor& visitor) -> bool //
+			  {
+				  Element& ele = visitor.current();
+				  BOOST_ASSERT(ele.wkt_idx == wkt_idx);
+				  BOOST_ASSERT(ele.name() == "Data");
+				  if (good_column_number) {
+					  BOOST_ASSERT(ele.col_idx == column_number);
+				  }
+				  if (!ele.text().empty()) {
+					  m_titles.add_row(wkt_idx, ele.row_idx, ele.text());
+				  }
+				  else {
+					  m_titles.add_row(
+						ele.wkt_idx, ele.row_idx, std::to_string(ele.row_idx));
 				  }
 				  return true;
 			  });

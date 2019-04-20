@@ -35,26 +35,16 @@ namespace simple_xml {
 		/**
 		 * The row which contains the titles for each column.
 		 */
-		int m_column_titles_row; // gColumnTitlesRow
+		int m_column_titles_row = 0; // gColumnTitlesRow
 
 		/**
 		 * How many rows do the column titles occupy.  Usually just one, though
 		 * sometimes lengthy column titles span two or three rows.
 		 */
-		size_t m_column_title_span; // gColumnTitleSpan
-
-		friend class Element_Filter;
+		size_t m_column_title_span = 0; // gColumnTitleSpan
 
 	public:
-		Document(
-		  std::string row_titles_column,
-		  int column_titles_row,
-		  size_t column_title_span)
-		  : m_row_titles_column{ row_titles_column }
-		  , m_column_titles_row{ column_titles_row }
-		  , m_column_title_span{ column_title_span }
-		{
-		}
+		Document() = default;
 
 		/**
 		 * Load and parse the given XML file into this document.
@@ -67,9 +57,14 @@ namespace simple_xml {
 		void extract_worksheet_titles();
 
 		/**
-		 * Find the column titles for each worksheet.
+		 * Find the column titles in each worksheet.
 		 */
-		void extract_column_titles();
+		void extract_column_titles(int column_titles_row = 1, size_t column_title_span = 1);
+
+		/**
+		 * Find the row titles in each worksheet.
+		 */
+		void extract_row_titles(const std::string row_titles_column = "1");
 
 		/**
 		 * Accessor that returns the Elements in this document.
