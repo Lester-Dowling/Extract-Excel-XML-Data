@@ -102,8 +102,10 @@ namespace simple_xml {
 		if (m_elements.empty())
 			return;
 		current_index = 0;
-		if (!callback(*this))
-			return;
+		if (visit_all_predicate()) {
+			if (!callback(*this))
+				return;
+		}
 		while (true) {
 			while (visit_first_child()) {
 				if (visit_all_predicate()) {

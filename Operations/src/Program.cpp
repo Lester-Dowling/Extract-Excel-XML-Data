@@ -41,6 +41,7 @@ namespace operations {
 		return xp;
 	}
 
+
 	std::string Program::xpath_prefix(const int worksheet_number)
 	{
 		std::ostringstream xp;
@@ -50,12 +51,9 @@ namespace operations {
 		return xp.str();
 	}
 
-	std::string Program::xpath_prefix()
-	{
-		std::ostringstream xp;
-		xp << "Workbook, Worksheet, Table, ";
-		return xp.str();
-	}
+
+	std::string Program::xpath_prefix() { return "Workbook, Worksheet, Table, "; }
+
 
 	void Program::extract_worksheet_titles(Node::SP xml_root)
 	{

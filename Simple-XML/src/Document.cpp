@@ -69,4 +69,35 @@ namespace simple_xml {
 		// return xml_parser.result;
 	}
 
+	
+	void Document::extract_worksheet_titles(Node::SP xml_root)
+	{
+		using std::runtime_error;
+		namespace ascii = boost::spirit::ascii;
+		namespace qi = boost::spirit::qi;
+		const string xpath_text{ "Workbook, Worksheet" };
+		XPath_Grammar xpath_parser;
+		String_Iterator sitr = xpath_text.begin();
+		String_Iterator const send = xpath_text.end();
+		if (!qi::phrase_parse(sitr, send, xpath_parser, ascii::space))
+			throw runtime_error{ "Failed to parse this XPath for worksheet titles: " +
+								 xpath_text };
+		excel_xml_parser::Node_Filter::all_siblings(
+		  xml_root,
+		  xpath_parser.result,
+		  m_titles,
+		  [&](excel_xml_parser::Node_Visitor& visitor) -> bool //
+		  {
+			  if (visitor.name() == "Worksheet") {
+				  if (visitor.attribute("ss:Name").has_value()) {
+					  m_titles->add_worksheet(visitor.wkt(), *visitor.attribute("ss:Name"));
+				  }
+				  else {
+					  m_titles->add_worksheet(visitor.wkt(), std::to_string(visitor.wkt()));
+				  }
+			  }
+			  return true;
+		  });
+	}
+
 } // namespace simple_xml

@@ -21,12 +21,6 @@ using simple_xml::Element_Visitor;
 BOOST_AUTO_TEST_SUITE(test_element_visitor_suite, *utf::enabled())
 
 
-inline vector<char> to_vector(const char* const sample)
-{
-	return vector<char>{ sample, sample + strlen(sample) };
-}
-
-
 BOOST_AUTO_TEST_CASE(element_visitor_ctor)
 {
 	vector<Element> sample;

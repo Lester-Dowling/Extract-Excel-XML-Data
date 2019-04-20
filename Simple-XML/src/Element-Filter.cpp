@@ -146,7 +146,7 @@ namespace simple_xml {
 #define __TRACER(args)
 #endif
 
-	bool Element_Filter::current_path_matches_filter_path() const
+	bool Element_Filter::visit_all_predicate()
 	{
 		using std::cout;
 		using std::endl;
