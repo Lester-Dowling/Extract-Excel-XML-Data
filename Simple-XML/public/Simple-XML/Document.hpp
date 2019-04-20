@@ -41,7 +41,7 @@ namespace simple_xml {
 		 * How many rows do the column titles occupy.  Usually just one, though
 		 * sometimes lengthy column titles span two or three rows.
 		 */
-		size_t m_column_title_span = 0; // gColumnTitleSpan
+		int m_column_title_span = 0; // gColumnTitleSpan
 
 	public:
 		Document() = default;
@@ -59,12 +59,17 @@ namespace simple_xml {
 		/**
 		 * Find the column titles in each worksheet.
 		 */
-		void extract_column_titles(int column_titles_row = 1, size_t column_title_span = 1);
+		void extract_column_titles(int column_titles_row = 1, int column_title_span = 1);
 
 		/**
 		 * Find the row titles in each worksheet.
 		 */
 		void extract_row_titles(const std::string row_titles_column = "1");
+
+		/**
+		 * Accessor for the index of the first row where the data of the worksheet starts.
+		 */
+		int row_idx_start_of_data() const;
 
 		/**
 		 * Accessor that returns the Elements in this document.

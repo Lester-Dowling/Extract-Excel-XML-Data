@@ -73,7 +73,8 @@ namespace operations {
 			  if (visitor.name() == "Worksheet") {
 				  if (visitor.attribute("ss:Name").has_value()) {
 					  m_titles->add_worksheet(visitor.wkt(), *visitor.attribute("ss:Name"));
-				  } else {
+				  }
+				  else {
 					  m_titles->add_worksheet(visitor.wkt(), std::to_string(visitor.wkt()));
 				  }
 			  }
@@ -152,7 +153,8 @@ namespace operations {
 		int column_number;
 		try {
 			column_number = std::stoi(gRowTitlesColumn);
-		} catch (std::invalid_argument const&) {
+		}
+		catch (std::invalid_argument const&) {
 			good_column_number = false;
 		}
 
@@ -257,12 +259,14 @@ namespace operations {
 		if (gEachArithmeticExpression.empty()) {
 			// No arithmetic expression to evaluate.  Print raw text, only:
 			*gOut << visitor.text();
-		} else { // Else, parse arithmetic expression for each visited:
+		}
+		else { // Else, parse arithmetic expression for each visited:
 			try {
 				gCalculator.set_symbol("DATA", std::stod(visitor.text()));
 				*gOut << std::fixed << std::setprecision(this->precision())
 					  << gCalculator.evaluate(gEachArithmeticExpression);
-			} catch (std::invalid_argument const&) {
+			}
+			catch (std::invalid_argument const&) {
 				// visitor.text() is not a number, so ignore arithmetic expression:
 				*gOut << visitor.text();
 			}
@@ -380,7 +384,8 @@ namespace operations {
 				if (regex_match(gXPathText, workbook_filter_match, workbook_filter_regex)) {
 					full_xpath_text += workbook_filter_match[1];
 					gXPathText = workbook_filter_match[2];
-				} else
+				}
+				else
 					gXPathText = workbook_match[1];
 			}
 
@@ -397,7 +402,8 @@ namespace operations {
 					  gXPathText, worksheet_filter_match, worksheet_filter_regex)) {
 					full_xpath_text += worksheet_filter_match[1];
 					gXPathText = worksheet_filter_match[2];
-				} else {
+				}
+				else {
 					full_xpath_text += '[';
 					operations::append_quoted_if_not_number(
 					  full_xpath_text,
@@ -406,7 +412,8 @@ namespace operations {
 					full_xpath_text += ']';
 					gXPathText = worksheet_match[1];
 				}
-			} else {
+			}
+			else {
 				full_xpath_text += '[';
 				append_quoted_if_not_number(
 				  full_xpath_text, gDefaultWorksheet, "Default worksheet ref is missing.");
@@ -425,7 +432,8 @@ namespace operations {
 				if (regex_match(gXPathText, table_filter_match, table_filter_regex)) {
 					full_xpath_text += table_filter_match[1];
 					gXPathText = table_filter_match[2];
-				} else
+				}
+				else
 					gXPathText = table_match[1];
 			}
 			a::trim(gXPathText);
@@ -470,7 +478,8 @@ namespace operations {
 				  if (cell_ref_ords.size() >= 3) {
 					  worksheet_name = cell_ref_ords.front();
 					  cell_ref_ords.pop_front();
-				  } else {
+				  }
+				  else {
 					  worksheet_name = gDefaultWorksheet;
 				  }
 
@@ -500,14 +509,16 @@ namespace operations {
 				  calc_interpolated += ' ';
 			  });
 			calc_interpolated.append(postmatched_begin, gCalcText.cend());
-		} else
+		}
+		else
 			calc_interpolated = gCalcText;
 		gCalculator.evaluate(calc_interpolated);
 		for (Calculator::History_Item hi : gCalculator.history()) {
 			if (std::holds_alternative<double>(hi)) {
 				*gOut << std::fixed << std::setprecision(this->precision())
 					  << std::get<double>(hi) << endl;
-			} else {
+			}
+			else {
 				const std::string s = std::get<Calculator::Assignment_Pair>(hi).first;
 				const double v = std::get<Calculator::Assignment_Pair>(hi).second;
 				*gOut << s << " = " << std::fixed << std::setprecision(this->precision())
@@ -607,8 +618,8 @@ namespace operations {
 	{
 		using namespace std;
 		if (gVM.count("in-file") == 0)
-			throw std::runtime_error{ "No Excel files were given." };
-		VectorString const& in_files = gVM["in-file"].as<VectorString>();
+			throw std::runtime_error{ "No files were listed on the command line." };
+		vector<string> const& in_files = gVM["in-file"].as<vector<string>>();
 		for (auto const& file_path : in_files) {
 			m_titles->clear();
 			m_visited_row = 0;
@@ -620,7 +631,6 @@ namespace operations {
 				// Try gCalcText first as a filename:
 				f::path calc_script_path{ gCalcText };
 				if (f::exists(calc_script_path)) {
-
 					f::fstream calc_script_stream{ calc_script_path };
 					if (!calc_script_stream)
 						throw runtime_error{ "Could not open file: " +

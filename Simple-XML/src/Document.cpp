@@ -108,7 +108,7 @@ namespace simple_xml {
 	}
 
 
-	void Document::extract_column_titles(int column_titles_row, size_t column_title_span)
+	void Document::extract_column_titles(int column_titles_row, int column_title_span)
 	{
 		m_column_titles_row = column_titles_row;
 		m_column_title_span = column_title_span;
@@ -170,8 +170,10 @@ namespace simple_xml {
 		const string& col_filter = good_column_number ? col_number_filter : col_name_filter;
 		for (const int wkt_idx : m_titles.wkt_indices()) {
 			std::ostringstream titles_xpath_oss;
-			titles_xpath_oss << "Workbook, Worksheet[" << wkt_idx << "], Table, "
-							 << "Row,Cell" << col_filter << ",Data[ss:Type=String]";
+			titles_xpath_oss << "Workbook,"									   //
+							 << "Worksheet[" << wkt_idx << "], Table, "		   //
+							 << "Row[Row>" << row_idx_start_of_data() << "], " //
+							 << "Cell" << col_filter << ", Data[ss:Type=String]";
 			Element_Filter ef{ m_elements, m_titles };
 			ef.set_filter_path(parse_xpath(titles_xpath_oss.str()));
 			ef.visit_all_depth_first(
@@ -193,6 +195,13 @@ namespace simple_xml {
 				  return true;
 			  });
 		}
+	}
+
+	int Document::row_idx_start_of_data() const
+	{
+		BOOST_ASSERT(m_column_titles_row > 0);
+		BOOST_ASSERT(m_column_title_span > 0);
+		return m_column_titles_row + m_column_title_span - 1;
 	}
 
 } // namespace simple_xml

@@ -11,10 +11,12 @@
 #include <memory>
 #include <limits>
 #include "Operations/Calculator.hpp"
+#include "Pseudo-XPath/Grade.hpp"
 #include "Simple-XML-Parser/Worksheet-Row-Column-Titles.hpp"
 #include "Simple-XML-Parser/Node.hpp"
 #include "Simple-XML-Parser/Node-Visitor.hpp"
-#include "Pseudo-XPath/Grade.hpp"
+#include "Simple-XML/Element.hpp"
+#include "Simple-XML/Document.hpp"
 namespace operations {
 	using excel_xml_parser::Worksheet_Row_Column_Titles;
 	using std::make_shared;

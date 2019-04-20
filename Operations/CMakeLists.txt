@@ -70,6 +70,11 @@ endif()
 target_link_libraries(${TARGET} PRIVATE "Simple-XML-Parser")
 
 #
+# Import XML Library
+#
+target_link_libraries(${TARGET} PRIVATE "Simple-XML")
+
+#
 # Import Pseudo XPath Parser Library
 #
 target_link_libraries(${TARGET} PRIVATE "Pseudo-XPath")

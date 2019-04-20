@@ -29,7 +29,7 @@ using simple_xml::Worksheet_Row_Column_Titles;
  * Unit tests to verify the correct operation of simple_xml::Document.
  */
 
-BOOST_AUTO_TEST_SUITE(test_xml_document_suite, *utf::enabled())
+BOOST_AUTO_TEST_SUITE(test_document_suite, *utf::enabled())
 namespace {
 
 	const f::path samples_dir{
@@ -104,6 +104,29 @@ BOOST_AUTO_TEST_CASE(document_column_titles_1)
 	  { "Item", "06/16", "06/17" };
 	BOOST_TEST(d.titles().col_count(2) == 3);
 	BOOST_TEST(d.titles().col_titles(2) == expected_names_wkt_2);
+}
+
+
+BOOST_AUTO_TEST_CASE(document_row_titles_1)
+{
+	Document d;
+	d.load_xml_file(samples_dir / "small.xml");
+	BOOST_TEST(d.elements().size() == 153);
+	BOOST_TEST(d.elements().front().name() == "Workbook");
+	d.extract_worksheet_titles();
+	BOOST_TEST(d.titles().wkt_count() == 2);
+	d.extract_column_titles();
+	d.extract_row_titles();
+	const vector<string> expected_rows_wkt_1 = //
+	  { "Operating Revenue", "Other Revenue", "Total Revenue Excluding Interest" };
+	BOOST_TEST(d.titles().row_count(1) == 3);
+	BOOST_TEST(d.titles().row_titles(1) == expected_rows_wkt_1);
+	const vector<string> expected_rows_wkt_2 = //
+	  { "CA - Cash",		"CA - Receivables",	   "CA - Prepaid Expenses",
+		"CA - Inventories", "CA - Investments",	   "CA - NCA Held Sale",
+		"CA - Other",		"Total Current Assets" };
+	BOOST_TEST(d.titles().row_count(2) == 8);
+	BOOST_TEST(d.titles().row_titles(2) == expected_rows_wkt_2);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
