@@ -13,10 +13,9 @@ namespace excel_xml_parser {
 
 	Node_Filter::Node_Filter(excel_xml_parser::Node::SP root)
 	  : Node_Visitor{ root }
-	{
-	}
+	{}
 
-	void Node_Filter::set_filter_path(pseudo_xpath_parser::Grade::SP filter_path)
+	void Node_Filter::set_filter_path(pseudo_xpath::Grade::SP filter_path)
 	{
 		m_filter_path = filter_path;
 	}
@@ -27,7 +26,7 @@ namespace excel_xml_parser {
 	{
 		using std::cout;
 		using std::endl;
-		using Attribute_Filter = pseudo_xpath_parser::Attribute_Filter;
+		using Attribute_Filter = pseudo_xpath::Attribute_Filter;
 		// cout << "node->name == " << node->name << endl;
 		// cout << "fn->name   == " << fn->name() << endl;
 		if (node->name != fn->name())
@@ -43,99 +42,96 @@ namespace excel_xml_parser {
 			if (filter_name == "Column" || filter_name == "Cell") {
 				if (good_filter_number)
 					switch (filter_operator) {
-					case '=':
-						if (!(node->col_idx == filter_number))
-							return false;
-						break;
-					case '<':
-						if (!(node->col_idx < filter_number))
-							return false;
-						break;
-					case '>':
-						if (!(node->col_idx > filter_number))
-							return false;
-						break;
-					default:
-						throw std::runtime_error{ "Impossible filter operator" };
+						case '=':
+							if (!(node->col_idx == filter_number))
+								return false;
+							break;
+						case '<':
+							if (!(node->col_idx < filter_number))
+								return false;
+							break;
+						case '>':
+							if (!(node->col_idx > filter_number))
+								return false;
+							break;
+						default:
+							throw std::runtime_error{ "Impossible filter operator" };
 					}
 				else // no good_filter_number => try filter_value
 					switch (filter_operator) {
-					case '=':
-						if (const auto col_title =
-							  m_titles->col_title(node->wkt_idx, node->col_idx);
-							col_title.has_value() && *col_title != filter_value) //
-						{
-							return false;
-						}
-						break;
-					default:
-						throw std::runtime_error{ "Bad filter operator" };
+						case '=':
+							if (const auto col_title =
+								  m_titles->col_title(node->wkt_idx, node->col_idx);
+								col_title.has_value() && *col_title != filter_value) //
+							{
+								return false;
+							}
+							break;
+						default:
+							throw std::runtime_error{ "Bad filter operator" };
 					}
-			}
-			else if (filter_name == "Row") {
+			} else if (filter_name == "Row") {
 				if (good_filter_number)
 					switch (filter_operator) {
-					case '=':
-						if (!(node->row_idx == filter_number))
-							return false;
-						break;
-					case '<':
-						if (!(node->row_idx < filter_number))
-							return false;
-						break;
-					case '>':
-						if (!(node->row_idx > filter_number))
-							return false;
-						break;
-					default:
-						throw std::runtime_error{ "Impossible filter operator" };
+						case '=':
+							if (!(node->row_idx == filter_number))
+								return false;
+							break;
+						case '<':
+							if (!(node->row_idx < filter_number))
+								return false;
+							break;
+						case '>':
+							if (!(node->row_idx > filter_number))
+								return false;
+							break;
+						default:
+							throw std::runtime_error{ "Impossible filter operator" };
 					}
 				else // no good_filter_number => try filter_value
 					switch (filter_operator) {
-					case '=':
-						if (const auto row_title =
-							  m_titles->row_title(node->wkt_idx, node->row_idx);
-							row_title.has_value() && *row_title != filter_value) //
-						{
-							return false;
-						}
-						break;
-					default:
-						throw std::runtime_error{ "Bad filter operator" };
+						case '=':
+							if (const auto row_title =
+								  m_titles->row_title(node->wkt_idx, node->row_idx);
+								row_title.has_value() && *row_title != filter_value) //
+							{
+								return false;
+							}
+							break;
+						default:
+							throw std::runtime_error{ "Bad filter operator" };
 					}
-			}
-			else if (filter_name == "Worksheet") {
+			} else if (filter_name == "Worksheet") {
 				if (good_filter_number)
 					switch (filter_operator) {
-					case '=':
-						if (!(node->wkt_idx == filter_number))
-							return false;
-						break;
-					case '<':
-						if (!(node->wkt_idx < filter_number))
-							return false;
-						break;
-					case '>':
-						if (!(node->wkt_idx > filter_number))
-							return false;
-						break;
-					default:
-						throw std::runtime_error{ "Impossible filter operator" };
+						case '=':
+							if (!(node->wkt_idx == filter_number))
+								return false;
+							break;
+						case '<':
+							if (!(node->wkt_idx < filter_number))
+								return false;
+							break;
+						case '>':
+							if (!(node->wkt_idx > filter_number))
+								return false;
+							break;
+						default:
+							throw std::runtime_error{ "Impossible filter operator" };
 					}
 				else // no good_filter_number => try filter_value
 					switch (filter_operator) {
-					case '=':
-						if (const auto wkt_title = m_titles->wkt_title(node->wkt_idx);
-							wkt_title.has_value() && *wkt_title != filter_value) //
-						{
-							return false;
-						}
-						break;
-					default:
-						throw std::runtime_error{ "Bad filter operator" };
+						case '=':
+							if (const auto wkt_title = m_titles->wkt_title(node->wkt_idx);
+								wkt_title.has_value() && *wkt_title != filter_value) //
+							{
+								return false;
+							}
+							break;
+						default:
+							throw std::runtime_error{ "Bad filter operator" };
 					}
-			}
-			else if (node->attributes.count(filter_name)) {
+			} else if (node->attributes.count(filter_name)) {
 				if (node->attributes[filter_name] != filter_value) {
 					return false;
 				}
@@ -157,8 +153,7 @@ namespace excel_xml_parser {
 		using std::cout;
 		using std::endl;
 		__TRACER("XML path == " << path_to_string());
-		__TRACER(
-		  "XPath    == " << pseudo_xpath_parser::Grade::path_to_string(m_filter_path));
+		__TRACER("XPath    == " << pseudo_xpath::Grade::path_to_string(m_filter_path));
 		Node_Visitor::Node_Path_Iterator node_itr = current_node_path.begin();
 		Node_Visitor::Node_Path_Iterator const node_end = current_node_path.end();
 		Filter_Node filter_node = m_filter_path;
@@ -199,7 +194,7 @@ namespace excel_xml_parser {
 
 	void Node_Filter::all_siblings(
 	  excel_xml_parser::Node::SP root,
-	  pseudo_xpath_parser::Grade::SP filter_path,
+	  pseudo_xpath::Grade::SP filter_path,
 	  Worksheet_Row_Column_Titles::SP titles,
 	  std::function<bool(Node_Visitor&)> filter_predicate)
 	{
@@ -220,8 +215,7 @@ namespace excel_xml_parser {
 							return;
 					}
 					break;
-				}
-				else { // No more siblings => retreat to parent:
+				} else { // No more siblings => retreat to parent:
 					if (!visitor.resume_parent())
 						return;
 				}

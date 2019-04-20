@@ -1,4 +1,4 @@
-// Pseudo-XPath-Parser/mini-grammar.hpp
+// Pseudo-XPath/mini-grammar.hpp
 // Started 29 Mar 2019
 #pragma once
 #include <boost/fusion/adapted/std_pair.hpp>
@@ -21,9 +21,9 @@
 #include <boost/spirit/include/qi_string.hpp>
 #include <boost/spirit/include/qi_symbols.hpp>
 #include <boost/bind.hpp>
-#include "Pseudo-XPath-Parser/Grade.hpp"
-#include "Pseudo-XPath-Parser/Grade-Creator.hpp"
-namespace pseudo_xpath_parser {
+#include "Pseudo-XPath/Grade.hpp"
+#include "Pseudo-XPath/Grade-Creator.hpp"
+namespace pseudo_xpath {
 	namespace fusion = boost::fusion;
 	namespace phx = boost::phoenix;
 	namespace spirit = boost::spirit;
@@ -33,15 +33,12 @@ namespace pseudo_xpath_parser {
 	constexpr char kSQ = '\'';
 
 	template<typename Iterator>
-	class mini_grammar
-	  : public qi::grammar<Iterator, void(), ascii::space_type> //
+	class mini_grammar : public qi::grammar<Iterator, void(), ascii::space_type> //
 	{
 		using base_type = typename mini_grammar::base_type;
 		using start_type = typename base_type::start_type;
 		using attr_type = typename start_type::attr_type;
 		using This = typename mini_grammar<Iterator>;
-		using Grade = pseudo_xpath_parser::Grade;
-		using Grade_Creator = pseudo_xpath_parser::Grade_Creator;
 
 		using char_seq_t = std::vector<char>;
 		using char_seq_rule_t = qi::rule<Iterator, char_seq_t(), ascii::space_type>;
@@ -49,13 +46,13 @@ namespace pseudo_xpath_parser {
 		using quoted_seq_rule_t = qi::rule<Iterator, quoted_attr_t(), ascii::space_type>;
 		using filter_attr_t = fusion::vector<char_seq_t, char, quoted_attr_t>;
 
-	public:
+	  public:
 		/**
 		 * The parsed result of this grammar.
 		 */
 		Grade::SP result{ new Grade };
 
-	private:
+	  private:
 		Grade_Creator::SP creator{ new Grade_Creator{ result } };
 		char_seq_rule_t xml_identifier;
 		char_seq_rule_t attribute_name;
@@ -69,7 +66,13 @@ namespace pseudo_xpath_parser {
 		const int sq_flag{ 2 }; // Flag for single quoted value.
 		const int nq_flag{ 3 }; // Flag for unquoted value (no quote).
 		const int dg_flag{ 4 }; // Flag for value with digits only.
-		enum Quote_Type : int { kDoubleQuoted = 1, kSingleQuoted, kNotQuoted, kDigitsOnly };
+		enum Quote_Type : int
+		{
+			kDoubleQuoted = 1,
+			kSingleQuoted,
+			kNotQuoted,
+			kDigitsOnly
+		};
 		qi::rule<Iterator, filter_attr_t(), ascii::space_type> binary_filter;
 		qi::rule<Iterator, void(), ascii::space_type> attributes;
 		start_type start;
@@ -113,7 +116,7 @@ namespace pseudo_xpath_parser {
 			  attribute_name, filter_operator, filter_value, quoted, digits_only);
 		}
 
-	public:
+	  public:
 		mini_grammar()
 		  : base_type{ start }
 		  , xml_identifier{ qi::lexeme[+qi::char_("a-zA-Z0-9:_-")] }
@@ -142,4 +145,4 @@ namespace pseudo_xpath_parser {
 						<< std::endl);
 		}
 	};
-} // namespace pseudo_xpath_parser
+} // namespace pseudo_xpath

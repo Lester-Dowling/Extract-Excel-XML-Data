@@ -1,16 +1,16 @@
-// Pseudo-XPath-Parser/Grade-Creator.hpp
+// Pseudo-XPath/Grade-Creator.hpp
 // Started 28 Mar 2019
 #pragma once
 #include <memory>
 #include <string>
 #include <deque>
 #include <vector>
-#include "Pseudo-XPath-Parser/Grade.hpp"
-namespace pseudo_xpath_parser {
+#include "Pseudo-XPath/Grade.hpp"
+namespace pseudo_xpath {
 
-	class Grade_Creator {
-	protected:
-		using Grade = pseudo_xpath_parser::Grade;
+	class Grade_Creator
+	{
+	  protected:
 		Grade::SP current_grade;
 
 		typedef std::deque<Grade::SP> Grade_Path_Type;
@@ -19,7 +19,7 @@ namespace pseudo_xpath_parser {
 
 		bool is_current_grade_root() const { return current_grade_path.empty(); }
 
-	public:
+	  public:
 		typedef std::shared_ptr<Grade_Creator> SP;
 
 		Grade_Creator(Grade::SP first_grade);
@@ -48,4 +48,4 @@ namespace pseudo_xpath_parser {
 
 		size_t depth() const { return current_grade_path.size(); }
 	};
-} // namespace pseudo_xpath_parser
+} // namespace pseudo_xpath

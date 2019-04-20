@@ -14,14 +14,15 @@
 #include "Simple-XML-Parser/Worksheet-Row-Column-Titles.hpp"
 #include "Simple-XML-Parser/Node.hpp"
 #include "Simple-XML-Parser/Node-Visitor.hpp"
-#include "Pseudo-XPath-Parser/Grade.hpp"
+#include "Pseudo-XPath/Grade.hpp"
 namespace operations {
+	using excel_xml_parser::Worksheet_Row_Column_Titles;
 	using std::make_shared;
 	using std::shared_ptr;
-	using excel_xml_parser::Worksheet_Row_Column_Titles;
 
-	class Program : public Program_Base {
-	public:
+	class Program : public Program_Base
+	{
+	  public:
 		/**
 		 * Prepend the row number to each line of output.
 		 */
@@ -101,14 +102,14 @@ namespace operations {
 		 */
 		Calculator gCalculator;
 
-	public: //~ Ctors ---------------------------------------------------------
+	  public: //~ Ctors ---------------------------------------------------------
 		Program(int argc, char** argv, std::ostream& out, std::ostream& err)
 		  : Program_Base{ argc, argv, out, err }
 		{
 			parse_command_line_options();
 		}
 
-	public: //~ Accessors -----------------------------------------------------
+	  public: //~ Accessors -----------------------------------------------------
 		std::streamsize precision() const
 		{
 			// Set max precision if gPrecision is negative:
@@ -122,12 +123,12 @@ namespace operations {
 
 		std::string xpath_prefix();
 
-	public: //~ Overrides -----------------------------------------------------
+	  public: //~ Overrides -----------------------------------------------------
 		void setup_option_descriptions() override;
 		void perform_requested_operation() override;
 		// void save() override{};
 
-	public: //~ XML operations ------------------------------------------------
+	  public: //~ XML operations ------------------------------------------------
 		typedef std::vector<char> file_in_memory_t;
 		typedef file_in_memory_t::const_iterator Memory_Iterator;
 		using Node = excel_xml_parser::Node;
@@ -139,8 +140,8 @@ namespace operations {
 		 */
 		Node::SP load_xml_file(const boost::filesystem::path xml_path);
 
-	public: //~ XPath operations ----------------------------------------------
-		using Grade = pseudo_xpath_parser::Grade;
+	  public: //~ XPath operations ----------------------------------------------
+		using Grade = pseudo_xpath::Grade;
 
 		/**
 		 * Parse the given pseudo XPath expression.
@@ -161,7 +162,7 @@ namespace operations {
 		 */
 		double extract_single_number(Node::SP xml_root, Grade::SP xpath_root);
 
-	private: //~ -----------------------------------------------------
+	  private: //~ -----------------------------------------------------
 		/**
 		 * Precision of calculator outputs.
 		 */

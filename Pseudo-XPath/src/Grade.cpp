@@ -1,9 +1,9 @@
-// Pseudo-XPath-Parser/Grade.cpp
+// Pseudo-XPath/Grade.cpp
 // Started 14 Apr 2019
 #pragma once
 #include "pch-xpath-parser.hpp"
-#include "Pseudo-XPath-Parser/Grade.hpp"
-namespace pseudo_xpath_parser {
+#include "Pseudo-XPath/Grade.hpp"
+namespace pseudo_xpath {
 	using std::string;
 
 	void append_attribute_filters(string& grade_path, Grade::SP v)
@@ -43,4 +43,4 @@ namespace pseudo_xpath_parser {
 		}
 		return grade_path;
 	}
-} // namespace pseudo_xpath_parser
+} // namespace pseudo_xpath

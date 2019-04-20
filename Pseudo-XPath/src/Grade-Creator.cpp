@@ -1,7 +1,7 @@
-// Pseudo-XPath-Parser/Grade-Creator.cpp
+// Pseudo-XPath/Grade-Creator.cpp
 // Started 29 Mar 2019
 #include "pch-xpath-parser.hpp"
-#include "Pseudo-XPath-Parser/Grade-Creator.hpp"
+#include "Pseudo-XPath/Grade-Creator.hpp"
 using std::string;
 
 #define TRACE_CREATOR
@@ -11,7 +11,7 @@ using std::string;
 #undef TRACE_CREATOR
 #endif
 
-namespace pseudo_xpath_parser {
+namespace pseudo_xpath {
 
 	Grade_Creator::Grade_Creator(Grade::SP root)
 	  : current_grade{ root }
@@ -56,8 +56,7 @@ namespace pseudo_xpath_parser {
 			try {
 				filter_number = std::stoi(v);
 				good_filter_number = true;
-			}
-			catch (std::invalid_argument const&) {
+			} catch (std::invalid_argument const&) {
 				good_filter_number = false;
 			}
 		current_grade->attribute_filters.emplace_back(
@@ -67,4 +66,4 @@ namespace pseudo_xpath_parser {
 							filter_number,
 							good_filter_number });
 	}
-} // namespace pseudo_xpath_parser
+} // namespace pseudo_xpath

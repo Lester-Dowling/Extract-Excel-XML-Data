@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 3.12)
 
 #A simplied, custom XPath - based grammar which is sufficient to filter Excel table data.
 
-set(TARGET "Pseudo-XPath-Parser")
+set(TARGET "Pseudo-XPath")
 add_library( ${TARGET} OBJECT )
 set_property(TARGET ${TARGET} PROPERTY CXX_STANDARD 17)
 

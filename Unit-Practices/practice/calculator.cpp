@@ -7,11 +7,11 @@
 namespace utf = boost::unit_test;
 namespace tt = boost::test_tools;
 namespace a = boost::algorithm;
+using operations::Program;
+using std::make_shared;
 using std::setw;
 using std::shared_ptr;
-using std::make_shared;
-using operations::Program;
-using Grade = pseudo_xpath_parser::Grade;
+using Grade = pseudo_xpath::Grade;
 
 /*
  * Unit tests to verify the correct operation of Calculator.

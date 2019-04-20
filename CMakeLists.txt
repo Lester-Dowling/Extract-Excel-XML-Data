@@ -36,7 +36,7 @@ add_subdirectory ("Simple-XML")
 add_subdirectory ("Simple-XML-Parser")
 
 # Pseudo XPath Parser library
-add_subdirectory ("Pseudo-XPath-Parser")
+add_subdirectory ("Pseudo-XPath")
 
 # The program operations
 add_subdirectory("Operations")
@@ -61,7 +61,7 @@ find_package(Doxygen
 
 doxygen_add_docs(
   ${PROJECT_NAME}
-  "Pseudo-XPath-Parser"
+  "Pseudo-XPath"
   "Simple-XML"
   "Operations"
   ALL

@@ -67,7 +67,7 @@ endif()
 #
 # Import Pseudo XPath Parser Library
 #
-target_link_libraries(${TARGET} PUBLIC "Pseudo-XPath-Parser")
+target_link_libraries(${TARGET} PUBLIC "Pseudo-XPath")
 
 #
 # Threads

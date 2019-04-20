@@ -9,7 +9,7 @@ namespace tt = boost::test_tools;
 namespace a = boost::algorithm;
 using operations::Program;
 using std::setw;
-using Grade = pseudo_xpath_parser::Grade;
+using Grade = pseudo_xpath::Grade;
 
 /*
  * Unit tests to verify the correct operation of Calculator.

@@ -20,7 +20,7 @@ namespace simple_xml {
 	  Element const& ele,
 	  const Grade::SP fn) const
 	{
-		using Attribute_Filter = pseudo_xpath_parser::Attribute_Filter;
+		using Attribute_Filter = pseudo_xpath::Attribute_Filter;
 		// cout << "e.name == " << visited_element.name() << endl;
 		// cout << "fn->name   == " << fn->name() << endl;
 		if (ele.name() != fn->name())
@@ -36,107 +36,103 @@ namespace simple_xml {
 			if (filter_name == "Column" || filter_name == "Cell") {
 				if (good_filter_number)
 					switch (filter_operator) {
-					case '=':
-						if (!(ele.col_idx == filter_number))
-							return false;
-						break;
-					case '<':
-						if (!(ele.col_idx < filter_number))
-							return false;
-						break;
-					case '>':
-						if (!(ele.col_idx > filter_number))
-							return false;
-						break;
-					default:
-						throw std::runtime_error{ "Impossible filter operator" };
+						case '=':
+							if (!(ele.col_idx == filter_number))
+								return false;
+							break;
+						case '<':
+							if (!(ele.col_idx < filter_number))
+								return false;
+							break;
+						case '>':
+							if (!(ele.col_idx > filter_number))
+								return false;
+							break;
+						default:
+							throw std::runtime_error{ "Impossible filter operator" };
 					}
 				else // no good_filter_number => try filter_value
 					switch (filter_operator) {
-					case '=':
-						if (const auto col_title =
-							  m_titles.col_title(ele.wkt_idx, ele.col_idx);
-							col_title.has_value() && *col_title != filter_value) //
-						{
-							return false;
-						}
-						break;
-					default:
-						throw std::runtime_error{ "Bad filter operator" };
+						case '=':
+							if (const auto col_title =
+								  m_titles.col_title(ele.wkt_idx, ele.col_idx);
+								col_title.has_value() && *col_title != filter_value) //
+							{
+								return false;
+							}
+							break;
+						default:
+							throw std::runtime_error{ "Bad filter operator" };
 					}
-			}
-			else if (filter_name == "Row") {
+			} else if (filter_name == "Row") {
 				if (good_filter_number)
 					switch (filter_operator) {
-					case '=':
-						if (!(ele.row_idx == filter_number))
-							return false;
-						break;
-					case '<':
-						if (!(ele.row_idx < filter_number))
-							return false;
-						break;
-					case '>':
-						if (!(ele.row_idx > filter_number))
-							return false;
-						break;
-					default:
-						throw std::runtime_error{ "Impossible filter operator" };
+						case '=':
+							if (!(ele.row_idx == filter_number))
+								return false;
+							break;
+						case '<':
+							if (!(ele.row_idx < filter_number))
+								return false;
+							break;
+						case '>':
+							if (!(ele.row_idx > filter_number))
+								return false;
+							break;
+						default:
+							throw std::runtime_error{ "Impossible filter operator" };
 					}
 				else // no good_filter_number => try filter_value
 					switch (filter_operator) {
-					case '=':
-						if (const auto row_title =
-							  m_titles.row_title(ele.wkt_idx, ele.row_idx);
-							row_title.has_value() && *row_title != filter_value) //
-						{
-							return false;
-						}
-						break;
-					default:
-						throw std::runtime_error{ "Bad filter operator" };
+						case '=':
+							if (const auto row_title =
+								  m_titles.row_title(ele.wkt_idx, ele.row_idx);
+								row_title.has_value() && *row_title != filter_value) //
+							{
+								return false;
+							}
+							break;
+						default:
+							throw std::runtime_error{ "Bad filter operator" };
 					}
-			}
-			else if (filter_name == "Worksheet") {
+			} else if (filter_name == "Worksheet") {
 				if (good_filter_number)
 					switch (filter_operator) {
-					case '=':
-						if (!(ele.wkt_idx == filter_number))
-							return false;
-						break;
-					case '<':
-						if (!(ele.wkt_idx < filter_number))
-							return false;
-						break;
-					case '>':
-						if (!(ele.wkt_idx > filter_number))
-							return false;
-						break;
-					default:
-						throw std::runtime_error{ "Impossible filter operator" };
+						case '=':
+							if (!(ele.wkt_idx == filter_number))
+								return false;
+							break;
+						case '<':
+							if (!(ele.wkt_idx < filter_number))
+								return false;
+							break;
+						case '>':
+							if (!(ele.wkt_idx > filter_number))
+								return false;
+							break;
+						default:
+							throw std::runtime_error{ "Impossible filter operator" };
 					}
 				else // no good_filter_number => try filter_value
 					switch (filter_operator) {
-					case '=':
-						if (const auto wkt_title = m_titles.wkt_title(ele.wkt_idx);
-							wkt_title.has_value() && *wkt_title != filter_value) //
-						{
-							return false;
-						}
-						break;
-					default:
-						throw std::runtime_error{ "Bad filter operator" };
+						case '=':
+							if (const auto wkt_title = m_titles.wkt_title(ele.wkt_idx);
+								wkt_title.has_value() && *wkt_title != filter_value) //
+							{
+								return false;
+							}
+							break;
+						default:
+							throw std::runtime_error{ "Bad filter operator" };
 					}
-			}
-			else if (const auto attribute_value = ele.attribute(filter_name);
-					 attribute_value.has_value() && *attribute_value != filter_value) //
+			} else if (const auto attribute_value = ele.attribute(filter_name);
+					   attribute_value.has_value() && *attribute_value != filter_value) //
 			{
 				return false;
 			}
 		}
 		return true;
 	}
-
 
 #undef TRACE_CURRENT_PATH_MATCHES_FILTER_PATH
 // define TRACE_CURRENT_PATH_MATCHES_FILTER_PATH

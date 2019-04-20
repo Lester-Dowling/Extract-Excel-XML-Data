@@ -41,9 +41,14 @@ target_link_libraries(${TARGET} PRIVATE "Operations")
 target_link_libraries(${TARGET} PRIVATE "Simple-XML-Parser")
 
 #
-# Import Pseudo XPath Parser Library
+# Import XML Library
 #
-target_link_libraries(${TARGET} PRIVATE "Pseudo-XPath-Parser")
+target_link_libraries(${TARGET} PRIVATE "Simple-XML")
+
+#
+# Import Pseudo XPath Library
+#
+target_link_libraries(${TARGET} PRIVATE "Pseudo-XPath")
 
 #
 # Threads

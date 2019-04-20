@@ -5,8 +5,8 @@
  */
 #include "pch-unit-tests.hpp"
 #include <boost/test/unit_test.hpp>
-#include "Pseudo-XPath-Parser/Grade.hpp"
-#include "Pseudo-XPath-Parser/mini-grammar.hpp"
+#include "Pseudo-XPath/Grade.hpp"
+#include "Pseudo-XPath/mini-grammar.hpp"
 #include "Simple-XML/Worksheet-Row-Column-Titles.hpp"
 #include "Simple-XML/Element-Filter.hpp"
 namespace utf = boost::unit_test;
@@ -17,26 +17,25 @@ namespace spirit = boost::spirit;
 namespace qi = spirit::qi;
 namespace ascii = spirit::ascii;
 namespace phx = boost::phoenix;
-using std::vector;
-using std::list;
-using std::string;
+using pseudo_xpath::Grade;
+using simple_xml::Element;
+using simple_xml::Element_Filter;
+using simple_xml::Element_Visitor;
+using simple_xml::Worksheet_Row_Column_Titles;
 using std::cout;
 using std::endl;
+using std::list;
 using std::runtime_error;
-using simple_xml::Element;
-using simple_xml::Element_Visitor;
-using simple_xml::Element_Filter;
-using simple_xml::Worksheet_Row_Column_Titles;
-using pseudo_xpath_parser::Grade;
+using std::string;
+using std::vector;
 using Stream_Iterator = boost::spirit::basic_istream_iterator<char>;
-using XPath_Grammar = pseudo_xpath_parser::mini_grammar<Stream_Iterator>;
+using XPath_Grammar = pseudo_xpath::mini_grammar<Stream_Iterator>;
 
 /*
  * Unit tests to verify the correct operation of simple_xml::Element_Filter.
  */
 
 BOOST_AUTO_TEST_SUITE(test_element_filter_suite, *utf::enabled())
-
 
 BOOST_AUTO_TEST_CASE(element_filter_ctor_1)
 {
@@ -53,7 +52,6 @@ BOOST_AUTO_TEST_CASE(element_filter_ctor_1)
 	BOOST_TEST(counter == 0);
 }
 
-
 static Element::Index
 new_element(vector<Element>& e, string const& n, const Element::Index parent_idx = 0)
 {
@@ -66,7 +64,6 @@ new_element(vector<Element>& e, string const& n, const Element::Index parent_idx
 	return new_element_index;
 }
 
-
 static Grade::SP parse_pseudo_xpath(const char* const xpath_text)
 {
 	XPath_Grammar g;
@@ -77,7 +74,6 @@ static Grade::SP parse_pseudo_xpath(const char* const xpath_text)
 		throw runtime_error{ "Failed to parse pseudo XPath." };
 	return g.result;
 }
-
 
 BOOST_AUTO_TEST_CASE(element_filter_depth_first_1)
 {
@@ -138,6 +134,5 @@ BOOST_AUTO_TEST_CASE(element_filter_depth_first_2)
 	  });
 	BOOST_TEST(filtered_names == expected_names);
 }
-
 
 BOOST_AUTO_TEST_SUITE_END()

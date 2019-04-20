@@ -1,12 +1,13 @@
-// Pseudo-XPath-Parser/Grade.hpp
+// Pseudo-XPath/Grade.hpp
 // Started 28 Mar 2019
 #pragma once
 #include <list>
 #include <memory>
 #include <string>
-namespace pseudo_xpath_parser {
+namespace pseudo_xpath {
 
-	struct Attribute_Filter {
+	struct Attribute_Filter
+	{
 		std::string attribute_name;
 		char filter_operator; // can be: = < >
 		std::string filter_value;
@@ -14,8 +15,9 @@ namespace pseudo_xpath_parser {
 		bool good_filter_number;
 	};
 
-	class Grade {
-	public:
+	class Grade
+	{
+	  public:
 		std::string xml_node_name;
 		std::list<Attribute_Filter> attribute_filters;
 		std::shared_ptr<Grade> next_grade;
@@ -30,4 +32,4 @@ namespace pseudo_xpath_parser {
 
 		static std::string path_to_string(const SP root);
 	};
-} // namespace pseudo_xpath_parser
+} // namespace pseudo_xpath

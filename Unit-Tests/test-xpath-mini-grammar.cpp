@@ -2,8 +2,8 @@
 // Started 15 Aug 2018
 #include "pch-unit-tests.hpp"
 #include <boost/test/unit_test.hpp>
-#include "Pseudo-XPath-Parser/mini-grammar.hpp"
-#include "Pseudo-XPath-Parser/Grade.hpp"
+#include "Pseudo-XPath/mini-grammar.hpp"
+#include "Pseudo-XPath/Grade.hpp"
 namespace utf = boost::unit_test;
 namespace fsn = boost::fusion;
 namespace spirit = boost::spirit;
@@ -11,8 +11,8 @@ namespace qi = spirit::qi;
 namespace ascii = spirit::ascii;
 namespace phx = boost::phoenix;
 using Stream_Iterator = boost::spirit::basic_istream_iterator<char>;
-using Grade = pseudo_xpath_parser::Grade;
-using XPath_Grammar = pseudo_xpath_parser::mini_grammar<Stream_Iterator>;
+using Grade = pseudo_xpath::Grade;
+using XPath_Grammar = pseudo_xpath::mini_grammar<Stream_Iterator>;
 
 /*
  * Unit tests to verify the correct operation of the pseudo XPath grammar.

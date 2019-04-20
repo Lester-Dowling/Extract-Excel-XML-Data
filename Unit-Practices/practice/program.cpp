@@ -6,7 +6,7 @@
 namespace utf = boost::unit_test;
 namespace a = boost::algorithm;
 using operations::Program;
-using pseudo_xpath_parser::Grade;
+using pseudo_xpath::Grade;
 using std::setw;
 
 /*
@@ -134,66 +134,40 @@ BOOST_AUTO_TEST_CASE(all_data_extraction_1)
 	BOOST_TEST(ess.str().empty());
 	typedef std::list<std::string> pieces_t;
 	pieces_t expected_output_pieces = //
-	  { "1",
-		"Item",
-		"06/16",
-		"06/17",
-		"2",
-		"Operating Revenue",
-		"285917000",
-		"239981000",
-		"3",
-		"Other Revenue",
-		"-34138000",
-		"-12077000",
-		"4",
-		"Total Revenue Excluding Interest",
-		"251779000",
-		"227904000",
-		"1",
-		"Item",
-		"06/16",
-		"06/17",
-		"2",
-		"CA - Cash",
-		"1435000",
-		"1060000",
-		"3",
-		"CA - Receivables",
-		"44888000",
-		"41131000",
-		"4",
-		"CA - Prepaid Expenses",
-		"3589000",
-		"5675000",
-		"5",
-		"CA - Inventories",
-		"104316000",
-		"87474000",
-		"6",
-		"CA - Investments",
-		"1293000",
-		"1270000",
-		"7",
-		"CA - NCA Held Sale",
-		"0",
-		"0",
-		"8",
-		"CA - Other",
-		"0",
-		"0",
-		"9",
-		"Total Current Assets",
-		"155521000",
-		"136610000" };
+	  { "1",		 "Item",
+		"06/16",	 "06/17",
+		"2",		 "Operating Revenue",
+		"285917000", "239981000",
+		"3",		 "Other Revenue",
+		"-34138000", "-12077000",
+		"4",		 "Total Revenue Excluding Interest",
+		"251779000", "227904000",
+		"1",		 "Item",
+		"06/16",	 "06/17",
+		"2",		 "CA - Cash",
+		"1435000",   "1060000",
+		"3",		 "CA - Receivables",
+		"44888000",  "41131000",
+		"4",		 "CA - Prepaid Expenses",
+		"3589000",   "5675000",
+		"5",		 "CA - Inventories",
+		"104316000", "87474000",
+		"6",		 "CA - Investments",
+		"1293000",   "1270000",
+		"7",		 "CA - NCA Held Sale",
+		"0",		 "0",
+		"8",		 "CA - Other",
+		"0",		 "0",
+		"9",		 "Total Current Assets",
+		"155521000", "136610000" };
 	pieces_t oss_pieces;
 	a::split(oss_pieces, oss.str(), a::is_any_of("\t\n\r"), a::token_compress_on);
 	// Remove spurious left-over after split:
 	for (auto& piece : oss_pieces)
 		a::trim(piece);
 	oss_pieces.remove_if([](std::string const& ord) { return ord.empty(); });
-	//typedef pieces_t::const_iterator Iter;
-	//for (Iter eitr = expected_output_pieces.begin(), oitr = oss_pieces.begin();
+	// typedef pieces_t::const_iterator Iter;
+	// for (Iter eitr = expected_output_pieces.begin(), oitr = oss_pieces.begin();
 	//	eitr != expected_output_pieces.end() && oitr != oss_pieces.end(); ++eitr, ++oitr)
 	//{
 	//	BOOST_TEST_MESSAGE(setw(36) << *eitr << setw(36) << *oitr);

@@ -25,7 +25,7 @@ endforeach(src_file)
 #
 target_link_libraries(${TARGET} PRIVATE "Simple-XML")
 target_link_libraries(${TARGET} PRIVATE "Simple-XML-Parser")
-target_link_libraries(${TARGET} PRIVATE "Pseudo-XPath-Parser")
+target_link_libraries(${TARGET} PRIVATE "Pseudo-XPath")
 target_link_libraries(${TARGET} PRIVATE "Operations")
 
 
