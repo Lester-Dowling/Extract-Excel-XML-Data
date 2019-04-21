@@ -43,6 +43,11 @@ namespace simple_xml {
 		 */
 		int m_column_title_span = 0; // gColumnTitleSpan
 
+		/**
+		 * Find all the worksheet titles.
+		 */
+		void extract_worksheet_titles();
+
 	public:
 		Document() = default;
 
@@ -55,11 +60,6 @@ namespace simple_xml {
 		 * Load and parse the given Excel XML file into this document.
 		 */
 		void load_xml_file(const boost::filesystem::path xml_path);
-
-		/**
-		 * Find all the worksheet titles.
-		 */
-		void extract_worksheet_titles();
 
 		/**
 		 * Find the column titles in each worksheet.

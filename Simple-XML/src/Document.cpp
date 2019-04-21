@@ -58,11 +58,9 @@ namespace simple_xml {
 		XML_Grammar xml_parser{ &element_creator };
 		if (!phrase_parse(fitr, fend, xml_parser, ascii::space))
 			throw runtime_error{ "Parsing failed." };
-		// extract_worksheet_titles(xml_parser.result);
-		// if (gWriteWorksheetTitles) {
-		//	write_worksheet_titles();
-		//	throw No_Op{};
-		//}
+
+		extract_worksheet_titles();
+
 		// extract_column_titles(xml_parser.result);
 		// if (gWriteColumnTitles) {
 		//	write_column_titles();

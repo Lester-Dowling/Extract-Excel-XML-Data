@@ -78,7 +78,6 @@ BOOST_AUTO_TEST_CASE(document_worksheet_titles_1)
 	d.load_xml_file(samples_dir / "small.xml");
 	BOOST_TEST(d.elements().size() == 153);
 	BOOST_TEST(d.elements().front().name() == "Workbook");
-	d.extract_worksheet_titles();
 	BOOST_TEST(d.titles().wkt_count() == 2);
 	const vector<string> expected_names = { "Profit and Loss", "Balance Sheet" };
 	BOOST_TEST(d.titles().wkt_titles() == expected_names);
@@ -91,7 +90,6 @@ BOOST_AUTO_TEST_CASE(document_column_titles_1)
 	d.load_xml_file(samples_dir / "small.xml");
 	BOOST_TEST(d.elements().size() == 153);
 	BOOST_TEST(d.elements().front().name() == "Workbook");
-	d.extract_worksheet_titles();
 	BOOST_TEST(d.titles().wkt_count() == 2);
 	d.extract_column_titles();
 	const vector<string> expected_names_wkt_1 = //
@@ -111,7 +109,6 @@ BOOST_AUTO_TEST_CASE(document_row_titles_1)
 	d.load_xml_file(samples_dir / "small.xml");
 	BOOST_TEST(d.elements().size() == 153);
 	BOOST_TEST(d.elements().front().name() == "Workbook");
-	d.extract_worksheet_titles();
 	BOOST_TEST(d.titles().wkt_count() == 2);
 	d.extract_column_titles();
 	d.extract_row_titles();

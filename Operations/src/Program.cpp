@@ -533,6 +533,35 @@ namespace operations {
 		}
 	}
 
+	void Program::compute_calc_file_and_write_results(Node::SP xml_root)
+	{
+		assert(!gCalcFile.empty());
+		f::path calc_script_path{ gCalcFile };
+		if (!f::exists(calc_script_path))
+			throw runtime_error{ "No such file: " + calc_script_path.string() };
+		f::fstream calc_script_stream{ calc_script_path };
+		if (!calc_script_stream)
+			throw runtime_error{ "Could not open file: " + calc_script_path.string() };
+		boost::system::error_code ec;
+		const boost::uintmax_t file_size = f::file_size(calc_script_path, ec);
+		if (ec || file_size == static_cast<boost::uintmax_t>(-1))
+			throw runtime_error{ "Failed to get calc script file size." };
+		if (gVerbose)
+			*gErr << "Loading calc script " << calc_script_path.string() << endl;
+
+		// Load the calc script into gCalcText:
+		const string saved_gCalcText = gCalcText;
+		gCalcText.clear();
+		gCalcText.reserve(file_size);
+		calc_script_stream.unsetf(std::ios::skipws); // No white space skipping!
+		std::copy(
+		  std::istream_iterator<char>(calc_script_stream),
+		  std::istream_iterator<char>(),
+		  std::back_inserter(gCalcText));
+		compute_calc_and_write_results(xml_root);
+		gCalcText = saved_gCalcText;
+	}
+
 	void Program::setup_option_descriptions()
 	{
 		Program_Base::setup_option_descriptions();
@@ -634,39 +663,21 @@ namespace operations {
 				*gErr << "Parsing " << xml_filename << endl;
 			Node::SP xml_root = load_xml_file(xml_filename);
 			m_documents.emplace_back(f::path{ xml_filename });
-			if (!gCalcFile.empty()) {
-				f::path calc_script_path{ gCalcFile };
-				if (!f::exists(calc_script_path))
-					throw runtime_error{ "No such file: " + calc_script_path.string() };
-				f::fstream calc_script_stream{ calc_script_path };
-				if (!calc_script_stream)
-					throw runtime_error{ "Could not open file: " +
-										 calc_script_path.string() };
-				boost::system::error_code ec;
-				const boost::uintmax_t file_size = f::file_size(calc_script_path, ec);
-				if (ec || file_size == static_cast<boost::uintmax_t>(-1))
-					throw runtime_error{ "Failed to get calc script file size." };
-				if (gVerbose)
-					*gErr << "Loading calc script " << calc_script_path.string() << endl;
 
-				// Load the calc script into gCalcText:
-				const string saved_gCalcText = gCalcText;
-				gCalcText.clear();
-				gCalcText.reserve(file_size);
-				calc_script_stream.unsetf(std::ios::skipws); // No white space skipping!
-				std::copy(
-				  std::istream_iterator<char>(calc_script_stream),
-				  std::istream_iterator<char>(),
-				  std::back_inserter(gCalcText));
-				compute_calc_and_write_results(xml_root);
-				gCalcText = saved_gCalcText;
-			}
-			if (!gCalcText.empty()) {
-				// Compute the calc expression in gCalcText:
-				compute_calc_and_write_results(xml_root);
-			}
+		// if (gWriteWorksheetTitles) {
+		//	write_worksheet_titles();
+		//	throw No_Op{};
+		//}
+
+
+			if (!gCalcFile.empty())
+				compute_calc_file_and_write_results(xml_root); // gCalcFile
+			
+			if (!gCalcText.empty())
+				compute_calc_and_write_results(xml_root); // gCalcText
+			
 			if (!gXPathText.empty())
-				compute_xpath_and_write_results(xml_root);
+				compute_xpath_and_write_results(xml_root); // gXPathText
 		}
 	}
 } // namespace operations

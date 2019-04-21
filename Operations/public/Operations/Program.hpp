@@ -185,6 +185,7 @@ namespace operations {
 
 		void compute_xpath_and_write_results(Node::SP xml_root);
 		void compute_calc_and_write_results(Node::SP xml_root);
+		void compute_calc_file_and_write_results(Node::SP xml_root);
 
 		/**
 		 * Find and put into @c m_titles all the worksheet names in the workbook.
