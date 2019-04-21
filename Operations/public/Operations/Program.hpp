@@ -70,7 +70,7 @@ namespace operations {
 		 * How many rows do the column titles occupy.  Usually just one, though
 		 * sometimes lengthy column titles span two or three rows.
 		 */
-		int gColumnTitleSpan = 1;
+		int gColumnTitleRowCount = 1;
 
 		/**
 		 * Write out all valid cell refs, nothing else.  Usually, this option is
@@ -78,6 +78,18 @@ namespace operations {
 		 * expression.
 		 */
 		bool gWriteCellRefs = false;
+
+		/**
+		 * Do not look for column titles in the workbook.  Usually, this option is specified
+		 * when the rows in a worksheet only contain data without a title.
+		 */
+		bool gNoColumnTitles = false;
+
+		/**
+		 * Do not look for row titles in the workbook.  This option saves time when the
+		 * worksheet is only a list of data without titles for each row.
+		 */
+		bool gNoRowTitles = false;
 
 		/**
 		 * The pseudo XPath as given on the command line.
