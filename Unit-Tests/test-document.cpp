@@ -47,8 +47,7 @@ BOOST_AUTO_TEST_CASE(document_ctor)
 
 BOOST_AUTO_TEST_CASE(document_load_single_value_worksheet)
 {
-	Document d;
-	d.load_xml_file(samples_dir / "single-value-worksheet.xml");
+	Document d{ samples_dir / "single-value-worksheet.xml" };
 	BOOST_TEST(d.elements().size() == 40);
 	BOOST_TEST(d.elements().front().name() == "Workbook");
 	for (auto const& e : d.elements()) {
@@ -60,8 +59,7 @@ BOOST_AUTO_TEST_CASE(document_load_single_value_worksheet)
 
 BOOST_AUTO_TEST_CASE(document_load_single_column_of_values_worksheet)
 {
-	Document d;
-	d.load_xml_file(samples_dir / "single-column-of-values-worksheet.xml");
+	Document d{ samples_dir / "single-column-of-values-worksheet.xml" };
 	BOOST_TEST(d.elements().size() == 52);
 	BOOST_TEST(d.elements().front().name() == "Workbook");
 	const vector<string> expected_values = { "2", "4", "6", "8", "10" };

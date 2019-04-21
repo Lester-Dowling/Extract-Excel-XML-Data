@@ -26,6 +26,11 @@ namespace simple_xml {
 	using XPath_Grammar = pseudo_xpath::mini_grammar<String_Iterator>;
 	using Grade = pseudo_xpath::Grade;
 
+	Document::Document(const boost::filesystem::path xml_path)
+	{
+		this->load_xml_file(xml_path);
+	}
+
 
 	void Document::load_xml_file(const f::path xml_path)
 	{

@@ -31,6 +31,12 @@ namespace operations {
 
 	const char* const all_data_xpath_text = "Row,Cell,Data";
 
+	Program::Program(int argc, char** argv, ostream& out, ostream& err)
+	  : Program_Base{ argc, argv, out, err }
+	{
+		parse_command_line_options();
+	}
+
 	std::string Program::xpath_prefix(std::string worksheet_name)
 	{
 		// Worksheet[ss:Name="Profit Loss"]
@@ -627,6 +633,7 @@ namespace operations {
 			if (gVerbose)
 				*gErr << "Parsing " << file_path << endl;
 			Node::SP xml_root = load_xml_file(file_path);
+			// m_documents.push_back();
 			if (!gCalcFile.empty()) {
 				f::path calc_script_path{ gCalcFile };
 				if (!f::exists(calc_script_path))

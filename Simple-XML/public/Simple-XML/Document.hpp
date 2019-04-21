@@ -47,7 +47,12 @@ namespace simple_xml {
 		Document() = default;
 
 		/**
-		 * Load and parse the given XML file into this document.
+		 * Ctor to make a Document with the contents of the given Excel XML file.
+		 */
+		Document(const boost::filesystem::path xml_path);
+
+		/**
+		 * Load and parse the given Excel XML file into this document.
 		 */
 		void load_xml_file(const boost::filesystem::path xml_path);
 

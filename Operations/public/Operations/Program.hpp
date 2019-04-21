@@ -18,13 +18,16 @@
 #include "Simple-XML/Element.hpp"
 #include "Simple-XML/Document.hpp"
 namespace operations {
+	using std::vector;
+	using std::string;
+	using std::ostream;
+	using std::numeric_limits;
 	using excel_xml_parser::Worksheet_Row_Column_Titles;
 	using std::make_shared;
 	using std::shared_ptr;
 
-	class Program : public Program_Base
-	{
-	  public:
+	class Program : public Program_Base {
+	public:
 		/**
 		 * Prepend the row number to each line of output.
 		 */
@@ -51,12 +54,12 @@ namespace operations {
 		/**
 		 * The worksheet to extract from if no worksheet ref was given.
 		 */
-		std::string gDefaultWorksheet{ "1" };
+		string gDefaultWorksheet{ "1" };
 
 		/**
 		 * The column which contains the titles for each row.
 		 */
-		std::string gRowTitlesColumn;
+		string gRowTitlesColumn;
 
 		/**
 		 * The row which contains the titles for each column.
@@ -79,58 +82,58 @@ namespace operations {
 		/**
 		 * The pseudo XPath as given on the command line.
 		 */
-		std::string gXPathText;
+		string gXPathText;
 
 		/**
 		 * An arithmetic expression given on the command line intended to be
 		 * parsed by the Calculator for each extracted data value.
 		 */
-		std::string gEachArithmeticExpression;
+		string gEachArithmeticExpression;
 
 		/**
 		 * An calculator expression given on the command line to be evaluated
 		 * once.
 		 */
-		std::string gCalcText;
+		string gCalcText;
 
 		/**
 		 * Filename of a text file which contains calc script to be worked out by the
 		 * calculator.
 		 */
-		std::string gCalcFile;
+		string gCalcFile;
 
 		/**
 		 * Calculator for computing arithmetic expressions.
 		 */
 		Calculator gCalculator;
 
-	  public: //~ Ctors ---------------------------------------------------------
-		Program(int argc, char** argv, std::ostream& out, std::ostream& err)
-		  : Program_Base{ argc, argv, out, err }
-		{
-			parse_command_line_options();
-		}
+		/**
+		 * Precision of calculator outputs.
+		 */
+		int gPrecision{ -1 };
 
-	  public: //~ Accessors -----------------------------------------------------
+	public: //~ Ctors ---------------------------------------------------------
+		Program(int argc, char** argv, ostream& out, ostream& err);
+
+	public: //~ Accessors -----------------------------------------------------
 		std::streamsize precision() const
 		{
 			// Set max precision if gPrecision is negative:
-			return (gPrecision < 0) ? std::numeric_limits<double>::digits10 + 1
-									: gPrecision;
+			return (gPrecision < 0) ? numeric_limits<double>::digits10 + 1 : gPrecision;
 		}
 
-		std::string xpath_prefix(std::string worksheet_name);
+		string xpath_prefix(string worksheet_name);
 
-		std::string xpath_prefix(const int worksheet_number);
+		string xpath_prefix(const int worksheet_number);
 
-		std::string xpath_prefix();
+		string xpath_prefix();
 
-	  public: //~ Overrides -----------------------------------------------------
+	public: //~ Overrides -----------------------------------------------------
 		void setup_option_descriptions() override;
 		void perform_requested_operation() override;
 		// void save() override{};
 
-	  public: //~ XML operations ------------------------------------------------
+	public: //~ XML operations ------------------------------------------------
 		typedef std::vector<char> file_in_memory_t;
 		typedef file_in_memory_t::const_iterator Memory_Iterator;
 		using Node = excel_xml_parser::Node;
@@ -142,7 +145,7 @@ namespace operations {
 		 */
 		Node::SP load_xml_file(const boost::filesystem::path xml_path);
 
-	  public: //~ XPath operations ----------------------------------------------
+	public: //~ XPath operations ----------------------------------------------
 		using Grade = pseudo_xpath::Grade;
 
 		/**
@@ -150,13 +153,13 @@ namespace operations {
 		 *
 		 * @return The root node of the parsed pseudo XPath.
 		 */
-		Grade::SP parse_xpath_text(const std::string xpath_text);
+		Grade::SP parse_xpath_text(const string xpath_text);
 
 		/**
 		 * Find and return a single node's text as specified by the precise pseudo
 		 * XPath.
 		 */
-		std::string extract_single_text(Node::SP xml_root, Grade::SP xpath_root);
+		string extract_single_text(Node::SP xml_root, Grade::SP xpath_root);
 
 		/**
 		 * Find and return a single node's text converted to a double.  The exact
@@ -164,11 +167,11 @@ namespace operations {
 		 */
 		double extract_single_number(Node::SP xml_root, Grade::SP xpath_root);
 
-	  private: //~ -----------------------------------------------------
+	private: //~ -----------------------------------------------------
 		/**
-		 * Precision of calculator outputs.
+		 * The parsed XML document represented in memory as a tree of nodes.
 		 */
-		int gPrecision{ -1 };
+		vector<simple_xml::Document> m_documents;
 
 		/**
 		 * Titles of all worksheets, rows and columns within the workbook.
@@ -233,7 +236,7 @@ namespace operations {
 		 * Extract a single data cell, usually specified exactly by a precise
 		 * XPath.
 		 */
-		std::string m_one_data;
+		string m_one_data;
 		bool one_data_visit(excel_xml_parser::Node_Visitor&);
 	};
 } // namespace operations
