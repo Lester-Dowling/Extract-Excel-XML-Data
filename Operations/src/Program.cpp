@@ -90,9 +90,9 @@ namespace operations {
 
 	void Program::write_worksheet_titles()
 	{
-		for (const int wkt_idx : m_titles->wkt_indices()) {
+		for (const int wkt_idx : m_documents.front().titles().wkt_indices()) {
 			*gOut << "Worksheet #" << setw(3) << wkt_idx << " --> "
-				  << *m_titles->wkt_title(wkt_idx) << endl;
+				  << *m_documents.front().titles().wkt_title(wkt_idx) << endl;
 		}
 	}
 
@@ -664,18 +664,18 @@ namespace operations {
 			Node::SP xml_root = load_xml_file(xml_filename);
 			m_documents.emplace_back(f::path{ xml_filename });
 
-		// if (gWriteWorksheetTitles) {
-		//	write_worksheet_titles();
-		//	throw No_Op{};
-		//}
+			// if (gWriteWorksheetTitles) {
+			//	write_worksheet_titles();
+			//	throw No_Op{};
+			//}
 
 
 			if (!gCalcFile.empty())
 				compute_calc_file_and_write_results(xml_root); // gCalcFile
-			
+
 			if (!gCalcText.empty())
 				compute_calc_and_write_results(xml_root); // gCalcText
-			
+
 			if (!gXPathText.empty())
 				compute_xpath_and_write_results(xml_root); // gXPathText
 		}
