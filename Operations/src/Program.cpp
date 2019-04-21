@@ -626,14 +626,14 @@ namespace operations {
 		if (gVM.count("in-file") == 0)
 			throw std::runtime_error{ "No files were listed on the command line." };
 		vector<string> const& in_files = gVM["in-file"].as<vector<string>>();
-		for (auto const& file_path : in_files) {
+		for (auto const& xml_filename : in_files) {
 			m_titles->clear();
 			m_visited_row = 0;
 			m_visited_col = 0;
 			if (gVerbose)
-				*gErr << "Parsing " << file_path << endl;
-			Node::SP xml_root = load_xml_file(file_path);
-			// m_documents.push_back();
+				*gErr << "Parsing " << xml_filename << endl;
+			Node::SP xml_root = load_xml_file(xml_filename);
+			m_documents.emplace_back(f::path{ xml_filename });
 			if (!gCalcFile.empty()) {
 				f::path calc_script_path{ gCalcFile };
 				if (!f::exists(calc_script_path))

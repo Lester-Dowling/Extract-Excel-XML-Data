@@ -8,7 +8,6 @@
 #include <map>
 #include <utility>
 #include <optional>
-#include <boost/noncopyable.hpp>
 #include "Simple-XML/Row-Column-Titles.hpp"
 namespace simple_xml {
 	using std::map;
@@ -20,7 +19,7 @@ namespace simple_xml {
 	/**
 	 * Keep all the titles of worksheets, rows and columns in a workbook.
 	 */
-	class Worksheet_Row_Column_Titles : private boost::noncopyable {
+	class Worksheet_Row_Column_Titles {
 		map<int, Row_Column_Titles> m_wrc_titles;
 		int m_previous_wkt_idx = 0;
 
