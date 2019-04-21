@@ -60,22 +60,6 @@ namespace simple_xml {
 			throw runtime_error{ "Parsing failed." };
 
 		extract_worksheet_titles();
-
-		// extract_column_titles(xml_parser.result);
-		// if (gWriteColumnTitles) {
-		//	write_column_titles();
-		//	throw No_Op{};
-		//}
-		// extract_row_titles(xml_parser.result);
-		// if (gWriteRowTitles) {
-		//	write_row_titles();
-		//	throw No_Op{};
-		//}
-		// if (gWriteCellRefs) {
-		//	write_cell_refs();
-		//	throw No_Op{};
-		//}
-		// return xml_parser.result;
 	}
 
 

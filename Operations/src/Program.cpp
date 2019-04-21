@@ -128,13 +128,15 @@ namespace operations {
 	void Program::write_column_titles()
 	{
 		typedef vector<int>::const_iterator Iterator;
-		const vector<int> wkts{ m_titles->wkt_indices() };
+		const vector<int> wkts{ m_documents.front().titles().wkt_indices() };
 		for (Iterator wkt_idx = wkts.begin(); wkt_idx != wkts.end(); wkt_idx++) {
-			const vector<int> cols{ m_titles->col_indices(*wkt_idx) };
+			const vector<int> cols{ m_documents.front().titles().col_indices(*wkt_idx) };
 			for (Iterator col_idx = cols.begin(); col_idx != cols.end(); col_idx++) {
-				*gOut << "Worksheet #" << *wkt_idx << ' ' << *m_titles->wkt_title(*wkt_idx)
-					  << " Column #" << setw(3) << *col_idx << " --> "
-					  << *m_titles->col_title(*wkt_idx, *col_idx) << endl;
+				*gOut << "Worksheet #" << *wkt_idx << ' '
+					  << *m_documents.front().titles().wkt_title(*wkt_idx) << " Column #"
+					  << setw(3) << *col_idx << " --> "
+					  << *m_documents.front().titles().col_title(*wkt_idx, *col_idx)
+					  << endl;
 			}
 		}
 	}
@@ -195,13 +197,15 @@ namespace operations {
 	void Program::write_row_titles()
 	{
 		typedef vector<int>::const_iterator Iterator;
-		const vector<int> wkts{ m_titles->wkt_indices() };
+		const vector<int> wkts{ m_documents.front().titles().wkt_indices() };
 		for (Iterator wkt_idx = wkts.begin(); wkt_idx != wkts.end(); wkt_idx++) {
-			const vector<int> rows{ m_titles->row_indices(*wkt_idx) };
+			const vector<int> rows{ m_documents.front().titles().row_indices(*wkt_idx) };
 			for (Iterator row_idx = rows.begin(); row_idx != rows.end(); row_idx++) {
-				*gOut << "Worksheet #" << *wkt_idx << ' ' << *m_titles->wkt_title(*wkt_idx)
-					  << " Row #" << setw(3) << *row_idx << " --> "
-					  << *m_titles->row_title(*wkt_idx, *row_idx) << endl;
+				*gOut << "Worksheet #" << *wkt_idx << ' '
+					  << *m_documents.front().titles().wkt_title(*wkt_idx) << " Row #"
+					  << setw(3) << *row_idx << " --> "
+					  << *m_documents.front().titles().row_title(*wkt_idx, *row_idx)
+					  << endl;
 			}
 		}
 	}
@@ -209,15 +213,20 @@ namespace operations {
 	void Program::write_cell_refs()
 	{
 		typedef vector<int>::const_iterator Iterator;
-		const vector<int> wkts{ m_titles->wkt_indices() };
+		const vector<int> wkts{ m_documents.front().titles().wkt_indices() };
 		for (Iterator wkt_idx = wkts.begin(); wkt_idx != wkts.end(); wkt_idx++) {
-			const vector<int> rows{ m_titles->row_indices(*wkt_idx) };
-			const vector<int> cols{ m_titles->col_indices(*wkt_idx) };
+			const vector<int> rows{ m_documents.front().titles().row_indices(*wkt_idx) };
+			const vector<int> cols{ m_documents.front().titles().col_indices(*wkt_idx) };
 			for (Iterator col_idx = cols.begin(); col_idx != cols.end(); col_idx++) {
 				for (Iterator row_idx = rows.begin(); row_idx != rows.end(); row_idx++) {
-					*gOut << '[' << *m_titles->wkt_title(*wkt_idx) << ']'			//
-						  << '[' << *m_titles->row_title(*wkt_idx, *row_idx) << ']' //
-						  << '[' << *m_titles->col_title(*wkt_idx, *col_idx) << ']' //
+					*gOut << '[' << *m_documents.front().titles().wkt_title(*wkt_idx)
+						  << ']' //
+						  << '['
+						  << *m_documents.front().titles().row_title(*wkt_idx, *row_idx)
+						  << ']' //
+						  << '['
+						  << *m_documents.front().titles().col_title(*wkt_idx, *col_idx)
+						  << ']' //
 						  << endl;
 				}
 			}
@@ -331,24 +340,8 @@ namespace operations {
 		if (!phrase_parse(fitr, fend, xml_parser, ascii::space))
 			throw runtime_error{ "Parsing failed." };
 		extract_worksheet_titles(xml_parser.result);
-		if (gWriteWorksheetTitles) {
-			write_worksheet_titles();
-			throw No_Op{};
-		}
 		extract_column_titles(xml_parser.result);
-		if (gWriteColumnTitles) {
-			write_column_titles();
-			throw No_Op{};
-		}
 		extract_row_titles(xml_parser.result);
-		if (gWriteRowTitles) {
-			write_row_titles();
-			throw No_Op{};
-		}
-		if (gWriteCellRefs) {
-			write_cell_refs();
-			throw No_Op{};
-		}
 		return xml_parser.result;
 	}
 
@@ -630,7 +623,7 @@ namespace operations {
 		   "Row which contains the titles for each column.  Default is the first row.")
 		  // -----------------------------------------------------------------
 		  ("column_titles_span,s",
-		   po::value<size_t>(&gColumnTitleSpan)->default_value(1),
+		   po::value<int>(&gColumnTitleSpan)->default_value(1),
 		   "Number of rows that the column titles span over.  Defaults to one row.")
 		  // -----------------------------------------------------------------
 		  ;
@@ -663,12 +656,28 @@ namespace operations {
 				*gErr << "Parsing " << xml_filename << endl;
 			Node::SP xml_root = load_xml_file(xml_filename);
 			m_documents.emplace_back(f::path{ xml_filename });
+			m_documents.front().extract_column_titles(gColumnTitlesRow, gColumnTitleSpan);
+			m_documents.front().extract_row_titles(gRowTitlesColumn);
 
-			// if (gWriteWorksheetTitles) {
-			//	write_worksheet_titles();
-			//	throw No_Op{};
-			//}
+			if (gWriteWorksheetTitles) {
+				write_worksheet_titles();
+				continue;
+			}
 
+			if (gWriteColumnTitles) {
+				write_column_titles();
+				continue;
+			}
+
+			if (gWriteRowTitles) {
+				write_row_titles();
+				continue;
+			}
+
+			if (gWriteCellRefs) {
+				write_cell_refs();
+				continue;
+			}
 
 			if (!gCalcFile.empty())
 				compute_calc_file_and_write_results(xml_root); // gCalcFile

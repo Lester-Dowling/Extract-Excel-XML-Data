@@ -70,7 +70,7 @@ namespace operations {
 		 * How many rows do the column titles occupy.  Usually just one, though
 		 * sometimes lengthy column titles span two or three rows.
 		 */
-		size_t gColumnTitleSpan = 1;
+		int gColumnTitleSpan = 1;
 
 		/**
 		 * Write out all valid cell refs, nothing else.  Usually, this option is
