@@ -626,15 +626,15 @@ namespace operations {
 		   po::value<int>(&gColumnTitleRowCount)->default_value(1),
 		   "Number of rows that the column titles span over.  Defaults to one row.")
 		  // -----------------------------------------------------------------
-		  ("no_column_titles,j",
-		   po::bool_switch(&gNoColumnTitles)->default_value(false),
-		   "Worksheet does not contain titles over the columns.  Default is false which "
-		   "means the worksheet _does_ contain titles over the columns.")
-		  // -----------------------------------------------------------------
-		  ("no_row_titles,k",
+		  ("no_row_titles,j",
 		   po::bool_switch(&gNoRowTitles)->default_value(false),
 		   "Worksheet does not contain titles before the rows.  Default is false which "
 		   "means the worksheet _does_ contain titles for each row of data.")
+		  // -----------------------------------------------------------------
+		  ("no_column_titles,k",
+		   po::bool_switch(&gNoColumnTitles)->default_value(false),
+		   "Worksheet does not contain titles over the columns.  Default is false which "
+		   "means the worksheet _does_ contain titles over the columns.")
 		  // -----------------------------------------------------------------
 		  ;
 

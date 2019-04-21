@@ -34,13 +34,14 @@ namespace simple_xml {
 
 	void Document::load_xml_file(const f::path xml_path)
 	{
-		if (!f::exists(xml_path))
-			throw runtime_error{ "No such file: " + xml_path.string() };
-		f::fstream xml_stream{ xml_path };
+		m_excel_xml_path = xml_path;
+		if (!f::exists(m_excel_xml_path))
+			throw runtime_error{ "No such file: " + m_excel_xml_path.string() };
+		f::fstream xml_stream{ m_excel_xml_path };
 		if (!xml_stream)
-			throw runtime_error{ "Could not open file: " + xml_path.string() };
+			throw runtime_error{ "Could not open file: " + m_excel_xml_path.string() };
 		boost::system::error_code ec;
-		const boost::uintmax_t xml_file_size = f::file_size(xml_path, ec);
+		const boost::uintmax_t xml_file_size = f::file_size(m_excel_xml_path, ec);
 		if (ec || xml_file_size == static_cast<boost::uintmax_t>(-1))
 			throw runtime_error{ "Failed to get XML file size." };
 
@@ -183,6 +184,7 @@ namespace simple_xml {
 			  });
 		}
 	}
+
 
 	int Document::row_idx_start_of_data() const
 	{

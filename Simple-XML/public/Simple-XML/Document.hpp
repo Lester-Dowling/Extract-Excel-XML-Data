@@ -44,6 +44,11 @@ namespace simple_xml {
 		int m_column_title_span = 0; // gColumnTitleSpan
 
 		/**
+		 * The Excel XML file which this Document represents in memory.
+		 */
+		boost::filesystem::path m_excel_xml_path;
+
+		/**
 		 * Find all the worksheet titles.
 		 */
 		void extract_worksheet_titles();
@@ -85,5 +90,10 @@ namespace simple_xml {
 		 * Accessor that returns the titles in this document.
 		 */
 		Worksheet_Row_Column_Titles const& titles() const { return m_titles; }
+
+		/**
+		 * Accessor for the pathname to the original Excel file.
+		 */
+		boost::filesystem::path const& path() const { return m_excel_xml_path; }
 	};
 } // namespace simple_xml
