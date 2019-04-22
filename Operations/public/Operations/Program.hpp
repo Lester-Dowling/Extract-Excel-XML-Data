@@ -16,6 +16,7 @@
 #include "Simple-XML-Parser/Node.hpp"
 #include "Simple-XML-Parser/Node-Visitor.hpp"
 #include "Simple-XML/Element.hpp"
+#include "Simple-XML/Element-Visitor.hpp"
 #include "Simple-XML/Document.hpp"
 namespace operations {
 	using std::vector;
@@ -59,12 +60,12 @@ namespace operations {
 		/**
 		 * The column which contains the titles for each row.
 		 */
-		string gRowTitlesColumn;
+		string gRowTitlesColumn{ "1" };
 
 		/**
 		 * The row which contains the titles for each column.
 		 */
-		int gColumnTitlesRow;
+		int gColumnTitlesRow = 1;
 
 		/**
 		 * How many rows do the column titles occupy.  Usually just one, though
@@ -179,6 +180,26 @@ namespace operations {
 		 */
 		double extract_single_number(Node::SP xml_root, Grade::SP xpath_root);
 
+		/**
+		 * Write to std output every worksheet name in the workbook.
+		 */
+		void write_worksheet_titles();
+
+		/**
+		 * Write to std output the column titles in every worksheet.
+		 */
+		void write_column_titles();
+
+		/**
+		 * Write to std output all the row titles in every worksheet.
+		 */
+		void write_row_titles();
+
+		/**
+		 * Write to std output the Cartesian product of all possible cell refs.
+		 */
+		void write_cell_refs();
+
 	private: //~ -----------------------------------------------------
 		/**
 		 * The parsed XML document represented in memory as a tree of nodes.
@@ -205,34 +226,14 @@ namespace operations {
 		void extract_worksheet_titles(Node::SP xml_root);
 
 		/**
-		 * Write to std output every worksheet name in the workbook.
-		 */
-		void write_worksheet_titles();
-
-		/**
 		 * Find and put into m_titles all the column titles in the workbook.
 		 */
 		void extract_column_titles(Node::SP);
 
 		/**
-		 * Write to std output the column titles in every worksheet.
-		 */
-		void write_column_titles();
-
-		/**
 		 * Find and put into m_titles all the row titles in the workbook.
 		 */
 		void extract_row_titles(Node::SP);
-
-		/**
-		 * Write to std output all the row titles in every worksheet.
-		 */
-		void write_row_titles();
-
-		/**
-		 * Write to std output the Cartesian product of all possible cell refs.
-		 */
-		void write_cell_refs();
 
 		/**
 		 * Visit all XML nodes and print all fields of the nodes.
@@ -250,6 +251,6 @@ namespace operations {
 		 * XPath.
 		 */
 		string m_one_data;
-		bool one_data_visit(excel_xml_parser::Node_Visitor&);
+		bool one_data_visit(simple_xml::Element_Visitor& visitor);
 	};
 } // namespace operations

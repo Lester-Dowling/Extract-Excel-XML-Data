@@ -10,6 +10,7 @@
 #include "Simple-XML/Element.hpp"
 #include "Simple-XML/Element-Filter.hpp"
 #include "Simple-XML/Worksheet-Row-Column-Titles.hpp"
+#include "Pseudo-XPath/Grade.hpp"
 
 namespace simple_xml {
 
@@ -59,6 +60,12 @@ namespace simple_xml {
 		 */
 		void extract_worksheet_titles();
 
+		/**
+		 * Visitor callback which extracts a single data cell.
+		 */
+		std::string m_one_data;
+		bool one_data_visit(simple_xml::Element_Visitor& visitor);
+
 	public:
 		Document() = default;
 
@@ -103,9 +110,15 @@ namespace simple_xml {
 		boost::filesystem::path const& path() const { return m_excel_xml_path; }
 
 		/**
-		 * Accessor to get a new, blank Element filter ready to query document.
+		 * Accessor to get an Element filter ready to query document.
 		 */
 		Element_Filter const& filter() const { return m_filter; }
 		Element_Filter& filter() { return m_filter; }
+
+		/**
+		 * Query Document and return a single node's text as specified by the precise pseudo
+		 * XPath.
+		 */
+		std::string extract_single_text(Grade::SP xpath_root);
 	};
 } // namespace simple_xml

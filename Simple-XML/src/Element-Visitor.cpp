@@ -13,10 +13,8 @@
 #endif
 
 namespace simple_xml {
-#ifdef TRACE_VISITOR
 	using std::cout;
 	using std::endl;
-#endif
 	using std::string;
 	using std::vector;
 	using std::map;

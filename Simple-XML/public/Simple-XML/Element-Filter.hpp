@@ -18,22 +18,23 @@ namespace simple_xml {
 	using std::string;
 	using std::vector;
 
-	class Element_Filter : public Element_Visitor
-	{
+	class Element_Filter : public Element_Visitor {
 		Worksheet_Row_Column_Titles& m_titles;
 		Grade::SP m_filter_path;
-
+		using This = Element_Filter&; // Indicate member function returns *this.
 		bool xml_element_matches_filter_node(Element const& e, const Grade::SP fn) const;
 
-	  public:
+	public:
 		Element_Filter(vector<Element>& elements, Worksheet_Row_Column_Titles& titles)
 		  : Element_Visitor{ elements }
 		  , m_titles{ titles }
-		{}
+		{
+		}
 
-	  public: //~ Filter ------------------------------------------------
-		void set_filter_path(Grade::SP filter_path) { m_filter_path = filter_path; }
+	public: //~ Filter ------------------------------------------------
+		This set_filter_path(Grade::SP filter_path);
 
+	protected:
 		/**
 		 * Current path matches filter path.
 		 */

@@ -289,25 +289,35 @@ namespace operations {
 		return true;
 	}
 
-	bool Program::one_data_visit(excel_xml_parser::Node_Visitor& visitor)
+	bool Program::one_data_visit(simple_xml::Element_Visitor& visitor)
 	{
-		m_one_data = visitor.text();
+		m_one_data = visitor.current().text();
 		return false;
 	}
 
 	string Program::extract_single_text(Node::SP xml_root, Grade::SP xpath_root)
 	{
 		m_one_data.clear();
-		excel_xml_parser::Node_Filter::all_siblings(
-		  xml_root, xpath_root, m_titles, boost::bind(&Program::one_data_visit, this, _1));
+		m_documents.back()
+		  .filter()
+		  .set_filter_path(xpath_root)
+		  .visit_all_depth_first(boost::bind(&Program::one_data_visit, this, _1));
+		// excel_xml_parser::Node_Filter::all_siblings(
+		//  xml_root, xpath_root, m_titles, boost::bind(&Program::one_data_visit, this,
+		//  _1));
 		return m_one_data;
 	}
 
 	double Program::extract_single_number(Node::SP xml_root, Grade::SP xpath_root)
 	{
 		m_one_data.clear();
-		excel_xml_parser::Node_Filter::all_siblings(
-		  xml_root, xpath_root, m_titles, boost::bind(&Program::one_data_visit, this, _1));
+		m_documents.back()
+		  .filter()
+		  .set_filter_path(xpath_root)
+		  .visit_all_depth_first(boost::bind(&Program::one_data_visit, this, _1));
+		// excel_xml_parser::Node_Filter::all_siblings(
+		//  xml_root, xpath_root, m_titles, boost::bind(&Program::one_data_visit, this,
+		//  _1));
 		return std::stod(erase_commas(m_one_data));
 	}
 
@@ -343,6 +353,14 @@ namespace operations {
 			extract_column_titles(xml_parser.result);
 		if (!gNoRowTitles)
 			extract_row_titles(xml_parser.result);
+
+		m_documents.emplace_back(xml_path);
+		if (!gNoColumnTitles)
+			m_documents.back().extract_column_titles(
+			  gColumnTitlesRow, gColumnTitleRowCount);
+		if (!gNoRowTitles)
+			m_documents.back().extract_row_titles(gRowTitlesColumn);
+
 		return xml_parser.result;
 	}
 
@@ -500,7 +518,7 @@ namespace operations {
 				  cell_ref_xpath_text += "Data";
 
 				  Grade::SP xpath_root = parse_xpath_text(cell_ref_xpath_text);
-				  const string cell_text = extract_single_text(xml_root, xpath_root);
+				  const string cell_text = m_documents.back().extract_single_text(xpath_root);
 				  if (cell_text.empty())
 					  throw std::runtime_error{ "Ref to non-existent cell: " +
 												cell_ref_xpath_text };
@@ -666,12 +684,6 @@ namespace operations {
 			if (gVerbose)
 				*gErr << "Parsing " << xml_filename << endl;
 			Node::SP xml_root = load_xml_file(xml_filename);
-			m_documents.emplace_back(f::path{ xml_filename });
-			if (!gNoColumnTitles)
-				m_documents.back().extract_column_titles(
-				  gColumnTitlesRow, gColumnTitleRowCount);
-			if (!gNoRowTitles)
-				m_documents.back().extract_row_titles(gRowTitlesColumn);
 
 			if (gWriteWorksheetTitles) {
 				write_worksheet_titles();

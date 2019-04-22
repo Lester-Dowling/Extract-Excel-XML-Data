@@ -190,4 +190,18 @@ namespace simple_xml {
 		return m_column_titles_row + m_column_title_span - 1;
 	}
 
+	bool Document::one_data_visit(simple_xml::Element_Visitor& visitor)
+	{
+		m_one_data = visitor.current().text();
+		return false;
+	}
+
+	std::string Document::extract_single_text(Grade::SP xpath_root)
+	{
+		m_one_data.clear();
+		m_filter.set_filter_path(xpath_root)
+		  .visit_all_depth_first(boost::bind(&Document::one_data_visit, this, _1));
+		return m_one_data;
+	}
+
 } // namespace simple_xml

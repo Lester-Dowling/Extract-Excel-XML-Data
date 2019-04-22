@@ -1,3 +1,8 @@
+#undef TRACE_VISITOR
+
+#ifdef NDEBUG
+#undef TRACE_VISITOR
+#endif
 
 
 
