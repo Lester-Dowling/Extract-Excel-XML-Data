@@ -64,7 +64,12 @@ namespace simple_xml {
 		 * Visitor callback which extracts a single data cell.
 		 */
 		std::string m_one_data;
-		bool one_data_visit(simple_xml::Element_Visitor& visitor);
+		bool one_data_visit(simple_xml::Element_Visitor&);
+
+		/**
+		 * Visitor callback to write out all fields of an Element.
+		 */
+		bool write_all_fields_visit(simple_xml::Element_Visitor&);
 
 	public:
 		Document() = default;
@@ -120,5 +125,10 @@ namespace simple_xml {
 		 * XPath.
 		 */
 		std::string extract_single_text(Grade::SP xpath_root);
+
+		/**
+		 * Diagnostic utility function to write out all fields of every Element.
+		 */
+		void write_all_fields();
 	};
 } // namespace simple_xml

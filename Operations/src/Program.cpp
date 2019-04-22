@@ -518,7 +518,8 @@ namespace operations {
 				  cell_ref_xpath_text += "Data";
 
 				  Grade::SP xpath_root = parse_xpath_text(cell_ref_xpath_text);
-				  const string cell_text = m_documents.back().extract_single_text(xpath_root);
+				  const string cell_text =
+					m_documents.back().extract_single_text(xpath_root);
 				  if (cell_text.empty())
 					  throw std::runtime_error{ "Ref to non-existent cell: " +
 												cell_ref_xpath_text };
@@ -655,6 +656,10 @@ namespace operations {
 		   "Worksheet does not contain titles over the columns.  Default is false which "
 		   "means the worksheet _does_ contain titles over the columns.")
 		  // -----------------------------------------------------------------
+		  ("write_all_fields,a",
+		   po::bool_switch(&gWriteAllFields)->default_value(false),
+		   "Write out all fields of every Element in the XML file.")
+		  // -----------------------------------------------------------------
 		  ;
 
 		// Hidden options are allowed both on the command line and in the config
@@ -684,6 +689,10 @@ namespace operations {
 			if (gVerbose)
 				*gErr << "Parsing " << xml_filename << endl;
 			Node::SP xml_root = load_xml_file(xml_filename);
+
+			if (gWriteAllFields) {
+				m_documents.back().write_all_fields();
+			}
 
 			if (gWriteWorksheetTitles) {
 				write_worksheet_titles();

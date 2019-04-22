@@ -6,6 +6,7 @@
 #include "pch-simple-xml.hpp"
 #include "Simple-XML/Document.hpp"
 #include "Simple-XML/Element-Creator.hpp"
+#include "Simple-XML/Element-Visitor.hpp"
 #include "Simple-XML/Element-Filter.hpp"
 #include "Simple-XML/mini-grammar.hpp"
 #include "Pseudo-XPath/Grade.hpp"
@@ -15,6 +16,8 @@ namespace simple_xml {
 	using std::runtime_error;
 	using std::string;
 	using std::vector;
+	using std::cout;
+	using std::endl;
 	namespace ascii = boost::spirit::ascii;
 	namespace qi = boost::spirit::qi;
 	namespace f = boost::filesystem;
@@ -190,11 +193,17 @@ namespace simple_xml {
 		return m_column_titles_row + m_column_title_span - 1;
 	}
 
+
 	bool Document::one_data_visit(simple_xml::Element_Visitor& visitor)
 	{
+		cout << visitor.current().name() << endl;
+		cout << visitor.current().text() << endl;
+		cout << visitor.current().row_idx << endl;
+		cout << visitor.current().col_idx << endl;
 		m_one_data = visitor.current().text();
 		return false;
 	}
+
 
 	std::string Document::extract_single_text(Grade::SP xpath_root)
 	{
@@ -202,6 +211,39 @@ namespace simple_xml {
 		m_filter.set_filter_path(xpath_root)
 		  .visit_all_depth_first(boost::bind(&Document::one_data_visit, this, _1));
 		return m_one_data;
+	}
+
+
+	bool Document::write_all_fields_visit(simple_xml::Element_Visitor& visitor)
+	{
+		using std::cout;
+		using std::endl;
+		using std::setw;
+		if (!visitor.current().name().empty()) {
+			cout << setw(-12) << "Tag:" << ' ' << visitor.current().name() << endl;
+			cout << setw(12) << "Depth:" << ' ' << visitor.depth() << endl;
+			cout << setw(12) << "Path:" << ' ' << visitor.path_to_string() << endl;
+		}
+		if (!visitor.current().attributes.empty()) {
+			cout << setw(12) << "Attr:" << ' ';
+			for (auto attr : visitor.current().attributes) {
+				cout << attr.first << '=' << attr.second << ' ' << ' ' << ' ';
+			}
+			cout << endl;
+		}
+		if (!visitor.current().text().empty()) {
+			cout << setw(12) << "Text:" << ' ' << visitor.current().text() << endl;
+		}
+		cout << setw(12) << "Row:" << ' ' << visitor.current().row_idx << endl;
+		cout << setw(12) << "Col:" << ' ' << visitor.current().col_idx << endl;
+		return true;
+	}
+
+
+	void Document::write_all_fields()
+	{
+		Element_Visitor v{ m_elements };
+		v.visit_all_depth_first(boost::bind(&Document::write_all_fields_visit, this, _1));
 	}
 
 } // namespace simple_xml

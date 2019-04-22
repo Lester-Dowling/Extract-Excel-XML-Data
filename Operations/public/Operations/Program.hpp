@@ -81,6 +81,11 @@ namespace operations {
 		bool gWriteCellRefs = false;
 
 		/**
+		 * Write out all fields of every Element.
+		 */
+		bool gWriteAllFields = false;
+
+		/**
 		 * Do not look for column titles in the workbook.  Usually, this option is specified
 		 * when the rows in a worksheet only contain data without a title.
 		 */

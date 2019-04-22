@@ -25,8 +25,8 @@ namespace simple_xml {
 	bool Element_Visitor::visit_first_child()
 	{
 #ifdef TRACE_VISITOR
-		cout << ">>> " << __FUNCTION__ << ": " << '(' << name() << ' ' << children().size()
-			 << " children" << ')' << path_to_string() << endl;
+		cout << ">>> " << __FUNCTION__ << ": " << '(' << current().name() << ' '
+			 << current().children.size() << " children" << ')' << path_to_string() << endl;
 #endif
 		if (current().children.empty())
 			return false;
@@ -39,8 +39,8 @@ namespace simple_xml {
 	bool Element_Visitor::resume_parent()
 	{
 #ifdef TRACE_VISITOR
-		cout << ">>> " << __FUNCTION__ << ": " << '(' << m_current_index->name << ')'
-			 << path() << endl;
+		cout << ">>> " << __FUNCTION__ << ": " << '(' << current().name() << ')'
+			 << path_to_string() << endl;
 #endif
 		if (this->is_current_index_root())
 			return false;
