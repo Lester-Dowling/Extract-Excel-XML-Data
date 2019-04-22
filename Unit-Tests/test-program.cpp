@@ -5,7 +5,7 @@
 #include "Operations/Program.hpp"
 namespace utf = boost::unit_test;
 
-BOOST_AUTO_TEST_SUITE(test_program_suite, *utf::disabled())
+BOOST_AUTO_TEST_SUITE(test_program_suite, *utf::enabled())
 
 /*
  * Unit tests to verify the correct operation of Program.

@@ -9,7 +9,7 @@
 namespace utf = boost::unit_test;
 namespace tt = boost::test_tools;
 
-BOOST_AUTO_TEST_SUITE(test_worksheet_row_column_titles_suite, *utf::disabled())
+BOOST_AUTO_TEST_SUITE(test_worksheet_row_column_titles_suite, *utf::enabled())
 
 /*
  * Unit tests to verify the correct operation of simple_xml::Worksheet_Row_Column_Titles.

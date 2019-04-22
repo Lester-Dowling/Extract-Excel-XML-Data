@@ -11,7 +11,7 @@
 namespace utf = boost::unit_test;
 namespace tt = boost::test_tools;
 
-BOOST_AUTO_TEST_SUITE(test_document_suite, *utf::disabled())
+BOOST_AUTO_TEST_SUITE(test_document_suite, *utf::enabled())
 
 /*
  * Unit tests to verify the correct operation of simple_xml::Document.

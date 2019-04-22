@@ -7,7 +7,7 @@
 #include "Simple-XML-Parser/Node-Visitor.hpp"
 namespace utf = boost::unit_test;
 
-BOOST_AUTO_TEST_SUITE(test_synthesized_attributes_suite, *utf::disabled())
+BOOST_AUTO_TEST_SUITE(test_synthesized_attributes_suite, *utf::enabled())
 
 /*
  * Unit tests to verify the correct operation of grammars.

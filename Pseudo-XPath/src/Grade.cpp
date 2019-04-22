@@ -6,25 +6,27 @@
 namespace pseudo_xpath {
 	using std::string;
 
-	void append_attribute_filters(string& grade_path, Grade::SP v)
+	std::string Grade::attribute_filters_to_string()
 	{
-		if (!v->attribute_filters.empty()) {
-			grade_path += '[';
+		std::string result;
+		if (!attribute_filters.empty()) {
+			result += '[';
 			bool insert_space = false;
-			for (Attribute_Filter const& af : v->attribute_filters) {
+			for (Attribute_Filter const& af : attribute_filters) {
 				if (insert_space)
-					grade_path += " ";
+					result += " ";
 				insert_space = true;
-				grade_path += af.attribute_name;
-				grade_path += af.filter_operator;
+				result += af.attribute_name;
+				result += af.filter_operator;
 				if (!af.good_filter_number)
-					grade_path += '\'';
-				grade_path += af.filter_value;
+					result += '\'';
+				result += af.filter_value;
 				if (!af.good_filter_number)
-					grade_path += '\'';
+					result += '\'';
 			}
-			grade_path += ']';
+			result += ']';
 		}
+		return result;
 	}
 
 	/*static*/ std::string Grade::path_to_string(const SP root)
@@ -35,11 +37,11 @@ namespace pseudo_xpath {
 		string grade_path;
 		if (v) {
 			grade_path = v->name();
-			append_attribute_filters(grade_path, v);
+			grade_path += v->attribute_filters_to_string();
 		}
 		while (v = v->next()) {
 			grade_path += " --> " + v->name();
-			append_attribute_filters(grade_path, v);
+			grade_path += v->attribute_filters_to_string();
 		}
 		return grade_path;
 	}

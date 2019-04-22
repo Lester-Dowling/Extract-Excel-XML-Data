@@ -5,16 +5,22 @@
  */
 #include "pch-simple-xml.hpp"
 #include "Simple-XML/Element-Visitor.hpp"
+
+
 #define TRACE_VISITOR
 #undef TRACE_VISITOR
+#ifdef TRACE_VISITOR
+#define __TRACER(args) std::cout << args << std::endl;
+#else // TRACE_VISITOR not defined
+#define __TRACER(args)
+#endif
+
 
 #ifdef NDEBUG
 #undef TRACE_VISITOR
 #endif
 
 namespace simple_xml {
-	using std::cout;
-	using std::endl;
 	using std::string;
 	using std::vector;
 	using std::map;
@@ -24,10 +30,9 @@ namespace simple_xml {
 
 	bool Element_Visitor::visit_first_child()
 	{
-#ifdef TRACE_VISITOR
-		cout << ">>> " << __FUNCTION__ << ": " << '(' << current().name() << ' '
-			 << current().children.size() << " children" << ')' << path_to_string() << endl;
-#endif
+		__TRACER(
+		  ">>> " << __FUNCTION__ << ": " << '(' << current().name() << ' '
+				 << current().children.size() << " children" << ')' << path_to_string());
 		if (current().children.empty())
 			return false;
 		m_current_index_path.push_back(m_current_index);
@@ -38,10 +43,9 @@ namespace simple_xml {
 
 	bool Element_Visitor::resume_parent()
 	{
-#ifdef TRACE_VISITOR
-		cout << ">>> " << __FUNCTION__ << ": " << '(' << current().name() << ')'
-			 << path_to_string() << endl;
-#endif
+		__TRACER(
+		  ">>> " << __FUNCTION__ << ": " << '(' << current().name() << ')'
+				 << path_to_string());
 		if (this->is_current_index_root())
 			return false;
 		m_current_index = m_current_index_path.back();
@@ -54,10 +58,9 @@ namespace simple_xml {
 	{
 		if (this->is_current_index_root())
 			return false;
-#ifdef TRACE_VISITOR
-		cout << ">>> " << __FUNCTION__ << ": " << '(' << parent().name() << ' '
-			 << parent().children.size() << " children" << ')' << path_to_string() << endl;
-#endif
+		__TRACER(
+		  ">>> " << __FUNCTION__ << ": " << '(' << parent().name() << ' '
+				 << parent().children.size() << " children" << ')' << path_to_string());
 		bool take_next = false;
 		for (auto sibling_index : parent().children) {
 			if (take_next) {

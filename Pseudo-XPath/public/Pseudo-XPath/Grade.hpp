@@ -6,8 +6,7 @@
 #include <string>
 namespace pseudo_xpath {
 
-	struct Attribute_Filter
-	{
+	struct Attribute_Filter {
 		std::string attribute_name;
 		char filter_operator; // can be: = < >
 		std::string filter_value;
@@ -15,9 +14,8 @@ namespace pseudo_xpath {
 		bool good_filter_number;
 	};
 
-	class Grade
-	{
-	  public:
+	class Grade {
+	public:
 		std::string xml_node_name;
 		std::list<Attribute_Filter> attribute_filters;
 		std::shared_ptr<Grade> next_grade;
@@ -31,5 +29,10 @@ namespace pseudo_xpath {
 		inline SP next() const { return next_grade; }
 
 		static std::string path_to_string(const SP root);
+
+		/**
+		 * Concatenate a list of @c Grade's attributes into a @c string.
+		 */
+		std::string attribute_filters_to_string();
 	};
 } // namespace pseudo_xpath

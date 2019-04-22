@@ -22,7 +22,7 @@ namespace simple_xml {
 			m_name.assign(ybeg, yend);
 		}
 	}
-	
+
 	void Element::set_name(string const& y)
 	{
 		using Iterator = string::const_iterator;
@@ -81,6 +81,30 @@ namespace simple_xml {
 			return fitr->second;
 		else
 			return {};
+	}
+
+
+	std::string Element::all_fields_to_string() const
+	{
+		using std::endl;
+		using std::setw;
+		std::ostringstream oss;
+		if (!name().empty()) {
+			oss << "Element name:" << ' ' << ' ' << ' ' << ' ' << name() << endl;
+		}
+		if (!attributes.empty()) {
+			oss << setw(16) << "Attr:" << ' ';
+			for (auto attr : attributes) {
+				oss << attr.first << '=' << attr.second << ' ' << ' ' << ' ';
+			}
+			oss << endl;
+		}
+		if (!text().empty()) {
+			oss << setw(16) << "Text:" << ' ' << text() << endl;
+		}
+		oss << setw(16) << "Row:" << ' ' << row_idx << endl;
+		oss << setw(16) << "Col:" << ' ' << col_idx << endl;
+		return oss.str();
 	}
 
 } // namespace simple_xml

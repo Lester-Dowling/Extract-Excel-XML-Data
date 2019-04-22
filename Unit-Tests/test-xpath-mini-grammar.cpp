@@ -9,7 +9,7 @@
 #include "Pseudo-XPath/Grade.hpp"
 namespace utf = boost::unit_test;
 
-BOOST_AUTO_TEST_SUITE(test_xpath_mini_grammar_suite, *utf::disabled())
+BOOST_AUTO_TEST_SUITE(test_xpath_mini_grammar_suite, *utf::enabled())
 
 /*
  * Unit tests to verify the correct operation of the pseudo XPath grammar.

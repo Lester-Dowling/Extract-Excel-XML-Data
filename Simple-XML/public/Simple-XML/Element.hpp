@@ -59,5 +59,10 @@ namespace simple_xml {
 		void set_text(string const& y);
 
 		optional<string> attribute(string attribute_name) const;
+
+		/**
+		 *  A diagnostic method which returns Element's field values listed in a string.
+		 */
+		std::string all_fields_to_string() const;
 	};
 } // namespace simple_xml

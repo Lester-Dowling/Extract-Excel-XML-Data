@@ -196,11 +196,6 @@ namespace simple_xml {
 
 	bool Document::one_data_visit(simple_xml::Element_Visitor& visitor)
 	{
-		cout << visitor.path_to_string() << endl;
-		cout << visitor.current().text() << endl;
-		cout << visitor.current().wkt_idx << endl;
-		cout << visitor.current().row_idx << endl;
-		cout << visitor.current().col_idx << endl;
 		m_one_data = visitor.current().text();
 		return false;
 	}

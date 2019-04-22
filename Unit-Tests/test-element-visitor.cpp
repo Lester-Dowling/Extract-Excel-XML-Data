@@ -9,7 +9,7 @@
 namespace utf = boost::unit_test;
 namespace tt = boost::test_tools;
 
-BOOST_AUTO_TEST_SUITE(test_element_visitor_suite, *utf::disabled())
+BOOST_AUTO_TEST_SUITE(test_element_visitor_suite, *utf::enabled())
 
 /*
  * Unit tests to verify the correct operation of simple_xml::Element_Visitor.

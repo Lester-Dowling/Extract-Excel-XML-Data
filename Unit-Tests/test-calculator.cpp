@@ -7,7 +7,7 @@
 namespace utf = boost::unit_test;
 namespace tt = boost::test_tools;
 
-BOOST_AUTO_TEST_SUITE(test_calculator_suite, *utf::disabled())
+BOOST_AUTO_TEST_SUITE(test_calculator_suite, *utf::enabled())
 
 /*
  * Unit tests to verify the correct operation of Calculator.
