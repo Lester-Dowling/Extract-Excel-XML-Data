@@ -6,10 +6,6 @@
 ## @date        Started 2019-04-21
 Param
 (
-    [parameter(Position = 0)]
-    [String]
-    $WORKSPACE_HASH = "29884886-1304-9437-a529-31f5a8869390",
-
 	[parameter(mandatory = $false)]
     [Switch]
     [alias("q")]
@@ -45,6 +41,7 @@ Function fatal_error_exit($ERROR_MESSAGE) {   # Fatal error; cannot continue.
 #
 # MAIN
 #
+$WORKSPACE_HASH = Get-Content "${PSScriptRoot}workspace-hash.txt"
 $INDEX_HTML = Resolve-Path "${ENV:USERPROFILE}\CMakeBuilds\${WORKSPACE_HASH}\build\x64-Release\html\index.html" -ErrorAction:Ignore
 
 if (-Not(Test-Path $INDEX_HTML)) {

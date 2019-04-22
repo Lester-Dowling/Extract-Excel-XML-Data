@@ -110,9 +110,12 @@ BOOST_AUTO_TEST_CASE(wrc_bad_wkt)
 	BOOST_CHECK_THROW(t.col_count(1), runtime_error);
 	BOOST_CHECK_THROW(t.row_indices(1), runtime_error);
 	BOOST_CHECK_THROW(t.col_indices(1), runtime_error);
+#pragma warning(push)
+#pragma warning(disable : 4834) // discard return of function with 'nodiscard' attribute
 	BOOST_CHECK_THROW(t.col_title(1, 1).value(), std::bad_optional_access);
 	BOOST_CHECK_THROW(t.row_title(1, 1).value(), std::bad_optional_access);
 	BOOST_CHECK_THROW(t.wkt_title(1).value(), std::bad_optional_access);
+#pragma warning(pop)
 }
 
 BOOST_AUTO_TEST_SUITE_END()

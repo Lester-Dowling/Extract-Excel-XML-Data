@@ -32,8 +32,8 @@ namespace simple_xml {
 #endif
 		if (current().children.empty())
 			return false;
-		current_index_path.push_back(current_index);
-		current_index = current().children.front();
+		m_current_index_path.push_back(m_current_index);
+		m_current_index = current().children.front();
 		return true;
 	}
 
@@ -41,13 +41,13 @@ namespace simple_xml {
 	bool Element_Visitor::resume_parent()
 	{
 #ifdef TRACE_VISITOR
-		cout << ">>> " << __FUNCTION__ << ": " << '(' << current_index->name << ')'
+		cout << ">>> " << __FUNCTION__ << ": " << '(' << m_current_index->name << ')'
 			 << path() << endl;
 #endif
 		if (this->is_current_index_root())
 			return false;
-		current_index = current_index_path.back();
-		current_index_path.pop_back();
+		m_current_index = m_current_index_path.back();
+		m_current_index_path.pop_back();
 		return true;
 	}
 
@@ -63,10 +63,10 @@ namespace simple_xml {
 		bool take_next = false;
 		for (auto sibling_index : parent().children) {
 			if (take_next) {
-				current_index = sibling_index;
+				m_current_index = sibling_index;
 				return true;
 			}
-			if (current_index == sibling_index) {
+			if (m_current_index == sibling_index) {
 				take_next = true;
 			}
 		}
@@ -76,7 +76,7 @@ namespace simple_xml {
 
 	size_t Element_Visitor::depth() const
 	{
-		return m_elements.empty() ? 0 : current_index_path.size() + 1;
+		return m_elements.empty() ? 0 : m_current_index_path.size() + 1;
 	}
 
 
@@ -85,8 +85,8 @@ namespace simple_xml {
 		if (m_elements.empty())
 			return {};
 		string result;
-		Element_Path_Iterator nitr = current_index_path.begin();
-		Element_Path_Iterator const nend = current_index_path.end();
+		Element_Path_Iterator nitr = m_current_index_path.begin();
+		Element_Path_Iterator const nend = m_current_index_path.end();
 		while (nitr != nend) {
 			const Element::Index idx = *nitr++;
 			result += m_elements[idx].name();
@@ -101,7 +101,8 @@ namespace simple_xml {
 	{
 		if (m_elements.empty())
 			return;
-		current_index = 0;
+		m_current_index = 0;
+		m_current_index_path.clear();
 		if (visit_all_predicate()) {
 			if (!callback(*this))
 				return;

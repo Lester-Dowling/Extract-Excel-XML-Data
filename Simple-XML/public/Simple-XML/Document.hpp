@@ -8,6 +8,7 @@
 #include <vector>
 #include <boost/filesystem/path.hpp>
 #include "Simple-XML/Element.hpp"
+#include "Simple-XML/Element-Filter.hpp"
 #include "Simple-XML/Worksheet-Row-Column-Titles.hpp"
 
 namespace simple_xml {
@@ -26,6 +27,11 @@ namespace simple_xml {
 		 * Titles of all worksheets, rows and columns within the workbook.
 		 */
 		Worksheet_Row_Column_Titles m_titles;
+
+		/**
+		 * The Element filter over this Document.
+		 */
+		Element_Filter m_filter{ m_elements, m_titles };
 
 		/**
 		 * The column which contains the titles for each row.
@@ -95,5 +101,11 @@ namespace simple_xml {
 		 * Accessor for the pathname to the original Excel file.
 		 */
 		boost::filesystem::path const& path() const { return m_excel_xml_path; }
+
+		/**
+		 * Accessor to get a new, blank Element filter ready to query document.
+		 */
+		Element_Filter const& filter() const { return m_filter; }
+		Element_Filter& filter() { return m_filter; }
 	};
 } // namespace simple_xml

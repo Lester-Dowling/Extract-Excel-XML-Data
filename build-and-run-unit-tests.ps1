@@ -6,10 +6,6 @@
 ## @date        Started 2019-04-10-10-16-08
 Param
 (
-    [parameter(Position = 0)]
-    [String]
-    $WORKSPACE_HASH = "29884886-1304-9437-a529-31f5a8869390",
-
     [parameter(mandatory = $false)]
     [Switch]
     [alias("c")]
@@ -109,7 +105,6 @@ Function Invoke-Environment()
 #
 # MAIN
 #
-play_start_sound
 
 #
 # Choose the version of Visual Studio
@@ -138,6 +133,7 @@ if (-Not($VCVARSALL_SETUP_ONLY_ONCE)) {
 #
 # Build Directory
 #
+$WORKSPACE_HASH = Get-Content "${PSScriptRoot}workspace-hash.txt"
 $BUILD="C:/Users/ljdowling/CMakeBuilds/${WORKSPACE_HASH}/build/x64-Release"
 $BUILD = Resolve-Path $BUILD -ea:stop  |  Select -ExpandProperty Path
 if (-Not(Test-Path $BUILD)) { fatal_error_exit "No BUILD path" }
@@ -151,6 +147,7 @@ Write-Host "Build directory is: $BUILD"
 #
 # Build
 #
+play_start_sound
 $CMAKE = Resolve-Path "${VC}\..\COMMON7\IDE\COMMONEXTENSIONS\MICROSOFT\CMAKE\CMake\bin\cmake.exe" -ea:stop    |    Select -ExpandProperty Path
 if (-Not(Test-Path $CMAKE)) { fatal_error_exit "No CMAKE path" }
 $CLEAN_FIRST = ""

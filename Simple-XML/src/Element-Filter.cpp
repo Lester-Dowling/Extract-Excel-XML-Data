@@ -151,7 +151,7 @@ namespace simple_xml {
 		Grade::SP filter_node = m_filter_path;
 		if (!filter_node)
 			throw std::runtime_error{ "No filter path set for Element Filter." };
-		for (const Element::Index visited_index : current_index_path) {
+		for (const Element::Index visited_index : m_current_index_path) {
 			Element const& visited_element = m_elements[visited_index];
 			if (!(filter_node = filter_node->next())) {
 				__TRACER("<<< No more filters => accept all nodes below.");

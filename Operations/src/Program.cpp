@@ -9,6 +9,7 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "Simple-XML-Parser/mini-grammar.hpp"
 #include "Simple-XML-Parser/Node-Filter.hpp"
+#include "Simple-XML/Element-Filter.hpp"
 #include "Pseudo-XPath/mini-grammar.hpp"
 #include "Operations/string-functions.hpp"
 

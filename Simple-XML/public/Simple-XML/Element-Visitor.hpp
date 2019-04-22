@@ -20,27 +20,27 @@ namespace simple_xml {
 	class Element_Visitor {
 	protected:
 		vector<Element>& m_elements; // Ref to the collection of Elements.
-		Element::Index current_index;
+		Element::Index m_current_index;
 
 		using Element_Path_Type = vector<Element::Index>;
 		using Element_Path_Iterator = Element_Path_Type::const_iterator;
-		Element_Path_Type current_index_path;
-		bool is_current_index_root() const { return current_index_path.empty(); }
-		Element& parent() const noexcept { return m_elements[current_index_path.back()]; }
+		Element_Path_Type m_current_index_path;
+		bool is_current_index_root() const { return m_current_index_path.empty(); }
+		Element& parent() const noexcept { return m_elements[m_current_index_path.back()]; }
 
 	public: //~ Ctors et al -------------------------------------------
 		Element_Visitor(vector<Element>& elements)
 		  : m_elements{ elements }
-		  , current_index{}
+		  , m_current_index{}
 		{
 		}
 
 		virtual ~Element_Visitor() = default;
 
 	public: //~ Accessors ---------------------------------------------
-		Element& current() noexcept { return m_elements.at(current_index); }
+		Element& current() noexcept { return m_elements.at(m_current_index); }
 
-		Element const& current() const noexcept { return m_elements.at(current_index); }
+		Element const& current() const noexcept { return m_elements.at(m_current_index); }
 
 		size_t depth() const;
 

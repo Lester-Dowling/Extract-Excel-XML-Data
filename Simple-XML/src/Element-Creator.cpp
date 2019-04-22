@@ -57,9 +57,9 @@ namespace simple_xml {
 		const Element::Index new_element_index = m_elements.size() - 1;
 		if (!new_child_is_root) {
 			current().children.push_back(new_element_index);
-			current_index_path.push_back(current_index);
+			m_current_index_path.push_back(m_current_index);
 		}
-		current_index = new_element_index;
+		m_current_index = new_element_index;
 #ifdef TRACE_CREATOR
 		cout << ">>> " << __FUNCTION__ << ": " << current().name() << endl;
 #endif

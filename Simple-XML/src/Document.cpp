@@ -77,9 +77,8 @@ namespace simple_xml {
 
 	void Document::extract_worksheet_titles()
 	{
-		Element_Filter ef{ m_elements, m_titles };
-		ef.set_filter_path(parse_xpath("Workbook, Worksheet"));
-		ef.visit_all_depth_first(
+		m_filter.set_filter_path(parse_xpath("Workbook, Worksheet"));
+		m_filter.visit_all_depth_first(
 		  [&](Element_Visitor& visitor) -> bool //
 		  {
 			  Element& ele = visitor.current();
@@ -105,9 +104,8 @@ namespace simple_xml {
 			titles_xpath_oss << "Workbook, Worksheet[" << wkt_idx << "], Table, "
 							 << "Row[" << m_column_titles_row
 							 << "],Cell,Data[ss:Type=String]";
-			Element_Filter ef{ m_elements, m_titles };
-			ef.set_filter_path(parse_xpath(titles_xpath_oss.str()));
-			ef.visit_all_depth_first(
+			m_filter.set_filter_path(parse_xpath(titles_xpath_oss.str()));
+			m_filter.visit_all_depth_first(
 			  [&](Element_Visitor& visitor) -> bool //
 			  {
 				  Element& ele = visitor.current();
@@ -162,9 +160,8 @@ namespace simple_xml {
 							 << "Worksheet[" << wkt_idx << "], Table, "		   //
 							 << "Row[Row>" << row_idx_start_of_data() << "], " //
 							 << "Cell" << col_filter << ", Data[ss:Type=String]";
-			Element_Filter ef{ m_elements, m_titles };
-			ef.set_filter_path(parse_xpath(titles_xpath_oss.str()));
-			ef.visit_all_depth_first(
+			m_filter.set_filter_path(parse_xpath(titles_xpath_oss.str()));
+			m_filter.visit_all_depth_first(
 			  [&](Element_Visitor& visitor) -> bool //
 			  {
 				  Element& ele = visitor.current();
