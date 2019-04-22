@@ -8,10 +8,17 @@
 #include "Simple-XML/Element.hpp"
 #include "Simple-XML/Worksheet-Row-Column-Titles.hpp"
 #include "Simple-XML/Document.hpp"
+namespace utf = boost::unit_test;
+namespace tt = boost::test_tools;
+
+BOOST_AUTO_TEST_SUITE(test_document_suite, *utf::disabled())
+
+/*
+ * Unit tests to verify the correct operation of simple_xml::Document.
+ */
+
 namespace a = boost::algorithm;
 namespace f = boost::filesystem;
-namespace tt = boost::test_tools;
-namespace utf = boost::unit_test;
 using std::runtime_error;
 using std::string;
 using std::vector;
@@ -24,12 +31,6 @@ using std::runtime_error;
 using simple_xml::Document;
 using simple_xml::Element;
 using simple_xml::Worksheet_Row_Column_Titles;
-
-/*
- * Unit tests to verify the correct operation of simple_xml::Document.
- */
-
-BOOST_AUTO_TEST_SUITE(test_document_suite, *utf::enabled())
 namespace {
 
 	const f::path samples_dir{

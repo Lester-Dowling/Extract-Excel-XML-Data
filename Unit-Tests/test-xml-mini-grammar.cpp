@@ -8,12 +8,19 @@
 #include "Simple-XML/Element.hpp"
 #include "Simple-XML/Element-Creator.hpp"
 #include "Simple-XML/mini-grammar.hpp"
+namespace utf = boost::unit_test;
+
+BOOST_AUTO_TEST_SUITE(test_xml_mini_grammar_suite, *utf::disabled())
+
+/*
+ * Unit tests to verify the correct operation of simple_xml::Element.
+ */
+
 namespace a = boost::algorithm;
 namespace ascii = boost::spirit::ascii;
 namespace f = boost::filesystem;
 namespace qi = boost::spirit::qi;
 namespace tt = boost::test_tools;
-namespace utf = boost::unit_test;
 using std::runtime_error;
 using std::string;
 using std::vector;
@@ -25,11 +32,6 @@ using XML_Grammar = simple_xml::mini_grammar<Memory_Iterator>;
 using simple_xml::Element;
 using simple_xml::Element_Creator;
 
-/*
- * Unit tests to verify the correct operation of simple_xml::Element.
- */
-
-BOOST_AUTO_TEST_SUITE(test_xml_mini_grammar_suite, *utf::enabled())
 namespace {
 
 	const f::path samples_dir{

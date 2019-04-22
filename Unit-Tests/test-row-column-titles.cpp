@@ -8,14 +8,15 @@
 #include "Simple-XML/Row-Column-Titles.hpp"
 namespace utf = boost::unit_test;
 namespace tt = boost::test_tools;
-namespace a = boost::algorithm;
-using std::vector;
+
+BOOST_AUTO_TEST_SUITE(test_row_column_titles_suite, *utf::disabled())
 
 /*
  * Unit tests to verify the correct operation of simple_xml::Row_Column_Titles.
  */
 
-BOOST_AUTO_TEST_SUITE(test_row_column_titles_suite, *utf::enabled())
+namespace a = boost::algorithm;
+using std::vector;
 
 BOOST_AUTO_TEST_CASE(rct_default_ctor)
 {

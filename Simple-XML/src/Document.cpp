@@ -196,8 +196,9 @@ namespace simple_xml {
 
 	bool Document::one_data_visit(simple_xml::Element_Visitor& visitor)
 	{
-		cout << visitor.current().name() << endl;
+		cout << visitor.path_to_string() << endl;
 		cout << visitor.current().text() << endl;
+		cout << visitor.current().wkt_idx << endl;
 		cout << visitor.current().row_idx << endl;
 		cout << visitor.current().col_idx << endl;
 		m_one_data = visitor.current().text();
@@ -219,6 +220,8 @@ namespace simple_xml {
 		using std::cout;
 		using std::endl;
 		using std::setw;
+		if (visitor.current().name() != "Data")
+			return true;
 		if (!visitor.current().name().empty()) {
 			cout << setw(-12) << "Tag:" << ' ' << visitor.current().name() << endl;
 			cout << setw(12) << "Depth:" << ' ' << visitor.depth() << endl;
@@ -236,6 +239,17 @@ namespace simple_xml {
 		}
 		cout << setw(12) << "Row:" << ' ' << visitor.current().row_idx << endl;
 		cout << setw(12) << "Col:" << ' ' << visitor.current().col_idx << endl;
+		if (const auto row_title =
+			  m_titles.row_title(visitor.current().wkt_idx, visitor.current().row_idx);
+			row_title.has_value()) //
+		{
+			cout << setw(12) << "Row Title:" << ' ' << *row_title << endl;
+		}
+		if (const auto col_title = m_titles.col_title(visitor.current().wkt_idx, visitor.current().col_idx);
+			col_title.has_value()) //
+		{
+			cout << setw(12) << "Col Title:" << ' ' << *col_title << endl;
+		}
 		return true;
 	}
 

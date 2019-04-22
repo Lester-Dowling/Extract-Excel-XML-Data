@@ -7,11 +7,11 @@
 #include "io/sequence.hpp"
 namespace utf = boost::unit_test;
 
+BOOST_AUTO_TEST_SUITE(test_pair_io_suite, *utf::disabled())
+
 /*
  * Unit tests to verify the correct operation of pair I/O.
  */
-
-BOOST_AUTO_TEST_SUITE(test_pair_io_suite, *utf::enabled())
 
 typedef boost::mpl::list<int16_t, int32_t, float, double> signed_test_types;
 typedef boost::mpl::list<uint16_t, uint32_t> unsigned_test_types;

@@ -8,14 +8,15 @@
 #include "Simple-XML/Element.hpp"
 namespace utf = boost::unit_test;
 namespace tt = boost::test_tools;
-namespace a = boost::algorithm;
-using std::vector;
+
+BOOST_AUTO_TEST_SUITE(test_element_suite, *utf::disabled())
 
 /*
  * Unit tests to verify the correct operation of simple_xml::Element.
  */
 
-BOOST_AUTO_TEST_SUITE(test_element_suite, *utf::enabled())
+namespace a = boost::algorithm;
+using std::vector;
 
 BOOST_AUTO_TEST_CASE(element_default_ctor)
 {

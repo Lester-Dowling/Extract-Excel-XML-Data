@@ -4,16 +4,17 @@
 #include <boost/test/unit_test.hpp>
 #include "Operations/Program.hpp"
 namespace utf = boost::unit_test;
-namespace a = boost::algorithm;
-using operations::Program;
-using pseudo_xpath::Grade;
-using std::setw;
+
+BOOST_AUTO_TEST_SUITE(test_program_suite, *utf::disabled())
 
 /*
  * Unit tests to verify the correct operation of Program.
  */
 
-BOOST_AUTO_TEST_SUITE(test_program_suite, *utf::enabled())
+namespace a = boost::algorithm;
+using operations::Program;
+using pseudo_xpath::Grade;
+using std::setw;
 namespace {
 
 	char* const sample_xml_file =

@@ -6,18 +6,19 @@
 #include "Operations/Calculator.hpp"
 namespace utf = boost::unit_test;
 namespace tt = boost::test_tools;
+
+BOOST_AUTO_TEST_SUITE(test_calculator_suite, *utf::disabled())
+
+/*
+ * Unit tests to verify the correct operation of Calculator.
+ */
+
 namespace a = boost::algorithm;
 using operations::Program;
 using std::cout;
 using std::endl;
 using std::setw;
 using Grade = pseudo_xpath::Grade;
-
-/*
- * Unit tests to verify the correct operation of Calculator.
- */
-
-BOOST_AUTO_TEST_SUITE(test_calculator_suite, *utf::enabled())
 namespace {
 	char* const small_xml_file =
 	  "C:/Users/ljdowling/Projects/Extract-Excel-XML-Data-2017/sample-xml/small.xml";
@@ -53,7 +54,7 @@ BOOST_AUTO_TEST_CASE(function_1)
 	BOOST_TEST(c.evaluate("( abs(DATA) * 2 + 1 ) / 2") == (std::abs(v) * 2 + 1) / 2);
 }
 
-BOOST_AUTO_TEST_CASE(regex_iterator_replace_into_calc_2)
+BOOST_AUTO_TEST_CASE(regex_iterator_replace_into_calc_2, *utf::enabled())
 {
 	char* argv[] = { program_name };
 	constexpr int argc = static_cast<int>(std::size(argv));
@@ -75,7 +76,8 @@ BOOST_AUTO_TEST_CASE(regex_iterator_replace_into_calc_2)
 	xoss << "Worksheet #2 Balance Sheet Column #  3 --> 06/17" << endl;
 	xoss << "Worksheet #1 Profit and Loss Row #  2 --> Operating Revenue" << endl;
 	xoss << "Worksheet #1 Profit and Loss Row #  3 --> Other Revenue" << endl;
-	xoss << "Worksheet #1 Profit and Loss Row #  4 --> Total Revenue Excluding Interest" << endl;
+	xoss << "Worksheet #1 Profit and Loss Row #  4 --> Total Revenue Excluding Interest"
+		 << endl;
 	xoss << "Worksheet #2 Balance Sheet Row #  2 --> CA - Cash" << endl;
 	xoss << "Worksheet #2 Balance Sheet Row #  3 --> CA - Receivables" << endl;
 	xoss << "Worksheet #2 Balance Sheet Row #  4 --> CA - Prepaid Expenses" << endl;

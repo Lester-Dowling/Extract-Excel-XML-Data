@@ -1,10 +1,20 @@
-// Unit-Tests/test-xpath-mini-grammar.cpp
-// Started 15 Aug 2018
+/**
+ * @file   Unit-Tests/test-xpath-mini-grammar.cpp
+ * @date   Started 2018-08-15
+ * @author Lester J. Dowling
+ */
 #include "pch-unit-tests.hpp"
 #include <boost/test/unit_test.hpp>
 #include "Pseudo-XPath/mini-grammar.hpp"
 #include "Pseudo-XPath/Grade.hpp"
 namespace utf = boost::unit_test;
+
+BOOST_AUTO_TEST_SUITE(test_xpath_mini_grammar_suite, *utf::disabled())
+
+/*
+ * Unit tests to verify the correct operation of the pseudo XPath grammar.
+ */
+
 namespace fsn = boost::fusion;
 namespace spirit = boost::spirit;
 namespace qi = spirit::qi;
@@ -14,11 +24,6 @@ using Stream_Iterator = boost::spirit::basic_istream_iterator<char>;
 using Grade = pseudo_xpath::Grade;
 using XPath_Grammar = pseudo_xpath::mini_grammar<Stream_Iterator>;
 
-/*
- * Unit tests to verify the correct operation of the pseudo XPath grammar.
- */
-
-BOOST_AUTO_TEST_SUITE(test_xpath_mini_grammar_suite, *utf::enabled())
 
 BOOST_AUTO_TEST_CASE(single_attribute_filter)
 {

@@ -8,18 +8,18 @@
 #include "Simple-XML/Element-Visitor.hpp"
 namespace utf = boost::unit_test;
 namespace tt = boost::test_tools;
-namespace a = boost::algorithm;
-using std::vector;
-using std::string;
-using simple_xml::Element;
-using simple_xml::Element_Visitor;
+
+BOOST_AUTO_TEST_SUITE(test_element_visitor_suite, *utf::disabled())
 
 /*
  * Unit tests to verify the correct operation of simple_xml::Element_Visitor.
  */
 
-BOOST_AUTO_TEST_SUITE(test_element_visitor_suite, *utf::enabled())
-
+namespace a = boost::algorithm;
+using std::vector;
+using std::string;
+using simple_xml::Element;
+using simple_xml::Element_Visitor;
 
 BOOST_AUTO_TEST_CASE(element_visitor_ctor)
 {

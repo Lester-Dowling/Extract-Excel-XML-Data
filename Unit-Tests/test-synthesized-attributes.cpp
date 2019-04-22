@@ -6,18 +6,18 @@
 #include "Simple-XML-Parser/Node-Creator.hpp"
 #include "Simple-XML-Parser/Node-Visitor.hpp"
 namespace utf = boost::unit_test;
-namespace fsn = boost::fusion;
-namespace qi = boost::spirit::qi;
-namespace ascii = boost::spirit::ascii;
-namespace phx = boost::phoenix;
-using Stream_Iterator = boost::spirit::basic_istream_iterator<char>;
+
+BOOST_AUTO_TEST_SUITE(test_synthesized_attributes_suite, *utf::disabled())
 
 /*
  * Unit tests to verify the correct operation of grammars.
  */
 
-BOOST_AUTO_TEST_SUITE(test_synthesized_attributes_suite, *utf::enabled())
-
+namespace fsn = boost::fusion;
+namespace qi = boost::spirit::qi;
+namespace ascii = boost::spirit::ascii;
+namespace phx = boost::phoenix;
+using Stream_Iterator = boost::spirit::basic_istream_iterator<char>;
 namespace practice {
 	template<typename Iterator>
 	struct XML_Attribute_Filter

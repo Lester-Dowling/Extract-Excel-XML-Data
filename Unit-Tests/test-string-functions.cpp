@@ -4,14 +4,15 @@
 #include <boost/test/unit_test.hpp>
 #include "Operations/string-functions.hpp"
 namespace utf = boost::unit_test;
-namespace a = boost::algorithm;
-using std::setw;
+
+BOOST_AUTO_TEST_SUITE(test_string_functions_suite, *utf::disabled())
 
 /*
  * Unit tests to verify the correct operation of Program.
  */
 
-BOOST_AUTO_TEST_SUITE(test_string_functions_suite, *utf::enabled())
+namespace a = boost::algorithm;
+using std::setw;
 
 BOOST_AUTO_TEST_CASE(is_comma_1)
 {

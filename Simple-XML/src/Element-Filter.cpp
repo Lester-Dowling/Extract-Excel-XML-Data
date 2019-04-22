@@ -5,12 +5,6 @@
  */
 #include "pch-simple-xml.hpp"
 #include "Simple-XML/Element-Filter.hpp"
-#define TRACE_FILTER
-//#undef TRACE_FILTER
-
-#ifdef NDEBUG
-#undef TRACE_FILTER
-#endif
 
 namespace simple_xml {
 	using std::cout;
@@ -28,11 +22,10 @@ namespace simple_xml {
 	  const Grade::SP fn) const
 	{
 		using Attribute_Filter = pseudo_xpath::Attribute_Filter;
-		// cout << "e.name == " << visited_element.name() << endl;
+		// cout << "e.name == " << ele.name() << endl;
 		// cout << "fn->name   == " << fn->name() << endl;
 		if (ele.name() != fn->name())
 			return false;
-		// cout << "XML node == " << visited_element.name() << endl;
 		for (Attribute_Filter const& filter_attribute : fn->filters()) {
 			auto const& filter_name = filter_attribute.attribute_name;
 			auto const& filter_operator = filter_attribute.filter_operator;
@@ -40,7 +33,7 @@ namespace simple_xml {
 			auto const& filter_number = filter_attribute.filter_number;
 			auto const& good_filter_number = filter_attribute.good_filter_number;
 
-			if (filter_name == "Column" || filter_name == "Cell") {
+			if (filter_name == "Cell" || filter_name == "Column") {
 				if (good_filter_number)
 					switch (filter_operator) {
 					case '=':
@@ -144,8 +137,8 @@ namespace simple_xml {
 		return true;
 	}
 
-#undef TRACE_CURRENT_PATH_MATCHES_FILTER_PATH
-// define TRACE_CURRENT_PATH_MATCHES_FILTER_PATH
+// undef TRACE_CURRENT_PATH_MATCHES_FILTER_PATH
+#define TRACE_CURRENT_PATH_MATCHES_FILTER_PATH
 #ifdef TRACE_CURRENT_PATH_MATCHES_FILTER_PATH
 #define __TRACER(args) std::cout << args << std::endl;
 #else // not defined

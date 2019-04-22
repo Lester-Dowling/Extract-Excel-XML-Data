@@ -5,13 +5,14 @@
 #include "Operations/Program.hpp"
 #include "Simple-XML-Parser/Worksheet-Row-Column-Titles.hpp"
 namespace utf = boost::unit_test;
-namespace a = boost::algorithm;
+
+BOOST_AUTO_TEST_SUITE(test_wrc_titles_suite, *utf::disabled())
 
 /*
  * Unit tests to verify the correct operation of WRC Titles.
  */
 
-BOOST_AUTO_TEST_SUITE(test_wrc_titles_suite, *utf::enabled())
+namespace a = boost::algorithm;
 
 BOOST_AUTO_TEST_CASE(wrc_ctor)
 {

@@ -8,18 +8,18 @@
 #include "Simple-XML/Element-Creator.hpp"
 namespace utf = boost::unit_test;
 namespace tt = boost::test_tools;
-namespace a = boost::algorithm;
-using std::vector;
-using std::string;
-using simple_xml::Element;
-using simple_xml::Element_Creator;
+
+BOOST_AUTO_TEST_SUITE(test_element_creator_suite, *utf::disabled())
 
 /*
  * Unit tests to verify the correct operation of simple_xml::Element_Creator.
  */
 
-BOOST_AUTO_TEST_SUITE(test_element_creator_suite, *utf::enabled())
-
+namespace a = boost::algorithm;
+using std::vector;
+using std::string;
+using simple_xml::Element;
+using simple_xml::Element_Creator;
 
 inline vector<char> to_vector(const char* const sample)
 {

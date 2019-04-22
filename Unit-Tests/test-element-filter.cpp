@@ -11,6 +11,13 @@
 #include "Simple-XML/Element-Filter.hpp"
 namespace utf = boost::unit_test;
 namespace tt = boost::test_tools;
+
+BOOST_AUTO_TEST_SUITE(test_element_filter_suite, *utf::disabled())
+
+/*
+ * Unit tests to verify the correct operation of simple_xml::Element_Filter.
+ */
+
 namespace a = boost::algorithm;
 namespace fsn = boost::fusion;
 namespace spirit = boost::spirit;
@@ -30,12 +37,6 @@ using std::string;
 using std::vector;
 using Stream_Iterator = boost::spirit::basic_istream_iterator<char>;
 using XPath_Grammar = pseudo_xpath::mini_grammar<Stream_Iterator>;
-
-/*
- * Unit tests to verify the correct operation of simple_xml::Element_Filter.
- */
-
-BOOST_AUTO_TEST_SUITE(test_element_filter_suite, *utf::enabled())
 
 BOOST_AUTO_TEST_CASE(element_filter_ctor_1)
 {
