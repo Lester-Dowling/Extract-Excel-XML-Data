@@ -32,9 +32,6 @@ add_subdirectory ("external")
 # Simple XML library
 add_subdirectory ("Simple-XML")
 
-# XML Parser library
-add_subdirectory ("Simple-XML-Parser")
-
 # Pseudo XPath Parser library
 add_subdirectory ("Pseudo-XPath")
 

@@ -36,11 +36,6 @@ include_directories("${PROJECT_BINARY_DIR}")
 target_link_libraries(${TARGET} PRIVATE "Operations")
 
 #
-# Import XML Parser Library
-#
-target_link_libraries(${TARGET} PRIVATE "Simple-XML-Parser")
-
-#
 # Import XML Library
 #
 target_link_libraries(${TARGET} PRIVATE "Simple-XML")
