@@ -122,6 +122,20 @@ namespace operations {
 				double result = 0;	   // function result
 				std::string fn = _sym; // function name
 				get_token();
+
+				if (fn == "date") {
+					int lim = kSymSizeLimit;
+					char ch;
+					_sym.clear();
+					_sym += ch;
+					while (_input->get(ch) && ch != ')' && 0 < --lim)
+						_sym += ch;
+					_input->putback(ch);
+					if (lim <= 0)
+						throw std::runtime_error{ "Symbol name too long" };
+					_curr_tok = RP;
+				}
+
 				const double e1 = expr();
 				if (_curr_tok == RP) {
 					// Unary Functions:
