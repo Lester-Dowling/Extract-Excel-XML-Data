@@ -121,38 +121,72 @@ namespace operations {
 		}
 	}
 
-	bool Program::crude_each_calc_constraint(int current_row_idx, int current_col_idx)
+
+	bool Program::constrain_each_calc(int current_row_idx, int current_col_idx)
 	{
 		using boost::regex;
 		using boost::smatch;
 		using boost::regex_match;
-		const regex constraint_regex{ "[[:space:]]*\\[([^\\]]+)\\][[:space:]]*(.*)" };
-		smatch constraint_match;
-		if (regex_match(gEachArithmeticExpression, constraint_match, constraint_regex)) {
-			// Extract an optional constraint:
-			const string constraint = constraint_match[1];
-			const regex row_number_regex{
-				"[[:space:]]*Row[[:space:]]*([=<>])[[:space:]]*([[:digit:]]+)[[:space:]]*",
-				boost::regex::icase
-			};
-			smatch row_match;
-			if (regex_match(constraint, row_match, row_number_regex)) {
-				const char constraint_operator = string{ row_match[1] }.front();
-				const int constraint_value = std::stoi(row_match[2]);
-				switch (constraint_operator) {
-				case '=':
-					return current_row_idx == constraint_value;
-				case '<':
-					return current_row_idx < constraint_value;
-				case '>':
-					return current_row_idx > constraint_value;
-				default:
-					throw std::runtime_error{ "Impossible constraint operator: " +
-											  string{ row_match[1] } };
+		if (m_each_calc_constraint._is_valid && m_each_calc_constraint._no_constraint)
+			return true;
+		if (!m_each_calc_constraint._is_valid) {
+			const regex constraint_regex{ "[[:space:]]*\\[([^\\]]+)\\][[:space:]]*(.*)" };
+			smatch constraint_match;
+			if (regex_match(gEachCalc, constraint_match, constraint_regex)) {
+				// Extract non-constraint part:
+				gEachCalc = constraint_match[2];
+				// Extract an optional constraint:
+				const string constraint = constraint_match[1];
+				const regex col_number_regex{
+					"[[:space:]]*Column[[:space:]]*([=<>])[[:space:]]"
+					"*([[:digit:]]+)[[:space:]]*",
+					boost::regex::icase
+				};
+				smatch col_match;
+				if (regex_match(constraint, col_match, col_number_regex)) {
+					m_each_calc_constraint._name = "Column";
+					m_each_calc_constraint._operator = string{ col_match[1] }.front();
+					m_each_calc_constraint._value = col_match[2];
+					m_each_calc_constraint._number =
+					  std::stoi(m_each_calc_constraint._value);
+					m_each_calc_constraint._good_number = true;
+					m_each_calc_constraint._is_valid = true;
 				}
 			}
+			else {
+				m_each_calc_constraint._is_valid = true;
+				m_each_calc_constraint._no_constraint = true;
+				return true;
+			}
 		}
-		return true;
+		if (m_each_calc_constraint._is_valid) {
+			if (m_each_calc_constraint._name == "Column")
+				switch (m_each_calc_constraint._operator) {
+				case '=':
+					return current_col_idx == m_each_calc_constraint._number;
+				case '<':
+					return current_col_idx < m_each_calc_constraint._number;
+				case '>':
+					return current_col_idx > m_each_calc_constraint._number;
+				default:
+					throw std::runtime_error{ "Impossible constraint operator: " +
+											  string{ m_each_calc_constraint._operator } };
+				}
+			else if (m_each_calc_constraint._name == "Row")
+				switch (m_each_calc_constraint._operator) {
+				case '=':
+					return current_row_idx == m_each_calc_constraint._number;
+				case '<':
+					return current_row_idx < m_each_calc_constraint._number;
+				case '>':
+					return current_row_idx > m_each_calc_constraint._number;
+				default:
+					throw std::runtime_error{ "Impossible constraint operator: " +
+											  string{ m_each_calc_constraint._operator } };
+				}
+		}
+		else
+			return true;
 	}
 
 
@@ -173,24 +207,28 @@ namespace operations {
 		else if (0 < m_visited_col)
 			*gOut << " \t ";
 
-		if (gEachArithmeticExpression.empty()) {
+		if (gEachCalc.empty()) {
 			// No arithmetic expression to evaluate.  Print raw text only:
 			*gOut << visitor.current().text();
 		}
 		else // Else, parse arithmetic expression for each visited:
-		  if (crude_each_calc_constraint(
-				visitor.current().row_idx, visitor.current().col_idx))
+		  if (constrain_each_calc(visitor.current().row_idx, visitor.current().col_idx)) {
 			try {
 				gCalculator.set_symbol("DATA", std::stod(visitor.current().text()));
 				gCalculator.set_symbol("Data", std::stod(visitor.current().text()));
 				gCalculator.set_symbol("data", std::stod(visitor.current().text()));
 				*gOut << std::fixed << std::setprecision(this->precision())
-					  << gCalculator.evaluate(gEachArithmeticExpression);
+					  << gCalculator.evaluate(gEachCalc);
 			}
 			catch (std::invalid_argument const&) {
 				// visitor.text() is not a number, so ignore arithmetic expression:
 				*gOut << visitor.current().text();
 			}
+		}
+		else {
+			// Constraint prevents calc evaluation, so ignore arithmetic expression:
+			*gOut << visitor.current().text();
+		}
 		m_visited_col = visitor.current().col_idx;
 		return true;
 	}
@@ -454,7 +492,7 @@ namespace operations {
 		   "to work through.")
 		  // --------------------------------------------------------------
 		  ("each,e",
-		   po::value<string>(&gEachArithmeticExpression),
+		   po::value<string>(&gEachCalc),
 		   "Arithmetic expression to be worked out by the calculator for each extract "
 		   "value given by a pseudo XPath expression (--xpath).  The symbol DATA in the "
 		   "arithmetic will be replaced by its value from the worksheet.  For example, to "
@@ -544,6 +582,7 @@ namespace operations {
 		for (auto const& xml_filename : in_files) {
 			m_visited_row = 0;
 			m_visited_col = 0;
+			m_each_calc_constraint.clear();
 			if (gVerbose)
 				*gErr << "Parsing " << xml_filename << endl;
 			load_xml_file(xml_filename);

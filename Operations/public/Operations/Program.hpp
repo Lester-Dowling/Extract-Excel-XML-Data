@@ -98,7 +98,30 @@ namespace operations {
 		 * An arithmetic expression given on the command line intended to be
 		 * parsed by the Calculator for each extracted data value.
 		 */
-		string gEachArithmeticExpression;
+		string gEachCalc;
+
+		struct Each_Calc_Constraint {
+			bool _is_valid{ false };
+			bool _no_constraint{ false };
+			std::string _name;
+			char _operator{ 0 }; // can be: = < >
+			std::string _value;
+			int _number{ 0 };
+			bool _good_number{ false };
+
+			void clear()
+			{
+				_is_valid = false;
+				_no_constraint = false;
+				_name.clear();
+				_operator = 0;
+				_value.clear();
+				_number = 0;
+				_good_number = false;
+			}
+		};
+
+		Each_Calc_Constraint m_each_calc_constraint;
 
 		/**
 		 * An calculator expression given on the command line to be evaluated
@@ -203,7 +226,7 @@ namespace operations {
 		void compute_xpath_and_write_results();
 		void compute_calc_and_write_results();
 		void compute_calc_file_and_write_results();
-		bool crude_each_calc_constraint(int current_row_idx, int current_col_idx);
+		bool constrain_each_calc(int current_row_idx, int current_col_idx);
 
 		/**
 		 * Visit all XML nodes and print their text only.  No attributes are
