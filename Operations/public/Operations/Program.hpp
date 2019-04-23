@@ -7,14 +7,9 @@
 #include "Program-Base.hpp"
 #include <vector>
 #include <string>
-#include <map>
-#include <memory>
 #include <limits>
 #include "Operations/Calculator.hpp"
 #include "Pseudo-XPath/Grade.hpp"
-#include "Simple-XML-Parser/Worksheet-Row-Column-Titles.hpp"
-#include "Simple-XML-Parser/Node.hpp"
-#include "Simple-XML-Parser/Node-Visitor.hpp"
 #include "Simple-XML/Element.hpp"
 #include "Simple-XML/Element-Visitor.hpp"
 #include "Simple-XML/Document.hpp"
@@ -23,9 +18,6 @@ namespace operations {
 	using std::string;
 	using std::ostream;
 	using std::numeric_limits;
-	using excel_xml_parser::Worksheet_Row_Column_Titles;
-	using std::make_shared;
-	using std::shared_ptr;
 
 	class Program : public Program_Base {
 	public:
@@ -152,9 +144,6 @@ namespace operations {
 		// void save() override{};
 
 	public: //~ XML operations ------------------------------------------------
-		typedef std::vector<char> file_in_memory_t;
-		typedef file_in_memory_t::const_iterator Memory_Iterator;
-		using Node = excel_xml_parser::Node;
 
 		/**
 		 * Load and parse the given XML file.
@@ -208,13 +197,6 @@ namespace operations {
 		 * The parsed XML document represented in memory as a tree of nodes.
 		 */
 		vector<simple_xml::Document> m_documents;
-
-		/**
-		 * Titles of all worksheets, rows and columns within the workbook.
-		 */
-		shared_ptr<Worksheet_Row_Column_Titles> m_titles{
-			make_shared<Worksheet_Row_Column_Titles>()
-		};
 
 		int m_visited_row = 0;
 		int m_visited_col = 0;

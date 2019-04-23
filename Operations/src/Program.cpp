@@ -7,8 +7,6 @@
 #include "Operations/Program.hpp"
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include "Simple-XML-Parser/mini-grammar.hpp"
-#include "Simple-XML-Parser/Node-Filter.hpp"
 #include "Simple-XML/Element-Filter.hpp"
 #include "Pseudo-XPath/mini-grammar.hpp"
 #include "Operations/string-functions.hpp"
@@ -21,14 +19,9 @@ namespace operations {
 	using std::vector;
 	namespace ascii = boost::spirit::ascii;
 	namespace qi = boost::spirit::qi;
-	using file_in_memory_t = Program::file_in_memory_t;
-	using Memory_Iterator = Program::Memory_Iterator;
-	using Stream_Iterator = boost::spirit::basic_istream_iterator<char>;
-	using Node = excel_xml_parser::Node;
 	using Grade = pseudo_xpath::Grade;
 	using String_Iterator = string::const_iterator;
 	using XPath_Grammar = pseudo_xpath::mini_grammar<String_Iterator>;
-	using XML_Grammar = excel_xml_parser::mini_grammar<Memory_Iterator>;
 
 	const char* const all_data_xpath_text = "Row,Cell,Data";
 
@@ -506,7 +499,6 @@ namespace operations {
 			throw std::runtime_error{ "No files were listed on the command line." };
 		vector<string> const& in_files = gVM["in-file"].as<vector<string>>();
 		for (auto const& xml_filename : in_files) {
-			m_titles->clear();
 			m_visited_row = 0;
 			m_visited_col = 0;
 			if (gVerbose)
