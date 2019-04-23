@@ -210,6 +210,23 @@ namespace simple_xml {
 	}
 
 
+	inline bool is_comma(char ch) { return ch == ','; }
+
+
+	inline string erase_commas(string text)
+	{
+		text.erase(
+		  std::remove_if(text.begin(), text.end(), boost::bind(is_comma, _1)), text.end());
+		return text;
+	}
+
+
+	double Document::extract_single_number(Grade::SP xpath_root)
+	{
+		return std::stod(erase_commas(extract_single_text(xpath_root)));
+	}
+
+
 	bool Document::write_all_fields_visit(simple_xml::Element_Visitor& visitor)
 	{
 		using std::cout;
@@ -240,7 +257,8 @@ namespace simple_xml {
 		{
 			cout << setw(12) << "Row Title:" << ' ' << *row_title << endl;
 		}
-		if (const auto col_title = m_titles.col_title(visitor.current().wkt_idx, visitor.current().col_idx);
+		if (const auto col_title =
+			  m_titles.col_title(visitor.current().wkt_idx, visitor.current().col_idx);
 			col_title.has_value()) //
 		{
 			cout << setw(12) << "Col Title:" << ' ' << *col_title << endl;

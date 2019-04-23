@@ -177,13 +177,13 @@ namespace operations {
 		 * Find and return a single node's text as specified by the precise pseudo
 		 * XPath.
 		 */
-		string extract_single_text(Node::SP xml_root, Grade::SP xpath_root);
+		string extract_single_text(Grade::SP xpath_root);
 
 		/**
 		 * Find and return a single node's text converted to a double.  The exact
 		 * XML node is specified precisely by the pseudo XPath.
 		 */
-		double extract_single_number(Node::SP xml_root, Grade::SP xpath_root);
+		double extract_single_number(Grade::SP xpath_root);
 
 		/**
 		 * Write to std output every worksheet name in the workbook.

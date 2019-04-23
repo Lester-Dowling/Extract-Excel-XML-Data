@@ -188,7 +188,7 @@ BOOST_AUTO_TEST_CASE(single_cell_data_extraction_1)
 	  " Row['Total Revenue Excluding Interest'], "
 	  "Cell['06/17'], "
 	  " Data ";
-	excel_xml_parser::Node::SP xml_root = program.load_xml_file(small_xml_file);
+	program.load_xml_file(small_xml_file);
 	const std::string xpath_text = program.xpath_prefix(1) + one_data_xpath_text;
 	Grade::SP xpath_root = program.parse_xpath_text(xpath_text);
 	const char* const expected_xpath = //
@@ -196,9 +196,9 @@ BOOST_AUTO_TEST_CASE(single_cell_data_extraction_1)
 	  "Row[Row='Total Revenue Excluding Interest'] --> "
 	  "Cell[Cell='06/17'] --> Data";
 	BOOST_TEST(Grade::path_to_string(xpath_root) == expected_xpath);
-	const double extracted_number = program.extract_single_number(xml_root, xpath_root);
+	const double extracted_number = program.extract_single_number(xpath_root);
 	BOOST_TEST(extracted_number == 227904000);
-	const std::string extracted_text = program.extract_single_text(xml_root, xpath_root);
+	const std::string extracted_text = program.extract_single_text(xpath_root);
 	BOOST_TEST(extracted_text == "227904000");
 }
 

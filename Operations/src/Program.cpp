@@ -295,31 +295,18 @@ namespace operations {
 		return false;
 	}
 
-	string Program::extract_single_text(Node::SP xml_root, Grade::SP xpath_root)
+
+	string Program::extract_single_text(Grade::SP xpath_root)
 	{
-		// m_one_data.clear();
-		// m_documents.back()
-		//  .filter()
-		//  .set_filter_path(xpath_root)
-		//  .visit_all_depth_first(boost::bind(&Program::one_data_visit, this, _1));
-		// excel_xml_parser::Node_Filter::all_siblings(
-		//  xml_root, xpath_root, m_titles, boost::bind(&Program::one_data_visit, this,
-		//  _1));
 		return m_documents.back().extract_single_text(xpath_root);
 	}
 
-	double Program::extract_single_number(Node::SP xml_root, Grade::SP xpath_root)
+
+	double Program::extract_single_number(Grade::SP xpath_root)
 	{
-		m_one_data.clear();
-		m_documents.back()
-		  .filter()
-		  .set_filter_path(xpath_root)
-		  .visit_all_depth_first(boost::bind(&Program::one_data_visit, this, _1));
-		// excel_xml_parser::Node_Filter::all_siblings(
-		//  xml_root, xpath_root, m_titles, boost::bind(&Program::one_data_visit, this,
-		//  _1));
-		return std::stod(erase_commas(m_one_data));
+		return m_documents.back().extract_single_number(xpath_root);
 	}
+
 
 	Node::SP Program::load_xml_file(const f::path xml_path)
 	{
@@ -687,7 +674,7 @@ namespace operations {
 			m_visited_col = 0;
 			if (gVerbose)
 				*gErr << "Parsing " << xml_filename << endl;
-			Node::SP xml_root = load_xml_file(xml_filename);
+			load_xml_file(xml_filename);
 
 			if (gWriteAllFields) {
 				m_documents.back().write_all_fields();

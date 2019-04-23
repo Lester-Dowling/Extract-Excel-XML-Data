@@ -127,7 +127,7 @@ BOOST_AUTO_TEST_CASE(regex_iterator_replace_into_calc_2, *utf::enabled())
 			"Workbook --> Worksheet[Worksheet=1] --> Table --> "
 			"Row[Row='Total Revenue Excluding Interest'] --> Cell[Cell='06/17'] --> Data";
 		  BOOST_TEST(Grade::path_to_string(xpath_root) == expected_xpath);
-		  const std::string cell_text = program.extract_single_text(xml_root, xpath_root);
+		  const std::string cell_text = program.extract_single_text(xpath_root);
 
 		  calc_interpolated += ' ';
 		  calc_interpolated.append(cell_text);

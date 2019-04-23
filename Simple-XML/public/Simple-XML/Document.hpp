@@ -127,6 +127,12 @@ namespace simple_xml {
 		std::string extract_single_text(Grade::SP xpath_root);
 
 		/**
+		 * Query Document and return the number in a single node whose address is specified
+		 * precisely from the @c xpath_root.
+		 */
+		double extract_single_number(Grade::SP xpath_root);
+
+		/**
 		 * Diagnostic utility function to write out all fields of every Element.
 		 */
 		void write_all_fields();
