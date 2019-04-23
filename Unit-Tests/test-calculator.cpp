@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE(regex_iterator_replace_into_calc_2, *utf::enabled())
 	std::ostringstream oss;
 	std::ostringstream ess;
 	Program program{ argc, argv, oss, ess };
-	excel_xml_parser::Node::SP xml_root = program.load_xml_file(small_xml_file);
+	program.load_xml_file(small_xml_file);
 	program.write_worksheet_titles();
 	program.write_column_titles();
 	program.write_row_titles();

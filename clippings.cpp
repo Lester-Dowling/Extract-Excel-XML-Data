@@ -155,3 +155,161 @@ BOOST_AUTO_TEST_CASE(wrc_add_row_col)
 //{
 //	return current().attribute(attribute_name);
 //}
+
+
+
+/**
+ * Find and put into @c m_titles all the worksheet names in the workbook.
+ */
+void extract_worksheet_titles(Node::SP xml_root);
+
+/**
+ * Find and put into m_titles all the column titles in the workbook.
+ */
+void extract_column_titles(Node::SP);
+
+/**
+ * Find and put into m_titles all the row titles in the workbook.
+ */
+void extract_row_titles(Node::SP);
+
+/**
+ * Visit all XML nodes and print all fields of the nodes.
+ */
+bool write_all_fields_visit(excel_xml_parser::Node_Visitor&);
+
+
+
+void Program::extract_worksheet_titles(Node::SP xml_root)
+{
+	using std::runtime_error;
+	namespace ascii = boost::spirit::ascii;
+	namespace qi = boost::spirit::qi;
+	const string xpath_text{ "Workbook, Worksheet" };
+	XPath_Grammar xpath_parser;
+	String_Iterator sitr = xpath_text.begin();
+	String_Iterator const send = xpath_text.end();
+	if (!qi::phrase_parse(sitr, send, xpath_parser, ascii::space))
+		throw runtime_error{ "Failed to parse this XPath for worksheet titles: " +
+							 xpath_text };
+	excel_xml_parser::Node_Filter::all_siblings(
+	  xml_root,
+	  xpath_parser.result,
+	  m_titles,
+	  [&](excel_xml_parser::Node_Visitor& visitor) -> bool //
+	  {
+		  if (visitor.name() == "Worksheet") {
+			  if (visitor.attribute("ss:Name").has_value()) {
+				  m_titles->add_worksheet(visitor.wkt(), *visitor.attribute("ss:Name"));
+			  }
+			  else {
+				  m_titles->add_worksheet(visitor.wkt(), std::to_string(visitor.wkt()));
+			  }
+		  }
+		  return true;
+	  });
+}
+
+void Program::extract_column_titles(Node::SP xml_root)
+{
+	std::ostringstream titles_xpath_oss;
+	titles_xpath_oss << "Row[" << gColumnTitlesRow << "],Cell,Data[ss:Type=String]";
+	for (const int wkt_idx : m_titles->wkt_indices()) {
+		const string xpath_text{ this->xpath_prefix(wkt_idx) + titles_xpath_oss.str() };
+		XPath_Grammar xpath_parser;
+		String_Iterator sitr = xpath_text.begin();
+		String_Iterator const send = xpath_text.end();
+		if (!qi::phrase_parse(sitr, send, xpath_parser, ascii::space))
+			throw runtime_error{ "Failed to parse this XPath for column titles: " +
+								 xpath_text };
+		excel_xml_parser::Node_Filter::all_siblings(
+		  xml_root,
+		  xpath_parser.result,
+		  m_titles,
+		  [&](excel_xml_parser::Node_Visitor& visitor) -> bool //
+		  {
+			  assert(visitor.wkt == wkt_idx);
+			  assert(visitor.row() == gColumnTitlesRow);
+			  assert(visitor.name() == "Data");
+			  if (!visitor.text().empty()) {
+				  m_titles->add_col(visitor.wkt(), visitor.col(), visitor.text());
+			  }
+			  return true;
+		  });
+	}
+}
+
+void Program::extract_row_titles(Node::SP xml_root)
+{
+	if (gRowTitlesColumn.empty())
+		gRowTitlesColumn = "1";
+	else {
+		// Translate a single capital letter to a column number.  For example, given "-m
+		// C" on the command line, translate that to "-m 3".
+		if (gRowTitlesColumn.size() == 1) {
+			if (std::isupper(gRowTitlesColumn.front())) {
+				const int corresponding_column_number =
+				  1 + static_cast<int>(gRowTitlesColumn.front()) - static_cast<int>('A');
+				gRowTitlesColumn = std::to_string(corresponding_column_number);
+			}
+		}
+	}
+	bool good_column_number = true;
+	int column_number;
+	try {
+		column_number = std::stoi(gRowTitlesColumn);
+	}
+	catch (std::invalid_argument const&) {
+		good_column_number = false;
+	}
+
+	const string col_name_filter{ "[Column=\"" + gRowTitlesColumn + "\"]" };
+	const string col_number_filter{ "[Column=" + gRowTitlesColumn + "]" };
+	const string col_filter = good_column_number ? col_number_filter : col_name_filter;
+	const string titles_xpath_text{ "Row,Cell" + col_filter + ",Data[ss:Type=String]" };
+	for (const int wkt_idx : m_titles->wkt_indices()) {
+		const string xpath_text{ this->xpath_prefix() + titles_xpath_text };
+		XPath_Grammar xpath_parser;
+		String_Iterator sitr = xpath_text.begin();
+		String_Iterator const send = xpath_text.end();
+		if (!qi::phrase_parse(sitr, send, xpath_parser, ascii::space))
+			throw runtime_error{ "Failed to parse this XPath for column titles: " +
+								 xpath_text };
+		excel_xml_parser::Node_Filter::all_siblings(
+		  xml_root,
+		  xpath_parser.result,
+		  m_titles,
+		  [&](excel_xml_parser::Node_Visitor& visitor) -> bool //
+		  {
+			  if (good_column_number)
+				  assert(visitor.col() == column_number);
+			  assert(visitor.wkt() == wkt_idx);
+			  assert(visitor.name() == "Data");
+			  m_titles->add_row(visitor.wkt(), visitor.row(), visitor.text());
+			  return true;
+		  });
+	}
+}
+
+
+
+bool Program::write_all_fields_visit(excel_xml_parser::Node_Visitor& visitor)
+{
+	if (!visitor.name().empty()) {
+		*gOut << '(' << visitor.depth() << ')' << "Tag:    " << visitor.name() << endl;
+		*gOut << "     Path:    " << visitor.path_to_string() << endl;
+	}
+	if (!visitor.attributes().empty()) {
+		*gOut << "     Attr: ";
+		for (auto attr : visitor.attributes()) {
+			*gOut << attr.first << '=' << attr.second << "   ";
+		}
+		*gOut << endl;
+	}
+	if (!visitor.text().empty()) {
+		*gOut << "     Text: " << visitor.text() << endl;
+	}
+	*gOut << "     Row: " << visitor.row() << endl;
+	*gOut << "     Col: " << visitor.col() << endl;
+	return true;
+}

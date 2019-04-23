@@ -158,10 +158,8 @@ namespace operations {
 
 		/**
 		 * Load and parse the given XML file.
-		 *
-		 * @return The root node of the parsed XML file.
 		 */
-		Node::SP load_xml_file(const boost::filesystem::path xml_path);
+		void load_xml_file(const boost::filesystem::path xml_path);
 
 	public: //~ XPath operations ----------------------------------------------
 		using Grade = pseudo_xpath::Grade;
@@ -226,36 +224,9 @@ namespace operations {
 		void compute_calc_file_and_write_results();
 
 		/**
-		 * Find and put into @c m_titles all the worksheet names in the workbook.
-		 */
-		void extract_worksheet_titles(Node::SP xml_root);
-
-		/**
-		 * Find and put into m_titles all the column titles in the workbook.
-		 */
-		void extract_column_titles(Node::SP);
-
-		/**
-		 * Find and put into m_titles all the row titles in the workbook.
-		 */
-		void extract_row_titles(Node::SP);
-
-		/**
-		 * Visit all XML nodes and print all fields of the nodes.
-		 */
-		bool write_all_fields_visit(excel_xml_parser::Node_Visitor&);
-
-		/**
-		 * Visit all XML nodes and print their text, only.  No attributes are
+		 * Visit all XML nodes and print their text only.  No attributes are
 		 * printed.
 		 */
 		bool write_text_visit(simple_xml::Element_Visitor&);
-
-		/**
-		 * Extract a single data cell, usually specified exactly by a precise
-		 * XPath.
-		 */
-		string m_one_data;
-		bool one_data_visit(simple_xml::Element_Visitor& visitor);
 	};
 } // namespace operations
