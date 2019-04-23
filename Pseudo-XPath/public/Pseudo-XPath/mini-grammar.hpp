@@ -134,10 +134,10 @@ namespace pseudo_xpath {
 					 qi::lit(','),
 				   "start" }
 		{
-			qi::on_error<qi::fail>(
-			  start,
-			  std::cout << phx::val("Error! Expecting ") << qi::_4 // what failed?
-						<< std::endl);
+			//qi::on_error<qi::fail>(
+			//  start,
+			//  std::cout << phx::val("Error! Expecting ") << qi::_4 // what failed?
+			//			<< std::endl);
 		}
 	};
 } // namespace pseudo_xpath

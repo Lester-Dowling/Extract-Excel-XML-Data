@@ -61,7 +61,6 @@ namespace simple_xml {
 		Start_Type tail;
 		// The following rules are recursive:
 		Start_Type sibling;
-		Start_Type children;
 		Start_Type element;
 		Start_Type start;
 
@@ -82,13 +81,16 @@ namespace simple_xml {
 		  : Base_Type(start, "start")
 		  , creator{ element_creator }
 		  , xml_identifier{ qi::lexeme[+qi::char_("a-zA-Z0-9:_-")] }
-		  , attribute_name{ qi::lexeme[+qi::char_("a-zA-Z0-9:_-")] }
-		  , attribute_value{ qi::lit(kDQ) >> qi::no_skip[*(qi::char_ - kDQ)] >
-							 qi::lit(kDQ) }
-		  , assignment{ attribute_name > qi::lit('=') > attribute_value, "assignment" }
-		  , attributes{ *(assignment[boost::bind(&This::set_attribute, this, _1)]) }
+		  , attribute_name{ qi::lexeme[+qi::char_("a-zA-Z0-9:_-")], "attribute-name" }
+		  , attribute_value{ qi::lit(kDQ) >> qi::no_skip[*(qi::char_ - kDQ)] > qi::lit(kDQ),
+							 "attribute-value" }
+		  , assignment{ attribute_name > qi::lit('=') > attribute_value,
+						"attribute-value-assignment" }
+		  , attributes{ *(assignment[boost::bind(&This::set_attribute, this, _1)]),
+						"element-attributes" }
 		  , text_node{ qi::lexeme[+(qi::char_ - '<' - '>')]
-								 [boost::bind(&Element_Creator::set_text, creator, _1)] }
+								 [boost::bind(&Element_Creator::set_text, creator, _1)],
+					   "text-node" }
 		  , closing_tag{ qi::lit("</") >> //
 						   xml_identifier[boost::bind(
 							 &Element_Creator::verify_closing_tag,
@@ -98,36 +100,33 @@ namespace simple_xml {
 		  , xml_header{ qi::lit("<?") > qi::omit[+(qi::char_ - '?' - '<' - '>')] >
 						  qi::lit("?>"),
 						"xml-header" }
-		  , comment{ qi::lit("<!--") > qi::omit[+(qi::char_ - '>')] > qi::lit("-->"),
-					 "comment" }
-		  , tail{ qi::lexeme[*ascii::print][boost::bind(&This::
-			  set_remainder, this, _1)] }
+		  , comment{ qi::lit("<!--") >> qi::omit[+(qi::char_ - '>' - '-')] >>
+					   qi::lit("-->"),
+					 "comment" } // <!-- Sample comment for unit testing -->
+		  , tail{ qi::lexeme[*ascii::print][boost::bind(&This::set_remainder, this, _1)] }
 		{
-			element %=
+			element =
 			  qi::lit('<') >>
 			  xml_identifier[boost::bind(&Element_Creator::new_element, creator, _1)] >>
 			  attributes >>
 			  (qi::lit("/>")[boost::bind(&Element_Creator::close_singleton, creator)] |
-			   (qi::lit('>') >> children >> closing_tag));
+			   (qi::lit('>') >> *sibling >> closing_tag));
 
-			sibling = element | text_node | comment;
-
-			children = *sibling;
+			sibling = comment | element | text_node;
 
 			start = *xml_header > element >> tail;
 
 			element.name("element");
-			children.name("children");
 			sibling.name("sibling");
 
 			qi::on_error<qi::fail>(
 			  start,
-			  std::cout << phoenix::val("Error! Expecting ")
+			  std::cout << phoenix::val("!!! Parsing error.  Expecting ")
 						<< qi::_4 // what failed?
-								  // << phoenix::val(" here: \"")
-								  // << phoenix::construct<std::string>(qi::_3, qi::_2)   //
-								  // iterators to error-pos, end
-								  // << phoenix::val("\"")
+						<< phoenix::val(" here: ")
+						<< phoenix::construct<std::string>(qi::_3, qi::_3 + 12) //
+						// iterators to error-pos, end
+						// << phoenix::val("\"")
 						<< std::endl);
 		}
 	};
