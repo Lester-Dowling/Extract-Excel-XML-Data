@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>Lester Dowling</Author>
+  <LastAuthor>Lester Dowling</LastAuthor>
+  <Created>2019-04-23T15:45:50Z</Created>
+  <LastSaved>2019-04-23T15:55:24Z</LastSaved>
+  <Version>16.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>7440</WindowHeight>
+  <WindowWidth>19200</WindowWidth>
+  <WindowTopX>32767</WindowTopX>
+  <WindowTopY>32767</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s62" ss:Name="Normal 2">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Arial"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s105" ss:Parent="s62">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <NumberFormat ss:Format="Short Date"/>
+  </Style>
+  <Style ss:ID="s107" ss:Parent="s62">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"
+    ss:Bold="1"/>
+   <Interior ss:Color="#CCCCCC" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s108" ss:Parent="s62">
+   <NumberFormat ss:Format="#,##0.00##"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Price History">
+  <Table ss:ExpandedColumnCount="3" ss:ExpandedRowCount="6" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultRowHeight="14.5">
+   <Column ss:AutoFitWidth="0" ss:Width="69.5" ss:Span="2"/>
+   <Row>
+    <Cell ss:StyleID="s107"><Data ss:Type="String">Date</Data></Cell>
+    <Cell ss:StyleID="s107"><Data ss:Type="String">Close</Data></Cell>
+    <Cell ss:StyleID="s107"><Data ss:Type="String">Volume</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s105"><Data ss:Type="String">09/08/2018</Data></Cell>
+    <Cell ss:StyleID="s108"><Data ss:Type="Number">5.91</Data></Cell>
+    <Cell ss:StyleID="s108"><Data ss:Type="Number">89177</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s105"><Data ss:Type="String">08/08/2018</Data></Cell>
+    <Cell ss:StyleID="s108"><Data ss:Type="Number">6</Data></Cell>
+    <Cell ss:StyleID="s108"><Data ss:Type="Number">108948</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s105"><Data ss:Type="String">07/08/2018</Data></Cell>
+    <Cell ss:StyleID="s108"><Data ss:Type="Number">5.93</Data></Cell>
+    <Cell ss:StyleID="s108"><Data ss:Type="Number">100885</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s105"><Data ss:Type="String">06/08/2018</Data></Cell>
+    <Cell ss:StyleID="s108"><Data ss:Type="Number">6.14</Data></Cell>
+    <Cell ss:StyleID="s108"><Data ss:Type="Number">149858</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s105"><Data ss:Type="String">03/08/2018</Data></Cell>
+    <Cell ss:StyleID="s108"><Data ss:Type="Number">6.16</Data></Cell>
+    <Cell ss:StyleID="s108"><Data ss:Type="Number">84893</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <RangeSelection>R1C1:R6C3</RangeSelection>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

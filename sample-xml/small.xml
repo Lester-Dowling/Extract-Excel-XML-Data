@@ -13,6 +13,7 @@
   </DocumentProperties>
   <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
     <AllowPNG/>
+    <!-- Sample comment for unit testing -->
   </OfficeDocumentSettings>
   <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
     <WindowHeight>7440</WindowHeight>

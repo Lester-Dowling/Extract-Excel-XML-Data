@@ -22,15 +22,18 @@ namespace operations {
 		_sym_table["e"] = 2.7182818284590452354;
 	}
 
+
 	void Calculator::set_symbol(const std::string& symbol__, double value__)
 	{
 		_sym_table[symbol__] = value__;
 	}
 
+
 	double Calculator::get_symbol(const std::string& symbol__)
 	{
 		return _sym_table[symbol__];
 	}
+
 
 	double Calculator::expr()
 	{
@@ -51,6 +54,7 @@ namespace operations {
 				return left;
 			}
 	}
+
 
 	double Calculator::term()
 	{
@@ -76,6 +80,7 @@ namespace operations {
 			}
 	}
 
+
 	double Calculator::power()
 	{
 		TRACE_CALCULATOR_METHOD;
@@ -92,6 +97,7 @@ namespace operations {
 				return left;
 			}
 	}
+
 
 	double Calculator::prim()
 	{
@@ -181,6 +187,8 @@ namespace operations {
 				return result;
 			}
 			else {
+				if (_sym_table.count(_sym) == 0)
+					throw std::runtime_error{ "No such calculator symbol: " + _sym };
 				return _sym_table[_sym];
 			}
 		}
@@ -201,6 +209,7 @@ namespace operations {
 			throw std::runtime_error{ "A number, name or parenthesis was expected" };
 		}
 	}
+
 
 	Calculator::token_value Calculator::get_token()
 	{
@@ -257,6 +266,7 @@ namespace operations {
 		}
 	}
 
+
 	double Calculator::evaluate(const std::string& expression__)
 	{
 		TRACE_CALCULATOR_METHOD_PARAM(expression__);
@@ -273,7 +283,7 @@ namespace operations {
 				_history.pop_back();
 				continue;
 			}
-			if (_curr_tok == PRINT) 
+			if (_curr_tok == PRINT)
 				continue;
 			result = expr();
 			if (!_assignment)

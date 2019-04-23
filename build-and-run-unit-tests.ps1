@@ -164,3 +164,8 @@ cls
 &$UNIT_TESTS --color_output=false  --report_level=short  --log_level=message;
 if ($LASTEXITCODE -ne 0) { fatal_error_exit "Unit tests failed."; }
 play_finished_sound
+
+
+# CMake Kit
+# 1> Command line: C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO\2017\COMMUNITY\COMMON7\IDE\COMMONEXTENSIONS\MICROSOFT\CMAKE\CMake\bin\cmake.exe  -G "Ninja" -DCMAKE_INSTALL_PREFIX:PATH="C:\Users\ljdowling\CMakeBuilds\29884886-1304-9437-a529-31f5a8869390\install\x64-Release"  -DCMAKE_CXX_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/HostX64/x64/cl.exe"  -DCMAKE_C_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/HostX64/x64/cl.exe"  -DCMAKE_BUILD_TYPE="RelWithDebInfo" -DCMAKE_MAKE_PROGRAM="C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO\2017\COMMUNITY\COMMON7\IDE\COMMONEXTENSIONS\MICROSOFT\CMAKE\Ninja\ninja.exe" "C:\Users\ljdowling\Projects\Extract-Excel-XML-Data-2017"
+# 1> Working directory: C:\Users\ljdowling\CMakeBuilds\29884886-1304-9437-a529-31f5a8869390\build\x64-Release

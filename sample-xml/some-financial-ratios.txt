@@ -1,0 +1,3 @@
+NetProfitMargin = [Profit and Loss][Nett Profit][06/17] / [Profit and Loss][Total Revenue][06/17] 
+
+ReturnOnEquity = [Profit and Loss][Nett Profit][06/17] / [Balance Sheet][Total Equity][06/17]

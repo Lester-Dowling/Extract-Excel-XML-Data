@@ -144,7 +144,6 @@ namespace operations {
 		// void save() override{};
 
 	public: //~ XML operations ------------------------------------------------
-
 		/**
 		 * Load and parse the given XML file.
 		 */
@@ -204,6 +203,7 @@ namespace operations {
 		void compute_xpath_and_write_results();
 		void compute_calc_and_write_results();
 		void compute_calc_file_and_write_results();
+		bool crude_each_calc_constraint(int current_row_idx, int current_col_idx);
 
 		/**
 		 * Visit all XML nodes and print their text only.  No attributes are

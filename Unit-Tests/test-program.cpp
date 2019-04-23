@@ -15,6 +15,7 @@ namespace a = boost::algorithm;
 using operations::Program;
 using pseudo_xpath::Grade;
 using std::setw;
+using std::string;
 namespace {
 
 	char* const sample_xml_file =
@@ -326,6 +327,34 @@ BOOST_AUTO_TEST_CASE(parse_non_number_1)
 	std::istringstream iss{ input };
 	iss >> parsed_number;
 	BOOST_TEST(!iss.eof());
+}
+
+BOOST_AUTO_TEST_CASE(calc_each_constraint)
+{
+	using boost::regex;
+	using boost::smatch;
+	using boost::regex_match;
+	const string calc_each_text{ " [Row=1] Data * 2" };
+	const regex constraint_regex{ "[[:space:]]*\\[([^\\]]+)\\][[:space:]]*(.*)" };
+	smatch constraint_match;
+	if (regex_match(calc_each_text, constraint_match, constraint_regex)) {
+		// Extract an optional constraint:
+		const string constraint = constraint_match[1];
+		BOOST_TEST(constraint == "Row=1");
+		const regex attr_regex{ "[[:space:]]*(.*)=(.*)[[:space:]]*" };
+		smatch attr_match;
+		if (regex_match(constraint, attr_match, attr_regex)) {
+			const string row_or_column = attr_match[1];
+			const string value = attr_match[2];
+			BOOST_TEST(row_or_column == "Row");
+			BOOST_TEST(value == "1");
+		}
+	}
+}
+
+BOOST_AUTO_TEST_CASE(calc_each_constraint)
+{
+
 }
 
 BOOST_AUTO_TEST_SUITE_END()

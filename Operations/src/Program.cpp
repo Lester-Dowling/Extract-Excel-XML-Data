@@ -121,6 +121,40 @@ namespace operations {
 		}
 	}
 
+	bool Program::crude_each_calc_constraint(int current_row_idx, int current_col_idx)
+	{
+		using boost::regex;
+		using boost::smatch;
+		using boost::regex_match;
+		const regex constraint_regex{ "[[:space:]]*\\[([^\\]]+)\\][[:space:]]*(.*)" };
+		smatch constraint_match;
+		if (regex_match(gEachArithmeticExpression, constraint_match, constraint_regex)) {
+			// Extract an optional constraint:
+			const string constraint = constraint_match[1];
+			const regex row_number_regex{
+				"[[:space:]]*Row[[:space:]]*([=<>])[[:space:]]*([[:digit:]]+)[[:space:]]*",
+				boost::regex::icase
+			};
+			smatch row_match;
+			if (regex_match(constraint, row_match, row_number_regex)) {
+				const char constraint_operator = string{ row_match[1] }.front();
+				const int constraint_value = std::stoi(row_match[2]);
+				switch (constraint_operator) {
+				case '=':
+					return current_row_idx == constraint_value;
+				case '<':
+					return current_row_idx < constraint_value;
+				case '>':
+					return current_row_idx > constraint_value;
+				default:
+					throw std::runtime_error{ "Impossible constraint operator: " +
+											  string{ row_match[1] } };
+				}
+			}
+		}
+		return true;
+	}
+
 
 	bool Program::write_text_visit(simple_xml::Element_Visitor& visitor)
 	{
@@ -140,12 +174,16 @@ namespace operations {
 			*gOut << " \t ";
 
 		if (gEachArithmeticExpression.empty()) {
-			// No arithmetic expression to evaluate.  Print raw text, only:
+			// No arithmetic expression to evaluate.  Print raw text only:
 			*gOut << visitor.current().text();
 		}
-		else { // Else, parse arithmetic expression for each visited:
+		else // Else, parse arithmetic expression for each visited:
+		  if (crude_each_calc_constraint(
+				visitor.current().row_idx, visitor.current().col_idx))
 			try {
 				gCalculator.set_symbol("DATA", std::stod(visitor.current().text()));
+				gCalculator.set_symbol("Data", std::stod(visitor.current().text()));
+				gCalculator.set_symbol("data", std::stod(visitor.current().text()));
 				*gOut << std::fixed << std::setprecision(this->precision())
 					  << gCalculator.evaluate(gEachArithmeticExpression);
 			}
@@ -153,7 +191,6 @@ namespace operations {
 				// visitor.text() is not a number, so ignore arithmetic expression:
 				*gOut << visitor.current().text();
 			}
-		}
 		m_visited_col = visitor.current().col_idx;
 		return true;
 	}
@@ -181,6 +218,7 @@ namespace operations {
 			m_documents.back().extract_row_titles(gRowTitlesColumn);
 	}
 
+
 	Grade::SP Program::parse_xpath_text(const string xpath_text) // , const int wkt_idx)
 	{
 		using std::runtime_error;
@@ -196,6 +234,7 @@ namespace operations {
 			*gErr << "XPath == " << Grade::path_to_string(xpath_parser.result) << endl;
 		return xpath_parser.result;
 	}
+
 
 	void Program::compute_xpath_and_write_results()
 	{
@@ -284,6 +323,7 @@ namespace operations {
 		*gOut << endl;
 	}
 
+
 	void Program::compute_calc_and_write_results()
 	{
 		namespace a = boost::algorithm;
@@ -362,6 +402,7 @@ namespace operations {
 		}
 	}
 
+
 	void Program::compute_calc_file_and_write_results()
 	{
 		assert(!gCalcFile.empty());
@@ -390,6 +431,7 @@ namespace operations {
 		compute_calc_and_write_results();
 		gCalcText = saved_gCalcText;
 	}
+
 
 	void Program::setup_option_descriptions()
 	{
@@ -491,6 +533,7 @@ namespace operations {
 		gPositional.add("in-file", -1);
 		gCmdLine.add(gGeneric).add(gHidden);
 	}
+
 
 	void Program::perform_requested_operation()
 	{
