@@ -33,6 +33,7 @@ namespace simple_xml {
 	namespace ascii = boost::spirit::ascii;
 	constexpr char kDQ = '"';
 	constexpr char kSQ = '\'';
+	inline const auto DQ = qi::lit(kDQ);
 
 	template<typename Iterator>
 	class mini_grammar
@@ -55,6 +56,7 @@ namespace simple_xml {
 		Start_Type attributes;
 		Char_Seq_Rule text_node;
 		Start_Type closing_tag;
+		Start_Type comment;
 		Start_Type xml_header;
 		Start_Type tail;
 		// The following rules are recursive:
@@ -96,7 +98,10 @@ namespace simple_xml {
 		  , xml_header{ qi::lit("<?") > qi::omit[+(qi::char_ - '?' - '<' - '>')] >
 						  qi::lit("?>"),
 						"xml-header" }
-		  , tail{ qi::lexeme[*ascii::print][boost::bind(&This::set_remainder, this, _1)] }
+		  , comment{ qi::lit("<!--") > qi::omit[+(qi::char_ - '>')] > qi::lit("-->"),
+					 "comment" }
+		  , tail{ qi::lexeme[*ascii::print][boost::bind(&This::
+			  set_remainder, this, _1)] }
 		{
 			element %=
 			  qi::lit('<') >>
@@ -105,7 +110,7 @@ namespace simple_xml {
 			  (qi::lit("/>")[boost::bind(&Element_Creator::close_singleton, creator)] |
 			   (qi::lit('>') >> children >> closing_tag));
 
-			sibling = element | text_node;
+			sibling = element | text_node | comment;
 
 			children = *sibling;
 
