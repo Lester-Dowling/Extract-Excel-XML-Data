@@ -221,9 +221,9 @@ namespace operations {
 		int m_visited_row = 0;
 		int m_visited_col = 0;
 
-		void compute_xpath_and_write_results(Node::SP xml_root);
-		void compute_calc_and_write_results(Node::SP xml_root);
-		void compute_calc_file_and_write_results(Node::SP xml_root);
+		void compute_xpath_and_write_results();
+		void compute_calc_and_write_results();
+		void compute_calc_file_and_write_results();
 
 		/**
 		 * Find and put into @c m_titles all the worksheet names in the workbook.
@@ -249,7 +249,7 @@ namespace operations {
 		 * Visit all XML nodes and print their text, only.  No attributes are
 		 * printed.
 		 */
-		bool write_text_visit(excel_xml_parser::Node_Visitor&);
+		bool write_text_visit(simple_xml::Element_Visitor&);
 
 		/**
 		 * Extract a single data cell, usually specified exactly by a precise

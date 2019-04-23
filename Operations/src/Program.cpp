@@ -253,39 +253,39 @@ namespace operations {
 		return true;
 	}
 
-	bool Program::write_text_visit(excel_xml_parser::Node_Visitor& visitor)
+	bool Program::write_text_visit(simple_xml::Element_Visitor& visitor)
 	{
-		assert(visitor.wkt() == 1);
 		if (m_visited_row == 0)
-			m_visited_row = visitor.row();
+			m_visited_row = visitor.current().row_idx;
 
-		if (m_visited_row != visitor.row()) {
-			m_visited_row = visitor.row();
+		if (m_visited_row != visitor.current().row_idx) //
+		{
+			m_visited_row = visitor.current().row_idx;
 			m_visited_col = 0;
 			*gOut << endl;
 		}
 
 		if (gEnumerateRows && m_visited_col == 0)
-			*gOut << std::setw(4) << visitor.row() << " \t ";
+			*gOut << std::setw(4) << visitor.current().row_idx << " \t ";
 		else if (0 < m_visited_col)
 			*gOut << " \t ";
 
 		if (gEachArithmeticExpression.empty()) {
 			// No arithmetic expression to evaluate.  Print raw text, only:
-			*gOut << visitor.text();
+			*gOut << visitor.current().text();
 		}
 		else { // Else, parse arithmetic expression for each visited:
 			try {
-				gCalculator.set_symbol("DATA", std::stod(visitor.text()));
+				gCalculator.set_symbol("DATA", std::stod(visitor.current().text()));
 				*gOut << std::fixed << std::setprecision(this->precision())
 					  << gCalculator.evaluate(gEachArithmeticExpression);
 			}
 			catch (std::invalid_argument const&) {
 				// visitor.text() is not a number, so ignore arithmetic expression:
-				*gOut << visitor.text();
+				*gOut << visitor.current().text();
 			}
 		}
-		m_visited_col = visitor.col();
+		m_visited_col = visitor.current().col_idx;
 		return true;
 	}
 
@@ -380,7 +380,7 @@ namespace operations {
 		return xpath_parser.result;
 	}
 
-	void Program::compute_xpath_and_write_results(Node::SP xml_root)
+	void Program::compute_xpath_and_write_results()
 	{
 		using boost::regex;
 		using boost::regex_match;
@@ -460,15 +460,14 @@ namespace operations {
 			full_xpath_text += gXPathText;
 		}
 
-		excel_xml_parser::Node_Filter::all_siblings(
-		  xml_root,
-		  parse_xpath_text(full_xpath_text),
-		  m_titles,
-		  boost::bind(&Program::write_text_visit, this, _1));
+		m_documents.back()
+		  .filter()
+		  .set_filter_path(parse_xpath_text(full_xpath_text))
+		  .visit_all_depth_first(boost::bind(&Program::write_text_visit, this, _1));
 		*gOut << endl;
 	}
 
-	void Program::compute_calc_and_write_results(Node::SP xml_root)
+	void Program::compute_calc_and_write_results()
 	{
 		namespace a = boost::algorithm;
 		assert(!gCalcText.empty());
@@ -546,7 +545,7 @@ namespace operations {
 		}
 	}
 
-	void Program::compute_calc_file_and_write_results(Node::SP xml_root)
+	void Program::compute_calc_file_and_write_results()
 	{
 		assert(!gCalcFile.empty());
 		f::path calc_script_path{ gCalcFile };
@@ -571,7 +570,7 @@ namespace operations {
 		  std::istream_iterator<char>(calc_script_stream),
 		  std::istream_iterator<char>(),
 		  std::back_inserter(gCalcText));
-		compute_calc_and_write_results(xml_root);
+		compute_calc_and_write_results();
 		gCalcText = saved_gCalcText;
 	}
 
@@ -715,13 +714,13 @@ namespace operations {
 			}
 
 			if (!gCalcFile.empty())
-				compute_calc_file_and_write_results(xml_root); // gCalcFile
+				compute_calc_file_and_write_results(); // gCalcFile
 
 			if (!gCalcText.empty())
-				compute_calc_and_write_results(xml_root); // gCalcText
+				compute_calc_and_write_results(); // gCalcText
 
 			if (!gXPathText.empty())
-				compute_xpath_and_write_results(xml_root); // gXPathText
+				compute_xpath_and_write_results(); // gXPathText
 		}
 	}
 } // namespace operations
