@@ -134,10 +134,8 @@ namespace operations {
 					int lim = kSymSizeLimit;
 					char ch;
 					_sym.clear();
-					// _sym += ch;
 					while (_input->get(ch) && ch != ')' && 0 < lim--)
 						_sym += ch;
-					_input->putback(ch);
 					_curr_tok = RP;
 					if (lim <= 0)
 						throw runtime_error{ "Date string too long" };
