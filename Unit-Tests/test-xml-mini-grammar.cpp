@@ -42,7 +42,7 @@ namespace {
 	{
 		if (!f::exists(xml_path))
 			throw runtime_error{ "No such file: " + xml_path.string() };
-		f::fstream xml_stream{ xml_path };
+		f::ifstream xml_stream{ xml_path };
 		if (!xml_stream)
 			throw runtime_error{ "Could not open file: " + xml_path.string() };
 		boost::system::error_code ec;
