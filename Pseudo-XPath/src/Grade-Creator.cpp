@@ -56,9 +56,11 @@ namespace pseudo_xpath {
 			try {
 				filter_number = std::stoi(v);
 				good_filter_number = true;
-			} catch (std::invalid_argument const&) {
+			}
+			catch (std::invalid_argument const&) {
 				good_filter_number = false;
 			}
+		current_grade->is_alternation = n.empty();
 		current_grade->attribute_filters.emplace_back(
 		  Attribute_Filter{ (n.empty() ? current_grade->name() : n),
 							op,

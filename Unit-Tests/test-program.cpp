@@ -181,7 +181,7 @@ BOOST_AUTO_TEST_CASE(all_data_extraction_1)
 	// Remove spurious left-over after split:
 	for (auto& piece : oss_pieces)
 		a::trim(piece);
-	oss_pieces.remove_if([](string const& ord) { return ord.empty(); });
+	oss_pieces.remove_if([](string const& s) { return s.empty(); });
 	// typedef pieces_t::const_iterator Iter;
 	// for (Iter eitr = expected_output_pieces.begin(), oitr = oss_pieces.begin();
 	//	eitr != expected_output_pieces.end() && oitr != oss_pieces.end(); ++eitr, ++oitr)
@@ -368,7 +368,6 @@ BOOST_AUTO_TEST_CASE(calc_each_constraint_1)
 
 BOOST_AUTO_TEST_CASE(calc_each_constraint_2)
 {
-
 	char* argv[] = //
 	  { program_name,
 		"--row_titles_column=Item",
@@ -391,9 +390,33 @@ BOOST_AUTO_TEST_CASE(calc_each_constraint_2)
 	// Remove spurious left-over after split:
 	for (auto& piece : oss_pieces)
 		a::trim(piece);
-	oss_pieces.remove_if([](string const& ord) { return ord.empty(); });
+	oss_pieces.remove_if([](string const& s) { return s.empty(); });
 	BOOST_TEST(oss_pieces.size() == expected_output_pieces.size());
 	BOOST_TEST(oss_pieces == expected_output_pieces);
+}
+
+BOOST_AUTO_TEST_CASE(implicit_alternation)
+{
+	char* argv[] = //
+	  { program_name, "--xpath=Row[Row>1], Cell[2|3], Data", small_xml_file };
+	constexpr int argc = static_cast<int>(std::size(argv));
+	ostringstream oss;
+	ostringstream ess;
+	Program program{ argc, argv, oss, ess };
+	program.run();
+	BOOST_TEST(ess.str().empty());
+	typedef list<string> pieces_t;
+	pieces_t expected_output_pieces = //
+	  { "285917000", "239981000", "-34138000", "-12077000", "251779000", "227904000" };
+	pieces_t oss_pieces;
+	a::split(oss_pieces, oss.str(), a::is_any_of("\t\n\r"), a::token_compress_on);
+	// Remove spurious left-over after split:
+	for (auto& piece : oss_pieces)
+		a::trim(piece);
+	oss_pieces.remove_if([](string const& s) { return s.empty(); });
+	BOOST_TEST(oss_pieces.size() == expected_output_pieces.size());
+	BOOST_TEST(oss_pieces == expected_output_pieces);
+	// BOOST_TEST_MESSAGE(oss.str());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

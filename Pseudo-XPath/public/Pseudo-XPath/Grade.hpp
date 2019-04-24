@@ -17,7 +17,8 @@ namespace pseudo_xpath {
 	class Grade {
 	public:
 		std::string xml_node_name;
-		std::list<Attribute_Filter> attribute_filters;
+		std::list<Attribute_Filter> attribute_filters; // Default: all filters must be true.
+		bool is_alternation{ false }; // == true => only one filter must be true.
 		std::shared_ptr<Grade> next_grade;
 
 		typedef std::shared_ptr<Grade> SP;

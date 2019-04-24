@@ -99,6 +99,31 @@ BOOST_AUTO_TEST_CASE(implicit_attribute_filter_numbered)
 	BOOST_TEST(Grade::path_to_string(g.result) == "Worksheet[Worksheet=1]");
 }
 
+BOOST_AUTO_TEST_CASE(implicit_attribute_filter_alternation)
+{
+	const char* const xpath_text = "Worksheet[1|2|3]";
+	XPath_Grammar g;
+	std::istringstream sample_stream{ xpath_text };
+	sample_stream.unsetf(std::ios::skipws);
+	sample_stream >> qi::phrase_match(g, ascii::space);
+	BOOST_REQUIRE(sample_stream.good() || sample_stream.eof());
+	int path_depth = 0;
+	Grade::SP v = g.result;
+	BOOST_TEST(v);
+
+	v = v->next();
+	BOOST_TEST(v);
+	path_depth++;
+	BOOST_TEST(path_depth == 1);
+	BOOST_TEST(v->name() == "Worksheet");
+	BOOST_TEST(v->filters().size() == 3);
+	BOOST_TEST(v->filters().front().attribute_name == "Worksheet");
+	BOOST_TEST(v->filters().front().filter_operator == '=');
+	BOOST_TEST(v->filters().front().filter_value == "1");
+	BOOST_TEST(v->filters().front().good_filter_number);
+	BOOST_TEST(Grade::path_to_string(g.result) == "Worksheet[Worksheet=1 Worksheet=2 Worksheet=3]");
+}
+
 BOOST_AUTO_TEST_CASE(column_path_1)
 {
 	const char* const xpath_text =

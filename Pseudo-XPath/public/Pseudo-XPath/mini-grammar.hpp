@@ -126,9 +126,11 @@ namespace pseudo_xpath {
 							 attribute_value_nq }
 		  , implicit_value{ attribute_value_dq | attribute_value_sq | attribute_value_dg }
 		  , binary_filter{ attribute_name >> qi::char_("=<>") >> attribute_value }
-		  , attributes{ implicit_value[boost::bind(&This::add_implicit_filter, this, _1)] |
-						  +binary_filter[boost::bind(&This::add_filter, this, _1)],
-						"attributes" }
+		  , attributes{ 
+			implicit_value[boost::bind(&This::add_implicit_filter, this, _1)] % qi::lit('|')
+			|
+			+binary_filter[boost::bind(&This::add_filter, this, _1)],
+			"attributes" }
 		  , start{ (xml_identifier[boost::bind(&Grade_Creator::new_element, creator, _1)] >>
 					-(qi::lit('[') > attributes > qi::lit(']'))) %
 					 qi::lit(','),
