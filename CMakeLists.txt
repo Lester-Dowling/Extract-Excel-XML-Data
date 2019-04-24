@@ -69,7 +69,7 @@ doxygen_add_docs(
   COMMENT "Generate HTML Documentation"
   )
 
-  #
-  # Info for scripts
-  #
-  file(WRITE "cmake_binary_dir.txt" ${CMAKE_BINARY_DIR})
+#
+# Info for scripts
+#
+file(WRITE "scripts/cmake_binary_dir.txt" ${CMAKE_BINARY_DIR})

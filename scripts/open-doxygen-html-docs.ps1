@@ -16,7 +16,9 @@ Param
 # Audio Player
 #
 New-Variable -Name AUDIO -Scope Script -Force
-$AUDIO = New-Object System.Media.SoundPlayer
+if (-Not($QUIET)) {
+    $AUDIO = New-Object System.Media.SoundPlayer
+}
 
 #
 # Sounds Directory
@@ -41,8 +43,15 @@ Function fatal_error_exit($ERROR_MESSAGE) {   # Fatal error; cannot continue.
 #
 # MAIN
 #
-$WORKSPACE_HASH = Get-Content "${PSScriptRoot}workspace-hash.txt"
-$INDEX_HTML = Resolve-Path "${ENV:USERPROFILE}\CMakeBuilds\${WORKSPACE_HASH}\build\x64-Release\html\index.html" -ErrorAction:Ignore
+if (-Not(Test-Path "${PSScriptRoot}cmake_binary_dir.txt")) {
+    fatal_error_exit "Build the project before viewing the docs."
+}
+$BINARY_DIR = Get-Content "${PSScriptRoot}cmake_binary_dir.txt"
+$BINARY_DIR = Resolve-Path "${BINARY_DIR}" -ErrorAction:Ignore
+if (-Not(Test-Path $BINARY_DIR)) {
+	fatal_error_exit "No such CMake binary directory: $BINARY_DIR"
+}
+$INDEX_HTML = Resolve-Path "${BINARY_DIR}/html/index.html" -ErrorAction:Ignore
 
 if (-Not(Test-Path $INDEX_HTML)) {
 	fatal_error_exit "No such HTML file: $INDEX_HTML"

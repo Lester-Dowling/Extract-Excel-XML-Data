@@ -4,6 +4,7 @@
 # User-specific files
 trash/
 cmake_binary_dir.txt
+workspace-hash.txt
 *.suo
 *.user
 *.userosscache
