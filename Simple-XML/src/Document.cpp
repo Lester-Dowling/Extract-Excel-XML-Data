@@ -40,7 +40,7 @@ namespace simple_xml {
 		m_excel_xml_path = xml_path;
 		if (!f::exists(m_excel_xml_path))
 			throw runtime_error{ "No such file: " + m_excel_xml_path.string() };
-		f::fstream xml_stream{ m_excel_xml_path };
+		f::ifstream xml_stream{ m_excel_xml_path };
 		if (!xml_stream)
 			throw runtime_error{ "Could not open file: " + m_excel_xml_path.string() };
 		boost::system::error_code ec;

@@ -260,3 +260,13 @@ At present, it is not possible to compute arithmetic expressions between items o
 |No.|Description|
 |-|-|
 |0.5.0| First published to GitHub after incubation. |
+
+## Matplotlib
+
+Extract-Excel-XML-Data.exe -p 3 -x "Row[Row>1],Cell[Column<3],Data" -e "[Column=1] date(DATA)" ./price-history.xml
+
+import matplotlib.pyplot as plt
+import numpy as np
+dat = np.loadtxt('graph.dat', delimiter='\t')
+plt.plot(dat[:,0],dat[:,1])
+plt.show()
