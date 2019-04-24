@@ -1,7 +1,7 @@
 ﻿cmake_minimum_required (VERSION 3.12)
 project (
   "Extract-Excel-XML-Data-2017"
-  VERSION 1.0.0
+  VERSION 0.5.0
   DESCRIPTION "A command line tool to extract data from Excel files which were saved in the Excel 2003 XML format."
   )
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

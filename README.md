@@ -40,7 +40,7 @@ Importantly, cell refs are formed by first the row, and secondly the column: **[
 
 ### General calculator
 
-The *--calc* option provides a general calculator.  So, a query can also contain arithmetic:
+The **--calc** option provides a general calculator.  So, a query can also contain arithmetic:
 
 ```PowerShell
     > Extract-Excel-XML-Data --calc '[Operating Revenue][06/17] - [Operating Revenue][06/16]' small-example.xml
@@ -91,7 +91,7 @@ expression:
 ### How many decimal places?
 
 If there are too many digits after the decimal point, that can be adjusted with
-the *--precision* option:
+the **--precision** option:
 
 ```PowerShell
     > Extract-Excel-XML-Data --precision 3 --calc 'NetProfitMargin = [Profit and Loss][Nett Profit][06/17] / [Profit and Loss][Total Revenue][06/17] ; ReturnOnEquity = [Profit and Loss][Nett Profit][06/17] / [Balance Sheet][Total Equity][06/17]' small-example.xml
@@ -102,7 +102,7 @@ the *--precision* option:
 
 ### A file of calc expressions
 
-The arithmetic expressions can be put into a separate text file if there is too much.  The previous example can be separated out into a text file, for instance named *some-financial-ratios.txt*:
+The arithmetic expressions can be put into a separate text file if there is too much and they're unwieldy.  The previous example can be separated out into a text file, for instance named *some-financial-ratios.txt*:
 
 ```Text
     NetProfitMargin = [Profit and Loss][Nett Profit][06/17] / [Profit and Loss][Total Revenue][06/17]
@@ -135,7 +135,7 @@ A description of the tool's available options can be listed by querying for help
 
 ## Extracting many values
 
-The calc command line option is ideal for working with single values.  It does not work with vectors nor matrices.  An alternate command line option is available to extract multiple values: the **--xpath** option.  This option is a pseudo XPath which can extract rows and columns.
+The **--calc** command line option is ideal for working with single values.  It does not work with vectors nor matrices.  An alternate command line option is available to extract multiple values: the **--xpath** option.  This option is a pseudo XPath which can extract rows and columns.
 
 ## Pseudo XPath example
 
@@ -202,7 +202,7 @@ writes the sub-matrix of data without row and column headers:
 > 6.14     149858 \
 > 6.16     84893
 
-Small arithmetic expressions are possible on *each* item of data.  The query:
+Small arithmetic expressions are possible on *each* item of data separately.  The query:
 
 ```PowerShell
     > Extract-Excel-XML-Data --precision 2 --xpath "Row[Row>1], Cell['Volume'], Data" --each "SharesOnIssue = 95226349; 100 * DATA / SharesOnIssue" price-history.xml
@@ -216,4 +216,47 @@ writes the percentage of shares traded:
 > 0.16 \
 > 0.09
 
-It is not possible to compute arithmetic expressions between items of data.  So, for instance, it is not possible to calculate each Close price multiplied by its corresponding Volume.  Arithmetic can only be computed on each item of data, represented by the DATA symbol in an arithmetic expression.
+A date function can convert dates in decimal approximations:
+
+```PowerShell
+    > Extract-Excel-XML-Data --precision 3 --xpath "Row[Row>1], Cell['Date'], Data" --each "date(DATA)" price-history.xml
+```
+
+writes the trading dates as decimals:
+
+> 2018.605 \
+> 2018.603 \
+> 2018.600 \
+> 2018.597 \
+> 2018.589
+
+Or, without the year:
+
+```PowerShell
+    > Extract-Excel-XML-Data --precision 3 --xpath "Row[Row>1], Cell['Date'], Data" --each "date(DATA) - 2018" price-history.xml
+```
+
+writes just the fraction of the day of the year:
+
+> 0.605 \
+> 0.603 \
+> 0.600 \
+> 0.597 \
+> 0.589
+
+At present, it is not possible to compute arithmetic expressions between items of data.  For instance, it is not possible to calculate each Close price multiplied by its corresponding Volume.  Arithmetic can only be computed on each item of data, represented by the DATA symbol in an arithmetic expression.
+
+## To Do
+
+* More unit tests.
+* Better error reporting.
+* Compute arithmetic expressions between items of data.
+* Maybe provide vector and matrix operations.
+* Maybe a plug-in facility.
+* Expand the supported Excel file formats.
+
+## Versions
+
+|No.|Description|
+|-|-|
+|0.5.0| First published to GitHub after incubation. |
