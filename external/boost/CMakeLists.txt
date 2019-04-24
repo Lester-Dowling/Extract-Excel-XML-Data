@@ -69,6 +69,15 @@ if (Boost_FOUND)
 		message(STATUS "Copied: ${DLL_FILENAME}")
 		set(BOOST_REDIST_COPY_LIST
 		  "${BOOST_REDIST_COPY_LIST} \"${DLL_FILENAME}\"")
+
+#
+# Installation
+#
+install(FILES 
+	"${DLL_ABSOLUTE}"
+	DESTINATION bin
+	)
+
 	  endif()
 	  if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 		if(BOOST_LIB_ABSOLUTE STREQUAL "debug")

@@ -41,12 +41,16 @@ add_subdirectory("Operations")
 # main is an execution harness around Operations
 add_subdirectory ("main")
 
+#
 # Unit tests
+#
 include(CTest)
 enable_testing()
 add_subdirectory ("Unit-Tests")
 
+#
 # Documentation
+#
 set(DOXYGEN_GENERATE_HTML YES)
 set(DOXYGEN_HTML_DYNAMIC_SECTIONS YES)
 set(DOXYGEN_HTML_EXTRA_STYLESHEET larger-font-sizes.css)
@@ -64,3 +68,8 @@ doxygen_add_docs(
   ALL
   COMMENT "Generate HTML Documentation"
   )
+
+  #
+  # Info for scripts
+  #
+  file(WRITE "cmake_binary_dir.txt" ${CMAKE_BINARY_DIR})

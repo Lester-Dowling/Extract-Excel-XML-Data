@@ -3,6 +3,7 @@
 
 # User-specific files
 trash/
+cmake_binary_dir.txt
 *.suo
 *.user
 *.userosscache
