@@ -36,6 +36,9 @@ namespace operations {
 		static const size_t kSymSizeLimit = 256; // Limit symbol names to this many chars.
 		double _number_value = 0;
 		bool _assignment = false;
+		typedef std::map<std::string, std::string> sym_text_table_t;
+		sym_text_table_t _sym_text_table;
+		std::string _date_format{ "%d/%m/%Y" };
 
 		/**
 		 * The type of items stored in the history list.
@@ -107,6 +110,11 @@ namespace operations {
 		 * Set the value of the specified symbol in the symbol table.
 		 */
 		void set_symbol(std::string const& symbol, double value);
+
+		/**
+		 * Set the value of the specified symbol in the text symbol table.
+		 */
+		void set_symbol_text(std::string const& symbol, std::string const& value);
 
 		/**
 		 * Return the value of the specified symbol in the symbol table.

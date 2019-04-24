@@ -230,4 +230,14 @@ BOOST_AUTO_TEST_CASE(calc_double_arithmetic)
 	BOOST_TEST(diff_sin_pi < 1.0e-16);
 }
 
+BOOST_AUTO_TEST_CASE(date_function)
+{
+	operations::Calculator c;
+	BOOST_TEST(c.evaluate("date(09/08/2018)") == 2018.6054794520548512);
+	BOOST_TEST(c.evaluate("date(08/08/2018)") == 2018.6027397260274938);
+	BOOST_TEST(c.evaluate("date(07/08/2018)") == 2018.5999999999999091);
+	BOOST_TEST(c.evaluate("date(06/08/2018)") == 2018.5972602739725517);
+	BOOST_TEST(c.evaluate("date(03/08/2018)") == 2018.5890410958904795);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

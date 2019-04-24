@@ -68,6 +68,10 @@
 #include <boost/throw_exception.hpp>
 #include <boost/tokenizer.hpp>
 #include <boost/variant/recursive_variant.hpp>
+#include <boost/locale/encoding_utf.hpp>
+#include <boost/date_time/gregorian/gregorian.hpp>
+#include <boost/date_time/format_date_parser.hpp>
+#include <boost/date_time/special_values_parser.hpp>
 
 namespace f = boost::filesystem;
 namespace po = boost::program_options;

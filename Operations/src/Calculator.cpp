@@ -13,6 +13,10 @@
 #endif // DO_TRACE_ljd_numeric_Calculator
 
 namespace operations {
+	namespace g = boost::gregorian;
+	namespace d = boost::date_time;
+	using std::cout;
+	using std::endl;
 
 	Calculator::Calculator()
 	{
@@ -23,16 +27,19 @@ namespace operations {
 	}
 
 
-	void Calculator::set_symbol(const std::string& symbol__, double value__)
+	void Calculator::set_symbol(const std::string& symbol, double value)
 	{
-		_sym_table[symbol__] = value__;
+		_sym_table[symbol] = value;
 	}
 
 
-	double Calculator::get_symbol(const std::string& symbol__)
+	void Calculator::set_symbol_text(std::string const& symbol, std::string const& value)
 	{
-		return _sym_table[symbol__];
+		_sym_text_table[symbol] = value;
 	}
+
+
+	double Calculator::get_symbol(const std::string& symbol) { return _sym_table[symbol]; }
 
 
 	double Calculator::expr()
@@ -102,6 +109,7 @@ namespace operations {
 	double Calculator::prim()
 	{
 		TRACE_CALCULATOR_METHOD;
+		using std::runtime_error;
 		switch (_curr_tok) {
 		case NUMBER: // floating point constant
 			get_token();
@@ -121,88 +129,102 @@ namespace operations {
 			else if (nt == LP) {	   // function call
 				double result = 0;	   // function result
 				std::string fn = _sym; // function name
-				get_token();
 
 				if (fn == "date") {
 					int lim = kSymSizeLimit;
 					char ch;
 					_sym.clear();
-					_sym += ch;
-					while (_input->get(ch) && ch != ')' && 0 < --lim)
+					// _sym += ch;
+					while (_input->get(ch) && ch != ')' && 0 < lim--)
 						_sym += ch;
 					_input->putback(ch);
-					if (lim <= 0)
-						throw std::runtime_error{ "Symbol name too long" };
 					_curr_tok = RP;
-				}
+					if (lim <= 0)
+						throw runtime_error{ "Date string too long" };
+					if (_sym.empty())
+						throw runtime_error{ "Parameter is missing from date function." };
 
-				const double e1 = expr();
-				if (_curr_tok == RP) {
-					// Unary Functions:
-					if (fn == "cos")
-						result = std::cos(e1);
-					else if (fn == "sin")
-						result = std::sin(e1);
-					else if (fn == "tan")
-						result = std::tan(e1);
-					else if (fn == "acos")
-						result = std::acos(e1);
-					else if (fn == "asin")
-						result = std::asin(e1);
-					else if (fn == "atan")
-						result = std::atan(e1);
-					// else if ( fn == "acosh" ) result = precise_math::acoshf(e);
-					// else if ( fn == "asinh" ) result = precise_math::asinhf(e);
-					// else if ( fn == "atanh" ) result = precise_math::atanhf(e);
-					else if (fn == "cosh")
-						result = std::cosh(e1);
-					else if (fn == "sinh")
-						result = std::sinh(e1);
-					else if (fn == "tanh")
-						result = std::tanh(e1);
-					else if (fn == "exp")
-						result = std::exp(e1);
-					// else if ( fn == "exp2" ) result = precise_math::exp2f(e);
-					else if (fn == "log")
-						result = std::log(e1);
-					else if (fn == "log10")
-						result = std::log10(e1);
-					// else if ( fn == "log2" ) result = precise_math::log2f(e);
-					else if (fn == "abs")
-						result = std::abs(e1);
-					else if (fn == "sqrt")
-						result = std::sqrt(e1);
-					// else if ( fn == "erf" ) result = precise_math::erff(e);
-					// else if ( fn == "lgamma" ) result = precise_math::lgammaf(e);
-					// else if ( fn == "tgamma" ) result = precise_math::tgammaf(e);
-					else if (fn == "ceil")
-						result = std::ceil(e1);
-					else if (fn == "floor")
-						result = std::floor(e1);
-					// else if ( fn == "round" ) result = precise_math::roundf(e);
-					else
-						throw std::runtime_error{ "Unknown unary function: " + fn };
+					if (_sym_text_table.count(_sym))
+						_sym = _sym_text_table[_sym];
+
+					d::format_date_parser<g::date, char> p{ _date_format,
+															std::locale{ "C" } };
+					const d::special_values_parser<g::date, char> svp;
+					const g::date parsed_date = p.parse_date(_sym, _date_format, svp);
+					const double the_year = parsed_date.year();
+					const double day_of_year = parsed_date.day_of_year();
+					const double day_ratio = day_of_year / 365.0;
+					result = the_year + day_ratio;
 				}
-				else if (_curr_tok == COMMA) {
+				else {
 					get_token();
-					const double e2 = expr();
+					const double e1 = expr();
 					if (_curr_tok == RP) {
-						// Binary Functions:
-						if (fn == "deltapercent")
-							result = 100.0 * ((e2 - e1) / e1);
+						// Unary Functions:
+						if (fn == "cos")
+							result = std::cos(e1);
+						else if (fn == "sin")
+							result = std::sin(e1);
+						else if (fn == "tan")
+							result = std::tan(e1);
+						else if (fn == "acos")
+							result = std::acos(e1);
+						else if (fn == "asin")
+							result = std::asin(e1);
+						else if (fn == "atan")
+							result = std::atan(e1);
+						// else if ( fn == "acosh" ) result = precise_math::acoshf(e);
+						// else if ( fn == "asinh" ) result = precise_math::asinhf(e);
+						// else if ( fn == "atanh" ) result = precise_math::atanhf(e);
+						else if (fn == "cosh")
+							result = std::cosh(e1);
+						else if (fn == "sinh")
+							result = std::sinh(e1);
+						else if (fn == "tanh")
+							result = std::tanh(e1);
+						else if (fn == "exp")
+							result = std::exp(e1);
+						// else if ( fn == "exp2" ) result = precise_math::exp2f(e);
+						else if (fn == "log")
+							result = std::log(e1);
+						else if (fn == "log10")
+							result = std::log10(e1);
+						// else if ( fn == "log2" ) result = precise_math::log2f(e);
+						else if (fn == "abs")
+							result = std::abs(e1);
+						else if (fn == "sqrt")
+							result = std::sqrt(e1);
+						// else if ( fn == "erf" ) result = precise_math::erff(e);
+						// else if ( fn == "lgamma" ) result = precise_math::lgammaf(e);
+						// else if ( fn == "tgamma" ) result = precise_math::tgammaf(e);
+						else if (fn == "ceil")
+							result = std::ceil(e1);
+						else if (fn == "floor")
+							result = std::floor(e1);
+						// else if ( fn == "round" ) result = precise_math::roundf(e);
 						else
-							throw std::runtime_error{ "Unknown binary function: " + fn };
+							throw runtime_error{ "Unknown unary function: " + fn };
+					}
+					else if (_curr_tok == COMMA) {
+						get_token();
+						const double e2 = expr();
+						if (_curr_tok == RP) {
+							// Binary Functions:
+							if (fn == "deltapercent")
+								result = 100.0 * ((e2 - e1) / e1);
+							else
+								throw runtime_error{ "Unknown binary function: " + fn };
+						}
 					}
 				}
-
 				if (_curr_tok != RP)
-					throw std::runtime_error{ ") expected" };
+					throw runtime_error{ ") expected" };
 				get_token();
 				return result;
 			}
 			else {
 				if (_sym_table.count(_sym) == 0)
-					throw std::runtime_error{ "No such calculator symbol: " + _sym };
+					throw runtime_error{ "No such calculator symbol: " + _sym };
 				return _sym_table[_sym];
 			}
 		}
@@ -213,14 +235,14 @@ namespace operations {
 			get_token();
 			double e = expr();
 			if (_curr_tok != RP)
-				throw std::runtime_error{ ") expected" };
+				throw runtime_error{ ") expected" };
 			get_token();
 			return e;
 		}
 		case END:
 			return 1;
 		default:
-			throw std::runtime_error{ "A number, name or parenthesis was expected" };
+			throw runtime_error{ "A number, name or parenthesis was expected" };
 		}
 	}
 
@@ -281,11 +303,11 @@ namespace operations {
 	}
 
 
-	double Calculator::evaluate(const std::string& expression__)
+	double Calculator::evaluate(const std::string& expression)
 	{
-		TRACE_CALCULATOR_METHOD_PARAM(expression__);
+		TRACE_CALCULATOR_METHOD_PARAM(expression);
 		_history.clear();
-		_sinput.reset(new std::istringstream(expression__));
+		_sinput.reset(new std::istringstream(expression));
 		_input = _sinput.get();
 		double result = 0;
 

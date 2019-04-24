@@ -17,6 +17,7 @@ namespace operations {
 	using std::setw;
 	using std::string;
 	using std::vector;
+	using std::list;
 	namespace ascii = boost::spirit::ascii;
 	namespace qi = boost::spirit::qi;
 	using Grade = pseudo_xpath::Grade;
@@ -185,8 +186,7 @@ namespace operations {
 											  string{ m_each_calc_constraint._operator } };
 				}
 		}
-		else
-			return true;
+		return true;
 	}
 
 
@@ -214,9 +214,11 @@ namespace operations {
 		else // Else, parse arithmetic expression for each visited:
 		  if (constrain_each_calc(visitor.current().row_idx, visitor.current().col_idx)) {
 			try {
-				gCalculator.set_symbol("DATA", std::stod(visitor.current().text()));
-				gCalculator.set_symbol("Data", std::stod(visitor.current().text()));
-				gCalculator.set_symbol("data", std::stod(visitor.current().text()));
+				static const list<string> cap_variations = { "DATA", "Data", "data" };
+				for (auto const& cap_var : cap_variations) {
+					gCalculator.set_symbol(cap_var, std::stod(visitor.current().text()));
+					gCalculator.set_symbol_text(cap_var, visitor.current().text());
+				}
 				*gOut << std::fixed << std::setprecision(this->precision())
 					  << gCalculator.evaluate(gEachCalc);
 			}
