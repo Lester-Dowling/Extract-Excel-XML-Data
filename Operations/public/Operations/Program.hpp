@@ -224,8 +224,9 @@ namespace operations {
 		int m_visited_col = 0;
 
 		void compute_xpath_and_write_results();
-		void compute_calc_and_write_results();
-		void compute_calc_file_and_write_results();
+		void compute_calc();
+		void compute_calc_file();
+		void write_calc_results();
 		bool constrain_each_calc(int current_row_idx, int current_col_idx);
 
 		/**

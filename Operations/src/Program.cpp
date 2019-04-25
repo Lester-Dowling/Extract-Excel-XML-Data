@@ -1,3 +1,4 @@
+#include "..\public\Operations\Program.hpp"
 /**
  * @file   Operations/src/Program.cpp
  * @date   Started Wed 02 Mar 2011 12:02:06 PM EST
@@ -364,7 +365,7 @@ namespace operations {
 	}
 
 
-	void Program::compute_calc_and_write_results()
+	void Program::compute_calc()
 	{
 		namespace a = boost::algorithm;
 		assert(!gCalcText.empty());
@@ -428,22 +429,10 @@ namespace operations {
 		else
 			calc_interpolated = gCalcText;
 		gCalculator.evaluate(calc_interpolated);
-		for (Calculator::History_Item hi : gCalculator.history()) {
-			if (std::holds_alternative<double>(hi)) {
-				*gOut << std::fixed << std::setprecision(this->precision())
-					  << std::get<double>(hi) << endl;
-			}
-			else {
-				const std::string s = std::get<Calculator::Assignment_Pair>(hi).first;
-				const double v = std::get<Calculator::Assignment_Pair>(hi).second;
-				*gOut << s << " = " << std::fixed << std::setprecision(this->precision())
-					  << v << endl;
-			}
-		}
 	}
 
 
-	void Program::compute_calc_file_and_write_results()
+	void Program::compute_calc_file()
 	{
 		assert(!gCalcFile.empty());
 		f::path calc_script_path{ gCalcFile };
@@ -460,7 +449,6 @@ namespace operations {
 			*gErr << "Loading calc script " << calc_script_path.string() << endl;
 
 		// Load the calc script into gCalcText:
-		const string saved_gCalcText = gCalcText;
 		gCalcText.clear();
 		gCalcText.reserve(file_size);
 		calc_script_stream.unsetf(std::ios::skipws); // No white space skipping!
@@ -468,8 +456,23 @@ namespace operations {
 		  std::istream_iterator<char>(calc_script_stream),
 		  std::istream_iterator<char>(),
 		  std::back_inserter(gCalcText));
-		compute_calc_and_write_results();
-		gCalcText = saved_gCalcText;
+		compute_calc();
+	}
+
+	void Program::write_calc_results()
+	{
+		for (Calculator::History_Item hi : gCalculator.history()) {
+			if (std::holds_alternative<double>(hi)) {
+				*gOut << std::fixed << std::setprecision(this->precision())
+					  << std::get<double>(hi) << endl;
+			}
+			else {
+				const std::string s = std::get<Calculator::Assignment_Pair>(hi).first;
+				const double v = std::get<Calculator::Assignment_Pair>(hi).second;
+				*gOut << s << " = " << std::fixed << std::setprecision(this->precision())
+					  << v << endl;
+			}
+		}
 	}
 
 
@@ -613,11 +616,17 @@ namespace operations {
 				continue;
 			}
 
-			if (!gCalcFile.empty())
-				compute_calc_file_and_write_results(); // gCalcFile
+			if (!gCalcText.empty()) {
+				compute_calc(); // gCalcText
+				// Write out calc results only if there is _not_ a calc file:
+				if (gCalcFile.empty())
+					write_calc_results();
+			}
 
-			if (!gCalcText.empty())
-				compute_calc_and_write_results(); // gCalcText
+			if (!gCalcFile.empty()) {
+				compute_calc_file(); // gCalcFile
+				write_calc_results();
+			}
 
 			if (!gXPathText.empty())
 				compute_xpath_and_write_results(); // gXPathText
