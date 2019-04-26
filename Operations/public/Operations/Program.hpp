@@ -141,6 +141,11 @@ namespace operations {
 		Calculator gCalculator;
 
 		/**
+		 * Should calculator output be formatted for LaTeX input?
+		 */
+		bool gLaTeXFormatCalc{ false };
+
+		/**
 		 * Precision of calculator outputs.
 		 */
 		int gPrecision{ -1 };

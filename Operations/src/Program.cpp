@@ -469,8 +469,12 @@ namespace operations {
 			else {
 				const std::string s = std::get<Calculator::Assignment_Pair>(hi).first;
 				const double v = std::get<Calculator::Assignment_Pair>(hi).second;
-				*gOut << s << " = " << std::fixed << std::setprecision(this->precision())
-					  << v << endl;
+				if (gLaTeXFormatCalc)
+					*gOut << "\\def\\" << s << '{' << std::fixed
+						  << std::setprecision(this->precision()) << v << '}' << endl;
+				else
+					*gOut << s << " = " << std::fixed
+						  << std::setprecision(this->precision()) << v << endl;
 			}
 		}
 	}
@@ -509,6 +513,10 @@ namespace operations {
 		   "Number of decimal places for output from the calculator.  Default is maximum "
 		   "precision.")
 		  // --------------------------------------------------------------
+		  ("latex_format,l",
+		   po::bool_switch(&gLaTeXFormatCalc)->default_value(false),
+		   "Format calculator output suitable for input to LaTeX.")
+		  // -----------------------------------------------------------------
 		  ("default_worksheet,d",
 		   po::value<string>(&gDefaultWorksheet)->default_value("1"),
 		   "Worksheet to operate on when no worksheet ref is otherwise specified.  "
