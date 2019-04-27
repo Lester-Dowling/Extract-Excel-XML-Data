@@ -43,10 +43,11 @@ Function fatal_error_exit($ERROR_MESSAGE) {   # Fatal error; cannot continue.
 #
 # MAIN
 #
-if (-Not(Test-Path "${PSScriptRoot}cmake_binary_dir.txt")) {
-    fatal_error_exit "Build the project before viewing the docs."
+$CMAKE_BINARY_DIR_FILE = Resolve-Path "${PSScriptRoot}/cmake_binary_dir.txt" -ea:Ignore
+if (-Not($CMAKE_BINARY_DIR_FILE)) {
+    fatal_error_exit "Build the project before viewing the docs.  Missing: $CMAKE_BINARY_DIR_FILE"
 }
-$BINARY_DIR = Get-Content "${PSScriptRoot}cmake_binary_dir.txt"
+$BINARY_DIR = Get-Content $CMAKE_BINARY_DIR_FILE
 $BINARY_DIR = Resolve-Path "${BINARY_DIR}" -ErrorAction:Ignore
 if (-Not(Test-Path $BINARY_DIR)) {
 	fatal_error_exit "No such CMake binary directory: $BINARY_DIR"
