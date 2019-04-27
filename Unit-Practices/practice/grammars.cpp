@@ -1,22 +1,23 @@
-// Unit-Tests/test/grammars.cpp
-// Started 15 Aug 2018
+/**
+ * @file   Unit-Practices/practice/grammars.cpp
+ * @date   Started 2018-08-15
+ * @author Lester J. Dowling
+ */
 #include "pch-practice.hpp"
 #include <boost/test/unit_test.hpp>
 namespace utf = boost::unit_test;
 
 /*
- * Unit tests to verify the correct operation of grammars.
+ * Practise and learn about the correct operation of grammars.
  */
 
-BOOST_AUTO_TEST_SUITE(test_grammars_suite, *utf::enabled())
-
+BOOST_AUTO_TEST_SUITE(practice_grammars_suite, *utf::enabled())
 namespace practice {
 	namespace qi = boost::spirit::qi;
 	namespace ascii = boost::spirit::ascii;
 
 	template<typename Iterator>
-	struct word_list_verifier : qi::grammar<Iterator, ascii::space_type>
-	{
+	struct word_list_verifier : qi::grammar<Iterator, ascii::space_type> {
 		qi::rule<Iterator, ascii::space_type> start, word;
 
 		word_list_verifier()
@@ -28,8 +29,8 @@ namespace practice {
 	};
 
 	template<typename Iterator>
-	struct word_list : qi::grammar<Iterator, std::vector<std::string>(), ascii::space_type>
-	{
+	struct word_list
+	  : qi::grammar<Iterator, std::vector<std::string>(), ascii::space_type> {
 		qi::rule<Iterator, std::vector<std::string>(), ascii::space_type> start;
 		qi::rule<Iterator, std::string(), ascii::space_type> word;
 
@@ -42,8 +43,8 @@ namespace practice {
 	};
 
 	template<typename Iterator>
-	struct head_word : qi::grammar<Iterator, std::vector<std::string>(), ascii::space_type>
-	{
+	struct head_word
+	  : qi::grammar<Iterator, std::vector<std::string>(), ascii::space_type> {
 		qi::rule<Iterator, std::vector<std::string>(), ascii::space_type> start;
 		qi::rule<Iterator, std::string(), ascii::space_type> head;
 		qi::rule<Iterator, std::string(), ascii::space_type> tail;

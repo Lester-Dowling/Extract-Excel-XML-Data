@@ -1,4 +1,8 @@
-// Unit-Tests/test/parsers.cpp
+/**
+ * @file   Unit-Practices/practice/parsers.cpp
+ * @date   Started 2019-04-7
+ * @author Lester J. Dowling
+ */
 #include "pch-practice.hpp"
 #include "testing-factor/mini-xml-tag.hpp"
 #include "testing-factor/opening-tag.hpp"
@@ -7,10 +11,10 @@
 namespace utf = boost::unit_test;
 
 /*
- * Unit tests used to develop an understanding of parsers.
+ * Practise and develop an understanding of parsers.
  */
 
-BOOST_AUTO_TEST_SUITE(test_parsers_suite, *utf::enabled())
+BOOST_AUTO_TEST_SUITE(practice_parsers_suite, *utf::enabled())
 namespace practice {
 	namespace qi = boost::spirit::qi;
 	namespace ascii = boost::spirit::ascii;

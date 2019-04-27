@@ -1,5 +1,8 @@
-// Unit-Tests/test-calculator.cpp
-// Started 7 Apr 2019
+/**
+ * @file   Unit-Tests/test-calculator.cpp
+ * @date   Started 2019-04-7
+ * @author Lester J. Dowling
+ */
 #include "pch-unit-tests.hpp"
 #include <boost/test/unit_test.hpp>
 #include "Operations/Program.hpp"

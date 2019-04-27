@@ -1,22 +1,20 @@
-// Unit-Tests/test/regex.cpp
-// Started 12 Apr 2019
+/**
+ * @file   Unit-Practices/practice/regex.cpp
+ * @date   Started 2019-04-12
+ * @author Lester J. Dowling
+ */
 #include "pch-practice.hpp"
 #include <boost/test/unit_test.hpp>
-#include "Operations/Program.hpp"
 #include "Operations/string-functions.hpp"
 namespace utf = boost::unit_test;
 namespace a = boost::algorithm;
 using boost::regex;
 using boost::regex_match;
 using boost::smatch;
-using operations::Program;
-using std::make_shared;
-using std::setw;
-using std::shared_ptr;
 using std::string;
 
 /*
- * Unit tests to verify the correct performance of regex expressions.
+ * Practise and verify the correct performance of regex expressions.
  */
 
 BOOST_AUTO_TEST_SUITE(test_regex_suite, *utf::enabled())
@@ -89,7 +87,8 @@ BOOST_AUTO_TEST_CASE(start_workbook)
 			if (regex_match(gXPathText, workbook_filter_match, workbook_filter_regex)) {
 				full_xpath_text += workbook_filter_match[1];
 				gXPathText = workbook_filter_match[2];
-			} else
+			}
+			else
 				gXPathText = workbook_match[1];
 		}
 		BOOST_TEST(a::starts_with(full_xpath_text, "Workbook"));
@@ -100,7 +99,7 @@ BOOST_AUTO_TEST_CASE(start_workbook)
 BOOST_AUTO_TEST_CASE(continue_worksheet)
 {
 	const char* should_pass[] = {
-		", Worksheet, Table ",	//
+		", Worksheet, Table ",	  //
 		",   Worksheet",		  //
 		", Worksheet[something]", //
 		", Table"				  //
@@ -123,14 +122,16 @@ BOOST_AUTO_TEST_CASE(continue_worksheet)
 			if (regex_match(gXPathText, worksheet_filter_match, worksheet_filter_regex)) {
 				full_xpath_text += worksheet_filter_match[1];
 				gXPathText = worksheet_filter_match[2];
-			} else {
+			}
+			else {
 				full_xpath_text += '[';
 				operations::append_quoted_if_not_number(
 				  full_xpath_text, gDefaultWorksheet, "Default worksheet ref is missing.");
 				full_xpath_text += ']';
 				gXPathText = worksheet_match[1];
 			}
-		} else {
+		}
+		else {
 			full_xpath_text += '[';
 			operations::append_quoted_if_not_number(
 			  full_xpath_text, gDefaultWorksheet, "Default worksheet ref is missing.");
@@ -168,7 +169,8 @@ BOOST_AUTO_TEST_CASE(continue_table)
 			if (regex_match(gXPathText, table_filter_match, table_filter_regex)) {
 				full_xpath_text += table_filter_match[1];
 				gXPathText = table_filter_match[2];
-			} else
+			}
+			else
 				gXPathText = table_match[1];
 		}
 		full_xpath_text += gXPathText;
@@ -208,7 +210,8 @@ BOOST_AUTO_TEST_CASE(workbook_worksheet_table)
 			if (regex_match(gXPathText, workbook_filter_match, workbook_filter_regex)) {
 				full_xpath_text += workbook_filter_match[1];
 				gXPathText = workbook_filter_match[2];
-			} else
+			}
+			else
 				gXPathText = workbook_match[1];
 		}
 
@@ -224,14 +227,16 @@ BOOST_AUTO_TEST_CASE(workbook_worksheet_table)
 			if (regex_match(gXPathText, worksheet_filter_match, worksheet_filter_regex)) {
 				full_xpath_text += worksheet_filter_match[1];
 				gXPathText = worksheet_filter_match[2];
-			} else {
+			}
+			else {
 				full_xpath_text += '[';
 				operations::append_quoted_if_not_number(
 				  full_xpath_text, gDefaultWorksheet, "Default worksheet ref is missing.");
 				full_xpath_text += ']';
 				gXPathText = worksheet_match[1];
 			}
-		} else {
+		}
+		else {
 			full_xpath_text += '[';
 			operations::append_quoted_if_not_number(
 			  full_xpath_text, gDefaultWorksheet, "Default worksheet ref is missing.");
@@ -248,7 +253,8 @@ BOOST_AUTO_TEST_CASE(workbook_worksheet_table)
 			if (regex_match(gXPathText, table_filter_match, table_filter_regex)) {
 				full_xpath_text += table_filter_match[1];
 				gXPathText = table_filter_match[2];
-			} else
+			}
+			else
 				gXPathText = table_match[1];
 		}
 		full_xpath_text += gXPathText;

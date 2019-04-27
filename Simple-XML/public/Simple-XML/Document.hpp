@@ -92,7 +92,7 @@ namespace simple_xml {
 		/**
 		 * Find the row titles in each worksheet.
 		 */
-		void extract_row_titles(const std::string row_titles_column = "1");
+		void extract_row_titles(std::string row_titles_column = "1");
 
 		/**
 		 * Accessor for the index of the first row where the data of the worksheet starts.

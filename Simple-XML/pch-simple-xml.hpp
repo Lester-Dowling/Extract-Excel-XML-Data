@@ -53,5 +53,5 @@
 #include <boost/variant/recursive_variant.hpp>
 #include <boost/algorithm/string/find.hpp>
 #include <boost/algorithm/string/split.hpp>
-
+#include <boost/algorithm/string/compare.hpp>
 #include "config.h"

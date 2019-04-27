@@ -1,4 +1,8 @@
-// Unit-Tests/test/fusion.cpp
+/**
+ * @file   Unit-Practices/practice/fusion.cpp
+ * @date   Started 2018-08-5
+ * @author Lester J. Dowling
+ */
 #include "pch-practice.hpp"
 #include "testing-factor/mini-xml-tag.hpp"
 #include "testing-factor/opening-tag.hpp"
@@ -7,10 +11,10 @@
 namespace utf = boost::unit_test;
 
 /*
- * Unit tests used to develop a correct parser for an XML tag.
+ * Practise and develop a correct parser for an XML tag.
  */
 
-BOOST_AUTO_TEST_SUITE(test_fusion_suite, *utf::enabled())
+BOOST_AUTO_TEST_SUITE(practice_fusion_suite, *utf::enabled())
 namespace {
 	practice::mini_xml_tag trial_mini_xml_tag(const std::string sample_input)
 	{
@@ -21,11 +25,11 @@ namespace {
 		practice::mini_xml_tag result;
 		BOOST_REQUIRE(qi::phrase_parse(
 		  sample_input.begin(), sample_input.end(), g, ascii::space, result));
-		//std::ostringstream oss;
-		//oss << "Result: " << std::endl;
-		//oss << "    Name       = " << result.name << std::endl;
-		//oss << "    Attributes = " << result.attributes << std::endl;
-		//BOOST_TEST_MESSAGE(oss.str());
+		// std::ostringstream oss;
+		// oss << "Result: " << std::endl;
+		// oss << "    Name       = " << result.name << std::endl;
+		// oss << "    Attributes = " << result.attributes << std::endl;
+		// BOOST_TEST_MESSAGE(oss.str());
 		return result;
 	}
 } // namespace

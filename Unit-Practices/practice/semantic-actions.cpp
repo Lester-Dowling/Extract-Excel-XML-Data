@@ -1,4 +1,8 @@
-// Unit-Tests/test/semantic-actions.cpp
+/**
+ * @file   Unit-Practices/practice/semantic-actions.cpp
+ * @date   Started 2019-04-12
+ * @author Lester J. Dowling
+ */
 #include "pch-practice.hpp"
 #include <boost/test/unit_test.hpp>
 #include "testing-factor/mini-xml-tag.hpp"
@@ -8,17 +12,16 @@
 namespace utf = boost::unit_test;
 
 /*
- * Unit tests used to develop an understanding of parsers.
+ * Practise and develop an understanding of semantic actions.
  */
 
-BOOST_AUTO_TEST_SUITE(test_semantic_actions_suite, *utf::enabled())
+BOOST_AUTO_TEST_SUITE(practice_semantic_actions_suite, *utf::enabled())
 namespace practice {
 	namespace qi = boost::spirit::qi;
 	namespace ascii = boost::spirit::ascii;
 
 	template<typename Iterator>
-	struct int_parser : qi::grammar<Iterator, void(), ascii::space_type>
-	{
+	struct int_parser : qi::grammar<Iterator, void(), ascii::space_type> {
 		typedef int_parser<Iterator> This;
 		typedef int Result_Type;
 		Result_Type result = 0;
@@ -34,8 +37,7 @@ namespace practice {
 	};
 
 	template<typename Iterator>
-	struct coords_parser : qi::grammar<Iterator, void(), ascii::space_type>
-	{
+	struct coords_parser : qi::grammar<Iterator, void(), ascii::space_type> {
 		typedef coords_parser<Iterator> This;
 		typedef std::pair<double, double> Result_Type;
 		Result_Type result{};
@@ -53,8 +55,7 @@ namespace practice {
 	};
 
 	template<typename Iterator>
-	struct assignment_parser : qi::grammar<Iterator, void(), ascii::space_type>
-	{
+	struct assignment_parser : qi::grammar<Iterator, void(), ascii::space_type> {
 		typedef assignment_parser<Iterator> This;
 		typedef std::pair<std::string, std::string> Result_Type;
 		Result_Type result{};

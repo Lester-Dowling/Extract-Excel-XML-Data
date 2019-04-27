@@ -1,14 +1,17 @@
-// Unit-Tests/test/filter-path.cpp
-// Started 15 Aug 2018
+/**
+ * @file   Unit-Practices/practice/initializer_list.cpp
+ * @date   Started 2018-08-15
+ * @author Lester J. Dowling
+ */
 #include "pch-practice.hpp"
 #include <boost/test/unit_test.hpp>
 namespace utf = boost::unit_test;
 
 /*
- * Unit tests to verify the correct operation of filter paths.
+ * Practice and learn about the operation of initializer_lists.
  */
 
-BOOST_AUTO_TEST_SUITE(test_filter_path_suite, *utf::enabled())
+BOOST_AUTO_TEST_SUITE(practice_initializer_lists_suite, *utf::enabled())
 namespace {
 	int sum(std::initializer_list<int> numbers)
 	{

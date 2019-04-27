@@ -50,7 +50,8 @@ namespace operations {
 		string gDefaultWorksheet{ "1" };
 
 		/**
-		 * The column which contains the titles for each row.
+		 * The column(s) which contains the titles for each row.  This can be a csv list
+		 * which specifies multiple columns for a single composed row title.
 		 */
 		string gRowTitlesColumn{ "1" };
 

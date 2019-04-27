@@ -13,11 +13,12 @@
 #include "Pseudo-XPath/mini-grammar.hpp"
 
 namespace simple_xml {
+	using std::cout;
+	using std::endl;
+	using std::list;
 	using std::runtime_error;
 	using std::string;
 	using std::vector;
-	using std::cout;
-	using std::endl;
 	namespace ascii = boost::spirit::ascii;
 	namespace qi = boost::spirit::qi;
 	namespace f = boost::filesystem;
@@ -33,7 +34,6 @@ namespace simple_xml {
 	{
 		this->load_xml_file(xml_path);
 	}
-
 
 	void Document::load_xml_file(const f::path xml_path)
 	{
@@ -66,7 +66,6 @@ namespace simple_xml {
 		extract_worksheet_titles();
 	}
 
-
 	static Grade::SP parse_xpath(const string xpath_text)
 	{
 		XPath_Grammar xpath_parser;
@@ -76,7 +75,6 @@ namespace simple_xml {
 			throw runtime_error{ "Failed to parse this XPath: " + xpath_text };
 		return xpath_parser.result;
 	}
-
 
 	void Document::extract_worksheet_titles()
 	{
@@ -88,15 +86,13 @@ namespace simple_xml {
 			  if (ele.name() == "Worksheet") {
 				  if (ele.attribute("ss:Name").has_value()) {
 					  m_titles.add_worksheet(ele.wkt_idx, *ele.attribute("ss:Name"));
-				  }
-				  else {
+				  } else {
 					  m_titles.add_worksheet(ele.wkt_idx, std::to_string(ele.wkt_idx));
 				  }
 			  }
 			  return true;
 		  });
 	}
-
 
 	void Document::extract_column_titles(int column_titles_row, int column_title_span)
 	{
@@ -117,8 +113,7 @@ namespace simple_xml {
 				  BOOST_ASSERT(ele.name() == "Data");
 				  if (!ele.text().empty()) {
 					  m_titles.add_col(wkt_idx, ele.col_idx, ele.text());
-				  }
-				  else {
+				  } else {
 					  m_titles.add_col(
 						ele.wkt_idx, ele.col_idx, std::to_string(ele.col_idx));
 				  }
@@ -127,35 +122,37 @@ namespace simple_xml {
 		}
 	}
 
-
-	void Document::extract_row_titles(const std::string row_titles_column)
+	void Document::extract_row_titles(std::string row_titles_column)
 	{
-		m_row_titles_column = row_titles_column;
-		if (m_row_titles_column.empty())
-			m_row_titles_column = "1";
-		else {
-			// Translate a single capital letter to a column number.  For example, given "-m
-			// C" on the command line, translate that to "-m 3".
-			if (m_row_titles_column.size() == 1) {
-				if (std::isupper(m_row_titles_column.front())) {
-					const int corresponding_column_number =
-					  1 + static_cast<int>(m_row_titles_column.front()) -
-					  static_cast<int>('A');
-					m_row_titles_column = std::to_string(corresponding_column_number);
-				}
+		BOOST_ASSERT(!row_titles_column.empty());
+		namespace a = boost::algorithm;
+		list<string> columns_list;
+		a::split(
+		  columns_list,
+		  row_titles_column,
+		  [](const char c) { return c == ','; },
+		  a::token_compress_on);
+
+		// Translate a single capital letter to a column number.  For example, given "-m
+		// C" on the command line, translate that to "-m 3".
+		if (row_titles_column.size() == 1) {
+			if (std::isupper(row_titles_column.front())) {
+				const int corresponding_column_number =
+				  1 + static_cast<int>(row_titles_column.front()) - static_cast<int>('A');
+				row_titles_column = std::to_string(corresponding_column_number);
 			}
 		}
+
 		bool good_column_number = true;
 		int column_number;
 		try {
-			column_number = std::stoi(m_row_titles_column);
-		}
-		catch (std::invalid_argument const&) {
+			column_number = std::stoi(row_titles_column);
+		} catch (std::invalid_argument const&) {
 			good_column_number = false;
 		}
 
-		const string col_name_filter{ "[Column=\"" + m_row_titles_column + "\"]" };
-		const string col_number_filter{ "[Column=" + m_row_titles_column + "]" };
+		const string col_name_filter{ "[Column=\"" + row_titles_column + "\"]" };
+		const string col_number_filter{ "[Column=" + row_titles_column + "]" };
 		const string& col_filter = good_column_number ? col_number_filter : col_name_filter;
 		for (const int wkt_idx : m_titles.wkt_indices()) {
 			std::ostringstream titles_xpath_oss;
@@ -175,8 +172,7 @@ namespace simple_xml {
 				  }
 				  if (!ele.text().empty()) {
 					  m_titles.add_row(wkt_idx, ele.row_idx, ele.text());
-				  }
-				  else {
+				  } else {
 					  m_titles.add_row(
 						ele.wkt_idx, ele.row_idx, std::to_string(ele.row_idx));
 				  }
@@ -185,7 +181,6 @@ namespace simple_xml {
 		}
 	}
 
-
 	int Document::row_idx_start_of_data() const
 	{
 		BOOST_ASSERT(m_column_titles_row > 0);
@@ -193,13 +188,11 @@ namespace simple_xml {
 		return m_column_titles_row + m_column_title_span - 1;
 	}
 
-
 	bool Document::one_data_visit(simple_xml::Element_Visitor& visitor)
 	{
 		m_one_data = visitor.current().text();
 		return false;
 	}
-
 
 	std::string Document::extract_single_text(Grade::SP xpath_root)
 	{
@@ -209,9 +202,7 @@ namespace simple_xml {
 		return m_one_data;
 	}
 
-
-	inline bool is_comma(char ch) { return ch == ','; }
-
+	inline bool is_comma(const char ch) { return ch == ','; }
 
 	inline string erase_commas(string text)
 	{
@@ -220,12 +211,10 @@ namespace simple_xml {
 		return text;
 	}
 
-
 	double Document::extract_single_number(Grade::SP xpath_root)
 	{
 		return std::stod(erase_commas(extract_single_text(xpath_root)));
 	}
-
 
 	bool Document::write_all_fields_visit(simple_xml::Element_Visitor& visitor)
 	{
@@ -265,7 +254,6 @@ namespace simple_xml {
 		}
 		return true;
 	}
-
 
 	void Document::write_all_fields()
 	{

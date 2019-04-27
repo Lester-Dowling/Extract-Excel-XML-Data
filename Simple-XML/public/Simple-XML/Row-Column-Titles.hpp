@@ -36,7 +36,11 @@ namespace simple_xml {
 	public: //~ Mutators ----------------------------------------------
 		void add_row(const int row_idx, const string title)
 		{
-			m_row_titles[row_idx] = title;
+			const string multiple_row_title_separator{ ", " };
+			if (m_row_titles.count(row_idx))
+				m_row_titles[row_idx] += multiple_row_title_separator + title;
+			else
+				m_row_titles[row_idx] = title;
 			m_previous_row_idx = row_idx;
 		}
 

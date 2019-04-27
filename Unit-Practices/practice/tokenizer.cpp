@@ -1,13 +1,17 @@
-// Unit-Tests/test/tokenizer.cpp
+/**
+ * @file   Unit-Practices/practice/tokenizer.cpp
+ * @date   Started 2019-04-12
+ * @author Lester J. Dowling
+ */
 #include "pch-practice.hpp"
 #include <boost/test/unit_test.hpp>
 namespace utf = boost::unit_test;
 
 /*
- * Unit tests to learn about the operation of Boost tokenizer.
+ * Practise and learn about the operation of Boost tokenizer.
  */
 
-BOOST_AUTO_TEST_SUITE(test_tokenizer_suite, *utf::enabled())
+BOOST_AUTO_TEST_SUITE(practice_tokenizer_suite, *utf::enabled())
 
 BOOST_AUTO_TEST_CASE(break_up_a_phrase_into_words)
 {
