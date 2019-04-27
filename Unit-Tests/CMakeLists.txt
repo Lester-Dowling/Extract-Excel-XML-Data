@@ -23,6 +23,7 @@ endforeach(src_file)
 #
 # Import the subjects for unit testing
 #
+target_link_libraries(${TARGET} PRIVATE "String-Extra")
 target_link_libraries(${TARGET} PRIVATE "Simple-XML")
 target_link_libraries(${TARGET} PRIVATE "Pseudo-XPath")
 target_link_libraries(${TARGET} PRIVATE "Operations")
@@ -60,6 +61,11 @@ if(EXISTS ${LOCAL_PRECOMPILED_CMAKE})
 else()
   message(WARNING "No such repo available: cmake-precompiled-header")
 endif()
+
+#
+# Import String Extra Library
+#
+target_link_libraries(${TARGET} PRIVATE "String-Extra")
 
 #
 # Threads

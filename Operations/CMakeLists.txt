@@ -65,6 +65,11 @@ else()
 endif()
 
 #
+# Import String Extra Library
+#
+target_link_libraries(${TARGET} PRIVATE "String-Extra")
+
+#
 # Import XML Library
 #
 target_link_libraries(${TARGET} PRIVATE "Simple-XML")

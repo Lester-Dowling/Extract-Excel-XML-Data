@@ -67,6 +67,11 @@ if(EXISTS ${LOCAL_PRECOMPILED_CMAKE})
 endif()
 
 #
+# Import String Extra Library
+#
+target_link_libraries(${TARGET} PRIVATE "String-Extra")
+
+#
 # Threads
 #
 target_link_libraries(${TARGET} PRIVATE Threads::Threads)

@@ -161,12 +161,6 @@ namespace operations {
 			return (gPrecision < 0) ? numeric_limits<double>::digits10 + 1 : gPrecision;
 		}
 
-		string xpath_prefix(string worksheet_name);
-
-		string xpath_prefix(const int worksheet_number);
-
-		string xpath_prefix();
-
 	public: //~ Overrides -----------------------------------------------------
 		void setup_option_descriptions() override;
 		void perform_requested_operation() override;

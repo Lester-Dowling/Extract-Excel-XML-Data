@@ -2,6 +2,7 @@
 // Started 7 Apr 2019
 #include "pch-unit-tests.hpp"
 #include <boost/test/unit_test.hpp>
+#include "Pseudo-XPath/forming.hpp"
 #include "Operations/Program.hpp"
 namespace utf = boost::unit_test;
 
@@ -204,7 +205,7 @@ BOOST_AUTO_TEST_CASE(single_cell_data_extraction_1)
 	  "Cell['06/17'], "
 	  " Data ";
 	program.load_xml_file(small_xml_file);
-	const string xpath_text = program.xpath_prefix(1) + one_data_xpath_text;
+	const string xpath_text = pseudo_xpath::prefix(1) + one_data_xpath_text;
 	Grade::SP xpath_root = program.parse_xpath_text(xpath_text);
 	const char* const expected_xpath = //
 	  "Workbook --> Worksheet[Worksheet=1] --> Table --> "

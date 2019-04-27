@@ -26,7 +26,8 @@ BOOST_AUTO_TEST_CASE(wrct_default_ctor)
 {
 	simple_xml::Worksheet_Row_Column_Titles t;
 	BOOST_TEST(t.size() == 0);
-	BOOST_REQUIRE_NO_THROW(t(1));
+	BOOST_REQUIRE_THROW(t(0), std::runtime_error);
+	BOOST_REQUIRE_THROW(t(1), std::runtime_error);
 }
 
 BOOST_AUTO_TEST_CASE(wrct_add_worksheet_1)
@@ -36,6 +37,7 @@ BOOST_AUTO_TEST_CASE(wrct_add_worksheet_1)
 	t.add_worksheet("two");
 	t.add_worksheet("three");
 	BOOST_TEST(t.size() == 3);
+	BOOST_REQUIRE_THROW(t(0), std::runtime_error);
 	BOOST_REQUIRE_NO_THROW(t(1));
 	BOOST_REQUIRE_NO_THROW(t(2));
 	BOOST_REQUIRE_NO_THROW(t(3));

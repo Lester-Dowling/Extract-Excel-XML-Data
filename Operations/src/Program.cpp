@@ -10,7 +10,9 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "Simple-XML/Element-Filter.hpp"
 #include "Pseudo-XPath/mini-grammar.hpp"
-#include "Operations/string-functions.hpp"
+#include "Pseudo-XPath/forming.hpp"
+#include "String-Extra/predicates.hpp"
+#include "String-Extra/forming.hpp"
 
 namespace operations {
 	using std::cout;
@@ -25,6 +27,7 @@ namespace operations {
 	using boost::regex_match;
 	namespace ascii = boost::spirit::ascii;
 	namespace qi = boost::spirit::qi;
+	namespace a = boost::algorithm;
 	using Grade = pseudo_xpath::Grade;
 	using String_Iterator = string::const_iterator;
 	using XPath_Grammar = pseudo_xpath::mini_grammar<String_Iterator>;
@@ -37,30 +40,6 @@ namespace operations {
 	{
 		parse_command_line_options();
 	}
-
-
-	std::string Program::xpath_prefix(std::string worksheet_name)
-	{
-		// Worksheet[ss:Name="Profit Loss"]
-		std::string xp = "Workbook, Worksheet[";
-		operations::append_quoted_if_not_number(
-		  xp, worksheet_name, "Missing worksheet name");
-		xp += "], Table, ";
-		return xp;
-	}
-
-
-	std::string Program::xpath_prefix(const int worksheet_number)
-	{
-		std::ostringstream xp;
-		xp << "Workbook, Worksheet[";
-		xp << worksheet_number;
-		xp << "], Table, ";
-		return xp.str();
-	}
-
-
-	std::string Program::xpath_prefix() { return "Workbook, Worksheet, Table, "; }
 
 
 	void Program::write_worksheet_titles()
@@ -277,7 +256,7 @@ namespace operations {
 		assert(!gXPathText.empty());
 		string full_xpath_text;
 		if (gXPathText == "Data")
-			full_xpath_text = xpath_prefix() + all_data_xpath_text;
+			full_xpath_text = pseudo_xpath::prefix() + all_data_xpath_text;
 		else {
 			full_xpath_text = "Workbook";
 			const regex workbook_regex{ "[[:space:]]*Workbook\\b(.*)" };
@@ -312,7 +291,7 @@ namespace operations {
 				}
 				else {
 					full_xpath_text += '[';
-					operations::append_quoted_if_not_number(
+					string_extra::append_quoted_if_not_number(
 					  full_xpath_text,
 					  gDefaultWorksheet,
 					  "Default worksheet ref is missing.");
@@ -322,7 +301,7 @@ namespace operations {
 			}
 			else {
 				full_xpath_text += '[';
-				append_quoted_if_not_number(
+				string_extra::append_quoted_if_not_number(
 				  full_xpath_text, gDefaultWorksheet, "Default worksheet ref is missing.");
 				full_xpath_text += ']';
 			}
@@ -390,17 +369,17 @@ namespace operations {
 					  worksheet_name = gDefaultWorksheet;
 				  }
 
-				  string cell_ref_xpath_text = xpath_prefix(worksheet_name);
+				  string cell_ref_xpath_text = pseudo_xpath::prefix(worksheet_name);
 
 				  cell_ref_xpath_text += " Row[";
-				  append_quoted_if_not_number(
+				  string_extra::append_quoted_if_not_number(
 					cell_ref_xpath_text, cell_ref_ords.front(), "Empty row ref");
 				  cell_ref_xpath_text += ']';
 				  cell_ref_ords.pop_front(); // Pop the row ref to get to the cell ref.
 
 				  cell_ref_xpath_text += " , ";
 				  cell_ref_xpath_text += "Cell[";
-				  append_quoted_if_not_number(
+				  string_extra::append_quoted_if_not_number(
 					cell_ref_xpath_text, cell_ref_ords.front(), "Empty column ref");
 				  cell_ref_xpath_text += ']';
 				  cell_ref_xpath_text += " , ";

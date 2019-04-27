@@ -1,48 +1,26 @@
 /**
- * @file   Operations/string-functions.hpp
- * @date   Started Wed 10 Apr 2019 7:50:00 AM EST
+ * @file   String-Extra/forming.hpp
+ * @date   Started 2019-04-28
  * @author Lester J. Dowling
  */
 #pragma once
 #include <string>
-#include <iostream>
-#include <sstream>
 #include <algorithm>
-#include <functional>
 #include <stdexcept>
-
+#include <sstream>
 #include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/classification.hpp>
-#include <boost/algorithm/string/find.hpp>
-#include <boost/algorithm/string/find_iterator.hpp>
-#include <boost/algorithm/string/replace.hpp>
-#include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/bind.hpp>
-
-namespace operations {
+#include "String-Extra/predicates.hpp"
+namespace string_extra {
 	namespace a = boost::algorithm;
 	using std::string;
-
-	inline bool is_comma(char ch) { return ch == ','; }
 
 	inline string erase_commas(string text)
 	{
 		text.erase(
 		  std::remove_if(text.begin(), text.end(), boost::bind(is_comma, _1)), text.end());
 		return text;
-	}
-
-	/**
-	 * Return true if the given string is wrapped by single or double quotes.
-	 */
-	inline bool is_quoted(string const& str)
-	{
-		if (str.front() == '\'' && str.back() == '\'')
-			return true;
-		if (str.front() == '"' && str.back() == '"')
-			return true;
-		return false;
 	}
 
 	/**
@@ -71,4 +49,4 @@ namespace operations {
 			// Ref is already quoted, so append as is:
 			bdr += nm;
 	}
-} // namespace operations
+} // namespace string_extra
