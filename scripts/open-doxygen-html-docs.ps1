@@ -49,12 +49,12 @@ if (-Not($CMAKE_BINARY_DIR_FILE)) {
 }
 $BINARY_DIR = Get-Content $CMAKE_BINARY_DIR_FILE
 $BINARY_DIR = Resolve-Path "${BINARY_DIR}" -ErrorAction:Ignore
-if (-Not(Test-Path $BINARY_DIR)) {
+if (-Not($BINARY_DIR)) {
 	fatal_error_exit "No such CMake binary directory: $BINARY_DIR"
 }
 $INDEX_HTML = Resolve-Path "${BINARY_DIR}/html/index.html" -ErrorAction:Ignore
 
-if (-Not(Test-Path $INDEX_HTML)) {
+if (-Not($INDEX_HTML)) {
 	fatal_error_exit "No such HTML file: $INDEX_HTML"
 }
 
