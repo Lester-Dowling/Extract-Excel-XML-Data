@@ -92,12 +92,12 @@ BOOST_AUTO_TEST_CASE(document_column_titles_1)
 	d.extract_column_titles();
 	const vector<string> expected_names_wkt_1 = //
 	  { "Profit and Loss Item", "06/16", "06/17" };
-	BOOST_TEST(d.titles().col_count(1) == 3);
-	BOOST_TEST(d.titles().col_titles(1) == expected_names_wkt_1);
+	BOOST_TEST(d.titles(1).col_count() == 3);
+	BOOST_TEST(d.titles(1).col_titles() == expected_names_wkt_1);
 	const vector<string> expected_names_wkt_2 = //
 	  { "Item", "06/16", "06/17" };
-	BOOST_TEST(d.titles().col_count(2) == 3);
-	BOOST_TEST(d.titles().col_titles(2) == expected_names_wkt_2);
+	BOOST_TEST(d.titles(2).col_count() == 3);
+	BOOST_TEST(d.titles(2).col_titles() == expected_names_wkt_2);
 }
 
 
@@ -112,14 +112,14 @@ BOOST_AUTO_TEST_CASE(document_row_titles_1)
 	d.extract_row_titles();
 	const vector<string> expected_rows_wkt_1 = //
 	  { "Operating Revenue", "Other Revenue", "Total Revenue Excluding Interest" };
-	BOOST_TEST(d.titles().row_count(1) == 3);
-	BOOST_TEST(d.titles().row_titles(1) == expected_rows_wkt_1);
+	BOOST_TEST(d.titles(1).row_count() == 3);
+	BOOST_TEST(d.titles(1).row_titles() == expected_rows_wkt_1);
 	const vector<string> expected_rows_wkt_2 = //
 	  { "CA - Cash",		"CA - Receivables",	   "CA - Prepaid Expenses",
 		"CA - Inventories", "CA - Investments",	   "CA - NCA Held Sale",
 		"CA - Other",		"Total Current Assets" };
-	BOOST_TEST(d.titles().row_count(2) == 8);
-	BOOST_TEST(d.titles().row_titles(2) == expected_rows_wkt_2);
+	BOOST_TEST(d.titles(2).row_count() == 8);
+	BOOST_TEST(d.titles(2).row_titles() == expected_rows_wkt_2);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

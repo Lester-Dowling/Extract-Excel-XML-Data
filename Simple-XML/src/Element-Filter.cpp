@@ -71,7 +71,7 @@ namespace simple_xml {
 			if (filter_name == "Cell" || filter_name == "Column") {
 				if (attribute_match(
 					  ele.col_idx,
-					  m_titles.col_title(ele.wkt_idx, ele.col_idx),
+					  m_titles(ele.wkt_idx).col_title(ele.col_idx),
 					  filter_attribute))
 					continue;
 				else
@@ -80,7 +80,7 @@ namespace simple_xml {
 			else if (filter_name == "Row") {
 				if (attribute_match(
 					  ele.row_idx,
-					  m_titles.row_title(ele.wkt_idx, ele.row_idx),
+					  m_titles(ele.wkt_idx).row_title(ele.row_idx),
 					  filter_attribute))
 					continue;
 				else
@@ -124,7 +124,7 @@ namespace simple_xml {
 			if (filter_name == "Cell" || filter_name == "Column") {
 				if (attribute_match(
 					  ele.col_idx,
-					  m_titles.col_title(ele.wkt_idx, ele.col_idx),
+					  m_titles(ele.wkt_idx).col_title(ele.col_idx),
 					  filter_attribute))
 					return true;
 				else
@@ -133,7 +133,7 @@ namespace simple_xml {
 			else if (filter_name == "Row") {
 				if (attribute_match(
 					  ele.row_idx,
-					  m_titles.row_title(ele.wkt_idx, ele.row_idx),
+					  m_titles(ele.wkt_idx).row_title(ele.row_idx),
 					  filter_attribute))
 					return true;
 				else

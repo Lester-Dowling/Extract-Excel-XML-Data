@@ -13,12 +13,16 @@
 #include "Operations/string-functions.hpp"
 
 namespace operations {
+	using std::cout;
 	using std::endl;
-	using std::runtime_error;
 	using std::setw;
+	using std::runtime_error;
 	using std::string;
 	using std::vector;
 	using std::list;
+	using boost::regex;
+	using boost::smatch;
+	using boost::regex_match;
 	namespace ascii = boost::spirit::ascii;
 	namespace qi = boost::spirit::qi;
 	using Grade = pseudo_xpath::Grade;
@@ -73,12 +77,12 @@ namespace operations {
 		typedef vector<int>::const_iterator Iterator;
 		const vector<int> wkts{ m_documents.back().titles().wkt_indices() };
 		for (Iterator wkt_idx = wkts.begin(); wkt_idx != wkts.end(); wkt_idx++) {
-			const vector<int> cols{ m_documents.back().titles().col_indices(*wkt_idx) };
+			const vector<int> cols{ m_documents.back().titles(*wkt_idx).col_indices() };
 			for (Iterator col_idx = cols.begin(); col_idx != cols.end(); col_idx++) {
 				*gOut << "Worksheet #" << *wkt_idx << ' '
 					  << *m_documents.back().titles().wkt_title(*wkt_idx) << " Column #"
 					  << setw(3) << *col_idx << " --> "
-					  << *m_documents.back().titles().col_title(*wkt_idx, *col_idx) << endl;
+					  << *m_documents.back().titles(*wkt_idx).col_title(*col_idx) << endl;
 			}
 		}
 	}
@@ -89,12 +93,12 @@ namespace operations {
 		typedef vector<int>::const_iterator Iterator;
 		const vector<int> wkts{ m_documents.back().titles().wkt_indices() };
 		for (Iterator wkt_idx = wkts.begin(); wkt_idx != wkts.end(); wkt_idx++) {
-			const vector<int> rows{ m_documents.back().titles().row_indices(*wkt_idx) };
+			const vector<int> rows{ m_documents.back().titles(*wkt_idx).row_indices() };
 			for (Iterator row_idx = rows.begin(); row_idx != rows.end(); row_idx++) {
 				*gOut << "Worksheet #" << *wkt_idx << ' '
 					  << *m_documents.back().titles().wkt_title(*wkt_idx) << " Row #"
 					  << setw(3) << *row_idx << " --> "
-					  << *m_documents.back().titles().row_title(*wkt_idx, *row_idx) << endl;
+					  << *m_documents.back().titles(*wkt_idx).row_title(*row_idx) << endl;
 			}
 		}
 	}
@@ -105,17 +109,15 @@ namespace operations {
 		typedef vector<int>::const_iterator Iterator;
 		const vector<int> wkts{ m_documents.back().titles().wkt_indices() };
 		for (Iterator wkt_idx = wkts.begin(); wkt_idx != wkts.end(); wkt_idx++) {
-			const vector<int> rows{ m_documents.back().titles().row_indices(*wkt_idx) };
-			const vector<int> cols{ m_documents.back().titles().col_indices(*wkt_idx) };
+			const vector<int> rows{ m_documents.back().titles(*wkt_idx).row_indices() };
+			const vector<int> cols{ m_documents.back().titles(*wkt_idx).col_indices() };
 			for (Iterator col_idx = cols.begin(); col_idx != cols.end(); col_idx++) {
 				for (Iterator row_idx = rows.begin(); row_idx != rows.end(); row_idx++) {
 					*gOut << '[' << *m_documents.back().titles().wkt_title(*wkt_idx)
 						  << ']' //
-						  << '['
-						  << *m_documents.back().titles().row_title(*wkt_idx, *row_idx)
+						  << '[' << *m_documents.back().titles(*wkt_idx).row_title(*row_idx)
 						  << ']' //
-						  << '['
-						  << *m_documents.back().titles().col_title(*wkt_idx, *col_idx)
+						  << '[' << *m_documents.back().titles(*wkt_idx).col_title(*col_idx)
 						  << ']' //
 						  << endl;
 				}
@@ -126,9 +128,6 @@ namespace operations {
 
 	bool Program::constrain_each_calc(int current_row_idx, int current_col_idx)
 	{
-		using boost::regex;
-		using boost::smatch;
-		using boost::regex_match;
 		if (m_each_calc_constraint._is_valid && m_each_calc_constraint._no_constraint)
 			return true;
 		if (!m_each_calc_constraint._is_valid) {
@@ -262,10 +261,6 @@ namespace operations {
 
 	Grade::SP Program::parse_xpath_text(const string xpath_text) // , const int wkt_idx)
 	{
-		using std::runtime_error;
-		namespace ascii = boost::spirit::ascii;
-		namespace qi = boost::spirit::qi;
-
 		XPath_Grammar xpath_parser;
 		String_Iterator sitr = xpath_text.begin();
 		String_Iterator const send = xpath_text.end();
@@ -279,9 +274,6 @@ namespace operations {
 
 	void Program::compute_xpath_and_write_results()
 	{
-		using boost::regex;
-		using boost::regex_match;
-		using std::string;
 		assert(!gXPathText.empty());
 		string full_xpath_text;
 		if (gXPathText == "Data")
@@ -588,7 +580,6 @@ namespace operations {
 
 	void Program::perform_requested_operation()
 	{
-		using namespace std;
 		if (gVM.count("in-file") == 0)
 			throw std::runtime_error{ "No files were listed on the command line." };
 		vector<string> const& in_files = gVM["in-file"].as<vector<string>>();

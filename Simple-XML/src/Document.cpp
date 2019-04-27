@@ -86,7 +86,8 @@ namespace simple_xml {
 			  if (ele.name() == "Worksheet") {
 				  if (ele.attribute("ss:Name").has_value()) {
 					  m_titles.add_worksheet(ele.wkt_idx, *ele.attribute("ss:Name"));
-				  } else {
+				  }
+				  else {
 					  m_titles.add_worksheet(ele.wkt_idx, std::to_string(ele.wkt_idx));
 				  }
 			  }
@@ -112,10 +113,11 @@ namespace simple_xml {
 				  BOOST_ASSERT(ele.row_idx == m_column_titles_row);
 				  BOOST_ASSERT(ele.name() == "Data");
 				  if (!ele.text().empty()) {
-					  m_titles.add_col(wkt_idx, ele.col_idx, ele.text());
-				  } else {
-					  m_titles.add_col(
-						ele.wkt_idx, ele.col_idx, std::to_string(ele.col_idx));
+					  m_titles(wkt_idx).add_col(ele.col_idx, ele.text());
+				  }
+				  else {
+					  m_titles(ele.wkt_idx)
+						.add_col(ele.col_idx, std::to_string(ele.col_idx));
 				  }
 				  return true;
 			  });
@@ -147,7 +149,8 @@ namespace simple_xml {
 		int column_number;
 		try {
 			column_number = std::stoi(row_titles_column);
-		} catch (std::invalid_argument const&) {
+		}
+		catch (std::invalid_argument const&) {
 			good_column_number = false;
 		}
 
@@ -171,10 +174,11 @@ namespace simple_xml {
 					  BOOST_ASSERT(ele.col_idx == column_number);
 				  }
 				  if (!ele.text().empty()) {
-					  m_titles.add_row(wkt_idx, ele.row_idx, ele.text());
-				  } else {
-					  m_titles.add_row(
-						ele.wkt_idx, ele.row_idx, std::to_string(ele.row_idx));
+					  m_titles(wkt_idx).add_row(ele.row_idx, ele.text());
+				  }
+				  else {
+					  m_titles(ele.wkt_idx)
+						.add_row(ele.row_idx, std::to_string(ele.row_idx));
 				  }
 				  return true;
 			  });
@@ -241,13 +245,13 @@ namespace simple_xml {
 		cout << setw(12) << "Row:" << ' ' << visitor.current().row_idx << endl;
 		cout << setw(12) << "Col:" << ' ' << visitor.current().col_idx << endl;
 		if (const auto row_title =
-			  m_titles.row_title(visitor.current().wkt_idx, visitor.current().row_idx);
+			  m_titles(visitor.current().wkt_idx).row_title(visitor.current().row_idx);
 			row_title.has_value()) //
 		{
 			cout << setw(12) << "Row Title:" << ' ' << *row_title << endl;
 		}
 		if (const auto col_title =
-			  m_titles.col_title(visitor.current().wkt_idx, visitor.current().col_idx);
+			  m_titles(visitor.current().wkt_idx).col_title(visitor.current().col_idx);
 			col_title.has_value()) //
 		{
 			cout << setw(12) << "Col Title:" << ' ' << *col_title << endl;

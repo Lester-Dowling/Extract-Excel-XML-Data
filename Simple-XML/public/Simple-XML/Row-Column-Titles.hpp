@@ -104,6 +104,30 @@ namespace simple_xml {
 			else
 				return {};
 		}
+
+		/**
+		 * @return A list of all the row titles.
+		 */
+		vector<string> row_titles() const
+		{
+			vector<string> parsed_titles;
+			for (const int row_idx : row_indices()) {
+				parsed_titles.push_back(row_title(row_idx).value());
+			}
+			return parsed_titles;
+		}
+
+		/**
+		 * @return A list of all the column titles.
+		 */
+		vector<string> col_titles() const
+		{
+			vector<string> parsed_titles;
+			for (const int col_idx : col_indices()) {
+				parsed_titles.push_back(col_title(col_idx).value());
+			}
+			return parsed_titles;
+		}
 	};
 
 } // namespace simple_xml

@@ -105,9 +105,17 @@ namespace simple_xml {
 		std::vector<Element> const& elements() const { return m_elements; }
 
 		/**
-		 * Accessor that returns the titles in this document.
+		 * Accessor that returns the worksheet titles in this document.
 		 */
 		Worksheet_Row_Column_Titles const& titles() const { return m_titles; }
+
+		/**
+		 * Accessor that returns the Row-Column titles in this document.
+		 */
+		Row_Column_Titles const& titles(const int wkt_idx) const
+		{
+			return m_titles(wkt_idx);
+		}
 
 		/**
 		 * Accessor for the pathname to the original Excel file.
