@@ -115,6 +115,28 @@ BOOST_AUTO_TEST_CASE(wrct_add_rows_columns_1)
 	BOOST_TEST(t.empty());
 }
 
+BOOST_AUTO_TEST_CASE(wrct_add_multi_cell_row_title)
+{
+	simple_xml::Worksheet_Row_Column_Titles t;
+	BOOST_TEST(t.add_worksheet("one") == 1);
+	BOOST_TEST(t.add_worksheet("two") == 2);
+	constexpr int w_1_idx = 1;
+	constexpr int w_2_idx = 2;
+	const int w_1_r_1_idx = t.add_row(w_1_idx, "title #1 part #1");
+	t.add_row(w_1_idx, w_1_r_1_idx, "part #2");
+	const int w_2_r_1_idx = t.add_row(w_2_idx, "title #2 part #1");
+	t.add_row(w_2_idx, w_2_r_1_idx, "part #2");
+	t.add_row(w_2_idx, w_2_r_1_idx, "part #3");
+	BOOST_TEST(t.row_count(1) == 1);
+	BOOST_TEST(t.row_count(2) == 1);
+	vector<int> w_1_expected_row_indices = { w_1_r_1_idx };
+	vector<int> w_2_expected_row_indices = { w_2_r_1_idx };
+	BOOST_TEST(t.row_indices(1) == w_1_expected_row_indices);
+	BOOST_TEST(t.row_indices(2) == w_2_expected_row_indices);
+	BOOST_TEST(t.row_title(1, w_1_r_1_idx).value() == "title #1 part #1, part #2");
+	BOOST_TEST(t.row_title(2, w_2_r_1_idx).value() == "title #2 part #1, part #2, part #3");
+}
+
 BOOST_AUTO_TEST_CASE(split_columns_list)
 {
 	const string row_titles_column{ "1,  2,  [3]  3" };
@@ -124,7 +146,6 @@ BOOST_AUTO_TEST_CASE(split_columns_list)
 		cout << s << endl;
 	}
 	BOOST_TEST(columns_list.size() == 4);
-
 }
 
 

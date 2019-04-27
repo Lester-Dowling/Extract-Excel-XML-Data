@@ -57,5 +57,23 @@ BOOST_AUTO_TEST_CASE(rct_add)
 	BOOST_TEST(rct.col_title(col_3_idx).value() == "col title #3");
 }
 
+BOOST_AUTO_TEST_CASE(rct_add_multi_cell_row_title)
+{
+	simple_xml::Row_Column_Titles rct{ "worksheet name" };
+	const int row_1_idx = rct.add_row("title #1 part #1");
+	rct.add_row(row_1_idx, "part #2");
+	const int row_2_idx = rct.add_row("title #2 part #1");
+	rct.add_row(row_2_idx, "part #2");
+	rct.add_row(row_2_idx, "part #3");
+	BOOST_TEST(rct.row_count() == 2);
+	BOOST_TEST(rct.col_count() == 0);
+	vector<int> expected_row_indices = { row_1_idx, row_2_idx };
+	vector<int> expected_col_indices;
+	BOOST_TEST(rct.row_indices() == expected_row_indices);
+	BOOST_TEST(rct.col_indices() == expected_col_indices);
+	BOOST_TEST(rct.row_title(row_1_idx).value() == "title #1 part #1, part #2");
+	BOOST_TEST(rct.row_title(row_2_idx).value() == "title #2 part #1, part #2, part #3");
+}
+
 
 BOOST_AUTO_TEST_SUITE_END()

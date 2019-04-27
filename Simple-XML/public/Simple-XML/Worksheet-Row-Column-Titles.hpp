@@ -115,6 +115,12 @@ namespace simple_xml {
 		size_t wkt_count() const noexcept { return m_wrc_titles.size(); }
 
 		/**
+		 * @return the Row-Columns Titles for the specified worksheet.
+		 */
+		Row_Column_Titles& rc_titles(const int wkt_idx);
+		Row_Column_Titles const& rc_titles(const int wkt_idx) const;
+
+		/**
 		 * @return The number of rows within the given worksheet in the titles map.
 		 */
 		size_t row_count(const int wkt_idx, const bool throwing = true) const;
