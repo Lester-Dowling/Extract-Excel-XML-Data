@@ -1,6 +1,6 @@
 #include "pch-unit-tests.hpp"
 #include "GlobalFixture.hpp"
-#include <date/date.h>
+// include <date/date.h>
 #include <boost/test/unit_test.hpp>
 using namespace std;
 
@@ -12,8 +12,8 @@ GlobalFixture::GlobalFixture()
 	cin.exceptions(ios_base::badbit | ios_base::failbit);
 	cout.exceptions(ios_base::badbit | ios_base::failbit | ios_base::eofbit);
 	wcout.exceptions(ios_base::badbit | ios_base::failbit | ios_base::eofbit);
-	using namespace date;
-	wcout << "Unit testing started at " << m_start_time << endl;
+	// using namespace date;
+	// wcout << "Unit testing started at " << m_start_time << endl;
 	// namespace a = boost::algorithm;
 	// const string env_path{ getenv("PATH") };
 	// list<string> env_paths;
@@ -24,10 +24,8 @@ GlobalFixture::GlobalFixture()
 	//}
 }
 
-
 GlobalFixture::~GlobalFixture()
 {
-	using namespace date;
 	const auto m_finish_time = std::chrono::system_clock::now();
 	const auto unit_testing_duration = m_finish_time - m_start_time;
 	// wcout << "Unit testing finished at " << m_finish_time << endl;

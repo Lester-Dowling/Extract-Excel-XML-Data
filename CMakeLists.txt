@@ -47,8 +47,8 @@ add_subdirectory ("main")
 #
 # Unit tests
 #
-include(CTest)
-enable_testing()
+# include(CTest)
+# enable_testing()
 add_subdirectory ("Unit-Tests")
 
 #
