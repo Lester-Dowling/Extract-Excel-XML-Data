@@ -20,6 +20,9 @@ namespace simple_xml {
 	 * Keep all the titles of worksheets, rows and columns in a workbook.
 	 */
 	class Worksheet_Row_Column_Titles {
+		/**
+		 * A mapping from worksheet index to its row and column titles.
+		 */
 		map<int, Row_Column_Titles> m_wrc_titles;
 		int m_previous_wkt_idx = 0;
 

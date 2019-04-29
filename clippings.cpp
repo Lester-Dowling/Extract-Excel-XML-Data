@@ -1,10 +1,3 @@
-#undef TRACE_VISITOR
-
-#ifdef NDEBUG
-#undef TRACE_VISITOR
-#endif
-
-
 
 typedef boost::spirit::basic_istream_iterator<char> Stream_Iterator;
 

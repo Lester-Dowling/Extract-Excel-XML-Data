@@ -1,4 +1,3 @@
-#include "..\public\Operations\Program.hpp"
 /**
  * @file   Operations/src/Program.cpp
  * @date   Started Wed 02 Mar 2011 12:02:06 PM EST

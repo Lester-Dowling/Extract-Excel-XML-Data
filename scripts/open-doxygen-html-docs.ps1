@@ -11,6 +11,17 @@ Param
     [alias("q")]
     $QUIET
 )
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+Add-Type @'
+using System;
+using System.Runtime.InteropServices;
+public class WindowControl {
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool SetForegroundWindow(IntPtr hWnd);
+}
+'@;
 
 #
 # Audio Player
@@ -58,4 +69,21 @@ if (-Not($INDEX_HTML)) {
 	fatal_error_exit "No such HTML file: $INDEX_HTML"
 }
 
-start "$INDEX_HTML"
+$FIREFOX = Get-Command firefox -ErrorAction:Ignore
+if (-Not($FIREFOX)) {
+	fatal_error_exit "No Firefox web browser"
+}
+
+&$FIREFOX "$INDEX_HTML"
+# Wait for Firefox to launch:
+foreach ($TRY_COUNTER in 1..12) {
+    Start-Sleep -Seconds 2
+    [int] $FirefoxWindow = (Get-Process).Where{ $_.MainWindowTitle -match 'Mozilla Firefox$' }  |  Select-Object -ExpandProperty MainWindowHandle
+    if ($FirefoxWindow -ne 0) {
+        break;
+    }
+}
+if ($FirefoxWindow -eq 0) {
+    fatal_error_exit "Invalid window handle for Firefox."
+}
+[WindowControl]::SetForegroundWindow($FirefoxWindow)

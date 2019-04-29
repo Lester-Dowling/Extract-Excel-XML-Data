@@ -7,6 +7,7 @@
 #include <boost/test/unit_test.hpp>
 #include "String-Extra/predicates.hpp"
 #include "String-Extra/forming.hpp"
+#include "String-Extra/convert-and-translate.hpp"
 namespace utf = boost::unit_test;
 
 BOOST_AUTO_TEST_SUITE(test_string_extra_suite, *utf::enabled())
@@ -22,9 +23,11 @@ BOOST_AUTO_TEST_CASE(is_comma_1)
 {
 	BOOST_TEST(string_extra::is_comma(','));
 	std::string all_commas{ ",,,," };
-	BOOST_TEST(std::all_of(all_commas.cbegin(), all_commas.cend(), &string_extra::is_comma));
+	BOOST_TEST(
+	  std::all_of(all_commas.cbegin(), all_commas.cend(), &string_extra::is_comma));
 	std::string any_commas{ "a,bcdef" };
-	BOOST_TEST(std::any_of(all_commas.cbegin(), all_commas.cend(), &string_extra::is_comma));
+	BOOST_TEST(
+	  std::any_of(all_commas.cbegin(), all_commas.cend(), &string_extra::is_comma));
 }
 
 BOOST_AUTO_TEST_CASE(remove_commas_1)
@@ -58,5 +61,14 @@ BOOST_AUTO_TEST_CASE(append_quoted_1)
 	string_extra::append_quoted_if_not_number(bdr, "Z", "unexpected");
 	BOOST_TEST(bdr == "'abc'123'Z'");
 }
+
+
+BOOST_AUTO_TEST_CASE(test_convert_column_title_uppercase_letter)
+{ //
+	using string_extra::convert_column_title_uppercase_letter;
+	const int expected_A = 1;
+	BOOST_TEST(*convert_column_title_uppercase_letter("A") == expected_A);
+}
+      
 
 BOOST_AUTO_TEST_SUITE_END()

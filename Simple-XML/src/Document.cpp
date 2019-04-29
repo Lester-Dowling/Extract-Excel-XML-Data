@@ -19,6 +19,7 @@ namespace simple_xml {
 	using std::runtime_error;
 	using std::string;
 	using std::vector;
+	using std::optional;
 	namespace ascii = boost::spirit::ascii;
 	namespace qi = boost::spirit::qi;
 	namespace f = boost::filesystem;
@@ -123,6 +124,7 @@ namespace simple_xml {
 			  });
 		}
 	}
+
 
 	void Document::extract_row_titles(std::string row_titles_column)
 	{
