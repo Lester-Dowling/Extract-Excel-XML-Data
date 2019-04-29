@@ -30,7 +30,4 @@ target_link_libraries(
   ${TARGET}
   INTERFACE
   Boost::boost
-  Boost::filesystem
-  Boost::program_options
-  Boost::regex
   )

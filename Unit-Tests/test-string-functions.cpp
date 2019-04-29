@@ -17,7 +17,7 @@ BOOST_AUTO_TEST_SUITE(test_string_extra_suite, *utf::enabled())
  */
 
 namespace a = boost::algorithm;
-using std::setw;
+using std::string;
 
 BOOST_AUTO_TEST_CASE(is_comma_1)
 {
@@ -68,7 +68,21 @@ BOOST_AUTO_TEST_CASE(test_convert_column_title_uppercase_letter)
 	using string_extra::convert_column_title_uppercase_letter;
 	const int expected_A = 1;
 	BOOST_TEST(*convert_column_title_uppercase_letter("A") == expected_A);
+	const int expected_Z = 26;
+	BOOST_TEST(*convert_column_title_uppercase_letter("Z") == expected_Z);
+	BOOST_TEST(!convert_column_title_uppercase_letter("Something else").has_value());
 }
+
+
+BOOST_AUTO_TEST_CASE(
+  text_translate_column_title_uppercase_letter)
+{ //
+	using string_extra::translate_column_title_uppercase_letter;
+	BOOST_TEST(translate_column_title_uppercase_letter("A") == string{"1"});
+	BOOST_TEST(translate_column_title_uppercase_letter("Z") == string{"26"});
+	BOOST_TEST(translate_column_title_uppercase_letter("Something else") == string{"Something else"});
+}
+      
       
 
 BOOST_AUTO_TEST_SUITE_END()

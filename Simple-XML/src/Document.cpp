@@ -137,6 +137,7 @@ namespace simple_xml {
 		  [](const char c) { return c == ','; },
 		  a::token_compress_on);
 
+		
 		// Translate a single capital letter to a column number.  For example, given "-m
 		// C" on the command line, translate that to "-m 3".
 		if (row_titles_column.size() == 1) {
@@ -172,9 +173,6 @@ namespace simple_xml {
 				  Element& ele = visitor.current();
 				  BOOST_ASSERT(ele.wkt_idx == wkt_idx);
 				  BOOST_ASSERT(ele.name() == "Data");
-				  if (good_column_number) {
-					  BOOST_ASSERT(ele.col_idx == column_number);
-				  }
 				  if (!ele.text().empty()) {
 					  m_titles(wkt_idx).add_row(ele.row_idx, ele.text());
 				  }
