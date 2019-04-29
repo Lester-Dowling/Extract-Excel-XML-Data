@@ -9,8 +9,6 @@ add_executable (
 set_property(TARGET ${TARGET} PROPERTY CXX_STANDARD 17)
 file(GLOB SRC_TEST_FILES LIST_DIRECTORIES false CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/test-*.cpp")
 target_sources(${TARGET} PRIVATE ${SRC_TEST_FILES})
-file(GLOB IO_SRC_FILES LIST_DIRECTORIES false CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/io/*")
-target_sources(${TARGET} PRIVATE ${IO_SRC_FILES})
 target_include_directories(${TARGET} PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR})
 target_include_directories(${TARGET} PRIVATE
@@ -23,6 +21,7 @@ endforeach(src_file)
 #
 # Import the subjects for unit testing
 #
+target_link_libraries(${TARGET} PRIVATE "IO")
 target_link_libraries(${TARGET} PRIVATE "String-Extra")
 target_link_libraries(${TARGET} PRIVATE "Simple-XML")
 target_link_libraries(${TARGET} PRIVATE "Pseudo-XPath")

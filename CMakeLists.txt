@@ -29,6 +29,9 @@ endif()
 # Make globally available all required external libraries:
 add_subdirectory ("external")
 
+# IO extras library
+add_subdirectory ("IO")
+
 # Simple strings extra library
 add_subdirectory ("String-Extra")
 
