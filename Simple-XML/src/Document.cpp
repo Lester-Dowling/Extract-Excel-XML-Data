@@ -130,13 +130,13 @@ namespace simple_xml {
 	}
 
 
-	string row_filter_columns(const std::string row_titles_column_spec)
+	string row_filter_columns(const int wkt_idx, const std::string row_titles_column_spec)
 	{
 		list<string> row_titles_column_list;
 		a::split(
 		  row_titles_column_list,
 		  row_titles_column_spec,
-		  strings::Is_Comma{},
+		  a::is_any_of(" ,"),
 		  a::token_compress_on);
 		row_titles_column_list.remove_if([](string const& spec) { return spec.empty(); });
 
@@ -145,12 +145,34 @@ namespace simple_xml {
 				"No column given to specify which column has the row titles."
 			};
 
-		string column_filter;
-		bool good_column_number = true;
-		for (std::string row_titles_column : row_titles_column_list) {
-			row_titles_column =
-			  strings::translate_column_title_uppercase_letter(row_titles_column);
 
+		using Iterator = list<string>::const_iterator;
+		Iterator litr = row_titles_column_list.begin();
+		Iterator const lend = row_titles_column_list.end();
+
+		// See if there are any worksheet guards:
+		std::ostringstream wkt_guard_oss;
+		wkt_guard_oss << '[' << wkt_idx << ']';
+		const string wkt_guard{ wkt_guard_oss.str() };
+		Iterator gitr = row_titles_column_list.begin();
+		for (; gitr != lend; ++gitr) {
+			if (*gitr == wkt_guard) {
+				litr = gitr;
+				++litr;
+				break;
+			}
+		}
+
+		string column_filter; // Default to first column for row titles.
+		bool good_column_number = true;
+		for (; litr != lend; ++litr) {
+			std::string row_titles_column = *litr;
+			if ( // Stop traversing the list if this item is a wkt guard:
+			  row_titles_column.size() == 3		  //
+			  && row_titles_column.front() == '[' //
+			  && row_titles_column.back() == ']')
+				break;
+			strings::translate_column_title_uppercase_letter(row_titles_column);
 			int column_number;
 			try {
 				column_number = std::stoi(row_titles_column);
@@ -173,7 +195,7 @@ namespace simple_xml {
 		BOOST_ASSERT(good_column_number);
 		if (column_filter.empty())
 			throw runtime_error{ "Empty column filter for row titles search." };
-		return { "[Column=" + column_filter + "]" };
+		return { "[" + column_filter + "]" };
 	}
 
 
@@ -185,10 +207,11 @@ namespace simple_xml {
 			titles_xpath_oss << "Workbook,"									   //
 							 << "Worksheet[" << wkt_idx << "], Table, "		   //
 							 << "Row[Row>" << row_idx_start_of_data() << "], " //
-							 << "Cell" << row_filter_columns(row_titles_column_spec)
+							 << "Cell"
+							 << row_filter_columns(wkt_idx, row_titles_column_spec)
 							 << ", Data[ss:Type=String]";
+			// cout << titles_xpath_oss.str() << endl;
 			m_filter.set_filter_path(parse_xpath(titles_xpath_oss.str()));
-			// cout << m_filter.filter_path()->to_string() << endl;
 
 			m_filter.visit_all_depth_first(
 			  [&](Element_Visitor& visitor) -> bool //
