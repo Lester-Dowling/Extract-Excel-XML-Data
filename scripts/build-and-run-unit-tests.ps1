@@ -165,8 +165,9 @@ if ($LASTEXITCODE -ne 0) { fatal_error_exit "CMake build failed."; }
 $UNIT_TESTS = Resolve-Path "${BINARY_DIR}/Unit-Tests/Unit-Tests.exe" -ea:ignore
 if (-Not($UNIT_TESTS)) { fatal_error_exit "No UNIT_TESTS path" }
 cls
-&$UNIT_TESTS --color_output=false  --report_level=short  --log_level=message;
-if ($LASTEXITCODE -ne 0) { Write-Host "Last error = $LASTEXITCODE"; fatal_error_exit "Unit tests failed."; }
+Write-Host $UNIT_TESTS
+& $UNIT_TESTS --color_output=false  --report_level=short  --log_level=message;
+if ($LASTEXITCODE -ne 0) { fatal_error_exit "Unit tests failed."; }
 play_finished_sound
 
 
