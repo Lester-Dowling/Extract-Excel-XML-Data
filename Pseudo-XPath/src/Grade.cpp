@@ -29,34 +29,24 @@ namespace pseudo_xpath {
 		return result;
 	}
 
+
 	std::string Grade::to_string()
 	{
-		string grade_path;
-		if (!this->name().empty()) {
-			grade_path = name();
-			grade_path += attribute_filters_to_string();
-		}
-		for (Grade::SP v = next(); v = v->next(); v) {
-			grade_path += " --> " + v->name();
-			grade_path += v->attribute_filters_to_string();
-		}
-		return grade_path;
+		if (name().empty())
+			return {};
+		else
+			return name() + attribute_filters_to_string() +
+				   (next() ? " --> " + next()->to_string() : string{});
 	}
+
 
 	/*static*/ std::string Grade::path_to_string(const SP root)
 	{
 		if (!root)
 			return {};
-		Grade::SP v = root->next();
-		string grade_path;
-		if (v) {
-			grade_path = v->name();
-			grade_path += v->attribute_filters_to_string();
-		}
-		while (v = v->next()) {
-			grade_path += " --> " + v->name();
-			grade_path += v->attribute_filters_to_string();
-		}
-		return grade_path;
+		else if (!root->next())
+			return {};
+		else
+			return root->next()->to_string();
 	}
 } // namespace pseudo_xpath

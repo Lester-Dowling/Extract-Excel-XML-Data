@@ -14,6 +14,7 @@
 #include "IO-Extra/sequence.hpp"
 #include "Strings-Extra/predicates.hpp"
 #include "Strings-Extra/convert-and-translate.hpp"
+#include "Strings-Extra/forming.hpp"
 namespace simple_xml {
 	using std::cout;
 	using std::endl;
@@ -187,7 +188,7 @@ namespace simple_xml {
 							 << "Cell" << row_filter_columns(row_titles_column_spec)
 							 << ", Data[ss:Type=String]";
 			m_filter.set_filter_path(parse_xpath(titles_xpath_oss.str()));
-			cout << m_filter.filter_path()->to_string() << endl;
+			// cout << m_filter.filter_path()->to_string() << endl;
 
 			m_filter.visit_all_depth_first(
 			  [&](Element_Visitor& visitor) -> bool //
@@ -228,18 +229,9 @@ namespace simple_xml {
 		return m_one_data;
 	}
 
-	inline bool is_comma(const char ch) { return ch == ','; }
-
-	inline string erase_commas(string text)
-	{
-		text.erase(
-		  std::remove_if(text.begin(), text.end(), boost::bind(is_comma, _1)), text.end());
-		return text;
-	}
-
 	double Document::extract_single_number(Grade::SP xpath_root)
 	{
-		return std::stod(erase_commas(extract_single_text(xpath_root)));
+		return std::stod(strings::erase_commas(extract_single_text(xpath_root)));
 	}
 
 	bool Document::write_all_fields_visit(simple_xml::Element_Visitor& visitor)
