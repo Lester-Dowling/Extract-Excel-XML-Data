@@ -75,28 +75,28 @@ Function Invoke-Environment()
     $command = "CALL $Args > nul 2>&1 && set"
     ## Write-Debug "Invoke-Environment command == $command"
     cmd.exe /c "$command" |
-    . {process {
-           if ($_ -match '^([^=]+)=(.*)') {
-               $EnvVar = $matches[1]
-               $EnvVal = $matches[2]
-               if (-Not([System.Environment]::GetEnvironmentVariable($EnvVar)) -or $EnvVar -eq "PATH") {
-                   [System.Environment]::SetEnvironmentVariable($EnvVar, $EnvVal)
-                   # Verbose output of newly set environment variables:
-                   if ($EnvVal.Contains(";")) {
-                       foreach ($v in ($EnvVal -split ';')) {
-                           Write-Output ("{0} += {1}" -f $EnvVar,$v);
-                       }
-                   } else {
-                       Write-Output ("{0} = {1}" -f $EnvVar,$EnvVal);
-                   }
-               } else {
-                   $ExistingVal = [System.Environment]::GetEnvironmentVariable($EnvVar);
-                   if ($EnvVal -ne $ExistingVal) {
-                       Write-Output ("!!! {0} = {1} vs existing {2}" -f $EnvVar,$EnvVal,$ExistingVal);
-                   }
-               }
-           }
-       }}
+      . {process {
+             if ($_ -match '^([^=]+)=(.*)') {
+                 $EnvVar = $matches[1]
+                 $EnvVal = $matches[2]
+                 if (-Not([System.Environment]::GetEnvironmentVariable($EnvVar)) -or $EnvVar -eq "PATH") {
+                     [System.Environment]::SetEnvironmentVariable($EnvVar, $EnvVal)
+                     # Verbose output of newly set environment variables:
+                     if ($EnvVal.Contains(";")) {
+                         foreach ($v in ($EnvVal -split ';')) {
+                             Write-Output ("{0} += {1}" -f $EnvVar,$v);
+                         }
+                     } else {
+                         Write-Output ("{0} = {1}" -f $EnvVar,$EnvVal);
+                     }
+                 } else {
+                     $ExistingVal = [System.Environment]::GetEnvironmentVariable($EnvVar);
+                     if ($EnvVal -ne $ExistingVal) {
+                         Write-Output ("!!! {0} = {1} vs existing {2}" -f $EnvVar,$EnvVal,$ExistingVal);
+                     }
+                 }
+             }
+         }}
     if ($LASTEXITCODE) {
         fatal_error_exit "Batch command '${args[0]}' exited with code: $LASTEXITCODE"
     }

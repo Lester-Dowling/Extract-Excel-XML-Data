@@ -66,14 +66,16 @@ find_package(Doxygen
   REQUIRED dot
   OPTIONAL_COMPONENTS mscgen dia)
 
-# doxygen_add_docs(
-#   ${PROJECT_NAME}
-#   "Pseudo-XPath"
-#   "Simple-XML"
-#   "Operations"
-#   ALL
-#   COMMENT "Generate HTML Documentation"
-#   )
+doxygen_add_docs(
+   ${PROJECT_NAME}
+   "Pseudo-XPath"
+   "Simple-XML"
+   "Operations"
+   "IO-Extra"
+   "Strings-Extra"
+   ALL
+   COMMENT "Generate HTML Documentation"
+   )
 
 #
 # Info for scripts
