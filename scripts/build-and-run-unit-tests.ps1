@@ -27,13 +27,13 @@ $AUDIO = New-Object System.Media.SoundPlayer
 # Sounds Directory
 #
 New-Variable -Name SOUNDS_DIR  -Scope Script -Force
-[string] $SOUNDS_DIR = Resolve-Path "${ENV:USERPROFILE}/sounds" -ea:ignore    |    Select -ExpandProperty Path
+$SOUNDS_DIR = Resolve-Path "${ENV:USERPROFILE}/sounds" -ea:ignore
 
 
 Function play_start_sound() {   # Commencement sound.
     if ($QUIET) {return}
-    $START_SOUND = Resolve-Path "${SOUNDS_DIR}/Computer Data 01.wav" -ea:ignore    |    Select -ExpandProperty Path
-    if (Test-Path $START_SOUND) {
+    $START_SOUND = Resolve-Path "${SOUNDS_DIR}/Computer Data 01.wav" -ea:ignore
+    if ($START_SOUND) {
         $AUDIO.SoundLocation = "$START_SOUND"
 	    $AUDIO.Play()
     }
@@ -42,8 +42,8 @@ Function play_start_sound() {   # Commencement sound.
 
 Function play_finished_sound() { # Successful completion.
     if ($QUIET) {return}
-    $FINISH_SOUND = Resolve-Path "${SOUNDS_DIR}/Computer Data 02.wav" -ea:ignore    |    Select -ExpandProperty Path
-    if (Test-Path $FINISH_SOUND) {
+    $FINISH_SOUND = Resolve-Path "${SOUNDS_DIR}/Computer Data 02.wav" -ea:ignore
+    if ($FINISH_SOUND) {
         $AUDIO.SoundLocation = "$FINISH_SOUND"
 	    $AUDIO.Play()
     }
@@ -52,8 +52,8 @@ Function play_finished_sound() { # Successful completion.
 
 Function fatal_error_exit($ERROR_MESSAGE) {   # Fatal error; cannot continue.
     if (-Not($QUIET)) {
-        $ERROR_SOUND = Resolve-Path "${SOUNDS_DIR}/Computer-Data-Error-Sound.wav" -ea:ignore    |    Select -ExpandProperty Path
-        if (Test-Path $ERROR_SOUND) {
+        $ERROR_SOUND = Resolve-Path "${SOUNDS_DIR}/Computer-Data-Error-Sound.wav" -ea:ignore
+        if ($ERROR_SOUND) {
             $AUDIO.SoundLocation = "$ERROR_SOUND"
 	        $AUDIO.Play()
         }
@@ -75,28 +75,28 @@ Function Invoke-Environment()
     $command = "CALL $Args > nul 2>&1 && set"
     ## Write-Debug "Invoke-Environment command == $command"
     cmd.exe /c "$command" |
-      . {process {
-             if ($_ -match '^([^=]+)=(.*)') {
-                 $EnvVar = $matches[1]
-                 $EnvVal = $matches[2]
-                 if (-Not([System.Environment]::GetEnvironmentVariable($EnvVar)) -or $EnvVar -eq "PATH") {
-                     [System.Environment]::SetEnvironmentVariable($EnvVar, $EnvVal)
-                     # Verbose output of newly set environment variables:
-                     if ($EnvVal.Contains(";")) {
-                         foreach ($v in ($EnvVal -split ';')) {
-                             Write-Output ("{0} += {1}" -f $EnvVar,$v);
-                         }
-                     } else {
-                         Write-Output ("{0} = {1}" -f $EnvVar,$EnvVal);
-                     }
-                 } else {
-                     $ExistingVal = [System.Environment]::GetEnvironmentVariable($EnvVar);
-                     if ($EnvVal -ne $ExistingVal) {
-                         Write-Output ("!!! {0} = {1} vs existing {2}" -f $EnvVar,$EnvVal,$ExistingVal);
-                     }
-                 }
-             }
-         }}
+    . {process {
+           if ($_ -match '^([^=]+)=(.*)') {
+               $EnvVar = $matches[1]
+               $EnvVal = $matches[2]
+               if (-Not([System.Environment]::GetEnvironmentVariable($EnvVar)) -or $EnvVar -eq "PATH") {
+                   [System.Environment]::SetEnvironmentVariable($EnvVar, $EnvVal)
+                   # Verbose output of newly set environment variables:
+                   if ($EnvVal.Contains(";")) {
+                       foreach ($v in ($EnvVal -split ';')) {
+                           Write-Output ("{0} += {1}" -f $EnvVar,$v);
+                       }
+                   } else {
+                       Write-Output ("{0} = {1}" -f $EnvVar,$EnvVal);
+                   }
+               } else {
+                   $ExistingVal = [System.Environment]::GetEnvironmentVariable($EnvVar);
+                   if ($EnvVal -ne $ExistingVal) {
+                       Write-Output ("!!! {0} = {1} vs existing {2}" -f $EnvVar,$EnvVal,$ExistingVal);
+                   }
+               }
+           }
+       }}
     if ($LASTEXITCODE) {
         fatal_error_exit "Batch command '${args[0]}' exited with code: $LASTEXITCODE"
     }
@@ -112,10 +112,10 @@ Function Invoke-Environment()
 $VSYEAR = "2017"
 $VSARCH = "Win64"
 $VCTAG  = "vc141"
-$VC = Resolve-Path "${ENV:ProgramFiles(x86)}\Microsoft Visual Studio\$VSYEAR\Community\VC" -ea:stop    |    Select -ExpandProperty Path
-if (-Not(Test-Path $VC)) { fatal_error_exit "No VC path" }
-$VCVARSALL = Resolve-Path "${VC}\Auxiliary\Build\vcvarsall.bat" -ea:stop    |    Select -ExpandProperty Path
-if (-Not(Test-Path $VCVARSALL)) { fatal_error_exit "No VCVARSALL path" }
+$VC = Resolve-Path "${ENV:ProgramFiles(x86)}\Microsoft Visual Studio\$VSYEAR\Community\VC" -ea:ignore
+if (-Not($VC)) { fatal_error_exit "Visual C++ is not installed." }
+$VCVARSALL = Resolve-Path "${VC}\Auxiliary\Build\vcvarsall.bat" -ea:ignore
+if (-Not($VCVARSALL)) { fatal_error_exit "No such file: vcvarsall.bat" }
 
 #
 # Setup Compiler Variables
@@ -133,11 +133,15 @@ if (-Not($VCVARSALL_SETUP_ONLY_ONCE)) {
 #
 # Build Directory
 #
-$WORKSPACE_HASH = Get-Content "${PSScriptRoot}workspace-hash.txt"
-$BUILD="C:/Users/ljdowling/CMakeBuilds/${WORKSPACE_HASH}/build/x64-Release"
-$BUILD = Resolve-Path $BUILD -ea:stop  |  Select -ExpandProperty Path
-if (-Not(Test-Path $BUILD)) { fatal_error_exit "No BUILD path" }
-Write-Host "Build directory is: $BUILD"
+$CMAKE_BINARY_DIR_FILE = Resolve-Path "${PSScriptRoot}/cmake_binary_dir.txt" -ea:Ignore
+if (-Not($CMAKE_BINARY_DIR_FILE)) {
+    fatal_error_exit "Build the project in Visual Studio 2017 first before running this script.  Missing binary directory."
+}
+$BINARY_DIR = Get-Content $CMAKE_BINARY_DIR_FILE
+$BINARY_DIR = Resolve-Path "${BINARY_DIR}" -ErrorAction:Ignore
+if (-Not($BINARY_DIR)) {
+	fatal_error_exit "No such CMake binary directory: $BINARY_DIR"
+}
 
 #
 # No user interaction
@@ -148,21 +152,21 @@ Write-Host "Build directory is: $BUILD"
 # Build
 #
 play_start_sound
-$CMAKE = Resolve-Path "${VC}\..\COMMON7\IDE\COMMONEXTENSIONS\MICROSOFT\CMAKE\CMake\bin\cmake.exe" -ea:stop    |    Select -ExpandProperty Path
-if (-Not(Test-Path $CMAKE)) { fatal_error_exit "No CMAKE path" }
+$CMAKE = Resolve-Path "${VC}\..\COMMON7\IDE\COMMONEXTENSIONS\MICROSOFT\CMAKE\CMake\bin\cmake.exe" -ea:ignore
+if (-Not($CMAKE)) { fatal_error_exit "cmake is not on PATH" }
 $CLEAN_FIRST = ""
 IF ($CLEAN) { $CLEAN_FIRST = "--clean-first" }
-&$CMAKE --build $BUILD  --config  RelWithDebInfo  $CLEAN_FIRST
+&$CMAKE --build $BINARY_DIR  --config  RelWithDebInfo  $CLEAN_FIRST
 if ($LASTEXITCODE -ne 0) { fatal_error_exit "CMake build failed."; }
 
 #
 # Run unit tests
 #
-$UNIT_TESTS = Resolve-Path "${BUILD}/Unit-Tests/Unit-Tests.exe" -ea:stop    |    Select -ExpandProperty Path
-if (-Not(Test-Path $UNIT_TESTS)) { fatal_error_exit "No UNIT_TESTS path" }
+$UNIT_TESTS = Resolve-Path "${BINARY_DIR}/Unit-Tests/Unit-Tests.exe" -ea:ignore
+if (-Not($UNIT_TESTS)) { fatal_error_exit "No UNIT_TESTS path" }
 cls
 &$UNIT_TESTS --color_output=false  --report_level=short  --log_level=message;
-if ($LASTEXITCODE -ne 0) { fatal_error_exit "Unit tests failed."; }
+if ($LASTEXITCODE -ne 0) { Write-Host "Last error = $LASTEXITCODE"; fatal_error_exit "Unit tests failed."; }
 play_finished_sound
 
 

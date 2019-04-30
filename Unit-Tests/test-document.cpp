@@ -115,11 +115,28 @@ BOOST_AUTO_TEST_CASE(document_row_titles_1)
 	BOOST_TEST(d.titles(1).row_count() == 3);
 	BOOST_TEST(d.titles(1).row_titles() == expected_rows_wkt_1);
 	const vector<string> expected_rows_wkt_2 = //
-	  { "CA - Cash",		"CA - Receivables",	   "CA - Prepaid Expenses",
-		"CA - Inventories", "CA - Investments",	   "CA - NCA Held Sale",
+	  { "CA - Cash",		"CA - Receivables",	"CA - Prepaid Expenses",
+		"CA - Inventories", "CA - Investments",	"CA - NCA Held Sale",
 		"CA - Other",		"Total Current Assets" };
 	BOOST_TEST(d.titles(2).row_count() == 8);
 	BOOST_TEST(d.titles(2).row_titles() == expected_rows_wkt_2);
 }
+
+
+BOOST_AUTO_TEST_CASE(test_row_filter_columns)
+{					   //
+	const int n_u = 0; // n_u == not used
+	BOOST_TEST(Document::row_filter_columns(n_u, "1") == "[1]");
+	BOOST_TEST(Document::row_filter_columns(n_u, "3,4") == "[3|4]");
+	BOOST_TEST(Document::row_filter_columns(n_u, "12,18,31") == "[12|18|31]");
+	BOOST_TEST(Document::row_filter_columns(n_u, "1,2,[5] 4,5") == "[1|2]");
+	BOOST_TEST(Document::row_filter_columns(n_u, "1 , 2 , [5] 4 , 5") == "[1|2]");
+	const int wkt_idx = 5;
+	BOOST_TEST(Document::row_filter_columns(wkt_idx, "1 , 2 , [5] 6 , 8") == "[6|8]");
+	BOOST_TEST(Document::row_filter_columns(wkt_idx, "[5] 6 , 8") == "[6|8]");
+	BOOST_TEST(Document::row_filter_columns(wkt_idx, "[4] 6 , 8") == "[1]");
+	BOOST_REQUIRE_THROW(Document::row_filter_columns(wkt_idx, ""), std::runtime_error);
+}
+
 
 BOOST_AUTO_TEST_SUITE_END()

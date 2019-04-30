@@ -130,7 +130,10 @@ namespace simple_xml {
 	}
 
 
-	string row_filter_columns(const int wkt_idx, const std::string row_titles_column_spec)
+	/*static*/
+	string Document::row_filter_columns(
+	  const int wkt_idx,
+	  const std::string row_titles_column_spec)
 	{
 		list<string> row_titles_column_list;
 		a::split(
@@ -144,13 +147,11 @@ namespace simple_xml {
 			throw std::runtime_error{
 				"No column given to specify which column has the row titles."
 			};
-
-
 		using Iterator = list<string>::const_iterator;
 		Iterator litr = row_titles_column_list.begin();
 		Iterator const lend = row_titles_column_list.end();
 
-		// See if there are any worksheet guards:
+		// See if there is a worksheet guard for this worksheet:
 		std::ostringstream wkt_guard_oss;
 		wkt_guard_oss << '[' << wkt_idx << ']';
 		const string wkt_guard{ wkt_guard_oss.str() };
@@ -163,7 +164,7 @@ namespace simple_xml {
 			}
 		}
 
-		string column_filter; // Default to first column for row titles.
+		string column_filter;
 		bool good_column_number = true;
 		for (; litr != lend; ++litr) {
 			std::string row_titles_column = *litr;
@@ -194,7 +195,7 @@ namespace simple_xml {
 		}
 		BOOST_ASSERT(good_column_number);
 		if (column_filter.empty())
-			throw runtime_error{ "Empty column filter for row titles search." };
+			column_filter = "1"; // Default is first column.
 		return { "[" + column_filter + "]" };
 	}
 

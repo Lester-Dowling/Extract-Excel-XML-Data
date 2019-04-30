@@ -13,6 +13,8 @@
 #include "Pseudo-XPath/Grade.hpp"
 
 namespace simple_xml {
+	using std::string;
+	using std::vector;
 
 	/**
 	 * A simple XML file represented in memory as a connected set of nodes.  Each node is
@@ -22,7 +24,7 @@ namespace simple_xml {
 		/**
 		 * The connected set of nodes.
 		 */
-		std::vector<Element> m_elements;
+		vector<Element> m_elements;
 
 		/**
 		 * Titles of all worksheets, rows and columns within the workbook.
@@ -37,7 +39,7 @@ namespace simple_xml {
 		/**
 		 * The column which contains the titles for each row.
 		 */
-		std::string m_row_titles_column; // gRowTitlesColumn
+		string m_row_titles_column; // gRowTitlesColumn
 
 		/**
 		 * The row which contains the titles for each column.
@@ -63,7 +65,7 @@ namespace simple_xml {
 		/**
 		 * Visitor callback which extracts a single data cell.
 		 */
-		std::string m_one_data;
+		string m_one_data;
 		bool one_data_visit(simple_xml::Element_Visitor&);
 
 		/**
@@ -92,7 +94,7 @@ namespace simple_xml {
 		/**
 		 * Find the row titles in each worksheet.
 		 */
-		void extract_row_titles(std::string row_titles_column = "1");
+		void extract_row_titles(string row_titles_column = "1");
 
 		/**
 		 * Accessor for the index of the first row where the data of the worksheet starts.
@@ -102,7 +104,7 @@ namespace simple_xml {
 		/**
 		 * Accessor that returns the Elements in this document.
 		 */
-		std::vector<Element> const& elements() const { return m_elements; }
+		vector<Element> const& elements() const { return m_elements; }
 
 		/**
 		 * Accessor that returns the worksheet titles in this document.
@@ -132,7 +134,7 @@ namespace simple_xml {
 		 * Query Document and return a single node's text as specified by the precise pseudo
 		 * XPath.
 		 */
-		std::string extract_single_text(Grade::SP xpath_root);
+		string extract_single_text(Grade::SP xpath_root);
 
 		/**
 		 * Query Document and return the number in a single node whose address is specified
@@ -144,5 +146,15 @@ namespace simple_xml {
 		 * Diagnostic utility function to write out all fields of every Element.
 		 */
 		void write_all_fields();
+
+		/**
+		 * Compose the column filter attribute for visiting row titles.
+		 *
+		 * @param[in] wkt_idx The index of the current worksheet.
+		 *
+		 * @param[in] column_spec The user given spec for which column(s) contain the row
+		 * titles.
+		 */
+		static string row_filter_columns(const int wkt_idx, const string column_spec);
 	};
 } // namespace simple_xml
