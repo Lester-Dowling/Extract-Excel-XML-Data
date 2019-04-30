@@ -173,7 +173,8 @@ namespace simple_xml {
 			  && row_titles_column.front() == '[' //
 			  && row_titles_column.back() == ']')
 				break;
-			strings::translate_column_title_uppercase_letter(row_titles_column);
+			row_titles_column =
+			  strings::translate_column_title_uppercase_letter(row_titles_column);
 			int column_number;
 			try {
 				column_number = std::stoi(row_titles_column);

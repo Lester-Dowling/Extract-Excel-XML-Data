@@ -58,7 +58,7 @@ BOOST_AUTO_TEST_CASE(single_cell_extraction_1)
 {
 	char* argv[] = //
 	  { program_name,
-		"--row_titles_column=Item",
+		"--row_titles=Item",
 		"--enumerate_rows",
 		"--xpath=Row['Net Profit after Tax Before Abnormals'] , Cell['06/16'] , Data",
 		sample_xml_file };
@@ -81,7 +81,7 @@ BOOST_AUTO_TEST_CASE(single_cell_extraction_2)
 {
 	char* argv[] = //
 	  { program_name,
-		"--row_titles_column=Item",
+		"--row_titles=Item",
 		"--xpath=Row['Operating Revenue'] , Cell['06/17'] , Data",
 		sample_xml_file };
 	constexpr int argc = static_cast<int>(std::size(argv));
@@ -101,7 +101,7 @@ BOOST_AUTO_TEST_CASE(single_cell_extraction_3)
 {
 	char* argv[] = //
 	  { program_name,
-		"--row_titles_column=Item",
+		"--row_titles=Item",
 		"--xpath=Row[22] , Cell[5] , Data",
 		// Row['Shares Outstanding at Period End']  Cell['06/17']
 		sample_xml_file };
@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_CASE(calculator_on_single_cell_extraction_1)
 {
 	char* argv[] = //
 	  { program_name,
-		"--row_titles_column=Item",
+		"--row_titles=Item",
 		"--xpath=Row[22] , Cell[5] , Data",
 		"--each=DATA * 3 + 2",
 		sample_xml_file };
@@ -371,7 +371,7 @@ BOOST_AUTO_TEST_CASE(calc_each_constraint_2)
 {
 	char* argv[] = //
 	  { program_name,
-		"--row_titles_column=Item",
+		"--row_titles=Item",
 		"--xpath=Row[Row>1], Cell[Column>1], Data",
 		"--each=[Column=2] DATA * 3",
 		price_history_xml_file };

@@ -135,6 +135,8 @@ BOOST_AUTO_TEST_CASE(test_row_filter_columns)
 	BOOST_TEST(Document::row_filter_columns(wkt_idx, "1 , 2 , [5] 6 , 8") == "[6|8]");
 	BOOST_TEST(Document::row_filter_columns(wkt_idx, "[5] 6 , 8") == "[6|8]");
 	BOOST_TEST(Document::row_filter_columns(wkt_idx, "[4] 6 , 8") == "[1]");
+	BOOST_TEST(Document::row_filter_columns(wkt_idx, "C, [5] C, F") == "[3|6]");
+	BOOST_TEST(Document::row_filter_columns(n_u, "C, [5] C, F") == "[3]");
 	BOOST_REQUIRE_THROW(Document::row_filter_columns(wkt_idx, ""), std::runtime_error);
 }
 

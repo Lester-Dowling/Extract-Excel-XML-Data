@@ -384,6 +384,8 @@ namespace operations {
 				  cell_ref_xpath_text += " , ";
 				  cell_ref_xpath_text += "Data";
 
+				  // cout << "cell_ref_xpath_text == " << cell_ref_xpath_text << endl;
+
 				  Grade::SP xpath_root = parse_xpath_text(cell_ref_xpath_text);
 				  const string cell_text =
 					m_documents.back().extract_single_text(xpath_root);
@@ -513,7 +515,7 @@ namespace operations {
 		   po::bool_switch(&gEnumerateRows)->default_value(false),
 		   "Prefix the row number to each line of output.  Default is off.")
 		  // -----------------------------------------------------------------
-		  ("row_titles_column,m",
+		  ("row_titles,m",
 		   po::value<string>(&gRowTitlesColumn)->default_value("1"),
 		   "Column which contains the titles for each row.  Default is the first column.")
 		  // -----------------------------------------------------------------
