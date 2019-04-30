@@ -3,8 +3,8 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/test/test_case_template.hpp>
 #include <boost/mpl/list.hpp>
-#include "io/pair.hpp"
-#include "io/sequence.hpp"
+#include "IO-Extra/pair.hpp"
+#include "IO-Extra/sequence.hpp"
 namespace utf = boost::unit_test;
 
 BOOST_AUTO_TEST_SUITE(test_pair_io_suite, *utf::enabled())

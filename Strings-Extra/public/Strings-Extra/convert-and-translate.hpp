@@ -1,5 +1,5 @@
 /**
- * @file   String-Extra/convert-and-translate.hpp
+ * @file   Strings-Extra/convert-and-translate.hpp
  * @date   Started 2019-04-30
  * @author Lester J. Dowling
  */
@@ -13,7 +13,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/bind.hpp>
-namespace string_extra {
+namespace strings {
 	namespace a = boost::algorithm;
 	using std::string;
 	using std::optional;
@@ -22,7 +22,7 @@ namespace string_extra {
 	 * Translate a single capital letter to a column number.
 	 * For example, given "C" then translate that to "3".
 	 */
-	string translate_column_title_uppercase_letter(string column_title)
+	inline string translate_column_title_uppercase_letter(string column_title)
 	{
 		if (column_title.size() == 1) {
 			if (std::isupper(column_title.front())) {
@@ -38,7 +38,7 @@ namespace string_extra {
 	 * Convert a single capital letter to a column number.
 	 * For example, given "C" then convert that to 3.
 	 */
-	optional<int> convert_column_title_uppercase_letter(const string column_title)
+	inline optional<int> convert_column_title_uppercase_letter(const string column_title)
 	{
 		if (column_title.size() == 1) {
 			if (std::isupper(column_title.front())) {
@@ -49,4 +49,4 @@ namespace string_extra {
 		}
 		return {};
 	}
-} // namespace string_extra
+} // namespace strings

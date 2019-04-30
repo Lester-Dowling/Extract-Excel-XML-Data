@@ -1,5 +1,5 @@
 /**
- * @file   String-Extra/forming.hpp
+ * @file   Strings-Extra/forming.hpp
  * @date   Started 2019-04-28
  * @author Lester J. Dowling
  */
@@ -11,8 +11,8 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/bind.hpp>
-#include "String-Extra/predicates.hpp"
-namespace string_extra {
+#include "Strings-Extra/predicates.hpp"
+namespace strings {
 	namespace a = boost::algorithm;
 	using std::string;
 
@@ -49,4 +49,4 @@ namespace string_extra {
 			// Ref is already quoted, so append as is:
 			bdr += nm;
 	}
-} // namespace string_extra
+} // namespace strings

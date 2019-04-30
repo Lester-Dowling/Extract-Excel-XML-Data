@@ -6,7 +6,7 @@
 #pragma once
 #include <string>
 #include <sstream>
-#include "String-Extra/forming.hpp"
+#include "Strings-Extra/forming.hpp"
 namespace pseudo_xpath {
 	using std::string;
 
@@ -14,7 +14,7 @@ namespace pseudo_xpath {
 	{
 		// Worksheet[ss:Name="Profit Loss"]
 		std::string xp = "Workbook, Worksheet[";
-		string_extra::append_quoted_if_not_number(
+		strings::append_quoted_if_not_number(
 		  xp, worksheet_name, "Missing worksheet name");
 		xp += "], Table, ";
 		return xp;

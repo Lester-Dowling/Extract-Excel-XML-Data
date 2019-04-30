@@ -30,10 +30,10 @@ endif()
 add_subdirectory ("external")
 
 # IO extras library
-add_subdirectory ("IO")
+add_subdirectory ("IO-Extra")
 
 # Simple strings extra library
-add_subdirectory ("String-Extra")
+add_subdirectory ("Strings-Extra")
 
 # Simple XML library
 add_subdirectory ("Simple-XML")

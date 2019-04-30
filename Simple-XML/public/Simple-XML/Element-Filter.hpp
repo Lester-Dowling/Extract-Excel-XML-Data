@@ -60,6 +60,8 @@ namespace simple_xml {
 	public: //~ Filter ------------------------------------------------
 		This set_filter_path(Grade::SP filter_path);
 
+		Grade::SP filter_path() const { return m_filter_path; }
+
 	protected:
 		/**
 		 * Current path matches filter path.

@@ -11,7 +11,9 @@
 #include "Simple-XML/mini-grammar.hpp"
 #include "Pseudo-XPath/Grade.hpp"
 #include "Pseudo-XPath/mini-grammar.hpp"
-
+#include "IO-Extra/sequence.hpp"
+#include "Strings-Extra/predicates.hpp"
+#include "Strings-Extra/convert-and-translate.hpp"
 namespace simple_xml {
 	using std::cout;
 	using std::endl;
@@ -23,6 +25,7 @@ namespace simple_xml {
 	namespace ascii = boost::spirit::ascii;
 	namespace qi = boost::spirit::qi;
 	namespace f = boost::filesystem;
+	namespace a = boost::algorithm;
 	using file_in_memory_t = std::vector<char>;
 	using Memory_Iterator = file_in_memory_t::const_iterator;
 	using Stream_Iterator = boost::spirit::basic_istream_iterator<char>;
@@ -126,47 +129,66 @@ namespace simple_xml {
 	}
 
 
-	void Document::extract_row_titles(std::string row_titles_column)
+	string row_filter_columns(const std::string row_titles_column_spec)
 	{
-		BOOST_ASSERT(!row_titles_column.empty());
-		namespace a = boost::algorithm;
-		list<string> columns_list;
+		list<string> row_titles_column_list;
 		a::split(
-		  columns_list,
-		  row_titles_column,
-		  [](const char c) { return c == ','; },
+		  row_titles_column_list,
+		  row_titles_column_spec,
+		  strings::Is_Comma{},
 		  a::token_compress_on);
+		row_titles_column_list.remove_if([](string const& spec) { return spec.empty(); });
 
-		
-		// Translate a single capital letter to a column number.  For example, given "-m
-		// C" on the command line, translate that to "-m 3".
-		if (row_titles_column.size() == 1) {
-			if (std::isupper(row_titles_column.front())) {
-				const int corresponding_column_number =
-				  1 + static_cast<int>(row_titles_column.front()) - static_cast<int>('A');
-				row_titles_column = std::to_string(corresponding_column_number);
+		if (row_titles_column_list.empty())
+			throw std::runtime_error{
+				"No column given to specify which column has the row titles."
+			};
+
+		string column_filter;
+		bool good_column_number = true;
+		for (std::string row_titles_column : row_titles_column_list) {
+			row_titles_column =
+			  strings::translate_column_title_uppercase_letter(row_titles_column);
+
+			int column_number;
+			try {
+				column_number = std::stoi(row_titles_column);
+				if (!column_filter.empty())
+					column_filter += '|';
+				column_filter += row_titles_column;
+			}
+			catch (std::invalid_argument const&) {
+				good_column_number = false;
+				if (column_filter.empty()) {
+					return { "[Column=\"" + row_titles_column + "\"]" };
+				}
+				else {
+					throw runtime_error{
+						"Named columns not yet implemented for multi-column row titles."
+					};
+				}
 			}
 		}
+		BOOST_ASSERT(good_column_number);
+		if (column_filter.empty())
+			throw runtime_error{ "Empty column filter for row titles search." };
+		return { "[Column=" + column_filter + "]" };
+	}
 
-		bool good_column_number = true;
-		int column_number;
-		try {
-			column_number = std::stoi(row_titles_column);
-		}
-		catch (std::invalid_argument const&) {
-			good_column_number = false;
-		}
 
-		const string col_name_filter{ "[Column=\"" + row_titles_column + "\"]" };
-		const string col_number_filter{ "[Column=" + row_titles_column + "]" };
-		const string& col_filter = good_column_number ? col_number_filter : col_name_filter;
+	void Document::extract_row_titles(std::string row_titles_column_spec)
+	{
+		BOOST_ASSERT(!row_titles_column_spec.empty());
 		for (const int wkt_idx : m_titles.wkt_indices()) {
 			std::ostringstream titles_xpath_oss;
 			titles_xpath_oss << "Workbook,"									   //
 							 << "Worksheet[" << wkt_idx << "], Table, "		   //
 							 << "Row[Row>" << row_idx_start_of_data() << "], " //
-							 << "Cell" << col_filter << ", Data[ss:Type=String]";
+							 << "Cell" << row_filter_columns(row_titles_column_spec)
+							 << ", Data[ss:Type=String]";
 			m_filter.set_filter_path(parse_xpath(titles_xpath_oss.str()));
+			cout << m_filter.filter_path()->to_string() << endl;
+
 			m_filter.visit_all_depth_first(
 			  [&](Element_Visitor& visitor) -> bool //
 			  {

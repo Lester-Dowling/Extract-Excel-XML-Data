@@ -1,5 +1,5 @@
 ﻿cmake_minimum_required (VERSION 3.12)
-set(TARGET "String-Extra")
+set(TARGET "IO-Extra")
 add_library( ${TARGET} INTERFACE )
 
 file(GLOB_RECURSE PUB_FILES LIST_DIRECTORIES false CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/public/*)
@@ -22,12 +22,3 @@ target_include_directories(${TARGET}
 target_include_directories(${TARGET}
   INTERFACE
   ${CMAKE_CURRENT_SOURCE_DIR}/public)
-
-#
-# Boost 1.69
-#
-target_link_libraries(
-  ${TARGET}
-  INTERFACE
-  Boost::boost
-  )

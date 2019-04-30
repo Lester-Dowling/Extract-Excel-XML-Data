@@ -21,8 +21,8 @@ endforeach(src_file)
 #
 # Import the subjects for unit testing
 #
-target_link_libraries(${TARGET} PRIVATE "IO")
-target_link_libraries(${TARGET} PRIVATE "String-Extra")
+target_link_libraries(${TARGET} PRIVATE "IO-Extra")
+target_link_libraries(${TARGET} PRIVATE "Strings-Extra")
 target_link_libraries(${TARGET} PRIVATE "Simple-XML")
 target_link_libraries(${TARGET} PRIVATE "Pseudo-XPath")
 target_link_libraries(${TARGET} PRIVATE "Operations")
@@ -62,9 +62,14 @@ else()
 endif()
 
 #
-# Import String Extra Library
+# Import IO Extra Library
 #
-target_link_libraries(${TARGET} PRIVATE "String-Extra")
+target_link_libraries(${TARGET} PRIVATE "IO-Extra")
+
+#
+# Import Strings Extra Library
+#
+target_link_libraries(${TARGET} PRIVATE "Strings-Extra")
 
 #
 # Threads

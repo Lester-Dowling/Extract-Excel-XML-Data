@@ -10,8 +10,8 @@
 #include "Simple-XML/Element-Filter.hpp"
 #include "Pseudo-XPath/mini-grammar.hpp"
 #include "Pseudo-XPath/forming.hpp"
-#include "String-Extra/predicates.hpp"
-#include "String-Extra/forming.hpp"
+#include "Strings-Extra/predicates.hpp"
+#include "Strings-Extra/forming.hpp"
 
 namespace operations {
 	using std::cout;
@@ -290,7 +290,7 @@ namespace operations {
 				}
 				else {
 					full_xpath_text += '[';
-					string_extra::append_quoted_if_not_number(
+					strings::append_quoted_if_not_number(
 					  full_xpath_text,
 					  gDefaultWorksheet,
 					  "Default worksheet ref is missing.");
@@ -300,7 +300,7 @@ namespace operations {
 			}
 			else {
 				full_xpath_text += '[';
-				string_extra::append_quoted_if_not_number(
+				strings::append_quoted_if_not_number(
 				  full_xpath_text, gDefaultWorksheet, "Default worksheet ref is missing.");
 				full_xpath_text += ']';
 			}
@@ -371,14 +371,14 @@ namespace operations {
 				  string cell_ref_xpath_text = pseudo_xpath::prefix(worksheet_name);
 
 				  cell_ref_xpath_text += " Row[";
-				  string_extra::append_quoted_if_not_number(
+				  strings::append_quoted_if_not_number(
 					cell_ref_xpath_text, cell_ref_ords.front(), "Empty row ref");
 				  cell_ref_xpath_text += ']';
 				  cell_ref_ords.pop_front(); // Pop the row ref to get to the cell ref.
 
 				  cell_ref_xpath_text += " , ";
 				  cell_ref_xpath_text += "Cell[";
-				  string_extra::append_quoted_if_not_number(
+				  strings::append_quoted_if_not_number(
 					cell_ref_xpath_text, cell_ref_ords.front(), "Empty column ref");
 				  cell_ref_xpath_text += ']';
 				  cell_ref_xpath_text += " , ";

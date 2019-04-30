@@ -74,9 +74,14 @@ configure_file (
 include_directories("${PROJECT_BINARY_DIR}")
 
 #
-# Import Pseudo XPath Parser Library
+# Import IO-Extra Library
 #
-target_link_libraries(${TARGET} PUBLIC "String-Extra")
+target_link_libraries(${TARGET} PUBLIC "IO-Extra")
+
+#
+# Import Strings-Extra Library
+#
+target_link_libraries(${TARGET} PUBLIC "Strings-Extra")
 
 #
 # Import Pseudo XPath Parser Library

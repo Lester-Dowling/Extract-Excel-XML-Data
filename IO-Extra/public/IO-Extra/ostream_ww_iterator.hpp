@@ -1,5 +1,5 @@
 /**
- * @file        io/ostream_ww_iterator.hpp
+ * @file        IO-Extra/ostream_ww_iterator.hpp
  * @date        Started Sun Jul  9 10:40:51 EST 2006
  * @author      Lester J. Dowling
  * @par         Copyright &copy; Lester J. Dowling.

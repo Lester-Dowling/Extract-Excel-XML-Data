@@ -29,6 +29,8 @@ namespace pseudo_xpath {
 
 		inline SP next() const { return next_grade; }
 
+		std::string to_string();
+
 		static std::string path_to_string(const SP root);
 
 		/**

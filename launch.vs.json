@@ -5,6 +5,17 @@
     {
       "type": "default",
       "project": "CMakeLists.txt",
+      "projectTarget": "Extract-Excel-XML-Data.exe (main\\Extract-Excel-XML-Data.exe)",
+      "name": "Extract-Excel-XML-Data.exe (main\\Extract-Excel-XML-Data.exe)",
+      "args": [
+        "--politely_finish",
+        "-b",
+        "\"C:\\Users\\ljdowling\\WSU\\2019-TP1\\200910.1-Financing-Enterprises\\Assignment-2\\Financial Reports SHV.xml\""
+      ]
+    },
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
       "projectTarget": "Unit-Tests.exe (Unit-Tests\\Unit-Tests.exe)",
       "name": "Unit-Tests.exe (Unit-Tests\\Unit-Tests.exe)",
       "args": [

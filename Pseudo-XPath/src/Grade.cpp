@@ -29,6 +29,20 @@ namespace pseudo_xpath {
 		return result;
 	}
 
+	std::string Grade::to_string()
+	{
+		string grade_path;
+		if (!this->name().empty()) {
+			grade_path = name();
+			grade_path += attribute_filters_to_string();
+		}
+		for (Grade::SP v = next(); v = v->next(); v) {
+			grade_path += " --> " + v->name();
+			grade_path += v->attribute_filters_to_string();
+		}
+		return grade_path;
+	}
+
 	/*static*/ std::string Grade::path_to_string(const SP root)
 	{
 		if (!root)

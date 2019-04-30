@@ -1,12 +1,17 @@
 /**
- * @file   String-Extra/predicates.hpp
+ * @file   Strings-Extra/predicates.hpp
  * @date   Started 2019-04-28
  * @author Lester J. Dowling
  */
 #pragma once
 #include <string>
-namespace string_extra {
+namespace strings {
 	using std::string;
+
+	struct Is_Comma // unary functor
+	{
+		bool operator()(char ch) const { return ch == ','; }
+	};
 
 
 	inline bool is_comma(char ch) { return ch == ','; }
@@ -24,4 +29,4 @@ namespace string_extra {
 		return false;
 	}
 
-} // namespace string_extra
+} // namespace strings

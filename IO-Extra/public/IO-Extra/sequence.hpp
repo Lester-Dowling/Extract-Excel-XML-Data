@@ -1,5 +1,5 @@
 /**
- * @file        io/sequence.hpp
+ * @file        IO-Extra/sequence.hpp
  * @date        Started Sun Jul  9 10:40:51 EST 2006
  * @author      Lester J. Dowling
  * @par         Copyright &copy; Lester J. Dowling.
@@ -11,7 +11,7 @@
 #include <iterator>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include "io/ostream_ww_iterator.hpp"
+#include "IO-Extra/ostream_ww_iterator.hpp"
 
 namespace io {
 

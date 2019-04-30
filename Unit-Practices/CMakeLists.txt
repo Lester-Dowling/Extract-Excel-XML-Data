@@ -55,6 +55,16 @@ else()
 endif()
 
 #
+# Import IO Extra Library
+#
+target_link_libraries(${TARGET} PRIVATE "IO-Extra")
+
+#
+# Import Strings Extra Library
+#
+target_link_libraries(${TARGET} PRIVATE "Strings-Extra")
+
+#
 # Threads
 #
 target_link_libraries(${TARGET} PRIVATE Threads::Threads)

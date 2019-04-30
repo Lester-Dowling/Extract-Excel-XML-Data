@@ -6,7 +6,7 @@
 #include "pch-unit-tests.hpp"
 #include <boost/test/unit_test.hpp>
 #include "Simple-XML/Worksheet-Row-Column-Titles.hpp"
-#include "io/sequence.hpp"
+#include "IO-Extra/sequence.hpp"
 namespace utf = boost::unit_test;
 namespace tt = boost::test_tools;
 
@@ -139,15 +139,6 @@ BOOST_AUTO_TEST_CASE(wrct_add_multi_cell_row_title)
 	BOOST_TEST(t(w_1_idx).row_title(w_1_r_1_idx).value() == "title #1 part #1, part #2");
 	BOOST_TEST(
 	  t(w_2_idx).row_title(w_2_r_1_idx).value() == "title #2 part #1, part #2, part #3");
-}
-
-BOOST_AUTO_TEST_CASE(split_columns_list)
-{
-	const string row_titles_column{ "1,  2,  [3]  3" };
-	list<string> columns_list;
-	a::split(columns_list, row_titles_column, a::is_any_of(", "), a::token_compress_on);
-	io::write_sequence(cout, columns_list, "columns_list");
-	BOOST_TEST(columns_list.size() == 4);
 }
 
 
