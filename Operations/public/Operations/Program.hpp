@@ -22,9 +22,14 @@ namespace operations {
 	class Program : public Program_Base {
 	public:
 		/**
-		 * Prepend the row number to each line of output.
+		 * Prepend the row number to each line of output from a row.
 		 */
 		bool gEnumerateRows = false;
+
+		/**
+		 * Prepend the column number to each line of output from a column.
+		 */
+		bool gEnumerateCols = false;
 
 		/**
 		 * Write out only the worksheet titles, nothing else.  Usually, this
@@ -43,28 +48,6 @@ namespace operations {
 		 * specified to check what the worksheet contains.
 		 */
 		bool gWriteRowTitles = false;
-
-		/**
-		 * The worksheet to extract from if no worksheet ref was given.
-		 */
-		string gDefaultWorksheet{ "1" };
-
-		/**
-		 * The column(s) which contains the titles for each row.  This can be a csv list
-		 * which specifies multiple columns for a single composed row title.
-		 */
-		string gRowTitlesColumn{ "1" };
-
-		/**
-		 * The row which contains the titles for each column.
-		 */
-		int gColumnTitlesRow = 1;
-
-		/**
-		 * How many rows do the column titles occupy.  Usually just one, though
-		 * sometimes lengthy column titles span two or three rows.
-		 */
-		int gColumnTitleRowCount = 1;
 
 		/**
 		 * Write out all valid cell refs, nothing else.  Usually, this option is
@@ -89,6 +72,33 @@ namespace operations {
 		 * worksheet is only a list of data without titles for each row.
 		 */
 		bool gNoRowTitles = false;
+
+		/**
+		 * The worksheet to extract from if no worksheet ref was given.
+		 */
+		string gDefaultWorksheet{ "1" };
+
+		/**
+		 * The column(s) which contains the titles for each row.  This can be a csv list
+		 * which specifies multiple columns for a single composed row title.
+		 */
+		string gRowTitlesColumn{ "1" };
+
+		/**
+		 * The row which contains the titles for each column.
+		 */
+		int gColumnTitlesRow = 1;
+
+		/**
+		 * The offset to add to each column index with the enumerate_column option.
+		 */
+		int gEnumerateColsOffset = 0;
+
+		/**
+		 * How many rows do the column titles occupy.  Usually just one, though
+		 * sometimes lengthy column titles span two or three rows.
+		 */
+		int gColumnTitleRowCount = 1;
 
 		/**
 		 * The pseudo XPath as given on the command line.

@@ -18,6 +18,7 @@ namespace simple_xml {
 	using std::map;
 	using std::string;
 	using std::vector;
+	using std::optional;
 
 	class Element_Filter : public Element_Visitor {
 		Worksheet_Row_Column_Titles& m_titles;
@@ -57,6 +58,23 @@ namespace simple_xml {
 		{
 		}
 
+	public: //~ Accessors ---------------------------------------------
+		/**
+		 * @return The title of the row for the currently visited cell.
+		 */
+		optional<string> row_title() const
+		{
+			return m_titles(current().wkt_idx).row_title(current().row_idx);
+		}
+
+		/**
+		 * @return The title of the column for the currently visited cell.
+		 */
+		optional<string> col_title() const
+		{
+			return m_titles(current().wkt_idx).col_title(current().col_idx);
+		}
+
 	public: //~ Filter ------------------------------------------------
 		This set_filter_path(Grade::SP filter_path);
 
@@ -67,5 +85,5 @@ namespace simple_xml {
 		 * Current path matches filter path.
 		 */
 		bool visit_all_predicate() override;
-	};
+	}; // namespace simple_xml
 } // namespace simple_xml

@@ -180,10 +180,16 @@ namespace operations {
 			*gOut << endl;
 		}
 
-		if (gEnumerateRows && m_visited_col == 0)
-			*gOut << std::setw(4) << visitor.current().row_idx << " \t ";
-		else if (0 < m_visited_col)
-			*gOut << " \t ";
+		if (gEnumerateCols)
+			*gOut << std::setw(4) << visitor.current().col_idx + gEnumerateColsOffset
+				  << " \t ";
+		else {
+			if (gEnumerateRows && m_visited_col == 0)
+				*gOut << std::setw(4) << visitor.current().row_idx << " \t ";
+			else if (0 < m_visited_col) {
+				*gOut << " \t ";
+			}
+		}
 
 		if (gEachCalc.empty()) {
 			// No arithmetic expression to evaluate.  Print raw text only:
@@ -210,6 +216,8 @@ namespace operations {
 			*gOut << visitor.current().text();
 		}
 		m_visited_col = visitor.current().col_idx;
+		if (gEnumerateCols)
+			*gOut << endl;
 		return true;
 	}
 
@@ -514,6 +522,15 @@ namespace operations {
 		  ("enumerate_rows,n",
 		   po::bool_switch(&gEnumerateRows)->default_value(false),
 		   "Prefix the row number to each line of output.  Default is off.")
+		  // -----------------------------------------------------------------
+		  ("enumerate_columns,u",
+		   po::bool_switch(&gEnumerateCols)->default_value(false),
+		   "Prefix the column number to each line of output.  Default is off.")
+		  // -----------------------------------------------------------------
+		  ("enumerate_columns_offset,v",
+		   po::value<int>(&gEnumerateColsOffset)->default_value(0),
+		   "The offset added to each column index when enumerate_columns is on.  Default "
+		   "is zero.")
 		  // -----------------------------------------------------------------
 		  ("row_titles,m",
 		   po::value<string>(&gRowTitlesColumn)->default_value("1"),
