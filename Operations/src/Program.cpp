@@ -527,7 +527,7 @@ namespace operations {
 		   po::bool_switch(&gEnumerateCols)->default_value(false),
 		   "Prefix the column number to each line of output.  Default is off.")
 		  // -----------------------------------------------------------------
-		  ("enumerate_columns_offset,v",
+		  ("enumerate_columns_offset,z",
 		   po::value<int>(&gEnumerateColsOffset)->default_value(0),
 		   "The offset added to each column index when enumerate_columns is on.  Default "
 		   "is zero.")
