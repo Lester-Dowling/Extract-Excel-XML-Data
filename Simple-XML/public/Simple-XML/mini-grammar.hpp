@@ -23,6 +23,7 @@
 #include <boost/spirit/include/qi_operator.hpp>
 #include <boost/spirit/include/qi_string.hpp>
 #include <boost/spirit/include/qi_symbols.hpp>
+#include <boost/spirit/repository/include/qi_seek.hpp>
 #include <boost/bind.hpp>
 #include "Simple-XML/Element.hpp"
 #include "Simple-XML/Element-Creator.hpp"
@@ -31,6 +32,7 @@ namespace simple_xml {
 	namespace phoenix = boost::phoenix;
 	namespace qi = boost::spirit::qi;
 	namespace ascii = boost::spirit::ascii;
+	namespace repo = boost::spirit::repository;
 	constexpr char kDQ = '"';
 	constexpr char kSQ = '\'';
 	inline const auto DQ = qi::lit(kDQ);
@@ -100,9 +102,7 @@ namespace simple_xml {
 		  , xml_header{ qi::lit("<?") > qi::omit[+(qi::char_ - '?' - '<' - '>')] >
 						  qi::lit("?>"),
 						"xml-header" }
-		  , comment{ qi::lit("<!--") >> qi::omit[+(qi::char_ - '>' - '-')] >>
-					   qi::lit("-->"),
-					 "comment" } // <!-- Sample comment for unit testing -->
+		  , comment{ qi::lit("<!--") >> repo::qi::seek["-->"], "comment" }
 		  , tail{ qi::lexeme[*ascii::print][boost::bind(&This::set_remainder, this, _1)] }
 		{
 			element =
