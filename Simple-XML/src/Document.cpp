@@ -10,7 +10,7 @@
 #include "Simple-XML/Element-Filter.hpp"
 #include "Simple-XML/mini-grammar.hpp"
 #include "Pseudo-XPath/Grade.hpp"
-#include "Pseudo-XPath/mini-grammar.hpp"
+#include "Pseudo-XPath/parsing.hpp"
 #include "IO-Extra/sequence.hpp"
 #include "Strings-Extra/predicates.hpp"
 #include "Strings-Extra/convert-and-translate.hpp"
@@ -29,16 +29,17 @@ namespace simple_xml {
 	namespace a = boost::algorithm;
 	using file_in_memory_t = std::vector<char>;
 	using Memory_Iterator = file_in_memory_t::const_iterator;
-	using Stream_Iterator = boost::spirit::basic_istream_iterator<char>;
-	using String_Iterator = string::const_iterator;
 	using XML_Grammar = mini_grammar<Memory_Iterator>;
-	using XPath_Grammar = pseudo_xpath::mini_grammar<String_Iterator>;
 	using Grade = pseudo_xpath::Grade;
+
+
 
 	Document::Document(const boost::filesystem::path xml_path)
 	{
 		this->load_xml_file(xml_path);
 	}
+
+
 
 	void Document::load_xml_file(const f::path xml_path)
 	{
@@ -71,19 +72,11 @@ namespace simple_xml {
 		extract_worksheet_titles();
 	}
 
-	static Grade::SP parse_xpath(const string xpath_text)
-	{
-		XPath_Grammar xpath_parser;
-		String_Iterator sitr = xpath_text.begin();
-		String_Iterator const send = xpath_text.end();
-		if (!qi::phrase_parse(sitr, send, xpath_parser, ascii::space))
-			throw runtime_error{ "Failed to parse this XPath: " + xpath_text };
-		return xpath_parser.result;
-	}
+
 
 	void Document::extract_worksheet_titles()
 	{
-		m_filter.set_filter_path(parse_xpath("Workbook, Worksheet"));
+		m_filter.set_filter_path(pseudo_xpath::parse("Workbook, Worksheet"));
 		m_filter.visit_all_depth_first(
 		  [&](Element_Visitor& visitor) -> bool //
 		  {
@@ -100,6 +93,8 @@ namespace simple_xml {
 		  });
 	}
 
+
+
 	void Document::extract_column_titles(int column_titles_row, int column_title_span)
 	{
 		m_column_titles_row = column_titles_row;
@@ -109,7 +104,7 @@ namespace simple_xml {
 			titles_xpath_oss << "Workbook, Worksheet[" << wkt_idx << "], Table, "
 							 << "Row[" << m_column_titles_row
 							 << "],Cell,Data[ss:Type=String]";
-			m_filter.set_filter_path(parse_xpath(titles_xpath_oss.str()));
+			m_filter.set_filter_path(pseudo_xpath::parse(titles_xpath_oss.str()));
 			m_filter.visit_all_depth_first(
 			  [&](Element_Visitor& visitor) -> bool //
 			  {
@@ -128,6 +123,7 @@ namespace simple_xml {
 			  });
 		}
 	}
+
 
 
 	/*static*/
@@ -201,6 +197,7 @@ namespace simple_xml {
 	}
 
 
+
 	void Document::extract_row_titles(std::string row_titles_column_spec)
 	{
 		BOOST_ASSERT(!row_titles_column_spec.empty());
@@ -213,7 +210,7 @@ namespace simple_xml {
 							 << row_filter_columns(wkt_idx, row_titles_column_spec)
 							 << ", Data[ss:Type=String]";
 			// cout << titles_xpath_oss.str() << endl;
-			m_filter.set_filter_path(parse_xpath(titles_xpath_oss.str()));
+			m_filter.set_filter_path(pseudo_xpath::parse(titles_xpath_oss.str()));
 
 			m_filter.visit_all_depth_first(
 			  [&](Element_Visitor& visitor) -> bool //
@@ -233,6 +230,8 @@ namespace simple_xml {
 		}
 	}
 
+
+
 	int Document::row_idx_start_of_data() const
 	{
 		BOOST_ASSERT(m_column_titles_row > 0);
@@ -240,11 +239,15 @@ namespace simple_xml {
 		return m_column_titles_row + m_column_title_span - 1;
 	}
 
+
+
 	bool Document::one_data_visit(simple_xml::Element_Visitor& visitor)
 	{
 		m_one_data = visitor.current().text();
 		return false;
 	}
+
+
 
 	std::string Document::extract_single_text(Grade::SP xpath_root)
 	{
@@ -254,10 +257,14 @@ namespace simple_xml {
 		return m_one_data;
 	}
 
+
+
 	double Document::extract_single_number(Grade::SP xpath_root)
 	{
 		return std::stod(strings::erase_commas(extract_single_text(xpath_root)));
 	}
+
+
 
 	bool Document::write_all_fields_visit(simple_xml::Element_Visitor& visitor)
 	{
@@ -297,6 +304,8 @@ namespace simple_xml {
 		}
 		return true;
 	}
+
+
 
 	void Document::write_all_fields()
 	{

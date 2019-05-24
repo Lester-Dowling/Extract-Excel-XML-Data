@@ -8,8 +8,8 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "Simple-XML/Element-Filter.hpp"
-#include "Pseudo-XPath/mini-grammar.hpp"
 #include "Pseudo-XPath/forming.hpp"
+#include "Pseudo-XPath/parsing.hpp"
 #include "Strings-Extra/predicates.hpp"
 #include "Strings-Extra/forming.hpp"
 
@@ -28,8 +28,7 @@ namespace operations {
 	namespace qi = boost::spirit::qi;
 	namespace a = boost::algorithm;
 	using Grade = pseudo_xpath::Grade;
-	using String_Iterator = string::const_iterator;
-	using XPath_Grammar = pseudo_xpath::mini_grammar<String_Iterator>;
+
 
 	const char* const all_data_xpath_text = "Row,Cell,Data";
 
@@ -245,19 +244,6 @@ namespace operations {
 	}
 
 
-	Grade::SP Program::parse_xpath_text(const string xpath_text) // , const int wkt_idx)
-	{
-		XPath_Grammar xpath_parser;
-		String_Iterator sitr = xpath_text.begin();
-		String_Iterator const send = xpath_text.end();
-		if (!qi::phrase_parse(sitr, send, xpath_parser, ascii::space))
-			throw runtime_error{ "Failed to parse this XPath: " + xpath_text };
-		if (gVerbose)
-			*gErr << "XPath == " << Grade::path_to_string(xpath_parser.result) << endl;
-		return xpath_parser.result;
-	}
-
-
 	void Program::compute_xpath_and_write_results()
 	{
 		assert(!gXPathText.empty());
@@ -337,7 +323,7 @@ namespace operations {
 
 		m_documents.back()
 		  .filter()
-		  .set_filter_path(parse_xpath_text(full_xpath_text))
+		  .set_filter_path(pseudo_xpath::parse(full_xpath_text))
 		  .visit_all_depth_first(boost::bind(&Program::write_text_visit, this, _1));
 		*gOut << endl;
 	}
@@ -394,7 +380,7 @@ namespace operations {
 
 				  // cout << "cell_ref_xpath_text == " << cell_ref_xpath_text << endl;
 
-				  Grade::SP xpath_root = parse_xpath_text(cell_ref_xpath_text);
+				  Grade::SP xpath_root = pseudo_xpath::parse(cell_ref_xpath_text);
 				  const string cell_text =
 					m_documents.back().extract_single_text(xpath_root);
 				  if (cell_text.empty())

@@ -21,8 +21,8 @@ namespace qi = spirit::qi;
 namespace ascii = spirit::ascii;
 namespace phx = boost::phoenix;
 using Stream_Iterator = boost::spirit::basic_istream_iterator<char>;
-using Grade = pseudo_xpath::Grade;
 using XPath_Grammar = pseudo_xpath::mini_grammar<Stream_Iterator>;
+using Grade = pseudo_xpath::Grade;
 
 
 BOOST_AUTO_TEST_CASE(single_attribute_filter)

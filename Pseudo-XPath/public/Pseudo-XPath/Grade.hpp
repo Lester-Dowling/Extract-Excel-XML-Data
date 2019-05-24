@@ -1,5 +1,8 @@
-// Pseudo-XPath/Grade.hpp
-// Started 28 Mar 2019
+/**
+ * @file   Pseudo-XPath/Grade.hpp
+ * @date   Started 2019-03-28
+ * @author Lester J. Dowling
+ */
 #pragma once
 #include <list>
 #include <memory>

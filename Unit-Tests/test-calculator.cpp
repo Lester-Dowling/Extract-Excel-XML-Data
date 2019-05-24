@@ -6,6 +6,7 @@
 #include "pch-unit-tests.hpp"
 #include <boost/test/unit_test.hpp>
 #include "Pseudo-XPath/forming.hpp"
+#include "Pseudo-XPath/parsing.hpp"
 #include "Operations/Program.hpp"
 #include "Operations/Calculator.hpp"
 namespace utf = boost::unit_test;
@@ -126,7 +127,7 @@ BOOST_AUTO_TEST_CASE(regex_iterator_replace_into_calc_2, *utf::enabled())
 		  cell_ref_xpath_text += ',';
 		  cell_ref_xpath_text += "Data";
 		  Grade::SP xpath_root =
-			program.parse_xpath_text(pseudo_xpath::prefix(1) + cell_ref_xpath_text);
+			pseudo_xpath::parse(pseudo_xpath::prefix(1) + cell_ref_xpath_text);
 		  const char* const expected_xpath = //
 			"Workbook --> Worksheet[Worksheet=1] --> Table --> "
 			"Row[Row='Total Revenue Excluding Interest'] --> Cell[Cell='06/17'] --> Data";

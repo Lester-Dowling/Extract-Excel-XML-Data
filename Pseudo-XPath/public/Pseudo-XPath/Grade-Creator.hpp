@@ -1,5 +1,8 @@
-// Pseudo-XPath/Grade-Creator.hpp
-// Started 28 Mar 2019
+/**
+ * @file   Pseudo-XPath/Grade-Creator.hpp
+ * @date   Started 2019-03-28
+ * @author Lester J. Dowling
+ */
 #pragma once
 #include <memory>
 #include <string>
@@ -8,9 +11,8 @@
 #include "Pseudo-XPath/Grade.hpp"
 namespace pseudo_xpath {
 
-	class Grade_Creator
-	{
-	  protected:
+	class Grade_Creator {
+	protected:
 		Grade::SP current_grade;
 
 		typedef std::deque<Grade::SP> Grade_Path_Type;
@@ -19,7 +21,7 @@ namespace pseudo_xpath {
 
 		bool is_current_grade_root() const { return current_grade_path.empty(); }
 
-	  public:
+	public:
 		typedef std::shared_ptr<Grade_Creator> SP;
 
 		Grade_Creator(Grade::SP first_grade);

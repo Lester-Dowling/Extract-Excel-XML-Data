@@ -186,13 +186,6 @@ namespace operations {
 		using Grade = pseudo_xpath::Grade;
 
 		/**
-		 * Parse the given pseudo XPath expression.
-		 *
-		 * @return The root node of the parsed pseudo XPath.
-		 */
-		Grade::SP parse_xpath_text(const string xpath_text);
-
-		/**
 		 * Find and return a single node's text as specified by the precise pseudo
 		 * XPath.
 		 */

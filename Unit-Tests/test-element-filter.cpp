@@ -6,7 +6,7 @@
 #include "pch-unit-tests.hpp"
 #include <boost/test/unit_test.hpp>
 #include "Pseudo-XPath/Grade.hpp"
-#include "Pseudo-XPath/mini-grammar.hpp"
+#include "Pseudo-XPath/parsing.hpp"
 #include "Simple-XML/Worksheet-Row-Column-Titles.hpp"
 #include "Simple-XML/Element-Filter.hpp"
 namespace utf = boost::unit_test;
@@ -35,8 +35,6 @@ using std::list;
 using std::runtime_error;
 using std::string;
 using std::vector;
-using Stream_Iterator = boost::spirit::basic_istream_iterator<char>;
-using XPath_Grammar = pseudo_xpath::mini_grammar<Stream_Iterator>;
 
 BOOST_AUTO_TEST_CASE(element_filter_ctor_1)
 {
@@ -65,16 +63,6 @@ new_element(vector<Element>& e, string const& n, const Element::Index parent_idx
 	return new_element_index;
 }
 
-static Grade::SP parse_pseudo_xpath(const char* const xpath_text)
-{
-	XPath_Grammar g;
-	std::istringstream xpath_stream{ xpath_text };
-	xpath_stream.unsetf(std::ios::skipws);
-	xpath_stream >> qi::phrase_match(g, ascii::space);
-	if (!(xpath_stream.good() || xpath_stream.eof()))
-		throw runtime_error{ "Failed to parse pseudo XPath." };
-	return g.result;
-}
 
 BOOST_AUTO_TEST_CASE(element_filter_depth_first_1)
 {
@@ -87,7 +75,7 @@ BOOST_AUTO_TEST_CASE(element_filter_depth_first_1)
 
 	Worksheet_Row_Column_Titles t;
 	Element_Filter ef{ elements, t };
-	ef.set_filter_path(parse_pseudo_xpath("Workbook,Worksheet,Row,Data"));
+	ef.set_filter_path(pseudo_xpath::parse("Workbook,Worksheet,Row,Data"));
 
 	int visit_count = 0;
 	ef.visit_all_depth_first(
@@ -123,7 +111,7 @@ BOOST_AUTO_TEST_CASE(element_filter_depth_first_2)
 
 	Worksheet_Row_Column_Titles t;
 	Element_Filter ef{ elements, t };
-	ef.set_filter_path(parse_pseudo_xpath("Workbook,Worksheet,Row"));
+	ef.set_filter_path(pseudo_xpath::parse("Workbook,Worksheet,Row"));
 
 	list<string> expected_names = { "Row", "Data", "Data", "Row", "Data", "Data", "Data" };
 	list<string> filtered_names;

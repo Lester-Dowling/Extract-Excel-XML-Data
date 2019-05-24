@@ -1,6 +1,5 @@
 // Pseudo-XPath/Grade.cpp
 // Started 14 Apr 2019
-#pragma once
 #include "pch-xpath-parser.hpp"
 #include "Pseudo-XPath/Grade.hpp"
 namespace pseudo_xpath {
