@@ -58,8 +58,8 @@ namespace simple_xml {
 		file_in_memory.reserve(xml_file_size);
 		xml_stream.unsetf(std::ios::skipws); // No white space skipping!
 		std::copy(
-		  std::istream_iterator<char>(xml_stream),
-		  std::istream_iterator<char>(),
+		  std::istream_iterator<char>{ xml_stream },
+		  std::istream_iterator<char>{},
 		  std::back_inserter(file_in_memory));
 
 		Memory_Iterator fitr = file_in_memory.begin();

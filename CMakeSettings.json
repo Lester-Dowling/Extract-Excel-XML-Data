@@ -2,7 +2,7 @@
   "configurations": [
     {
       "buildCommandArgs": "-v",
-      "buildRoot": "${projectDir}\\build",
+      "buildRoot": "${projectDir}\\build\\${name}",
       "cmakeCommandArgs": "",
       "configurationType": "RelWithDebInfo",
       "ctestCommandArgs": "",
