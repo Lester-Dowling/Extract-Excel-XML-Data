@@ -105,6 +105,6 @@ add_custom_command(
 #
 # Discover all the unit tests
 #
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/")
-include(Discover.Boost.Test)
-boost_discover_tests(${TARGET})
+# list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
+# include(Discover.Boost.Test)
+# boost_discover_tests(${TARGET})
