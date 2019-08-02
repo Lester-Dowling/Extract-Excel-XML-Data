@@ -115,13 +115,17 @@ $PROJECT_DIR = $SCRIPT_DIR | Select -ExpandProperty Parent | Select -ExpandPrope
 if ($SCRIPT_DIRNAME -ne "scripts") { $PROJECT_DIR = Get-Item ${PSScriptRoot} | Select -ExpandProperty FullName }
 Write-Host "PROJECT_DIR == $PROJECT_DIR"
 
+
 #
 # Choose the version of Visual Studio
 #
-$ARCH = "x64"
-$VSYEAR = "2017"
-$VC = Resolve-Path "${ENV:ProgramFiles(x86)}\Microsoft Visual Studio\$VSYEAR\Community\VC" -ea:ignore
-if (-Not($VC)) { fatal_error_exit "Visual C++ is not installed." }
+$ARCH = 'x64'
+$VSYEAR = '2019'
+$VC = Resolve-Path "${ENV:ProgramFiles(x86)}\Microsoft Visual Studio\$VSYEAR\Preview\VC" -ea:ignore
+if (-Not($VC)) { fatal_error_exit "Visual C++ ${VSYEAR} is not installed." }
+$TOOLS_MSVC = "${VC}\Tools\MSVC"
+if (-Not($TOOLS_MSVC)) { fatal_error_exit "No Visual C++ tools." }
+$TOOLS_VERSIONED = Get-ChildItem "$TOOLS_MSVC" -Directory | Sort -Property Name | Select -Last 1  |  Select -ExpandProperty FullName
 $VCVARSALL = Resolve-Path "${VC}\Auxiliary\Build\vcvarsall.bat" -ea:ignore
 if (-Not($VCVARSALL)) { fatal_error_exit "No such file: vcvarsall.bat" }
 $COMMONEXTENSIONS = Resolve-Path "${VC}\..\COMMON7\IDE\COMMONEXTENSIONS" -ea:Ignore
@@ -130,10 +134,10 @@ $CMAKE = Resolve-Path "${COMMONEXTENSIONS}\MICROSOFT\CMAKE\CMake\bin\cmake.exe" 
 if (-Not($CMAKE)) { fatal_error_exit "cmake is not available" }
 $MAKE_PROGRAM = Resolve-Path "${COMMONEXTENSIONS}\MICROSOFT\CMAKE\Ninja\ninja.exe" -ea:Ignore
 if (-Not($MAKE_PROGRAM)) { fatal_error_exit "ninja is not available" }
-$C_COMPILER = Resolve-Path "${VC}/Tools/MSVC/14.16.27023/bin/HostX64/x64/cl.exe" -ea:Ignore
-if (-Not($C_COMPILER)) { fatal_error_exit "cl is not available" }
-$CXX_COMPILER = Resolve-Path "${VC}/Tools/MSVC/14.16.27023/bin/HostX64/x64/cl.exe" -ea:Ignore
-if (-Not($CXX_COMPILER)) { fatal_error_exit "cl is not available" }
+$C_COMPILER = Resolve-Path "${TOOLS_VERSIONED}/bin/HostX64/x64/cl.exe" -ea:Ignore
+if (-Not($C_COMPILER)) { fatal_error_exit "C compiler in Visual Studio ${VSYEAR} is not available" }
+$CXX_COMPILER = Resolve-Path "${TOOLS_VERSIONED}/bin/HostX64/x64/cl.exe" -ea:Ignore
+if (-Not($CXX_COMPILER)) { fatal_error_exit  "C++ compiler in Visual Studio ${VSYEAR} is not available" }
 
 #
 # Build Type
@@ -158,9 +162,16 @@ if (-Not($VCVARSALL_SETUP_ONLY_ONCE)) {
 $CMAKE_DEFAULT_BUILD_DIR = "build"
 $CMAKE_DEFAULT_BINARY_DIR = "${ARCH}-Release"
 $BINARY_DIR = ""
+$BUILD_DIR = ""
 $CMAKE_BINARY_DIR_FILE = Resolve-Path "${PSScriptRoot}/cmake_binary_dir.txt" -ea:Ignore
 if (-Not($CMAKE_BINARY_DIR_FILE)) {
     $BUILD_DIR = Resolve-Path "${PROJECT_DIR}/${CMAKE_DEFAULT_BUILD_DIR}" -ea:Ignore
+    if ($CLEAN) {
+        if ($BUILD_DIR) {
+            rm ${BUILD_DIR} -Recurse -Force -ea:Stop
+            $BUILD_DIR = ""
+        }
+    }
     if (-Not($BUILD_DIR)) {
         New-Item -Path ${PROJECT_DIR} -Name ${CMAKE_DEFAULT_BUILD_DIR} -ItemType "directory" -Verbose
         $BUILD_DIR = Resolve-Path "${PROJECT_DIR}/${CMAKE_DEFAULT_BUILD_DIR}"
@@ -172,10 +183,38 @@ if (-Not($CMAKE_BINARY_DIR_FILE)) {
     }
 } else {
     $BINARY_DIR = Get-Content $CMAKE_BINARY_DIR_FILE
-    $BINARY_DIR = Resolve-Path "${BINARY_DIR}" -ea:Ignore
+    $C = @( $BINARY_DIR -split '/')
+    $N = $C.Count
+    if ($N -gt 3) {
+        $N = $N - 1
+        $BINARY_DIR_NAME = $C[$N]
+        $N = $N - 1
+        $BUILD_DIR_NAME = $C[$N]
+        $BUILD_DIR = $C[0..$N] -join '/'
+        $N = $N - 1
+        $BUILD_PARENT = $C[0..$N] -join '/'
+        $BUILD_DIR = Resolve-Path "${BUILD_DIR}" -ea:Ignore
+        if ($CLEAN) {
+            if ($BUILD_DIR) {
+                rm ${BUILD_DIR} -Recurse -Force -ea:Stop
+                $BUILD_DIR = ""
+            }
+        }
+        if (-Not($BUILD_DIR)) {
+            New-Item -Path ${BUILD_PARENT} -Name ${BUILD_DIR_NAME} -ItemType "directory" -Verbose
+            $BUILD_DIR = Resolve-Path "${BUILD_PARENT}/${BUILD_DIR_NAME}"
+        }
+        $BINARY_DIR = Resolve-Path "${BUILD_DIR}/${CMAKE_DEFAULT_BINARY_DIR}" -ea:Ignore
+        if (-Not($BINARY_DIR)) {
+            New-Item -Path ${BUILD_DIR} -Name ${BINARY_DIR_NAME} -ItemType "directory" -Verbose
+            $BINARY_DIR = Resolve-Path "${BUILD_DIR}/${BINARY_DIR_NAME}"
+        }
+    } else {
+        fatal_error_exit "Binary directory path too short."
+    }
 }
 if (-Not($BINARY_DIR)) {
-	fatal_error_exit "No such CMake binary directory: $BINARY_DIR"
+	fatal_error_exit "No such CMake binary directory."
 }
 Write-Host "Binary directory: $BINARY_DIR"
 
@@ -193,7 +232,15 @@ if (-Not(Test-Path "CMakeCache.txt")) {
     Write-Host "C_COMPILER == $C_COMPILER"
     Write-Host "MAKE_PROGRAM == $MAKE_PROGRAM"
 
-    &$CMAKE -G "Ninja" -DCMAKE_INSTALL_PREFIX:PATH="$INSTALL_DIR" -DCMAKE_CXX_COMPILER:PATH="$CXX_COMPILER" -DCMAKE_C_COMPILER:PATH="$C_COMPILER" -DCMAKE_BUILD_TYPE="$BUILD_TYPE" -DCMAKE_MAKE_PROGRAM="$MAKE_PROGRAM"  "$PROJECT_DIR"
+    &$CMAKE `
+      -G "Ninja" `
+      -DCMAKE_INSTALL_PREFIX:PATH="$INSTALL_DIR" `
+      -DCMAKE_CXX_COMPILER:PATH="$CXX_COMPILER" `
+      -DCMAKE_C_COMPILER:PATH="$C_COMPILER" `
+      -DCMAKE_BUILD_TYPE="$BUILD_TYPE" `
+      -DCMAKE_MAKE_PROGRAM="$MAKE_PROGRAM" `
+      -DCMAKE_VERBOSE_MAKEFILE=ON `
+      "$PROJECT_DIR"
 }
 
 #
@@ -205,32 +252,17 @@ if (-Not(Test-Path "CMakeCache.txt")) {
 # Build
 #
 play_start_sound
-$CLEAN_FIRST = ""
-if ($CLEAN) { $CLEAN_FIRST = "--clean-first" }
-&$CMAKE --build $BINARY_DIR  --config  "$BUILD_TYPE"  $CLEAN_FIRST
+&$CMAKE --build $BINARY_DIR  --config  "$BUILD_TYPE"
 if ($LASTEXITCODE -ne 0) { fatal_error_exit "CMake build failed."; }
 
 #
 # Run unit tests
 #
 $UNIT_TESTS = Resolve-Path "${BINARY_DIR}/Unit-Tests/Unit-Tests.exe" -ea:ignore
-if (-Not($UNIT_TESTS)) { fatal_error_exit "No Unit_Tests executable." }
+if (-Not($UNIT_TESTS)) { fatal_error_exit "No executable for Unit_Tests." }
 cls
 Write-Host $UNIT_TESTS
 & $UNIT_TESTS --color_output=false  --report_level=short  --log_level=message;
 if ($LASTEXITCODE -ne 0) { fatal_error_exit "Unit tests failed."; }
 cd "$PROJECT_DIR"
 play_finished_sound
-
-
-# CMake Kit
-# 1> Command line:
-# C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO\2017\COMMUNITY\COMMON7\IDE\COMMONEXTENSIONS\MICROSOFT\CMAKE\CMake\bin\cmake.exe
-# -G "Ninja"
-# -DCMAKE_INSTALL_PREFIX:PATH="C:\Users\ljdowling\CMakeBuilds\29884886-1304-9437-a529-31f5a8869390\install\x64-Release"
-# -DCMAKE_CXX_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/HostX64/x64/cl.exe"
-# -DCMAKE_C_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/HostX64/x64/cl.exe"
-# -DCMAKE_BUILD_TYPE="RelWithDebInfo"
-# -DCMAKE_MAKE_PROGRAM="C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO\2017\COMMUNITY\COMMON7\IDE\COMMONEXTENSIONS\MICROSOFT\CMAKE\Ninja\ninja.exe"
-# "C:\Users\ljdowling\Projects\Extract-Excel-XML-Data-2017"
-# 1> Working directory: C:\Users\ljdowling\CMakeBuilds\29884886-1304-9437-a529-31f5a8869390\build\x64-Release

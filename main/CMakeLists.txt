@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.12)
+﻿cmake_minimum_required (VERSION 3.14)
 set(TARGET "Extract-Excel-XML-Data") # The name of the main exe.
 add_executable ( ${TARGET} )
 set_property(TARGET ${TARGET} PROPERTY CXX_STANDARD 17)

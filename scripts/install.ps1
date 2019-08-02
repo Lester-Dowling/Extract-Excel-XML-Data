@@ -66,11 +66,4 @@ if (-Not(Test-Path "$CMAKE_INSTALL")) {
 
 if (Get-Command cmake -ea:sil) {
     cmake -P "$CMAKE_INSTALL"
-} else {
-    $GUESS_CMAKE = Resolve-Path "${ENV:ProgramFiles}\CMake\bin\cmake.exe" -ErrorAction:Ignore
-    if (Get-Command "$GUESS_CMAKE" -ea:sil) {
-        &"${GUESS_CMAKE}" -P "$CMAKE_INSTALL"
-    } else {
-        fatal_error_exit "CMake is not in PATH"
-    }
-}
+} 

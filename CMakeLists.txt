@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.12)
+﻿cmake_minimum_required (VERSION 3.14)
 project (
   "Extract-Excel-XML-Data-2017"
   VERSION 0.6.0
@@ -7,7 +7,6 @@ project (
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 option(GRANT_INTERNET_ACCESS "Permit CMake to download from the Internet" OFF)
 message(STATUS "Access Internet permission: ${GRANT_INTERNET_ACCESS}")
-
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 #

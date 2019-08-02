@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.12)
+cmake_minimum_required (VERSION 3.14)
 
 set(USE_SYSTEM_TZ_DB ON)
 set(DATE_INTERNET_REPO "https://github.com/HowardHinnant/date.git")

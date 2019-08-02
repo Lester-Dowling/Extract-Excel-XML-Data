@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.12)
+cmake_minimum_required (VERSION 3.14)
 
 #A simplied, custom XPath - based grammar which is sufficient to filter Excel table data.
 
