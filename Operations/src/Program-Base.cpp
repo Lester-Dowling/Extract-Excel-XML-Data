@@ -199,7 +199,7 @@ namespace operations {
 		try {
 			this->run();
 			if (this->gVerbose)
-				*gOut << "Okay." << std::endl;
+				*gErr << "Okay." << std::endl;
 		}
 		catch (operations::No_Op const& ex) { // Nothing for program to do.
 			if (0 < std::strlen(ex.what()))
