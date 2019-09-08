@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.14)
 
-set(BOOST_VERSION 1.70.0)
+set(BOOST_VERSION 1.71.0)
 set(Boost_LIBRARIES filesystem program_options date_time regex unit_test_framework)
 
 set(BUILD_SHARED_LIBS            ON)
@@ -37,7 +37,7 @@ if (Boost_FOUND)
 	)
   foreach(Boost_Lib ${Boost_LIBRARIES})
     set_target_properties(
-	  Boost::${Boost_Lib}
+	  ${Boost_Lib}
 	  PROPERTIES IMPORTED_GLOBAL TRUE
 	  )
   endforeach(Boost_Lib)
@@ -73,7 +73,7 @@ if (Boost_FOUND)
   if(WIN32)
 	set(BOOST_REDIST_COPY_LIST "")
     foreach(Boost_Lib ${Boost_LIBRARIES})
-	  get_target_property(BOOST_LIB_ABSOLUTE Boost::${Boost_Lib} IMPORTED_LOCATION_RELEASE)
+	  get_target_property(BOOST_LIB_ABSOLUTE ${Boost_Lib} IMPORTED_LOCATION_RELEASE)
 	  get_filename_component(LIB_BASENAME ${BOOST_LIB_ABSOLUTE} NAME_WE)
 	  get_filename_component(BOOST_REDIST_DIR ${BOOST_LIB_ABSOLUTE} DIRECTORY)
 	  set(DLL_FILENAME "${LIB_BASENAME}.dll")

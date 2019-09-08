@@ -61,28 +61,9 @@ else()
   message(WARNING "No such repo available: cmake-precompiled-header")
 endif()
 
-#
-# Import IO Extra Library
-#
-target_link_libraries(${TARGET} PRIVATE "IO-Extra")
 
 #
-# Import Strings Extra Library
-#
-target_link_libraries(${TARGET} PRIVATE "Strings-Extra")
-
-#
-# Threads
-#
-target_link_libraries(${TARGET} PRIVATE Threads::Threads)
-
-#
-# Date
-#
-# target_link_libraries(${TARGET} PRIVATE date::interface)
-
-#
-# Boost 1.69
+# Boost
 #
 target_link_libraries(
   ${TARGET}
@@ -96,8 +77,8 @@ target_link_libraries(
   )
 add_custom_command(
   TARGET ${TARGET} PRE_BUILD
-  COMMAND START /MIN "RoboCopy of Boost redist from parent directory" ROBOCOPY
-  /COPY:DAT /NP /R:2 /W:2
+  COMMAND START /MIN "RoboCopy of Boost redist from parent directory" 
+  ROBOCOPY  /COPY:DAT /NP /R:2 /W:2
   "${CMAKE_BINARY_DIR}"
   "${CMAKE_CURRENT_BINARY_DIR}"
   "boost*dll")

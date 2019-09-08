@@ -85,7 +85,7 @@ target_link_libraries(${TARGET} PRIVATE "Pseudo-XPath")
 target_link_libraries(${TARGET} PRIVATE Threads::Threads)
 
 #
-# Boost 1.69
+# Boost
 #
 target_link_libraries(
   ${TARGET}

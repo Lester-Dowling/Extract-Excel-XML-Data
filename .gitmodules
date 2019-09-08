@@ -1,0 +1,6 @@
+[submodule "OStream-Extra"]
+	path = OStream-Extra
+	url = https://github.com/Lester-Dowling/OStream-Extra.git
+[submodule "IStream-Extra"]
+	path = IStream-Extra
+	url = https://github.com/Lester-Dowling/IStream-Extra.git
