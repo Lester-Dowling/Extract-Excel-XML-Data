@@ -11,7 +11,7 @@
 #include "Simple-XML/mini-grammar.hpp"
 #include "Pseudo-XPath/Grade.hpp"
 #include "Pseudo-XPath/parsing.hpp"
-#include "IO-Extra/sequence.hpp"
+#include "OStream-Extra/sequence.hpp"
 #include "Strings-Extra/predicates.hpp"
 #include "Strings-Extra/convert-and-translate.hpp"
 #include "Strings-Extra/forming.hpp"

@@ -6,7 +6,7 @@
 #include "pch-unit-tests.hpp"
 #include <boost/test/unit_test.hpp>
 #include "Simple-XML/Worksheet-Row-Column-Titles.hpp"
-#include "IO-Extra/sequence.hpp"
+#include "OStream-Extra/sequence.hpp"
 namespace utf = boost::unit_test;
 namespace tt = boost::test_tools;
 

@@ -28,8 +28,9 @@ endif()
 # Make globally available all required external libraries:
 add_subdirectory ("external")
 
-# IO extras library
-add_subdirectory ("IO-Extra")
+# OStream-Extras git submodule
+add_subdirectory ("OStream-Extra")
+
 
 # Simple strings extra library
 add_subdirectory ("Strings-Extra")
@@ -70,7 +71,6 @@ doxygen_add_docs(
    "Pseudo-XPath"
    "Simple-XML"
    "Operations"
-   "IO-Extra"
    "Strings-Extra"
    ALL
    COMMENT "Generate HTML Documentation"

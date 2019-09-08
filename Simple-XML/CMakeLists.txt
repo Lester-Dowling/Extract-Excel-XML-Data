@@ -74,9 +74,9 @@ configure_file (
 include_directories("${PROJECT_BINARY_DIR}")
 
 #
-# Import IO-Extra Library
+# Import OStream-Extra Library
 #
-target_link_libraries(${TARGET} PUBLIC "IO-Extra")
+target_link_libraries(${TARGET} PUBLIC "OStream-Extra")
 
 #
 # Import Strings-Extra Library
