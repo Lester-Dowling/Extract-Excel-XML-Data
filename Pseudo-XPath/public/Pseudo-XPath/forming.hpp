@@ -6,7 +6,7 @@
 #pragma once
 #include <string>
 #include <sstream>
-#include "Strings-Extra/forming.hpp"
+#include "String-Extra/forming.hpp"
 namespace pseudo_xpath {
 	using std::string;
 
