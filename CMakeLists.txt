@@ -1,13 +1,13 @@
-﻿cmake_minimum_required (VERSION 3.14)
+﻿cmake_minimum_required (VERSION 3.15)
 project (
   "Extract-Excel-XML-Data-2017"
   VERSION 0.6.0
   DESCRIPTION "A command line tool to extract data from Excel files which were saved in the Excel 2003 XML format."
   )
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 option(GRANT_INTERNET_ACCESS "Permit CMake to download from the Internet" OFF)
 message(STATUS "Access Internet permission: ${GRANT_INTERNET_ACCESS}")
 set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 #
 # Parent directory for locally cached repositories of open source software (oss)
@@ -31,9 +31,8 @@ add_subdirectory ("external")
 # OStream-Extras git submodule
 add_subdirectory ("OStream-Extra")
 
-
-# Simple strings extra library
-add_subdirectory ("Strings-Extra")
+# String-Extra git submodule
+add_subdirectory ("String-Extra")
 
 # Simple XML library
 add_subdirectory ("Simple-XML")
@@ -50,8 +49,8 @@ add_subdirectory ("main")
 #
 # Unit tests
 #
-# include(CTest)
-# enable_testing()
+include(CTest)
+message(STATUS "Building unit tests: ${BUILD_TESTING}")
 add_subdirectory ("Unit-Tests")
 
 #
@@ -67,14 +66,14 @@ find_package(Doxygen
   OPTIONAL_COMPONENTS mscgen dia)
 
 doxygen_add_docs(
-   ${PROJECT_NAME}
-   "Pseudo-XPath"
-   "Simple-XML"
-   "Operations"
-   "Strings-Extra"
-   ALL
-   COMMENT "Generate HTML Documentation"
-   )
+  ${PROJECT_NAME}
+  "Pseudo-XPath"
+  "Simple-XML"
+  "Operations"
+  "Strings-Extra"
+  ALL
+  COMMENT "Generate HTML Documentation"
+  )
 
 #
 # Info for scripts

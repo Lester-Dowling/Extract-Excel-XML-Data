@@ -1,6 +1,6 @@
 # Extract Data from Excel XML files
 
-This is a command line tool to extract data from Excel files which were saved in the **Excel 2003 XML** format.  The intended use case for this tool is to be part of a workflow which takes Excel files downloaded from a website and extracts data from the worksheets for other reporting tools.
+This is a command line tool to extract data from Excel files which were saved in the **Excel 2003 XML** format.  The intended use case for this tool is within a workflow which takes Excel files downloaded from a website and extracts data from the worksheets for other reporting tools.
 
 ## For example
 

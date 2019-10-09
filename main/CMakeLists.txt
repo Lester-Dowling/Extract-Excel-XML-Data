@@ -51,7 +51,7 @@ target_link_libraries(${TARGET} PRIVATE "Pseudo-XPath")
 target_link_libraries(${TARGET} PRIVATE Threads::Threads)
 
 #
-# Boost 1.69
+# Boost
 #
 target_link_libraries(
   ${TARGET}
@@ -74,8 +74,8 @@ add_custom_command(
 # Installation
 #
 install(TARGETS ${TARGET} RUNTIME
-	DESTINATION bin
-	)
+  DESTINATION bin
+  )
 
 message(STATUS "------------------ CMake Variable Logging ------------------")
 message(STATUS "CMAKE_CURRENT_LIST_FILE:     " ${CMAKE_CURRENT_LIST_FILE})
