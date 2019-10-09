@@ -62,7 +62,7 @@ target_link_libraries(${TARGET} PRIVATE "IO-Extra")
 #
 # Import Strings Extra Library
 #
-target_link_libraries(${TARGET} PRIVATE "Strings-Extra")
+target_link_libraries(${TARGET} PRIVATE "String-Extra")
 
 #
 # Threads

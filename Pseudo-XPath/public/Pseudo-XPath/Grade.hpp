@@ -9,6 +9,9 @@
 #include <string>
 namespace pseudo_xpath {
 
+	/**
+	 * Filter atom for a single attribute within an XML tag.
+	 */
 	struct Attribute_Filter {
 		std::string attribute_name;
 		char filter_operator; // can be: = < >

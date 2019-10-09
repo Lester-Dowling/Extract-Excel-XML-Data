@@ -67,7 +67,7 @@ endif()
 #
 # Import String Extra Library
 #
-target_link_libraries(${TARGET} PRIVATE "Strings-Extra")
+target_link_libraries(${TARGET} PRIVATE "String-Extra")
 
 #
 # Import XML Library

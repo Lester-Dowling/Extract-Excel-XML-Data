@@ -7,6 +7,7 @@
 #include <memory>
 #include <string>
 #include <map>
+#include <vector>
 #include <utility>
 #include <optional>
 namespace simple_xml {
@@ -18,8 +19,7 @@ namespace simple_xml {
 	/**
 	 * For each worksheet, maintain a list of column titles and row titles.
 	 */
-	class Row_Column_Titles
-	{
+	class Row_Column_Titles {
 		typedef map<int, string> titles_map_t;
 		/**
 		 * Mapping from column index to column title.
@@ -30,21 +30,25 @@ namespace simple_xml {
 		 * Mapping from row index to row title.
 		 */
 		titles_map_t m_row_titles;
-		
+
 		string m_worksheet_title;
 		int m_previous_row_idx = 0;
 		int m_previous_col_idx = 0;
 
-	  public: //~ Ctors et al -------------------------------------------
+	public: //~ Ctors et al -------------------------------------------
 		// typedef std::shared_ptr<Row_Column_Titles> SP;
 
 		Row_Column_Titles() {} // Requirement for std::map.
 
+		/**
+		 * The row, column titles for the named worksheet.
+		 */
 		explicit Row_Column_Titles(const string wkt_title)
 		  : m_worksheet_title{ wkt_title }
-		{}
+		{
+		}
 
-	  public: //~ Mutators ----------------------------------------------
+	public: //~ Mutators ----------------------------------------------
 		void add_row(const int row_idx, const string title)
 		{
 			const string multiple_row_title_separator{ ", " };
@@ -75,7 +79,7 @@ namespace simple_xml {
 			return col_idx;
 		}
 
-	  public: //~ Accessors ---------------------------------------------
+	public: //~ Accessors ---------------------------------------------
 		size_t row_count() const { return m_row_titles.size(); }
 
 		size_t col_count() const { return m_col_titles.size(); }

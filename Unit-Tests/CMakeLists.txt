@@ -26,7 +26,7 @@ target_link_libraries(${TARGET} PUBLIC "OStream-Extra")
 #
 # Import the subjects for unit testing
 #
-target_link_libraries(${TARGET} PRIVATE "Strings-Extra")
+target_link_libraries(${TARGET} PRIVATE "String-Extra")
 target_link_libraries(${TARGET} PRIVATE "Simple-XML")
 target_link_libraries(${TARGET} PRIVATE "Pseudo-XPath")
 target_link_libraries(${TARGET} PRIVATE "Operations")

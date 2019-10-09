@@ -23,6 +23,7 @@
 #include <numeric>
 #include <stdexcept>
 #include <limits>
+#include <optional>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/classification.hpp>

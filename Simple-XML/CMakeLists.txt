@@ -79,9 +79,9 @@ include_directories("${PROJECT_BINARY_DIR}")
 target_link_libraries(${TARGET} PUBLIC "OStream-Extra")
 
 #
-# Import Strings-Extra Library
+# Import String-Extra Library
 #
-target_link_libraries(${TARGET} PUBLIC "Strings-Extra")
+target_link_libraries(${TARGET} PUBLIC "String-Extra")
 
 #
 # Import Pseudo XPath Parser Library

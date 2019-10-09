@@ -69,7 +69,7 @@ endif()
 #
 # Import String Extra Library
 #
-target_link_libraries(${TARGET} PRIVATE "Strings-Extra")
+target_link_libraries(${TARGET} PRIVATE "String-Extra")
 
 #
 # Threads
@@ -77,7 +77,7 @@ target_link_libraries(${TARGET} PRIVATE "Strings-Extra")
 target_link_libraries(${TARGET} PRIVATE Threads::Threads)
 
 #
-# Boost 1.69
+# Boost
 #
 target_link_libraries(
   ${TARGET}

@@ -32,6 +32,9 @@ namespace pseudo_xpath {
 	constexpr char kDQ = '"';
 	constexpr char kSQ = '\'';
 
+	/**
+	 * Mini grammar for a reduced subset of XML.
+	 */
 	template<typename Iterator>
 	class mini_grammar
 	  : public qi::grammar<Iterator, void(), ascii::space_type> //
@@ -126,17 +129,16 @@ namespace pseudo_xpath {
 							 attribute_value_nq }
 		  , implicit_value{ attribute_value_dq | attribute_value_sq | attribute_value_dg }
 		  , binary_filter{ attribute_name >> qi::char_("=<>") >> attribute_value }
-		  , attributes{ 
-			implicit_value[boost::bind(&This::add_implicit_filter, this, _1)] % qi::lit('|')
-			|
-			+binary_filter[boost::bind(&This::add_filter, this, _1)],
-			"attributes" }
+		  , attributes{ implicit_value[boost::bind(&This::add_implicit_filter, this, _1)] %
+							qi::lit('|') |
+						  +binary_filter[boost::bind(&This::add_filter, this, _1)],
+						"attributes" }
 		  , start{ (xml_identifier[boost::bind(&Grade_Creator::new_element, creator, _1)] >>
 					-(qi::lit('[') > attributes > qi::lit(']'))) %
 					 qi::lit(','),
 				   "start" }
 		{
-			//qi::on_error<qi::fail>(
+			// qi::on_error<qi::fail>(
 			//  start,
 			//  std::cout << phx::val("Error! Expecting ") << qi::_4 // what failed?
 			//			<< std::endl);

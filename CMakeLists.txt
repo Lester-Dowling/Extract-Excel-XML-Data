@@ -56,6 +56,8 @@ add_subdirectory ("Unit-Tests")
 #
 # Documentation
 #
+option(BUILD_DOCS "Whether to build or ignore documentation" OFF)
+if (BUILD_DOCS)
 set(DOXYGEN_GENERATE_HTML YES)
 set(DOXYGEN_HTML_DYNAMIC_SECTIONS YES)
 set(DOXYGEN_HTML_EXTRA_STYLESHEET larger-font-sizes.css)
@@ -64,16 +66,16 @@ set(DOXYGEN_GENERATE_MAN NO)
 find_package(Doxygen
   REQUIRED dot
   OPTIONAL_COMPONENTS mscgen dia)
-
 doxygen_add_docs(
   ${PROJECT_NAME}
   "Pseudo-XPath"
   "Simple-XML"
   "Operations"
-  "Strings-Extra"
+  "String-Extra"
   ALL
   COMMENT "Generate HTML Documentation"
   )
+endif(BUILD_DOCS)
 
 #
 # Info for scripts
