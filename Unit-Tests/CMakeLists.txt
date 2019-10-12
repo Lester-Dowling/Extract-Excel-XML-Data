@@ -81,15 +81,15 @@ target_link_libraries(
   )
 add_custom_command(
   TARGET ${TARGET} PRE_BUILD
-  COMMAND START /MIN "RoboCopy of Boost redist from parent directory" 
+  COMMAND START /MIN "RoboCopy of Boost redist from parent directory"
   ROBOCOPY  /COPY:DAT /NP /R:2 /W:2
   "${CMAKE_BINARY_DIR}"
   "${CMAKE_CURRENT_BINARY_DIR}"
   "boost*dll")
 
 #
-# Discover all the unit tests
+# Discover all the unit tests automatically for CTest to execute
 #
-# list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
-# include(Discover.Boost.Test)
-# boost_discover_tests(${TARGET})
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
+include(Discover.Boost.Test)
+boost_discover_tests(${TARGET})
