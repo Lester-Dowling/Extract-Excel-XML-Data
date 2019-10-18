@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_CASE(single_cell_extraction_1)
 	BOOST_TEST(!oss.str().empty());
 	BOOST_TEST(ess.str().empty());
 	list<string> expected_output_pieces = {
-		"16",	   // Expected row number.
+		"16",	  // Expected row number.
 		"34177000" // Expected value.
 	};
 	const string expected_answer = a::join(expected_output_pieces, " \t ");
@@ -163,15 +163,15 @@ BOOST_AUTO_TEST_CASE(all_data_extraction_1)
 		"1",		 "Item",
 		"06/16",	 "06/17",
 		"2",		 "CA - Cash",
-		"1435000",	 "1060000",
+		"1435000",   "1060000",
 		"3",		 "CA - Receivables",
-		"44888000",	 "41131000",
+		"44888000",  "41131000",
 		"4",		 "CA - Prepaid Expenses",
-		"3589000",	 "5675000",
+		"3589000",   "5675000",
 		"5",		 "CA - Inventories",
 		"104316000", "87474000",
 		"6",		 "CA - Investments",
-		"1293000",	 "1270000",
+		"1293000",   "1270000",
 		"7",		 "CA - NCA Held Sale",
 		"0",		 "0",
 		"8",		 "CA - Other",
@@ -384,7 +384,7 @@ BOOST_AUTO_TEST_CASE(calc_each_constraint_2)
 	BOOST_TEST(ess.str().empty());
 	typedef list<string> pieces_t;
 	pieces_t expected_output_pieces = //
-	  { "17.7300000000000004", "89177",	 "18.0000000000000000", "108948",
+	  { "17.7300000000000004", "89177",  "18.0000000000000000", "108948",
 		"17.7899999999999991", "100885", "18.4199999999999982", "149858",
 		"18.4800000000000004", "84893" };
 	pieces_t oss_pieces;
