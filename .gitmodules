@@ -7,3 +7,6 @@
 [submodule "String-Extra"]
 	path = String-Extra
 	url = https://github.com/Lester-Dowling/String-Extra.git
+[submodule "Pseudo-XPath"]
+	path = Pseudo-XPath
+	url = https://github.com/Lester-Dowling/Pseudo-XPath.git
