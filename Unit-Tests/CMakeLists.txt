@@ -37,6 +37,19 @@ target_sources(${TARGET} PRIVATE ${SRC_TEST_FILES})
 target_include_directories(${TARGET} PRIVATE ${OSTREAM_EXTRA_UNIT_TESTS})
 
 #
+# Import IStream-Extra for unit testing
+#
+target_link_libraries(${TARGET} PRIVATE "IStream-Extra")
+get_filename_component(ISTREAM_EXTRA_UNIT_TESTS
+                       "${CMAKE_SOURCE_DIR}/IStream-Extra/Unit-Tests" ABSOLUTE)
+file(
+  GLOB SRC_TEST_FILES
+  LIST_DIRECTORIES false
+  CONFIGURE_DEPENDS "${ISTREAM_EXTRA_UNIT_TESTS}/test-*.cpp")
+target_sources(${TARGET} PRIVATE ${SRC_TEST_FILES})
+target_include_directories(${TARGET} PRIVATE ${ISTREAM_EXTRA_UNIT_TESTS})
+
+#
 # Import Pseudo-XPath for unit testing
 #
 target_link_libraries(${TARGET} PRIVATE "Pseudo-XPath")
