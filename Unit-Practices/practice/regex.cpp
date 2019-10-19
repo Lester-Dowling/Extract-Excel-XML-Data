@@ -19,6 +19,15 @@ using std::string;
 
 BOOST_AUTO_TEST_SUITE(test_regex_suite, *utf::enabled())
 
+namespace {
+
+inline bool starts_with(std::string_view big, std::string_view x)
+{
+	return big.size() >= x.size() && big.compare(0, x.size(), x) == 0;
+}
+
+}
+
 BOOST_AUTO_TEST_CASE(starts_with_workbook)
 {
 	const regex workbook_regex{ "[[:space:]]*Workbook\\b.*" };

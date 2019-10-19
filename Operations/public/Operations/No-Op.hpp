@@ -10,15 +10,16 @@ namespace operations {
 	/*
 	 * An exception to indicate there's no operation to perform.
 	 */
-	class No_Op : public std::exception
-	{
-	  public:
+	class No_Op : public std::exception {
+	public:
 		No_Op()
-		  : std::exception{ "" }
-		{}
+		  : std::exception()
+		{
+		}
 
-		No_Op(const char* what)
-		  : std::exception{ what }
-		{}
+		// No_Op(const char* what)
+		// : std::exception(what)
+		// {
+		//}
 	};
 } // namespace operations

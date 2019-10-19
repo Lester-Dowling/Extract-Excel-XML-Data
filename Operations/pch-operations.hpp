@@ -82,8 +82,3 @@ typedef std::vector<VectorStringSP> VectorVectorString;
 typedef std::shared_ptr<VectorVectorString> VectorVectorStringSP;
 typedef std::map<std::string, VectorStringSP> MapStringToVectorString;
 typedef std::vector<std::wstring> VectorWString;
-
-inline bool starts_with(std::string_view big, std::string_view x)
-{
-	return big.size() >= x.size() && big.compare(0, x.size(), x) == 0;
-}

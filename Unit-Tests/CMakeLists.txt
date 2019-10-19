@@ -120,12 +120,18 @@ target_link_libraries(
           Boost::regex #
           Boost::unit_test_framework #
 )
-add_custom_command(
-  TARGET ${TARGET} PRE_BUILD
-  COMMAND
-    START /MIN "RoboCopy of Boost redist from parent directory" #
-    ROBOCOPY /COPY:DAT /NP /R:2 /W:2 "${CMAKE_BINARY_DIR}"
-    "${CMAKE_CURRENT_BINARY_DIR}" "boost*dll")
+if(WIN32)
+  add_custom_command(
+    TARGET ${TARGET} PRE_BUILD
+    COMMAND
+      START /MIN "RoboCopy of Boost redist from parent directory" #
+      ROBOCOPY /COPY:DAT /NP /R:2 /W:2 "${CMAKE_BINARY_DIR}"
+      "${CMAKE_CURRENT_BINARY_DIR}" "boost*dll")
+endif()
+
+if(NOT WIN32) # Support for <boost/dll.hpp> on Linux:
+  target_link_libraries(${TARGET} PUBLIC dl)
+endif()
 
 #
 # Discover all the unit tests automatically for CTest to execute
