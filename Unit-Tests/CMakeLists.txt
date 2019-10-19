@@ -11,9 +11,8 @@ target_sources(${TARGET} PRIVATE ${SRC_TEST_FILES})
 target_include_directories(${TARGET} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 #
-# Import the subjects for unit testing
+# Import String-Extra for unit testing
 #
-target_link_libraries(${TARGET} PRIVATE "OStream-Extra")
 target_link_libraries(${TARGET} PRIVATE "String-Extra")
 get_filename_component(STRING_EXTRA_UNIT_TESTS
                        "${CMAKE_SOURCE_DIR}/String-Extra/Unit-Tests" ABSOLUTE)
@@ -24,8 +23,40 @@ file(
 target_sources(${TARGET} PRIVATE ${SRC_TEST_FILES})
 target_include_directories(${TARGET} PRIVATE ${STRING_EXTRA_UNIT_TESTS})
 
-target_link_libraries(${TARGET} PRIVATE "Simple-XML")
+#
+# Import OStream-Extra for unit testing
+#
+target_link_libraries(${TARGET} PRIVATE "OStream-Extra")
+get_filename_component(OSTREAM_EXTRA_UNIT_TESTS
+                       "${CMAKE_SOURCE_DIR}/OStream-Extra/Unit-Tests" ABSOLUTE)
+file(
+  GLOB SRC_TEST_FILES
+  LIST_DIRECTORIES false
+  CONFIGURE_DEPENDS "${OSTREAM_EXTRA_UNIT_TESTS}/test-*.cpp")
+target_sources(${TARGET} PRIVATE ${SRC_TEST_FILES})
+target_include_directories(${TARGET} PRIVATE ${OSTREAM_EXTRA_UNIT_TESTS})
+
+#
+# Import Pseudo-XPath for unit testing
+#
 target_link_libraries(${TARGET} PRIVATE "Pseudo-XPath")
+get_filename_component(PSEUDO_XPATH_UNIT_TESTS
+                       "${CMAKE_SOURCE_DIR}/Pseudo-XPath/Unit-Tests" ABSOLUTE)
+file(
+  GLOB SRC_TEST_FILES
+  LIST_DIRECTORIES false
+  CONFIGURE_DEPENDS "${PSEUDO_XPATH_UNIT_TESTS}/test-*.cpp")
+target_sources(${TARGET} PRIVATE ${SRC_TEST_FILES})
+target_include_directories(${TARGET} PRIVATE ${PSEUDO_XPATH_UNIT_TESTS})
+
+#
+# Import Simple-XML for unit testing
+#
+target_link_libraries(${TARGET} PRIVATE "Simple-XML")
+
+#
+# Import Operations for unit testing
+#
 target_link_libraries(${TARGET} PRIVATE "Operations")
 
 if(WIN32)
