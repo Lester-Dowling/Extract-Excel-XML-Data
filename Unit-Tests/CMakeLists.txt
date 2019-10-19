@@ -21,7 +21,7 @@ file(
   LIST_DIRECTORIES false
   CONFIGURE_DEPENDS "${STRING_EXTRA_UNIT_TESTS}/test-*.cpp")
 target_sources(${TARGET} PRIVATE ${SRC_TEST_FILES})
-target_include_directories(${TARGET} PRIVATE ${STRING_EXTRA_UNIT_TESTS})
+# target_include_directories(${TARGET} PRIVATE ${STRING_EXTRA_UNIT_TESTS})
 
 #
 # Import OStream-Extra for unit testing
@@ -34,7 +34,7 @@ file(
   LIST_DIRECTORIES false
   CONFIGURE_DEPENDS "${OSTREAM_EXTRA_UNIT_TESTS}/test-*.cpp")
 target_sources(${TARGET} PRIVATE ${SRC_TEST_FILES})
-target_include_directories(${TARGET} PRIVATE ${OSTREAM_EXTRA_UNIT_TESTS})
+# target_include_directories(${TARGET} PRIVATE ${OSTREAM_EXTRA_UNIT_TESTS})
 
 #
 # Import IStream-Extra for unit testing
@@ -47,7 +47,7 @@ file(
   LIST_DIRECTORIES false
   CONFIGURE_DEPENDS "${ISTREAM_EXTRA_UNIT_TESTS}/test-*.cpp")
 target_sources(${TARGET} PRIVATE ${SRC_TEST_FILES})
-target_include_directories(${TARGET} PRIVATE ${ISTREAM_EXTRA_UNIT_TESTS})
+# target_include_directories(${TARGET} PRIVATE ${ISTREAM_EXTRA_UNIT_TESTS})
 
 #
 # Import Pseudo-XPath for unit testing
@@ -60,7 +60,7 @@ file(
   LIST_DIRECTORIES false
   CONFIGURE_DEPENDS "${PSEUDO_XPATH_UNIT_TESTS}/test-*.cpp")
 target_sources(${TARGET} PRIVATE ${SRC_TEST_FILES})
-target_include_directories(${TARGET} PRIVATE ${PSEUDO_XPATH_UNIT_TESTS})
+# target_include_directories(${TARGET} PRIVATE ${PSEUDO_XPATH_UNIT_TESTS})
 
 #
 # Import Simple-XML for unit testing
@@ -112,14 +112,20 @@ endif()
 #
 target_link_libraries(
   ${TARGET}
-  PRIVATE Boost::boost Boost::filesystem Boost::date_time
-          Boost::program_options Boost::regex Boost::unit_test_framework)
+  PRIVATE #
+          Boost::boost #
+          Boost::filesystem #
+          Boost::date_time #
+          Boost::program_options #
+          Boost::regex #
+          Boost::unit_test_framework #
+)
 add_custom_command(
   TARGET ${TARGET} PRE_BUILD
   COMMAND
-    START /MIN "RoboCopy of Boost redist from parent directory" ROBOCOPY
-    /COPY:DAT /NP /R:2 /W:2 "${CMAKE_BINARY_DIR}" "${CMAKE_CURRENT_BINARY_DIR}"
-    "boost*dll")
+    START /MIN "RoboCopy of Boost redist from parent directory" #
+    ROBOCOPY /COPY:DAT /NP /R:2 /W:2 "${CMAKE_BINARY_DIR}"
+    "${CMAKE_CURRENT_BINARY_DIR}" "boost*dll")
 
 #
 # Discover all the unit tests automatically for CTest to execute
