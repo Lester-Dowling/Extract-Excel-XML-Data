@@ -6,8 +6,8 @@ using namespace std;
 
 GlobalFixture::GlobalFixture()
   : m_start_time{ std::chrono::system_clock::now() }
-  , env_var{ getenv("FINISH_WITHOUT_USER_PROMPT") }
-  , m_finish_without_user_prompt{ string{ env_var == nullptr ? "" : env_var } == "1" }
+  , env_var{ getenv("FINISH_WITH_USER_PROMPT") }
+  , m_finish_with_user_prompt{ string{ env_var == nullptr ? "" : env_var } == "1" }
 {
 	cin.exceptions(ios_base::badbit | ios_base::failbit);
 	cout.exceptions(ios_base::badbit | ios_base::failbit | ios_base::eofbit);
@@ -30,7 +30,7 @@ GlobalFixture::~GlobalFixture()
 	const auto unit_testing_duration = m_finish_time - m_start_time;
 	// wcout << "Unit testing finished at " << m_finish_time << endl;
 	// wcout << "Unit testing took " << unit_testing_duration << endl;
-	if (!m_finish_without_user_prompt) {
+	if (m_finish_with_user_prompt) {
 		cout << endl << endl << "Please press <Enter> to finish: " << flush;
 		getchar();
 	}
