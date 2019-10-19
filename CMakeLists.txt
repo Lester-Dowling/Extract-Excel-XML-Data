@@ -1,9 +1,10 @@
-﻿cmake_minimum_required (VERSION 3.15)
-project (
+﻿cmake_minimum_required(VERSION 3.15)
+project(
   "Extract-Excel-XML-Data-2017"
   VERSION 0.6.0
-  DESCRIPTION "A command line tool to extract data from Excel files which were saved in the Excel 2003 XML format."
-  )
+  DESCRIPTION
+    "A command line tool to extract data from Excel files which were saved in the Excel 2003 XML format."
+)
 option(GRANT_INTERNET_ACCESS "Permit CMake to download from the Internet" OFF)
 message(STATUS "Access Internet permission: ${GRANT_INTERNET_ACCESS}")
 set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -19,62 +20,61 @@ else()
 endif()
 get_filename_component(LOCALLY_CACHED_REPOS_DIR "${HOME}/oss" ABSOLUTE)
 if(EXISTS ${LOCALLY_CACHED_REPOS_DIR})
-  message(STATUS "Locally cached repositories folder: " ${LOCALLY_CACHED_REPOS_DIR})
+  message(STATUS "Locally cached repositories folder: "
+                 ${LOCALLY_CACHED_REPOS_DIR})
 else()
   message(WARNING "No local repositories folder: " ${LOCALLY_CACHED_REPOS_DIR})
 endif()
 
-
 # Make globally available all required external libraries:
-add_subdirectory ("external")
+add_subdirectory("external")
 
-# OStream-Extras git submodule
-add_subdirectory ("OStream-Extra")
+# I/OStream-Extras git submodule
+add_subdirectory("IStream-Extra")
+add_subdirectory("OStream-Extra")
 
 # String-Extra git submodule
-add_subdirectory ("String-Extra")
+add_subdirectory("String-Extra")
 
 # Simple XML library
-add_subdirectory ("Simple-XML")
+add_subdirectory("Simple-XML")
 
 # Pseudo XPath Parser library
-add_subdirectory ("Pseudo-XPath")
+add_subdirectory("Pseudo-XPath")
 
 # The program operations
 add_subdirectory("Operations")
 
 # main is an execution harness around Operations
-add_subdirectory ("main")
+add_subdirectory("main")
 
 #
 # Unit tests
 #
 include(CTest)
 message(STATUS "Building unit tests: ${BUILD_TESTING}")
-add_subdirectory ("Unit-Tests")
+add_subdirectory("Unit-Tests")
 
 #
 # Documentation
 #
 option(BUILD_DOCS "Whether to build or ignore documentation" OFF)
-if (BUILD_DOCS)
-set(DOXYGEN_GENERATE_HTML YES)
-set(DOXYGEN_HTML_DYNAMIC_SECTIONS YES)
-set(DOXYGEN_HTML_EXTRA_STYLESHEET larger-font-sizes.css)
-set(DOXYGEN_HTML_COLORSTYLE_HUE 120)
-set(DOXYGEN_GENERATE_MAN NO)
-find_package(Doxygen
-  REQUIRED dot
-  OPTIONAL_COMPONENTS mscgen dia)
-doxygen_add_docs(
-  ${PROJECT_NAME}
-  "Pseudo-XPath"
-  "Simple-XML"
-  "Operations"
-  "String-Extra"
-  ALL
-  COMMENT "Generate HTML Documentation"
-  )
+if(BUILD_DOCS)
+  set(DOXYGEN_GENERATE_HTML YES)
+  set(DOXYGEN_HTML_DYNAMIC_SECTIONS YES)
+  set(DOXYGEN_HTML_EXTRA_STYLESHEET larger-font-sizes.css)
+  set(DOXYGEN_HTML_COLORSTYLE_HUE 120)
+  set(DOXYGEN_GENERATE_MAN NO)
+  find_package(Doxygen REQUIRED dot OPTIONAL_COMPONENTS mscgen dia)
+  doxygen_add_docs(
+    ${PROJECT_NAME}
+    "Pseudo-XPath"
+    "Simple-XML"
+    "Operations"
+    "String-Extra"
+    ALL
+    COMMENT
+    "Generate HTML Documentation")
 endif(BUILD_DOCS)
 
 #
