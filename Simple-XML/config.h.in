@@ -1,8 +1,0 @@
-#define CMAKE_BUILD_TYPE @CMAKE_BUILD_TYPE@
-
-#if CMAKE_BUILD_TYPE == "Release"
-#undef BOOST_ENABLE_ASSERT_HANDLER
-#else
-#define BOOST_ENABLE_ASSERT_HANDLER 1
-#include <boost/assert.hpp>
-#endif
