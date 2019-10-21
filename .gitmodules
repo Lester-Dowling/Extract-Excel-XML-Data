@@ -10,3 +10,6 @@
 [submodule "Pseudo-XPath"]
 	path = Pseudo-XPath
 	url = https://github.com/Lester-Dowling/Pseudo-XPath.git
+[submodule "Simple-XML"]
+	path = Simple-XML
+	url = https://github.com/Lester-Dowling/Simple-XML.git
