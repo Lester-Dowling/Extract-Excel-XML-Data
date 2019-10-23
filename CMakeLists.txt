@@ -36,11 +36,11 @@ add_subdirectory("OStream-Extra")
 # String-Extra git submodule
 add_subdirectory("String-Extra")
 
-# Simple XML library
-add_subdirectory("Simple-XML")
-
 # Pseudo XPath Parser library
 add_subdirectory("Pseudo-XPath")
+
+# Simple XML library
+add_subdirectory("Simple-XML")
 
 # The program operations
 add_subdirectory("Operations")
