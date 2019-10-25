@@ -6,7 +6,6 @@
 #include "pch-unit-tests.hpp"
 #include <boost/test/unit_test.hpp>
 #include "Pseudo-XPath/Grade.hpp"
-#include "Pseudo-XPath/parsing.hpp"
 #include "Simple-XML/Worksheet-Row-Column-Titles.hpp"
 #include "Simple-XML/Element-Filter.hpp"
 namespace utf = boost::unit_test;
@@ -75,7 +74,7 @@ BOOST_AUTO_TEST_CASE(element_filter_depth_first_1)
 
 	Worksheet_Row_Column_Titles t;
 	Element_Filter ef{ elements, t };
-	ef.set_filter_path(pseudo_xpath::parse("Workbook,Worksheet,Row,Data"));
+	ef.set_filter_path(pseudo_xpath::Grade::parse("Workbook,Worksheet,Row,Data"));
 
 	int visit_count = 0;
 	ef.visit_all_depth_first(
@@ -111,7 +110,7 @@ BOOST_AUTO_TEST_CASE(element_filter_depth_first_2)
 
 	Worksheet_Row_Column_Titles t;
 	Element_Filter ef{ elements, t };
-	ef.set_filter_path(pseudo_xpath::parse("Workbook,Worksheet,Row"));
+	ef.set_filter_path(pseudo_xpath::Grade::parse("Workbook,Worksheet,Row"));
 
 	list<string> expected_names = { "Row", "Data", "Data", "Row", "Data", "Data", "Data" };
 	list<string> filtered_names;

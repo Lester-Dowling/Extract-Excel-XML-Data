@@ -9,7 +9,6 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "Simple-XML/Element-Filter.hpp"
 #include "Pseudo-XPath/forming.hpp"
-#include "Pseudo-XPath/parsing.hpp"
 #include "String-Extra/predicates.hpp"
 #include "String-Extra/forming.hpp"
 
@@ -323,7 +322,7 @@ namespace operations {
 
 		m_documents.back()
 		  .filter()
-		  .set_filter_path(pseudo_xpath::parse(full_xpath_text))
+		  .set_filter_path(pseudo_xpath::Grade::parse(full_xpath_text))
 		  .visit_all_depth_first(boost::bind(&Program::write_text_visit, this, _1));
 		*gOut << endl;
 	}
@@ -380,7 +379,7 @@ namespace operations {
 
 				  // cout << "cell_ref_xpath_text == " << cell_ref_xpath_text << endl;
 
-				  Grade::SP xpath_root = pseudo_xpath::parse(cell_ref_xpath_text);
+				  Grade::SP xpath_root = pseudo_xpath::Grade::parse(cell_ref_xpath_text);
 				  const string cell_text =
 					m_documents.back().extract_single_text(xpath_root);
 				  if (cell_text.empty())

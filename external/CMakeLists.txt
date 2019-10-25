@@ -1,8 +1,5 @@
-cmake_minimum_required (VERSION 3.14)
+cmake_minimum_required(VERSION 3.15)
 
-add_subdirectory ("threads")
+add_subdirectory("threads")
 
-# set(USE_SYSTEM_TZ_DB ON)
-# add_subdirectory ("date")
-
-add_subdirectory ("boost")
+# set(USE_SYSTEM_TZ_DB ON) add_subdirectory ("date")
